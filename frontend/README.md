@@ -12,3 +12,14 @@ This is a [React Native app](https://reactnative.dev/) that helps people track t
 
   - [Android Studio](https://developer.android.com/studio?gclid=EAIaIQobChMI5bPP9obN6AIVip-fCh3PggusEAAYASAAEgIyRfD_BwE&gclsrc=aw.ds)
   - [Xcode](https://apps.apple.com/us/app/xcode/id497799835?mt=12)
+
+### Few things you might have to install following the docs
+
+- ``` brew install node brew install watchman ```
+
+- ``` sudo gem install cocoapods ```
+
+- ``` npx react-native start ``` or ``` npx react-native run-ios ```
+
+- When getting an error starting ios simulator go to ```cd /frontend/pantry/ios && pod install ```
+
