@@ -43,6 +43,8 @@ This is a [React Native app](https://reactnative.dev/) that helps people track t
 
 - [React Native Components](https://reactnative.dev/docs/components-and-apis#user-interface)
 
+- [React-Redux using hooks](https://react-redux.js.org/api/hooks#useselector-examples)
+
 
 
 
