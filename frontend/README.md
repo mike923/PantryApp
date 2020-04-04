@@ -23,3 +23,13 @@ This is a [React Native app](https://reactnative.dev/) that helps people track t
 
 - When getting an error starting ios simulator go to ```cd /frontend/pantry/ios && pod install ```
 
+## To run the app
+
+- If you don't already have the app: ``` git clone https://github.com/mike923/PantryApp.git ```
+
+- Install dependencies ``` cd frontend/pantry && npm install ```
+
+- Install pod changes in ios ``` cd /ios && pod install ```
+
+- Open iOS simulator ``` cd .. && npx react-native run-ios ```
+
