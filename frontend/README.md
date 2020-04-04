@@ -33,3 +33,20 @@ This is a [React Native app](https://reactnative.dev/) that helps people track t
 
 - Open iOS simulator ``` cd .. && npx react-native run-ios ```
 
+## Useful Resources
+
+- Setting up [Enviroment](https://reactnative.dev/docs/environment-setup)
+
+- [React Native Navigation](https://reactnavigation.org/)
+  - [Stack Navigation](https://reactnavigation.org/docs/stack-navigator/)
+  - [Bottom Tab Navigation](https://reactnavigation.org/docs/tab-based-navigation)
+
+- [React Native Components](https://reactnative.dev/docs/components-and-apis#user-interface)
+
+
+
+
+
+
+
+
