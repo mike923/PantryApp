@@ -32,7 +32,7 @@ const API = () => {
       <View style={styles.h1View}>
         <Text style={styles.h1}>User data</Text>
       </View>
-      {testUser.fetching ? displayLoading() : displayUser()}
+      {!testUser.apiResults ? displayLoading() : displayUser()}
       <TouchableOpacity
         onPress={() => dispatch(getRandomUser())}
         style={styles.button}>

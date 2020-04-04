@@ -15,29 +15,41 @@ This is a [React Native app](https://reactnative.dev/) that helps people track t
 
 ### Few things you might have to install following the docs
 
-- ``` brew install node brew install watchman ```
+- `brew install node brew install watchman`
 
-- ``` sudo gem install cocoapods ```
+- `sudo gem install cocoapods`
 
-- ``` npx react-native start ``` or ``` npx react-native run-ios ```
+- `npx react-native start` or `npx react-native run-ios`
 
-- When getting an error starting ios simulator go to ```cd /frontend/pantry/ios && pod install ```
+- When getting an error starting ios simulator go to `cd /frontend/pantry/ios && pod install`
 
 ## To run the app
 
-- If you don't already have the app: ``` git clone https://github.com/mike923/PantryApp.git ```
+- If you don't already have the app: `git clone https://github.com/mike923/PantryApp.git`
 
-- Install dependencies ``` cd frontend/pantry && npm install ```
+- Install dependencies `cd frontend/pantry && npm install`
 
-- Install pod changes in ios ``` cd /ios && pod install ```
+- Install pod changes in ios `cd /ios && pod install`
 
-- Open iOS simulator ``` cd .. && npx react-native run-ios ```
+- Open iOS simulator `cd .. && npx react-native run-ios`
+
+## To run the react-native-debugger
+
+- For macOs use Homebrew Cask to install:
+- `brew update && brew cask install react-native-debugger`
+
+- This puts React Native Debugger.app in your /applications/ folder.
+
+- run open "rndebugger://set-debugger-loc?host=localhost&port=8081" to open the debugger window
+
+- run ctrl + m (Android) or ⌘ + D (iOS) in order to connect app to react-native-debugger
 
 ## Useful Resources
 
 - Setting up [Enviroment](https://reactnative.dev/docs/environment-setup)
 
 - [React Native Navigation](https://reactnavigation.org/)
+
   - [Stack Navigation](https://reactnavigation.org/docs/stack-navigator/)
   - [Bottom Tab Navigation](https://reactnavigation.org/docs/tab-based-navigation)
 
@@ -45,10 +57,4 @@ This is a [React Native app](https://reactnative.dev/) that helps people track t
 
 - [React-Redux using hooks](https://react-redux.js.org/api/hooks#useselector-examples)
 
-
-
-
-
-
-
-
+- [React-Native Debugger](https://github.com/jhen0409/react-native-debugger)
