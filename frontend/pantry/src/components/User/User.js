@@ -4,7 +4,7 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import styles from './styles';
 
 const User = ({ navigation }) => {
-  const navigateToHome = () => navigation.navigate('Home')
+  const navigateToHome = () => navigation.navigate('Home');
   return (
     <View style={styles.container}>
       <Text>User</Text>
