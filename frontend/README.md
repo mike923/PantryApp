@@ -35,9 +35,13 @@ This is a [React Native app](https://reactnative.dev/) that helps people track t
 
 ## To run the react-native-debugger
 
+- For macOs use Homebrew Cask to install:
 - `brew update && brew cask install react-native-debugger`
 
-- open "rndebugger://set-debugger-loc?host=localhost&port=8081" to open the debugger window
+- This puts React Native Debugger.app in your /applications/ folder.
+
+- run open "rndebugger://set-debugger-loc?host=localhost&port=8081" to open the debugger window
+
 - run ctrl + m (Android) or ⌘ + D (iOS) in order to connect app to react-native-debugger
 
 ## Useful Resources
