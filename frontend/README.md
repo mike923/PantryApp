@@ -17,8 +17,6 @@ This is a [React Native app](https://reactnative.dev/) that helps people track t
 
 - `brew install node brew install watchman`
 
-- `brew update && brew cask install react-native-debugger`
-
 - `sudo gem install cocoapods`
 
 - `npx react-native start` or `npx react-native run-ios`
@@ -37,7 +35,10 @@ This is a [React Native app](https://reactnative.dev/) that helps people track t
 
 ## To run the react-native-debugger
 
-- ctrl + m (Android) or ⌘ + D (iOS)
+- `brew update && brew cask install react-native-debugger`
+
+- open "rndebugger://set-debugger-loc?host=localhost&port=8081" to open the debugger window
+- run ctrl + m (Android) or ⌘ + D (iOS) in order to connect app to react-native-debugger
 
 ## Useful Resources
 
