@@ -9,6 +9,7 @@ import { Provider } from 'react-redux';
 // Import Component Screens
 import HomeScreen from './Screens/HomeScreen';
 import UserScreen from './Screens/UserScreen';
+import ApiScreen from './Screens/ApiScreen';
 // import TestScreen from './Screens/TestScreen';
 
 const Tab = createBottomTabNavigator();
@@ -20,6 +21,7 @@ const App = () => {
         <Tab.Navigator>
           <Tab.Screen name="Home" component={HomeScreen} />
           <Tab.Screen name="User" component={UserScreen} />
+          <Tab.Screen name="API" component={ApiScreen} />
         </Tab.Navigator>
       </NavigationContainer>
     </Provider>
