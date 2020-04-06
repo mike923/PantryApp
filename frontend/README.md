@@ -61,4 +61,4 @@ This is a [React Native app](https://reactnative.dev/) that helps people track t
 
 ## React Native Navigation Notes
 
-- Routes can be accessed and interchanged between `<Stack.Screen/>` and `<Tab.Screen/>` when using the prop method navigate for navigation `navigation.navigate('route-name`)`
+- Routes can be accessed and interchanged between `<Stack.Screen/>` and `<Tab.Screen/>` when using the prop method navigate for navigation `navigation.navigate('route-name')`
