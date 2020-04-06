@@ -58,3 +58,7 @@ This is a [React Native app](https://reactnative.dev/) that helps people track t
 - [React-Redux using hooks](https://react-redux.js.org/api/hooks#useselector-examples)
 
 - [React-Native Debugger](https://github.com/jhen0409/react-native-debugger)
+
+## React Native Navigation Notes
+
+- Routes can be accessed and interchanged between `<Stack.Screen/>` and `<Tab.Screen/>` when using the prop method navigate for navigation `navigation.navigate('route-name`)`

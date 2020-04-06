@@ -9,7 +9,7 @@ const UserScreen = ({ navigation }) => {
   return (
     <Stack.Navigator>
       <Stack.Screen name="User" component={User} />
-      <Stack.Screen name="Home" component={Home} />
+      {/* <Stack.Screen name="Home" component={Home} /> */}
     </Stack.Navigator>
   );
 };
