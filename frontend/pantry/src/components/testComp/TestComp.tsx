@@ -10,8 +10,8 @@ const API = () => {
 
   useEffect(() => {
     // dispatch(getRandomUser())
-    console.debug('API State', testUser);
-    console.log('API State', testUser);
+    // console.debug('API State', testUser);
+    // console.log('API State', testUser);
   }, [dispatch, testUser]);
 
   const displayLoading = () => <Text style={styles.p}>Loading...</Text>;
