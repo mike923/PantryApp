@@ -50,8 +50,9 @@ This is a [React Native app](https://reactnative.dev/) that helps people track t
 
 - [React Native Navigation](https://reactnavigation.org/)
 
-  - [Stack Navigation](https://reactnavigation.org/docs/stack-navigator/)
-  - [Bottom Tab Navigation](https://reactnavigation.org/docs/tab-based-navigation)
+- [Stack Navigation](https://reactnavigation.org/docs/stack-navigator/)
+
+- [Bottom Tab Navigation](https://reactnavigation.org/docs/tab-based-navigation)
 
 - [React Native Components](https://reactnative.dev/docs/components-and-apis#user-interface)
 
