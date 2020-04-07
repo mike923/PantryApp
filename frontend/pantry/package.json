@@ -28,6 +28,7 @@
     "@react-navigation/bottom-tabs": "^5.2.5",
     "@react-navigation/native": "^5.1.4",
     "@react-navigation/stack": "^5.2.9",
+    "@types/react-test-renderer": "^16.9.2",
     "axios": "^0.19.2",
     "react": "16.11.0",
     "react-native": "0.62.1",
@@ -44,15 +45,36 @@
     "@babel/core": "^7.9.0",
     "@babel/runtime": "^7.9.2",
     "@react-native-community/eslint-config": "^1.0.0",
+    "@types/jest": "^25.2.1",
+    "@types/react": "^16.9.32",
+    "@types/react-native": "^0.62.2",
     "babel-jest": "^25.2.6",
     "eslint": "^6.8.0",
     "husky": "^4.2.3",
     "jest": "^25.2.7",
     "lint-staged": "^10.1.1",
     "metro-react-native-babel-preset": "^0.59.0",
-    "react-test-renderer": "16.11.0"
+    "react-native-typescript-transformer": "^1.2.13",
+    "react-test-renderer": "16.11.0",
+    "ts-jest": "^25.3.1",
+    "typescript": "^3.8.3"
   },
   "jest": {
-    "preset": "react-native"
+    "preset": "react-native",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      "^.+\\.(js)$": "<rootDir>/node_modules/babel-jest",
+      "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "testPathIgnorePatterns": [
+      "\\.snap$",
+      "<rootDir>/node_modules/"
+    ],
+    "cacheDirectory": ".jest/cache"
   }
 }
