@@ -1,6 +1,12 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, ViewStyle, TextStyle, ButtonProps } from 'react-native';
 
-const styles = StyleSheet.create({
+interface Styles {
+  container: ViewStyle;
+  button: ButtonProps;
+  buttonText: TextStyle
+}
+
+const styles = StyleSheet.create<Styles>({
   container: {
     flex: 1,
     justifyContent: 'center',

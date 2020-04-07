@@ -1,9 +1,14 @@
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
+import { NavigationParams, NavigationScreenProp, NavigationState } from 'react-navigation'
 
 import styles from './styles';
 
-const Home = ({ navigation }) => {
+export interface Props {
+  navigation: NavigationScreenProp<NavigationState, NavigationParams>;
+}
+
+const Home = ({ navigation }: Props) => {
   const navigateToUsers = () => navigation.navigate('User');
   const navigateToTestComp = () => navigation.navigate('Test');
   return (
