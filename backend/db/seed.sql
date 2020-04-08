@@ -10,6 +10,34 @@ CREATE TABLE users (
     password_digest VARCHAR NOT NULL
 );
 
+CREATE TABLE receipts (
+    id  SERIAL PRIMARY KEY,
+    user_id INT REFERENCES users(id),
+    receipt_img_url VARCHAR NOT NULL,
+    receipt_json JSON,
+    store_name VARCHAR NOT NULL,
+    store_coordinate JSON NOT NULL
+);
+
+CREATE TABLE pantry (
+    id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES users(id)
+);
+
+CREATE TABLE food_item(
+    id SERIAL PRIMARY KEY,
+    receipt_id INT REFERENCES receipts(id),
+    pantry_id INT REFERENCES pantry(id),
+    name VARCHAR NOT NULL,
+    price INT NOT NULL
+); 
+
+CREATE TABLE nutrition (
+    id SERIAL PRIMARY KEY,
+    food_id INT REFERENCES food_item(id),
+    calories INT NOT NULL
+);
+
 INSERT INTO users (email,password_digest) 
 VALUES 
 ('michaelscott@pursuit.org','$2b$12$OJ2Kc75eXgLddy2.iFqxcuCMlN1.i25Jze6JDUR7Pjv4.ZdWDR.cm'),
