@@ -40,5 +40,9 @@ CREATE TABLE nutrition (
 
 INSERT INTO users (email,password_digest) 
 VALUES 
-('michaelscott@pursuit.org','$2b$12$OJ2Kc75eXgLddy2.iFqxcuCMlN1.i25Jze6JDUR7Pjv4.ZdWDR.cm'),
-('pambeesly@pursuit.org','$2b$12$tfAxX4n9f2jJ65Sy3lS41OoK07pR18782Vz.3VmI9gpTN0L7QNCXa');
+('michaelscott@pursuit.org','$2b$12$OJ2Kc75eXgLddy2.iFqxcuCMlN1.i25Jze6JDUR7Pjv4.ZdWDR.cm'),--1
+('pambeesly@pursuit.org','$2b$12$tfAxX4n9f2jJ65Sy3lS41OoK07pR18782Vz.3VmI9gpTN0L7QNCXa');--2
+
+INSERT INTO receipts (user_id,receipt_img_url,receipt_json,store_name,store_coordinate) 
+VALUES
+(1,'https://farm6.staticflickr.com/5530/14653691031_5c3d80b968.jpg','{"DRP DT":3,"Dr pepper":3,"Dr pepper": 3 ,"Dr pepper": 3,"Dr pepper": 3}','Walmart','{"latitude":41.8287,"longitude":88.0569}')
