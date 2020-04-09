@@ -25,13 +25,13 @@ CREATE TABLE receipts (
     store_name VARCHAR NOT NULL,
     store_coordinate JSON NOT NULL,
     spent INT NOT NULL,
-    date CURRENT_DATE NOT NULL
+    date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE all_foods(
     id SERIAL PRIMARY KEY,
     upc VARCHAR NOT NULL,
-    type_id INT NOT NULL
+    type_id VARCHAR NOT NULL
 ); 
 
 CREATE TABLE food_item(
@@ -45,17 +45,19 @@ CREATE TABLE food_item(
     expired BOOLEAN DEFAULT FALSE
 
 ); 
+CREATE TABLE item_categories (
+    id SERIAL PRIMARY key,
+    item_id INT REFERENCES food_item(id),
+    name VARCHAR NOT NULL,
+    type VARCHAR NOT NULL
+);
 
 CREATE TABLE shopping_list (
     id SERIAL PRIMARY KEY,
     upc INT
 );
 
-CREATE TABLE item_categories (
-    id INT REFERENCES food_item(id),
-    name VARCHAR NOT NULL,
-    type VARCHAR NOT NULL
-);
+
 
 INSERT INTO pantry(name)
 VALUES
@@ -70,7 +72,7 @@ VALUES
 ('pambeesly@pursuit.org','pam');--2
 
 -- inserting into the receipts table for test user 1
-INSERT INTO receipts (user_id,receipt_img_url,receipt_json,store_name,store_coordinate) 
+INSERT INTO receipts (user_id,receipt_img_url,receipt_json,store_name,store_coordinate,spent) 
 VALUES
 (1,'https://farm6.staticflickr.com/5530/14653691031_5c3d80b968.jpg',
 '{"DRP DT":3,"Dr pepper":3,"Dr pepper": 3 ,"Dr pepper": 3,"Dr pepper": 3}','Walmart',
@@ -90,6 +92,11 @@ VALUES
 '{"latitude":44.9527661,"longitude":-93.1627024}',
 26.84
 );
+
+-- inserting into the all_foods table
+-- INSERT INTO all_foods (upc,type)
+-- VALUES
+-- ()
 
 -- inserting data into the food items table
 INSERT INTO food_item (receipt_id,pantry_id,name,price,quantity)
@@ -116,6 +123,6 @@ INSERT INTO food_item (receipt_id,pantry_id,name,price,quantity)
 (2,2,'CUB LARGE EGGS',1.98,1);
 
 -- inserting into the item categories table
-INSERT INTO item_categories(id,name,type)
-VALUES
-()
+-- INSERT INTO item_categories(id,name,type)
+-- VALUES
+-- ()
