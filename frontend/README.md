@@ -60,6 +60,8 @@ This is a [React Native app](https://reactnative.dev/) that helps people track t
 
 - [React-Native Debugger](https://github.com/jhen0409/react-native-debugger)
 
+- [Firebase Upload Tutorial](https://dev.to/younesh1989/upload-files-using-react-native-and-firebase-part-1-a7h)
+
 ## React Native Navigation Notes
 
 - Routes can be accessed and interchanged between `<Stack.Screen/>` and `<Tab.Screen/>` when using the prop method navigate for navigation `navigation.navigate('route-name')`

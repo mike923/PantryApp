@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "127492590607",
+    "firebase_url": "https://capstone-pantry.firebaseio.com",
+    "project_id": "capstone-pantry",
+    "storage_bucket": "capstone-pantry.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:127492590607:android:566130f4b215894175e77a",
+        "android_client_info": {
+          "package_name": "com.pantry"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "127492590607-erpd2c4fnpg1b8v4l9vfn9jn1m90gq5j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAb_I-51mMygsGR44HvdHi5ybgbS1Tlp88"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "127492590607-erpd2c4fnpg1b8v4l9vfn9jn1m90gq5j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
