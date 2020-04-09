@@ -50,17 +50,21 @@ VALUES
 INSERT INTO receipts (user_id,receipt_img_url,receipt_json,store_name,store_coordinate) 
 VALUES
 (2,'https://unionadvocate.files.wordpress.com/2013/04/metsa-receipt-web.jpg',
-'{"HNT SPAGETTI SAUCE" : 0.88,"EE SPAGETTI SAUCE": 0.88,"Dr MRCHN INST LUNCH": 2.39 
-,"EE  COFFEE FRNCH TOAST": 3.t4,"ESTL EVRDY PNT BTR": 4.35, "CUB WHITE BREAD": 1.19,
+'{"HNT SPAGETTI SAUCE": 0.88,"EE SPAGETTI SAUCE": 0.88,"Dr MRCHN INST LUNCH": 2.39 
+,"EE COFFEE FRNCH TOAST": 3.74,"ESTL EVRDY PNT BTR": 4.35, "CUB WHITE BREAD": 1.19,
 "SHPERS VALU SALAMI": 1.19, "ICE BERG LETTUCE": 1.48, "BANANAS YELLOW": 1.04, "POTATO RUSSET": 1.05,
 "OLD O PINK LMNADE": 1.59, "CUB HOMOGENIZED MILK": 2.99, "ESENTL EDAY CHEESE": 2.99, "CUB LARGE EGGS": 1.98 
 }','CUBS',
-'{"latitude":44.9527661,,"longitude":-93.1627024,}');
+'{"latitude":44.9527661,"longitude":-93.1627024}');
 
 
 INSERT INTO pantry(user_id)
 VALUES
 (1);
+
+INSERT INTO pantry(user_id)
+VALUES
+(2);
 
 INSERT INTO food_item (receipt_id,pantry_id,name,price)
  VALUES
@@ -70,7 +74,29 @@ INSERT INTO food_item (receipt_id,pantry_id,name,price)
 (1,1,'Dr pepper',3),
 (1,1,'Dr pepper',3);
 
+INSERT INTO food_item (receipt_id,pantry_id,name,price)
+ VALUES
+(2,2,'HNT SPAGETTI SAUCE',0.88),
+(2,2,'EE SPAGETTI SAUCE',0.88),
+(2,2,'Dr MRCHN INST LUNCH',2.39),
+(2,2,'EE COFFEE FRNCH TOAST',3.74),
+(2,2,'CUB WHITE BREAD',1.19),
+(2,2,'SHPERS VALU SALAMI',1.19),
+(2,2,'ICE BERG LETTUCE',1.19),
+(2,2,'BANANAS YELLOW',1.04),
+(2,2,'POTATO RUSSET',1.05),
+(2,2,'ESTL EVRDY PNT BTR',4.35),
+(2,2,'OLD O PINK LMNADE',1.59),
+(2,2,'CUB HOMOGENIZED MILK',2.99),
+(2,2,'ESENTL EDAY CHEESE',2.99),
+(2,2,'CUB LARGE EGGS',1.98);
+
 
  INSERT INTO nutrition(food_id,calories)
 VALUES
-(1,350);
+(2,350),
+(12,1),
+(19,78),
+(17,160),
+(10,79),
+(13,105);
