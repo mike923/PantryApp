@@ -19,6 +19,7 @@
 		2DCD954D1E0B4F2C00145EB5 /* pantryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* pantryTests.m */; };
 		839A20366ADC28A14721BA93 /* libPods-pantry-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BCCCED84D9E3786CB8933AAD /* libPods-pantry-tvOSTests.a */; };
 		8A44962302B3E9F2A5754376 /* libPods-pantry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 989A4BF234A1E894F9237629 /* libPods-pantry.a */; };
+		91A548F1243F9E700034B988 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 91A548F0243F9E700034B988 /* GoogleService-Info.plist */; };
 		9DF3F98197F724A77A18E48F /* libPods-pantry-pantryTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 855985CE4619F783CCDCABB7 /* libPods-pantry-pantryTests.a */; };
 /* End PBXBuildFile section */
 
@@ -61,6 +62,7 @@
 		855985CE4619F783CCDCABB7 /* libPods-pantry-pantryTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-pantry-pantryTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8801BC9DA9E49703A62909FF /* Pods-pantry-pantryTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pantry-pantryTests.debug.xcconfig"; path = "Target Support Files/Pods-pantry-pantryTests/Pods-pantry-pantryTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8EE35EE41EAE124367DCF5B8 /* Pods-pantry-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pantry-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-pantry-tvOS/Pods-pantry-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
+		91A548F0243F9E700034B988 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9783409ACC486EF05E394FAF /* Pods-pantry-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pantry-tvOS.release.xcconfig"; path = "Target Support Files/Pods-pantry-tvOS/Pods-pantry-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		989A4BF234A1E894F9237629 /* libPods-pantry.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-pantry.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9C45EF86ACFCD896AD71F12 /* Pods-pantry.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pantry.release.xcconfig"; path = "Target Support Files/Pods-pantry/Pods-pantry.release.xcconfig"; sourceTree = "<group>"; };
@@ -161,7 +163,6 @@
 				796C142A7DD6B8AA8419F16E /* Pods-pantry-tvOSTests.debug.xcconfig */,
 				0396618134BBBFA9E0DD0860 /* Pods-pantry-tvOSTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -175,6 +176,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				91A548F0243F9E700034B988 /* GoogleService-Info.plist */,
 				13B07FAE1A68108700A75B9A /* pantry */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* pantryTests */,
@@ -285,7 +287,7 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1130;
+				LastUpgradeCheck = 1140;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
@@ -340,6 +342,7 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				91A548F1243F9E700034B988 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -584,6 +587,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8801BC9DA9E49703A62909FF /* Pods-pantry-pantryTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -607,6 +611,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 449A4A0DC10F61FDCA9950D7 /* Pods-pantry-pantryTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = pantryTests/Info.plist;

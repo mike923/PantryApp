@@ -28,10 +28,16 @@ CREATE TABLE receipts (
     date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE item_categories (
+    id SERIAL PRIMARY key,
+    name VARCHAR NOT NULL,
+    type VARCHAR NOT NULL
+);
+
 CREATE TABLE all_foods(
     id SERIAL PRIMARY KEY,
     upc VARCHAR NOT NULL,
-    type_id VARCHAR NOT NULL
+    type_id INT REFERENCES item_categories(id)
 ); 
 
 CREATE TABLE food_item(
@@ -45,12 +51,6 @@ CREATE TABLE food_item(
     expired BOOLEAN DEFAULT FALSE
 
 ); 
-CREATE TABLE item_categories (
-    id SERIAL PRIMARY key,
-    item_id INT REFERENCES food_item(id),
-    name VARCHAR NOT NULL,
-    type VARCHAR NOT NULL
-);
 
 CREATE TABLE shopping_list (
     id SERIAL PRIMARY KEY,

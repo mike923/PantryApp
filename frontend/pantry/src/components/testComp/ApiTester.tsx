@@ -12,10 +12,11 @@ import styles from './styles';
 import axios from 'axios';
 import { ScrollView } from 'react-native-gesture-handler';
 
-const ApiTester = () => {
+const ApiTester = ({ navigation }) => {
   const [api, setApi] = useState('https://randomuser.me/api/');
   const [res, setRes] = useState([]);
 
+  const navigateToImg = () => navigation.navigate('ImageUpload')
   const displayLoading = () => <Text style={styles.p}>Loading...</Text>;
 
   const loadApi = async () => {
@@ -58,6 +59,9 @@ const ApiTester = () => {
       </View>
       <TouchableOpacity onPress={() => loadApi()} style={styles.button}>
         <Text style={styles.buttonText}>Get Results</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => navigateToImg()} style={styles.button}>
+        <Text style={styles.buttonText}>Image Upload</Text>
       </TouchableOpacity>
       <ScrollView>{res}</ScrollView>
     </View>
