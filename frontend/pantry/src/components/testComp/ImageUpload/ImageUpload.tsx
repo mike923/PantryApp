@@ -42,13 +42,21 @@ const ImageUpload = ({ navigation }) => {
       (completed) => {
         console.log(`Upload Completed`);
         completed.ref.getDownloadURL()
-          .then((url) => {
+          .then(async (url) => {
             console.log(`Firebase Hosted Url`, url);
+            try {
+              const { data } = await axios.post("http://localhost:3000/tesseract/parse", {url})
+              console.log(data)
+            } catch(err) {
+              console.log(err)
+            }
             setFirebaseImgUrl(url)
           });
       },
     );
   };
+
+
 
   const uploadFile = () => {
     ImagePicker.launchImageLibrary(imagePickerOptions, async (res) => {
