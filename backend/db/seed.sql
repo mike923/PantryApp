@@ -30,7 +30,6 @@ CREATE TABLE receipts (
 
 CREATE TABLE item_categories (
     id SERIAL PRIMARY key,
-    name VARCHAR NOT NULL,
     type VARCHAR NOT NULL
 );
 
@@ -92,6 +91,15 @@ VALUES
 '{"latitude":44.9527661,"longitude":-93.1627024}',
 26.84
 );
+
+
+inserting INTO item_categories(type)
+VALUES
+('Grocery'),
+('Meat'),
+('Produce'),
+('Frozen'),
+('Dairy');
 
 -- inserting into the all_foods table
 -- INSERT INTO all_foods (upc,type)
