@@ -65,10 +65,10 @@ VALUES
 
 
 -- inserting test users into users table
-INSERT INTO users (email,password_digest) 
+INSERT INTO users (email,password_digest,pantry_id) 
 VALUES 
-('michaelscott@pursuit.org','michael'),--1
-('pambeesly@pursuit.org','pam');--2
+('michaelscott@pursuit.org','michael',1),--1
+('pambeesly@pursuit.org','pam',2);--2
 
 -- inserting into the receipts table for test user 1
 INSERT INTO receipts (user_id,receipt_img_url,receipt_json,store_name,store_coordinate,spent) 
@@ -122,25 +122,25 @@ VALUES
 ('CUB LARGE EGGS',5);
 
 -- inserting data into the food items table
-INSERT INTO food_item (receipt_id,pantry_id,name,price,quantity)
+INSERT INTO food_item (receipt_id,pantry_id,name,price,quantity,food_id)
  VALUES
-(1,1,'DRP DT',3,1),
-(1,1,'Dr pepper',3,4);
+(1,1,'DRP DT',3,1,1),
+(1,1,'Dr pepper',3,4,2);
 
 -- inserting data into the food items table
-INSERT INTO food_item (receipt_id,pantry_id,name,price,quantity)
+INSERT INTO food_item (receipt_id,pantry_id,name,price,quantity,food_id)
  VALUES
-(2,2,'HNT SPAGETTI SAUCE',0.88,1),
-(2,2,'EE SPAGETTI SAUCE',0.88,1),
-(2,2,'Dr MRCHN INST LUNCH',2.39,1),
-(2,2,'EE COFFEE FRNCH TOAST',3.74,1),
-(2,2,'CUB WHITE BREAD',1.19,1),
-(2,2,'SHPERS VALU SALAMI',1.19,1),
-(2,2,'ICE BERG LETTUCE',1.19,1),
-(2,2,'BANANAS YELLOW',1.04,1),
-(2,2,'POTATO RUSSET',1.05,1),
-(2,2,'ESTL EVRDY PNT BTR',4.35,1),
-(2,2,'OLD O PINK LMNADE',1.59,1),
-(2,2,'CUB HOMOGENIZED MILK',2.99,1),
-(2,2,'ESENTL EDAY CHEESE',2.99,1),
-(2,2,'CUB LARGE EGGS',1.98,1);
+(2,2,'HNT SPAGETTI SAUCE',0.88,1,3),
+(2,2,'EE SPAGETTI SAUCE',0.88,1,4),
+(2,2,'Dr MRCHN INST LUNCH',2.39,1,5),
+(2,2,'EE COFFEE FRNCH TOAST',3.74,1,6),
+(2,2,'CUB WHITE BREAD',1.19,1,7),
+(2,2,'SHPERS VALU SALAMI',1.19,1,8),
+(2,2,'ICE BERG LETTUCE',1.19,1,9),
+(2,2,'BANANAS YELLOW',1.04,1,10),
+(2,2,'POTATO RUSSET',1.05,1,11),
+(2,2,'ESTL EVRDY PNT BTR',4.35,1,12),
+(2,2,'OLD O PINK LMNADE',1.59,1,13),
+(2,2,'CUB HOMOGENIZED MILK',2.99,1,14),
+(2,2,'ESENTL EDAY CHEESE',2.99,1,15),
+(2,2,'CUB LARGE EGGS',1.98,1,16);
