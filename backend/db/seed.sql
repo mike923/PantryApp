@@ -92,8 +92,8 @@ VALUES
 26.84
 );
 
-
-inserting INTO item_categories(type)
+-- inserting into categories table
+INSERT INTO item_categories(type)
 VALUES
 ('Grocery'),
 ('Meat'),
@@ -102,9 +102,24 @@ VALUES
 ('Dairy');
 
 -- inserting into the all_foods table
--- INSERT INTO all_foods (upc,type)
--- VALUES
--- ()
+INSERT INTO all_foods (upc,type_id)
+VALUES
+('DRP DT',1),
+('Dr pepper',4),
+('HNT SPAGETTI SAUCE',1),
+('EE SPAGETTI SAUCE',1),
+('Dr MRCHN INST LUNCH',1),
+('EE COFFEE FRNCH TOAST',1),
+('CUB WHITE BREAD',1),
+('SHPERS VALU SALAMI',3),
+('ICE BERG LETTUCE',3),
+('BANANAS YELLOW',3),
+('POTATO RUSSET',3),
+('ESTL EVRDY PNT BTR',1),
+('OLD O PINK LMNADE',4),
+('CUB HOMOGENIZED MILK',5),
+('ESENTL EDAY CHEESE',5),
+('CUB LARGE EGGS',5);
 
 -- inserting data into the food items table
 INSERT INTO food_item (receipt_id,pantry_id,name,price,quantity)
@@ -129,8 +144,3 @@ INSERT INTO food_item (receipt_id,pantry_id,name,price,quantity)
 (2,2,'CUB HOMOGENIZED MILK',2.99,1),
 (2,2,'ESENTL EDAY CHEESE',2.99,1),
 (2,2,'CUB LARGE EGGS',1.98,1);
-
--- inserting into the item categories table
--- INSERT INTO item_categories(id,name,type)
--- VALUES
--- ()
