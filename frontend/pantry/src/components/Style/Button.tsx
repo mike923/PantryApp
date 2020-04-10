@@ -5,10 +5,7 @@ import styled from "styled-components"
 
 export default () => {
   const [counter, setCounter] = useState(0)
-  return (<View>
-    <Title>
-      This is test
-    </Title>
+  return (
     <Boton
       onPress={() => setCounter(counter + 1)}
       title={counter.toString()}
@@ -16,32 +13,11 @@ export default () => {
       <Title>
         The icon goes to the right
       </Title>
-      <Text> 
-      </Text>
-      <Text>  
-      </Text>
-      <Text> 
-      </Text>
       <Text>
         X
       </Text>
     </Boton>
-    <Button
-      onPress={() => setCounter(counter + 1)}
-      title={counter.toString()}
-      color="#ff0000"
-    />
-    <NeuButton style={{ height: 150, width: 150, borderRadius: 75 }}
-        onPress={() => {
-          Alert.alert("I was pressed")
-        }}
-        onUnpress={() => {
-          Alert.alert("I was unpressed")
-        }}
-      >
-        <Text style={{ opacity: 0.4, textAlign: 'center' }}>NeuButton with listeners</Text>
-    </NeuButton>
-  </View>)
+  )
 }
 
 const Title = styled.Text`
