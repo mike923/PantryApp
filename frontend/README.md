@@ -66,10 +66,12 @@ This is a [React Native app](https://reactnative.dev/) that helps people track t
 
 - Routes can be accessed and interchanged between `<Stack.Screen/>` and `<Tab.Screen/>` when using the prop method navigate for navigation `navigation.navigate('route-name')`
 
-
 ## TypeScript Notes
 
 - [Adding Typescript to React Native](https://github.com/Microsoft/TypeScript-React-Native-Starter)
 
 - [Typescript JSX tutorial](https://www.typescriptlang.org/docs/handbook/jsx.html)
 
+## Server Notes
+
+- The back end server is running of port 8282
