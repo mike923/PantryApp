@@ -1,0 +1,9 @@
+{
+  "name": "server",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./backend/bin/www",
+    "heroku-postbuild": "cd backend && npm install"
+  }
+}
