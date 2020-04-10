@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
   button: {
     padding: 10,
     backgroundColor: 'blue',
+    marginVertical: 10
   },
   buttonText: {
     color: 'white',
