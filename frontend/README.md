@@ -13,6 +13,14 @@ This is a [React Native app](https://reactnative.dev/) that helps people track t
   - [Android Studio](https://developer.android.com/studio?gclid=EAIaIQobChMI5bPP9obN6AIVip-fCh3PggusEAAYASAAEgIyRfD_BwE&gclsrc=aw.ds)
   - [Xcode](https://apps.apple.com/us/app/xcode/id497799835?mt=12)
 
+## Running iOS simulator on your iOS device 
+
+- Once you've downloaded Xcode signup for an [Apple Developer Account](https://developer.apple.com/).
+- Select your project in the Xcode Project Navigator, then select your main target (it should share the same name as your project)
+- Look for the "General" tab. Go to "Signing" and make sure your Apple developer account or team is selected under the Team dropdown. 
+- Do the same for the tests target (it ends with Tests, and is below your main target).
+- Repeat this step for the Tests target in your project.
+
 ### Few things you might have to install following the docs
 
 - `brew install node brew install watchman`
