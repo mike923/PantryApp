@@ -83,3 +83,4 @@ This is a [React Native app](https://reactnative.dev/) that helps people track t
 ## Server Notes
 
 - The back end server is running of port 8282
+- Back end server deployed at [Pantry back end](https://pantry-backend.herokuapp.com/)

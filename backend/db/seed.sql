@@ -1,8 +1,8 @@
-DROP DATABASE IF EXISTS pantry;
+-- DROP DATABASE IF EXISTS pantry;
 
-CREATE DATABASE pantry;
+-- CREATE DATABASE pantry;
 
-\c pantry
+-- \c pantry
 
 CREATE TABLE pantry (
     id SERIAL PRIMARY KEY,
