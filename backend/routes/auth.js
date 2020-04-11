@@ -7,7 +7,7 @@ const uuid = require("uuid");
 
 router.post("/signup", async (req, res, next) => {
   const passwordDigest = await authHelpers.hashPassword(req.body.password);
-  //   const user_id = uuid.v4();
+  const user_id = uuid.v4();
 
   const userInfo = {
     username: req.body.username,
