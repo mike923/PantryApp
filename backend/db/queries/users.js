@@ -32,8 +32,12 @@ const updateUserInfo = async (userObj, id) => {
     SET email = $1 
     WHERE id = $2
     RETURNING  id,email`,
-    [userObj.username, Number(id)]
+    [userObj.email, id]
   );
+};
+
+const hardDeleteUSer = async (id) => {
+  return await db.none("DELETE * FROM users WHERE id = $1"[id]);
 };
 
 module.exports = {
@@ -42,4 +46,5 @@ module.exports = {
   addNewUser,
   getUserByEmail,
   updateUserInfo,
+  hardDeleteUSer,
 };

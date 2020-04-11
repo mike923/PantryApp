@@ -12,7 +12,7 @@ CREATE TABLE pantry (
 
 CREATE TABLE users (
     id  VARCHAR PRIMARY KEY,
-    email VARCHAR NOT NULL,
+    email VARCHAR NOT NULL UNIQUE,
     pantry_id INT REFERENCES pantry (id),
     password_digest VARCHAR NOT NULL
 );

@@ -24,9 +24,9 @@ router.post("/signup", async (req, res, next) => {
     });
   } catch (error) {
     console.log("error", error);
-    res.status(500).json({
+    res.status(409).json({
       payload: null,
-      msg: "Failed to create a new account",
+      msg: "Conflict, Failed to create a new account",
       error: true,
     });
   }
@@ -46,9 +46,9 @@ router.patch("/:id", authHelpers.loginRequired, async (req, res, next) => {
     });
   } catch (error) {
     console.log("error", error);
-    res.status(500).json({
+    res.status(400).json({
       payload: null,
-      msg: "Failed update account",
+      msg: "Failed to update account",
       error: true,
     });
   }
