@@ -17,14 +17,16 @@ CREATE TABLE users (
     password_digest VARCHAR NOT NULL
 );
 
+
+-- reciepts need status
 CREATE TABLE receipts (
     id  SERIAL PRIMARY KEY,
-    user_id INT REFERENCES users(id),
+    pantry_id INT REFERENCES pantry(id),
     receipt_img_url VARCHAR NOT NULL,
     receipt_json JSON,
-    store_name VARCHAR NOT NULL,
-    store_coordinate JSON NOT NULL,
-    spent INT NOT NULL,
+    store_name VARCHAR,
+    store_coordinate JSON,
+    spent INT,
     date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -71,7 +73,7 @@ VALUES
 ('pambeesly@pursuit.org','pam',2);--2
 
 -- inserting into the receipts table for test user 1
-INSERT INTO receipts (user_id,receipt_img_url,receipt_json,store_name,store_coordinate,spent) 
+INSERT INTO receipts (pantry_id,receipt_img_url,receipt_json,store_name,store_coordinate,spent) 
 VALUES
 (1,'https://farm6.staticflickr.com/5530/14653691031_5c3d80b968.jpg',
 '{"DRP DT":3,"Dr pepper":3,"Dr pepper": 3 ,"Dr pepper": 3,"Dr pepper": 3}','Walmart',
@@ -80,14 +82,26 @@ VALUES
 );
 
 -- inserting into the receipts table for test user 2
-INSERT INTO receipts (user_id,receipt_img_url,receipt_json,store_name,store_coordinate,spent) 
+INSERT INTO receipts (pantry_id,receipt_img_url,receipt_json,store_name,store_coordinate,spent) 
 VALUES
 (2,'https://unionadvocate.files.wordpress.com/2013/04/metsa-receipt-web.jpg',
-'{"HNT SPAGETTI SAUCE": 0.88,"EE SPAGETTI SAUCE": 0.88,"Dr MRCHN INST LUNCH": 2.39 
-,"EE COFFEE FRNCH TOAST": 3.74,"ESTL EVRDY PNT BTR": 4.35, "CUB WHITE BREAD": 1.19,
-"SHPERS VALU SALAMI": 1.19, "ICE BERG LETTUCE": 1.48, "BANANAS YELLOW": 1.04, "POTATO RUSSET": 1.05,
-"OLD O PINK LMNADE": 1.59, "CUB HOMOGENIZED MILK": 2.99, "ESENTL EDAY CHEESE": 2.99, "CUB LARGE EGGS": 1.98 
-}','CUBS',
+    '{
+        "HNT SPAGETTI SAUCE": 0.88,
+        "EE SPAGETTI SAUCE": 0.88,
+        "Dr MRCHN INST LUNCH": 2.39 ,
+        "EE COFFEE FRNCH TOAST": 3.74,
+        "ESTL EVRDY PNT BTR": 4.35,
+        "CUB WHITE BREAD": 1.19,
+        "SHPERS VALU SALAMI": 1.19,
+        "ICE BERG LETTUCE": 1.48,
+        "BANANAS YELLOW": 1.04,
+        "POTATO RUSSET": 1.05,
+        "OLD O PINK LMNADE": 1.59,
+        "CUB HOMOGENIZED MILK": 2.99,
+        "ESENTL EDAY CHEESE": 2.99,
+        "CUB LARGE EGGS": 1.98 
+}',
+'CUBS',
 '{"latitude":44.9527661,"longitude":-93.1627024}',
 26.84
 );
