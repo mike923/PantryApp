@@ -45,7 +45,7 @@ const ImageUpload = ({ navigation }) => {
           .then(async (url) => {
             console.log(`Firebase Hosted Url`, url);
             try {
-              const { data } = await axios.post("http://localhost:3000/tesseract/parse", {url})
+              const { data } = await axios.post("http://localhost:8282/receipts/upload", {url})
               console.log(data)
             } catch(err) {
               console.log(err)

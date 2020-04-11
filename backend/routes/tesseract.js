@@ -1,6 +1,5 @@
-const express = require("express");
-const router = express.Router();
 const tesseract = require('tesseract.js')
+const db = require("../db/db");
 
 const readImgData = async (img, details) => {
   const start = Date.now();
@@ -16,12 +15,12 @@ const readImgData = async (img, details) => {
       return text;
     });
 
-    console.log(test)
+    console.log("This is tesseract running and this is the result of the parsing\n", test)
     return test
 };
 
 
-/* Read Image and Parse it into Text */
+/* // Read Image and Parse it into Text 
 router.post("/parse", async function (req, res, next) {
   console.log('hit endpoint', req.body)
   // const formData = req.data
@@ -31,8 +30,10 @@ router.post("/parse", async function (req, res, next) {
     details: `Tesseract parsed image`,
     data: parsedText
   })
-});
+});*/
 
-module.exports = router;
+module.exports = {
+  readImgData
+};
 
 
