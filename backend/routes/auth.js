@@ -3,11 +3,11 @@ const router = express.Router();
 const authHelpers = require("../auth/helpers");
 const userQueries = require("../db/queries/users");
 const passport = require("../auth/passport");
-// const uuidv4 = require("uuid");
+const uuid = require("uuid");
 
 router.post("/signup", async (req, res, next) => {
   const passwordDigest = await authHelpers.hashPassword(req.body.password);
-  //   const user_id = uuidv4();
+  //   const user_id = uuid.v4();
 
   const userInfo = {
     username: req.body.username,
@@ -83,10 +83,14 @@ router.get("/logout", authHelpers.loginRequired, (req, res, next) => {
   });
 });
 
-module.exports = router;
+// module.exports = router;
 
 // const test = () => {
-//   return (user_id = uuidv4("pam"));
+//   user_id = uuid.v4();
+
+//   // console.log(user_id);
+
+//   return user_id;
 // };
 
 // console.log(test());
