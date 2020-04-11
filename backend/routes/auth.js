@@ -10,10 +10,9 @@ router.post("/signup", async (req, res, next) => {
   const user_id = uuid.v4();
 
   const userInfo = {
-    username: req.body.username,
-    avatar_url: req.body.avatar_url,
+    email: req.body.email,
     password: passwordDigest,
-    // user_id: user_id,
+    user_id: user_id,
   };
 
   try {
@@ -83,7 +82,7 @@ router.get("/logout", authHelpers.loginRequired, (req, res, next) => {
   });
 });
 
-// module.exports = router;
+module.exports = router;
 
 // const test = () => {
 //   user_id = uuid.v4();
