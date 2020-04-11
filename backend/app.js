@@ -6,7 +6,7 @@ const logger = require("morgan");
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
-const tesseractRouter = require("./routes/tesseract");
+const receiptsRouter = require("./routes/receipts");
 
 const app = express();
 
@@ -18,6 +18,6 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
-app.use("/tesseract", tesseractRouter);
+app.use("/receipts", receiptsRouter);
 
 module.exports = app;
