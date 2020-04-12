@@ -56,6 +56,24 @@ target 'pantry' do
 
   pod 'RNFBApp', :path => '../node_modules/@react-native-firebase/app'
 
+  pod 'react-native-camera', path: '../node_modules/react-native-camera', subspecs: [
+  'FaceDetectorMLKit'
+  ]
+
+  pod 'react-native-camera', path: '../node_modules/react-native-camera', subspecs: [
+    'TextDetector'
+  ]
+
+  pod 'react-native-camera', path: '../node_modules/react-native-camera', subspecs: [
+  'BarcodeDetectorMLKit'
+  ]
+
+  pod 'react-native-camera', path: '../node_modules/react-native-camera', subspecs: [
+  'TextDetector',
+  'FaceDetectorMLKit',
+  'BarcodeDetectorMLKit'
+  ]
+
   target 'pantryTests' do
     inherit! :complete
     # Pods for testing
