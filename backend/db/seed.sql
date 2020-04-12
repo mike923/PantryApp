@@ -11,8 +11,8 @@ CREATE TABLE pantry (
 
 
 CREATE TABLE users (
-    id  SERIAL PRIMARY KEY ,
-    email VARCHAR NOT NULL,
+    id  VARCHAR PRIMARY KEY,
+    email VARCHAR NOT NULL UNIQUE,
     pantry_id INT REFERENCES pantry (id),
     password_digest VARCHAR NOT NULL
 );
@@ -67,10 +67,10 @@ VALUES
 
 
 -- inserting test users into users table
-INSERT INTO users (email,password_digest,pantry_id) 
+INSERT INTO users (id,email,password_digest,pantry_id) 
 VALUES 
-('michaelscott@pursuit.org','michael',1),--1
-('pambeesly@pursuit.org','pam',2);--2
+('43faf51e-247f-41f2-bdad-1c522414631e','michaelscott@pursuit.org','michael',1),--1
+('d246805b-afff-4283-9aad-7bcf6f678b42','pambeesly@pursuit.org','pam',2);--2
 
 -- inserting into the receipts table for test user 1
 INSERT INTO receipts (pantry_id,receipt_img_url,receipt_json,store_name,store_coordinate,spent) 

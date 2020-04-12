@@ -9,14 +9,18 @@ const getUsersById = async (id) => {
 };
 
 //adding a new user to app
-const addNewUser = async ({ email, password_digest }) => {
-  const newUserQStr = `INSERT INTO users (email,password_digest) 
-VALUES($/email/,$/password_digest/) RETURNING id,email,avatar_url`;
+const addNewUser = async (userObj) => {
+  const newUserQStr = `INSERT INTO users (email,password_digest,id) 
+VALUES($/email/,$/password_digest/,$/id/) RETURNING id,email`;
 
-  return await db.one(newUserQStr, { email, password_digest });
+  return await db.one(newUserQStr, {
+    email: userObj.email,
+    password_digest: userObj.password,
+    id: userObj.user_id,
+  });
 };
 
-//retrieving users y id
+//retrieving users email id
 const getUserByEmail = async (email) => {
   return await db.oneOrNone("SELECT * FROM users WHERE email = $1", [email]);
 };
@@ -28,8 +32,12 @@ const updateUserInfo = async (userObj, id) => {
     SET email = $1 
     WHERE id = $2
     RETURNING  id,email`,
-    [userObj.username, Number(id)]
+    [userObj.email, id]
   );
+};
+
+const hardDeleteUSer = async (id) => {
+  return await db.none("DELETE * FROM users WHERE id = $1"[id]);
 };
 
 module.exports = {
@@ -38,4 +46,5 @@ module.exports = {
   addNewUser,
   getUserByEmail,
   updateUserInfo,
+  hardDeleteUSer,
 };
