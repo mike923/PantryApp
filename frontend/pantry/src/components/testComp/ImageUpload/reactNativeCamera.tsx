@@ -11,7 +11,7 @@ const PICTURE_OPTIONS = {
   forceUpOrientation: true,
 };
 
-export default class App extends Component {
+export default class CameraTest extends Component {
   state = {
     loading: false,
     image: null,
