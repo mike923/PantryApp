@@ -114,11 +114,13 @@ const styles = {
   capture: {
     flex: 0,
     backgroundColor: '#fff',
-    borderRadius: 5,
+    borderRadius: 50,
     padding: 15,
     paddingHorizontal: 20,
     alignSelf: 'center',
     margin: 20,
+    width: 50,
+    height: 50,
   },
   SpinnerStyle: {
     flex: 1,

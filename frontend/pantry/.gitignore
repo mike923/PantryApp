@@ -63,3 +63,4 @@ buck-out/
 
 # Api Keys
 config.js
+config.json

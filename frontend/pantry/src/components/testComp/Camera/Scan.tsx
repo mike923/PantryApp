@@ -20,20 +20,22 @@ const Scan = (props) => {
     googleVisionDetetion,
     loading,
   } = props;
-  const desccription =
-    'QR code (abbreviated from Quick Response Code) is the trademark for a type of matrix barcode (or two-dimensional barcode) first designed in 1994 for the automotive industry in Japan. A barcode is a machine-readable optical label that contains information about the item to which it is attached. In practice, QR codes often contain data for a locator, identifier, or tracker that points to a website or application. A QR code uses four standardized encoding modes (numeric, alphanumeric, byte/binary, and kanji) to store data efficiently; extensions may also be used.';
+  const description = `
+  Pantry is an app that aims to help individuals reduce the amount of food they waste.
+  We allow users to scan their receipt to add their purchases to a virtual pantry.
+  `;
   return (
     <View style={styles.scrollViewStyle}>
       {/* View When app starts, here we will dive for camera and vision things */}
       <Fragment>
         <StatusBar barStyle="dark-content" />
         <Text style={styles.textTitle}>
-          Welcome To React-Native Google Vision Tutorial !
+          Scan your receipt to add items to your pantry
         </Text>
         {!camera && !cameraResult && (
           <View style={styles.cardView}>
             <Text numberOfLines={8} style={styles.descText}>
-              {desccription}
+              {description}
             </Text>
 
             <TouchableOpacity

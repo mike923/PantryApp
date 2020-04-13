@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Scan from './scan';
-import config from '../config';
+import Scan from './Scan';
+import config from '../../../../config';
 class CameraContainer extends Component {
   constructor(props) {
     super(props);
