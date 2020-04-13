@@ -119,8 +119,8 @@ const styles = {
     paddingHorizontal: 20,
     alignSelf: 'center',
     margin: 20,
-    width: 50,
-    height: 50,
+    width: 70,
+    height: 70,
   },
   SpinnerStyle: {
     flex: 1,

@@ -9,6 +9,7 @@ import {
   View,
   ActivityIndicator,
 } from 'react-native';
+import { Icon } from 'react-native-elements';
 
 const Scan = (props) => {
   const {
@@ -93,7 +94,7 @@ const Scan = (props) => {
           </Fragment>
         )}
 
-        {/* React Native camera View */}
+        {/* Using react native camera  */}
         {camera && (
           <View style={styles.container}>
             <RNCamera
@@ -103,6 +104,7 @@ const Scan = (props) => {
               style={styles.preview}
               type={RNCamera.Constants.Type.back}
               flashMode={RNCamera.Constants.FlashMode.off}
+              // camera permissions for android
               androidCameraPermissionOptions={{
                 title: 'Permission to use camera',
                 message: 'We need your permission to use your camera',
@@ -115,11 +117,13 @@ const Scan = (props) => {
                 buttonPositive: 'Ok',
                 buttonNegative: 'Cancel',
               }}
+
+              //using built in react native camera barcode scanner
               onGoogleVisionBarcodesDetected={({ barcodes }) => {
                 console.log(barcodes);
               }}
             />
-            {/* Click here for taking picture  */}
+            {/* Button to take picture  */}
             <View
               style={{
                 flex: 0,
@@ -129,7 +133,7 @@ const Scan = (props) => {
               <TouchableOpacity
                 onPress={() => takePicture(this.camera)}
                 style={styles.capture}>
-                <Text style={{ fontSize: 14 }}> SNAP </Text>
+                <Text style={{ fontSize: 14 }}> </Text>
               </TouchableOpacity>
             </View>
           </View>
