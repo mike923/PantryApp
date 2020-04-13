@@ -6,7 +6,7 @@ const styles = {
   scrollViewStyle: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: '#99003d',
+    backgroundColor: 'teal',
   },
 
   textTitle: {

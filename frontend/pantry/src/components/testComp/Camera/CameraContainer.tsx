@@ -41,6 +41,7 @@ class CameraContainer extends Component {
               image: {
                 content: base64,
               },
+              //adding the features from the visions api
               features: [
                 { type: 'LABEL_DETECTION', maxResults: 10 },
                 { type: 'LANDMARK_DETECTION', maxResults: 5 },
