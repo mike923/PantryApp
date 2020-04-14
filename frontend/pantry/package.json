@@ -9,7 +9,7 @@
     "test": "jest",
     "lint": "eslint .",
     "lint-fix": "eslint --fix .",
-    "start:app": "cd ios/ && pod install && cd .. && npx react-native run-ios && npm run start:debugger",
+    "start:app": "cd ios/ && pod install --repo-update && cd .. && npx react-native run-ios && npm run start:debugger",
     "start:debugger": "open 'rndebugger://set-debugger-loc?host=localhost&port=8081'"
   },
   "lint-staged": {
