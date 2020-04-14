@@ -9,7 +9,7 @@
     "test": "jest",
     "lint": "eslint .",
     "lint-fix": "eslint --fix .",
-    "start:app": "cd ios/ && pod install && cd .. && npx react-native run-ios && npm run start:debugger",
+    "start:app": "cd ios/ && pod install --repo-update && cd .. && npx react-native run-ios && npm run start:debugger",
     "start:debugger": "open 'rndebugger://set-debugger-loc?host=localhost&port=8081'"
   },
   "lint-staged": {
@@ -28,13 +28,14 @@
   "dependencies": {
     "@react-native-community/masked-view": "^0.1.7",
     "@react-native-firebase/app": "^6.4.0",
+    "@react-native-firebase/ml-vision": "^6.4.0",
     "@react-native-firebase/storage": "^6.4.0",
     "@react-navigation/bottom-tabs": "^5.2.5",
     "@react-navigation/native": "^5.1.4",
     "@react-navigation/stack": "^5.2.9",
     "axios": "^0.19.2",
-    "neumorphism-ui": "^1.0.2",
     "firebase": "^7.13.2",
+    "neumorphism-ui": "^1.0.2",
     "react": "16.11.0",
     "react-devtools": "^4.6.0",
     "react-native": "0.62.1",
