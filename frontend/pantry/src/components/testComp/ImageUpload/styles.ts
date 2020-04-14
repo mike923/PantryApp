@@ -12,8 +12,8 @@ export const Picture = styled.Image.attrs({
 `;
 
 export const ProgressBar = styled.View`
-  background-color : ${(props) => props.bar === 100 ? 'green' : 'red'};
-  height: 3;
+  background-color: ${(props) => (props.bar === 100 ? 'green' : 'red')};
+  height: 3px;
   width: ${(props) => props.bar}%;
   align-items: flex-start;
 `;

@@ -5,9 +5,11 @@ import { FireBaseStorage } from '../../../firebase/firebase';
 import ImagePicker from 'react-native-image-picker';
 import axios from 'axios';
 
+import TextRecog from './TextRecog';
+
 const ImageUpload = ({ navigation }) => {
-  const [firebaseImgUrl, setFirebaseImgUrl] = useState('')
-  const [imageURI, setImageURI] = useState({ uri: false });
+  const [firebaseImgUrl, setFirebaseImgUrl] = useState('');
+  const [imageURI, setImageURI] = useState({ uri: false, localPath: '' });
   const [upload, setUpload] = useState({
     loading: false,
     progress: 0,
@@ -41,22 +43,24 @@ const ImageUpload = ({ navigation }) => {
       },
       (completed) => {
         console.log(`Upload Completed`);
-        completed.ref.getDownloadURL()
-          .then(async (url) => {
-            console.log(`Firebase Hosted Url`, url);
-            try {
-              const { data } = await axios.post("http://localhost:8282/receipts/upload", {url})
-              console.log(data)
-            } catch(err) {
-              console.log(err)
-            }
-            setFirebaseImgUrl(url)
-          });
+        completed.ref.getDownloadURL().then(async (url) => {
+          console.log(`Firebase Hosted Url`, url);
+          try {
+            const { data } = await axios.post(
+              'http://localhost:8282/receipts/upload',
+              {
+                url,
+              },
+            );
+            console.log(`Posted to backend successfully`, data);
+          } catch (err) {
+            console.log(`Post to backedn error`, err);
+          }
+          setFirebaseImgUrl(url);
+        });
       },
     );
   };
-
-
 
   const uploadFile = () => {
     ImagePicker.launchImageLibrary(imagePickerOptions, async (res) => {
@@ -66,10 +70,14 @@ const ImageUpload = ({ navigation }) => {
         Alert.alert(`Error: `, res.error);
       } else {
         res.fileName = res.fileName ? res.fileName : 'Test';
+        const fileLocalPath = getFileLocalPath(res);
         // console.log(`File details: `, res);
-        // console.log(`File Path: `, getFileLocalPath(res))
+        // console.log(`File Path: `, getFileLocalPath(res));
         // console.log(`File Stored at: `, FireBaseStorage.ref(res.fileName))
-        setImageURI({ uri: res.uri });
+        setImageURI({
+          uri: res.uri,
+          localPath: fileLocalPath,
+        });
         const firebaseRes = uploadToFireBase(res);
         uploadImage(firebaseRes);
       }
@@ -83,6 +91,9 @@ const ImageUpload = ({ navigation }) => {
       <Button title="Choose Photo" onPress={uploadFile} color="green" />
       {imageURI.uri && <Picture source={imageURI} />}
       {upload.loading && <ProgressBar bar={upload.progress} />}
+      {imageURI.localPath ? (
+        <TextRecog localUriPath={imageURI.localPath} />
+      ) : null}
     </Container>
   );
 };

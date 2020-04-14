@@ -84,3 +84,10 @@ This is a [React Native app](https://reactnative.dev/) that helps people track t
 
 - The back end server is running of port 8282
 - Back end server deployed at [Pantry back end](https://pantry-backend.herokuapp.com/)
+
+## React Native Firebase setup
+
+- [Getting Started](https://rnfirebase.io/)
+
+- [Using Firebase ML Kits](https://rnfirebase.io/ml-vision/usage)
+  - [Text Recognition ML Kit](https://rnfirebase.io/ml-vision/text-recognition)
