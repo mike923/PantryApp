@@ -1,7 +1,11 @@
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-import { NavigationParams, NavigationScreenProp, NavigationState } from 'react-navigation'
-import Button from "../Style/Button"
+import {
+  NavigationParams,
+  NavigationScreenProp,
+  NavigationState,
+} from 'react-navigation';
+import Button from '../Style/Button';
 
 import styles from './styles';
 
@@ -25,5 +29,9 @@ const Home = ({ navigation }: Props) => {
     </View>
   );
 };
+
+Home.navigationOptions = ({ navigation }) => ({
+  title: 'Home',
+});
 
 export default Home;
