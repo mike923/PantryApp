@@ -16,51 +16,54 @@ import { Provider } from 'react-redux';
 import HomeScreen from './Screens/HomeScreen';
 import UserScreen from './Screens/UserScreen';
 import ApiScreen from './Screens/ApiScreen';
+
 // import TestScreen from './Screens/TestScreen';
 
-// const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator();
 
-// const App = () => {
-//   return (
-//     <Provider store={store}>
-//       <NavigationContainer>
-//         <Tab.Navigator>
-//           <Tab.Screen name="Home" component={HomeScreen} />
-//           <Tab.Screen name="User" component={UserScreen} />
-//           <Tab.Screen name="API" component={ApiScreen} />
-//         </Tab.Navigator>
-//       </NavigationContainer>
-//     </Provider>
-//   );
-// };
-
-const RootStack = createStackNavigator(
-  {
-    Login: Login,
-    Register: Register,
-    Home: Home,
-    Reset: Reset,
-  },
-  {
-    initialRouteName: 'Login',
-    defaultNavigationOptions: {
-      headerStyle: {
-        backgroundColor: '#19AC52',
-      },
-      headerTintColor: '#fff',
-      headerTitleStyle: {
-        fontWeight: 'bold',
-      },
-    },
-  },
-);
-
-const RootContainer = createAppContainer(RootStack);
-
-export default function App() {
+const App = () => {
   return (
     <Provider store={store}>
-      <RootContainer />
+      <NavigationContainer>
+        <Tab.Navigator>
+          <Tab.Screen name="Home" component={HomeScreen} />
+          <Tab.Screen name="User" component={UserScreen} />
+          <Tab.Screen name="API" component={ApiScreen} />
+        </Tab.Navigator>
+      </NavigationContainer>
     </Provider>
   );
-}
+};
+
+export default App;
+// const RootStack = createStackNavigator(
+//   {
+//     Login: Login,
+//     Register: Register,
+//     Home: Home,
+//     Reset: Reset,
+//     ApiScreen: ApiScreen,
+//   },
+//   {
+//     initialRouteName: 'ApiScreen',
+//     defaultNavigationOptions: {
+//       headerStyle: {
+//         backgroundColor: '#19AC52',
+//       },
+//       headerTintColor: '#fff',
+//       headerTitleStyle: {
+//         fontWeight: 'bold',
+//       },
+//     },
+//   },
+// );
+
+// const RootContainer = createAppContainer(RootStack);
+
+// export default function App() {
+//   return (
+//     <Provider store={store}>
+//       <RootContainer />
+//     </Provider>
+//   );
+// }
