@@ -55,11 +55,8 @@ target 'pantry' do
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
 
-  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
-  pod 'RNFBAuth', :path => '../node_modules/@react-native-firebase/auth'
 
-  pod 'RNFBApp', :path => '../node_modules/@react-native-firebase/app'
 
   target 'pantryTests' do
     inherit! :complete

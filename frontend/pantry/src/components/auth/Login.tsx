@@ -3,7 +3,7 @@ import { ActivityIndicator, View, Text, Alert } from 'react-native';
 import { Button, Input, Icon } from 'react-native-elements';
 import auth from '@react-native-firebase/auth';
 
-import { styles } from './authStyles';
+import { styles } from './Styles';
 
 export const Login = ({ navigation }) => {
   const [email, setEmail] = useState('');
@@ -35,7 +35,6 @@ export const Login = ({ navigation }) => {
           <Input
             style={styles.textInput}
             placeholder="Your Email"
-            leftIcon={<Icon name="mail" size={24} />}
             value={email}
             onChangeText={setEmail}
           />
@@ -44,7 +43,6 @@ export const Login = ({ navigation }) => {
           <Input
             style={styles.textInput}
             placeholder="Your Password"
-            leftIcon={<Icon name="lock" size={24} />}
             secureTextEntry={true}
             value={password}
             onChangeText={setPassword}
@@ -53,7 +51,6 @@ export const Login = ({ navigation }) => {
         <View style={styles.subContainer}>
           <Button
             style={styles.textInput}
-            icon={<Icon name="input" size={15} color="white" />}
             title="Login"
             onPress={() => login()}
           />
@@ -65,7 +62,6 @@ export const Login = ({ navigation }) => {
         <View style={styles.subContainer}>
           <Button
             style={styles.textInput}
-            icon={<Icon name="refresh" size={15} color="white" />}
             title="Reset Password"
             onPress={() => {
               navigation.navigate('Reset');
@@ -79,7 +75,6 @@ export const Login = ({ navigation }) => {
         <View style={styles.subContainer}>
           <Button
             style={styles.textInput}
-            icon={<Icon name="check-circle" size={15} color="white" />}
             title="Register"
             onPress={() => {
               navigation.navigate('Register');
