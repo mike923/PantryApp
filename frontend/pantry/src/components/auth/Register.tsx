@@ -11,6 +11,10 @@ export const Register = ({ navigation }) => {
 
   const register = async () => {
     setShowLoading(true);
+    if (!password || !email) {
+      return Alert.alert('Please fill out all fields');
+    }
+
     auth()
       .createUserWithEmailAndPassword(email, password)
       .then(() => {
@@ -20,13 +24,24 @@ export const Register = ({ navigation }) => {
       })
       .catch((error) => {
         setShowLoading(false);
-        Alert.alert('Error');
-        if (error.code === 'auth/email-already-in-use') {
-          console.log('That email address is already in use!');
-        }
+        // if (error.code === 'auth/email-already-in-use') {
+        //   return Alert.alert('Invalid credentials please try again!');
+        //   console.log('That email address is already in use!');
+        // }
 
         if (error.code === 'auth/invalid-email') {
           console.log('That email address is invalid!');
+        }
+
+        switch (error.code) {
+          case 'auth/email-already-in-use':
+            return Alert.alert('Invalid credentials \n Please try again!');
+          case 'auth/weak-password':
+            return Alert.alert('Invalid credentials \n please try again!');
+          case 'auth/weak-password':
+            return Alert.alert('Invalid credentials \n please try again!');
+          default:
+            break;
         }
 
         console.error(error);

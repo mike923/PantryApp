@@ -12,16 +12,16 @@ export const Login = ({ navigation }) => {
 
   const login = async () => {
     setShowLoading(true);
-    try {
-      const doLogin = await auth().signInWithEmailAndPassword(email, password);
-      setShowLoading(false);
-      if (doLogin.user) {
+    auth()
+      .signInWithEmailAndPassword(email, password)
+      .then(() => {
+        setShowLoading(false);
         navigation.navigate('Home');
-      }
-    } catch (e) {
-      setShowLoading(false);
-      Alert.alert(e.message);
-    }
+      })
+      .catch(() => {
+        setShowLoading(false);
+        Alert.alert('Invalid credentials \n Please try again');
+      });
   };
 
   return (
