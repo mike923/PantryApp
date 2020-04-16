@@ -8,6 +8,7 @@ export const Register = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showLoading, setShowLoading] = useState(false);
+  const [passVisible, setPassVisible] = useState(true);
 
   const register = async () => {
     setShowLoading(true);
@@ -47,6 +48,9 @@ export const Register = ({ navigation }) => {
         console.error(error);
       });
   };
+
+  //   console.log(passVisibility);
+
   return (
     <View style={styles.container}>
       <View style={styles.formContainer}>
@@ -66,10 +70,17 @@ export const Register = ({ navigation }) => {
           <Input
             style={styles.textInput}
             placeholder="Your Password"
-            secureTextEntry={true}
+            secureTextEntry={passVisible ? true : false}
             value={password}
             onChangeText={setPassword}
           />
+          <Button
+            style={styles.passVisibility}
+            onPress={() => {
+              setPassVisible(!passVisible);
+            }}>
+            help
+          </Button>
         </View>
         <View style={styles.subContainer}>
           <Button

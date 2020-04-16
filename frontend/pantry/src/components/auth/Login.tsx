@@ -9,8 +9,11 @@ export const Login = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showLoading, setShowLoading] = useState(false);
-
+  const [passVisible, setPassVisible] = useState(true);
   const login = async () => {
+    if (!password || !email) {
+      return Alert.alert('Please fill out all fields');
+    }
     setShowLoading(true);
     auth()
       .signInWithEmailAndPassword(email, password)
@@ -43,10 +46,17 @@ export const Login = ({ navigation }) => {
           <Input
             style={styles.textInput}
             placeholder="Your Password"
-            secureTextEntry={true}
+            secureTextEntry={passVisible ? true : false}
             value={password}
             onChangeText={setPassword}
           />
+          <Button
+            style={styles.passVisibility}
+            onPress={() => {
+              setPassVisible(!passVisible);
+            }}>
+            help
+          </Button>
         </View>
         <View style={styles.subContainer}>
           <Button
