@@ -1,7 +1,7 @@
 import React from 'react';
 import 'react-native-gesture-handler'; // Requred for @react-navigation
-import { NavigationContainer } from '@react-navigation/native'; // Navigation wrapper for App
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+// import { NavigationContainer } from '@react-navigation/native'; // Navigation wrapper for App
+// import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { Login } from './auth/Login';
@@ -19,7 +19,7 @@ import UserScreen from './Screens/UserScreen';
 import ApiScreen from './Screens/ApiScreen';
 // import TestScreen from './Screens/TestScreen';
 
-const Tab = createBottomTabNavigator();
+// const Tab = createBottomTabNavigator();
 
 // const App = () => {
 //   return (

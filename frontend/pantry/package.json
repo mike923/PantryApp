@@ -40,6 +40,7 @@
     "react": "16.11.0",
     "react-devtools": "^4.6.0",
     "react-native": "0.62.1",
+    "react-native-check-box": "^2.1.7",
     "react-native-elements": "^1.2.7",
     "react-native-gesture-handler": "^1.6.1",
     "react-native-image-picker": "^2.3.1",

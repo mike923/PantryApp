@@ -28,7 +28,12 @@ export const styles = StyleSheet.create({
     margin: 5,
     width: 200,
   },
-  passVisibility: {
-    width: 5,
+  // password: {
+  //   flexDirection: 'row',
+  // },
+  passVisbility: {
+    position: 'relative',
+    right: 900,
+    left: 900,
   },
 });

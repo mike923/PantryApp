@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ActivityIndicator, View, Text, Alert } from 'react-native';
 import { Button, Input, Icon } from 'react-native-elements';
+import CheckBox from 'react-native-check-box';
 import auth from '@react-native-firebase/auth';
 
 import { styles } from './Styles';
@@ -46,7 +47,7 @@ export const Login = ({ navigation }) => {
             onChangeText={setEmail}
           />
         </View>
-        <View style={styles.subContainer}>
+        <View style={[styles.subContainer, styles.password]}>
           <Input
             style={styles.textInput}
             placeholder="Your Password"
@@ -54,13 +55,13 @@ export const Login = ({ navigation }) => {
             value={password}
             onChangeText={setPassword}
           />
-          <Button
-            style={styles.passVisibility}
-            onPress={() => {
+          <CheckBox
+            onClick={() => {
               setPassVisible(!passVisible);
-            }}>
-            help
-          </Button>
+            }}
+            isChecked={!passVisible}
+            leftText={'Visible'}
+          />
         </View>
         <View style={styles.subContainer}>
           <Button
