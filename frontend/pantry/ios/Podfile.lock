@@ -364,6 +364,8 @@ PODS:
   - React-jsinspector (0.62.1)
   - react-native-image-picker (2.3.1):
     - React
+  - react-native-maps (0.27.1):
+    - React
   - react-native-safe-area-context (0.7.3):
     - React
   - React-RCTActionSheet (0.62.1):
@@ -481,6 +483,7 @@ DEPENDENCIES:
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - react-native-image-picker (from `../node_modules/react-native-image-picker`)
+  - react-native-maps (from `../node_modules/react-native-maps`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
@@ -571,6 +574,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
   react-native-image-picker:
     :path: "../node_modules/react-native-image-picker"
+  react-native-maps:
+    :path: "../node_modules/react-native-maps"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
   React-RCTActionSheet:
@@ -662,6 +667,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: e9698dee4fd43ceb44832baf15d5745f455b0157
   React-jsinspector: f74a62727e5604119abd4a1eda52c0a12144bcd5
   react-native-image-picker: 668e72d0277dc8c12ae90e835507c1eddd2e4f85
+  react-native-maps: f4b89da81626ad7f151a8bfcb79733295d31ce5c
   react-native-safe-area-context: 8260e5157617df4b72865f44006797f895b2ada7
   React-RCTActionSheet: af8f28dd82fec89b8fe29637b8c779829e016a88
   React-RCTAnimation: 0d21fff7c20fb8ee41de5f2ebb63221127febd96

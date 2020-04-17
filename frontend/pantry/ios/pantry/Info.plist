@@ -70,6 +70,8 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>UIAppFonts</key>
-	<array/>
+	<array>
+		<string>Vibur.ttf</string>
+	</array>
 </dict>
 </plist>
