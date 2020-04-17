@@ -48,7 +48,6 @@ const loginUser = (email, password) => {
     auth()
       .signInWithEmailAndPassword(email, password)
       .then(() => {
-        dispatch(fetchedUser);
         dispatch(fetchedUser());
         dispatch(setUser(email));
       })
@@ -72,7 +71,6 @@ const registerUser = (email, password) => {
     auth()
       .createUserWithEmailAndPassword(email, password)
       .then(() => {
-        dispatch(fetchedUser);
         dispatch(fetchedUser());
         dispatch(setUser(email));
         console.log('User account created & signed in!');

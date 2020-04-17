@@ -15,7 +15,11 @@ export const Login = ({ navigation }) => {
   const loggedUser = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
-  useEffect(() => {}, [dispatch, loggedUser]);
+  useEffect(() => {
+    if (loggedUser.loggedIn) {
+      navigation.navigate('Home');
+    }
+  }, [dispatch, loggedUser]);
 
   //directs to log in screen after authentication
   const login = () => {
