@@ -40,6 +40,7 @@ const userReducer = (state = initUserState, action) => {
 
     case FETCHING_USER_ERROR:
       stateCopy.loading = false;
+      stateCopy.loggedIn = false;
       stateCopy.error = true;
       stateCopy.errorMsgs = [action.payload];
       break;

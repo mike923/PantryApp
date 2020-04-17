@@ -15,11 +15,7 @@ export const Register = ({ navigation }) => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (user.loggedIn) {
-      navigation.navigate('Home');
-    }
-  }, [dispatch, user]);
+  useEffect(() => {}, [dispatch, user]);
 
   const register = async () => {
     dispatch(registerUser(email, password));
