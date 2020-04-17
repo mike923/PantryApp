@@ -7,7 +7,7 @@ import store from '../redux/store';
 import { Provider } from 'react-redux';
 
 // Import Component Screens
-import HomeScreen from './Screens/HomeScreen';
+import HomeScreen from './Screens/Welcome';
 import UserScreen from './Screens/UserScreen';
 import ApiScreen from './Screens/ApiScreen';
 // import TestScreen from './Screens/TestScreen';

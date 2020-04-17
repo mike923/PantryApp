@@ -10,6 +10,7 @@
     "lint": "eslint .",
     "lint-fix": "eslint --fix .",
     "start:app": "cd ios/ && pod install --repo-update && cd .. && npx react-native run-ios && npm run start:debugger",
+    "start:mike": "cd ios/ && pod install --repo-update && cd .. && npx react-native run-ios --device='Michael D.’s iPhone' && npm run start:debugger",
     "start:debugger": "open 'rndebugger://set-debugger-loc?host=localhost&port=8081'"
   },
   "lint-staged": {
@@ -41,6 +42,7 @@
     "react-native": "0.62.1",
     "react-native-gesture-handler": "^1.6.1",
     "react-native-image-picker": "^2.3.1",
+    "react-native-maps": "^0.27.1",
     "react-native-reanimated": "^1.7.1",
     "react-native-safe-area-context": "^0.7.3",
     "react-native-screens": "^2.4.0",

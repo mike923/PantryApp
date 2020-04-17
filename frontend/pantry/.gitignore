@@ -63,3 +63,7 @@ buck-out/
 
 # Api Keys
 config.js
+# ignore node_modules symlink
+node_modules
+node_modules.tmg
+node_modules.nosync
