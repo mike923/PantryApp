@@ -41,7 +41,7 @@ const errorMessages = (err) => {
 
 //firebase functions to log the user in with email and password
 //authenticate if the user has a valid account
-const loginUser = (email, password, navigation) => {
+const loginUser = (email, password) => {
   return (dispatch) => {
     dispatch(fetchingUser());
 

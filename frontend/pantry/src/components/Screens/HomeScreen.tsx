@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { View, Text } from 'react-native';
-import { Button } from 'react-native-elements';
-import auth from '@react-native-firebase/auth';
+
 import Home from '../Home/Home';
 import User from '../User/User';
 import Test from '../testComp/TestComp';
