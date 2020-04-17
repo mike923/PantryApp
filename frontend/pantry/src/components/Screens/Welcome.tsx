@@ -8,7 +8,6 @@ const Welcome = (props: any) => (
             resizeMode="contain"
             style={styles.image2}
         ></Image>
-        {/* <View style={styles.image2Filler}></View> */}
         <Text style={styles.heading}>Welcome To Pantry</Text>
         <StatusBar></StatusBar>
     </View>
@@ -25,16 +24,12 @@ const styles = StyleSheet.create({
     marginVertical: 151,
     alignSelf: "center"
   },
-  // image2Filler: {
-  //   flex: 1
-  // },
   heading: {
     width: 414,
     height: 61,
     color: "rgba(255,0,149,1)",
     fontSize: 50,
     fontFamily: "Vibur",
-    // lineHeight: 50,
     textAlign: "center",
     marginBottom: 327
   },
