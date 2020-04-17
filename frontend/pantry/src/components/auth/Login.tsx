@@ -1,36 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ActivityIndicator, View, Text, Alert } from 'react-native';
-import { Button, Input, Icon } from 'react-native-elements';
+import { Button, Input } from 'react-native-elements';
 import CheckBox from 'react-native-check-box';
 import auth from '@react-native-firebase/auth';
+import { useSelector, useDispatch } from 'react-redux';
+import { loginUser } from '../../redux/actions/userActions';
 
 import { styles } from './Styles';
 
 export const Login = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [showLoading, setShowLoading] = useState(false);
   const [passVisible, setPassVisible] = useState(true);
 
-  //firebase functions to log the user in with email and password
-  //authenticate if the user has a valid account
+  const loggedUser = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    // console.log(loginUser);
+  }, [dispatch, loggedUser]);
+
   //directs to log in screen after authentication
-  const login = async () => {
-    if (!password || !email) {
-      setShowLoading(false);
-      return Alert.alert('Please fill out all fields');
+  const login = () => {
+    dispatch(loginUser(email, password));
+
+    if (loggedUser.loggedIn) {
+      navigation.navigate('Home');
     }
-    setShowLoading(true);
-    auth()
-      .signInWithEmailAndPassword(email, password)
-      .then(() => {
-        setShowLoading(false);
-        navigation.navigate('Home');
-      })
-      .catch(() => {
-        setShowLoading(false);
-        Alert.alert('Invalid credentials \n Please try again');
-      });
   };
 
   return (
@@ -97,7 +93,7 @@ export const Login = ({ navigation }) => {
             }}
           />
         </View>
-        {showLoading && (
+        {loggedUser.loading && (
           <View style={styles.activity}>
             <ActivityIndicator size="large" color="#0000ff" />
           </View>
