@@ -5,10 +5,10 @@ import auth from '@react-native-firebase/auth';
 import { styles } from './Styles';
 
 export const Register = ({ navigation }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [showLoading, setShowLoading] = useState(false);
-  const [passVisible, setPassVisible] = useState(true);
+  const [email, setEmail] = useState(''); // user inputting email
+  const [password, setPassword] = useState(''); // user inputting password
+  const [showLoading, setShowLoading] = useState(false); // sets the loading screen
+  const [passVisible, setPassVisible] = useState(true); // toggling password visibility
 
   const register = async () => {
     setShowLoading(true);
@@ -16,6 +16,9 @@ export const Register = ({ navigation }) => {
       return Alert.alert('Please fill out all fields');
     }
 
+    //firebase functions to create a user with email and password
+    //takes in email and password parameters
+    //after account is created, user gets uuid and directed to the home page
     auth()
       .createUserWithEmailAndPassword(email, password)
       .then(() => {
@@ -25,19 +28,13 @@ export const Register = ({ navigation }) => {
       })
       .catch((error) => {
         setShowLoading(false);
-        // if (error.code === 'auth/email-already-in-use') {
-        //   return Alert.alert('Invalid credentials please try again!');
-        //   console.log('That email address is already in use!');
-        // }
 
-        if (error.code === 'auth/invalid-email') {
-          console.log('That email address is invalid!');
-        }
-
+        //checking for the error codes
+        //informing the user about improper inputs
         switch (error.code) {
           case 'auth/email-already-in-use':
             return Alert.alert('Invalid credentials \n Please try again!');
-          case 'auth/weak-password':
+          case 'auth/invalid-email':
             return Alert.alert('Invalid credentials \n please try again!');
           case 'auth/weak-password':
             return Alert.alert('Invalid credentials \n please try again!');

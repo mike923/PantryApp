@@ -10,6 +10,10 @@ export const Login = ({ navigation }) => {
   const [password, setPassword] = useState('');
   const [showLoading, setShowLoading] = useState(false);
   const [passVisible, setPassVisible] = useState(true);
+
+  //firebase functions to log the user in with email and password
+  //authenticate if the user has a valid account
+  //directs to log in screen after authentication
   const login = async () => {
     if (!password || !email) {
       return Alert.alert('Please fill out all fields');
