@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { ActivityIndicator, View, Text, Alert } from 'react-native';
 import { Button, Input } from 'react-native-elements';
-import CheckBox from 'react-native-check-box';
-import auth from '@react-native-firebase/auth';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginUser } from '../../redux/actions/userActions';
+import CheckBox from 'react-native-check-box';
 
 import { styles } from './Styles';
 
@@ -16,9 +15,7 @@ export const Login = ({ navigation }) => {
   const loggedUser = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    // console.log(loginUser);
-  }, [dispatch, loggedUser]);
+  useEffect(() => {}, [dispatch, loggedUser]);
 
   //directs to log in screen after authentication
   const login = () => {

@@ -1,31 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ActivityIndicator, View, Text, Alert } from 'react-native';
 import { Button, Input, Icon } from 'react-native-elements';
-import auth from '@react-native-firebase/auth';
+import { useSelector, useDispatch } from 'react-redux';
+import { resetPassword } from '../../redux/actions/userActions';
 import { styles } from './Styles';
 
 export const Reset = ({ navigation }) => {
   const [email, setEmail] = useState('');
-  const [showLoading, setShowLoading] = useState(false);
+
+  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
+  useEffect(() => {}, [dispatch, user]);
 
   const reset = async () => {
-    setShowLoading(true);
-    if (!email) {
-      return Alert.alert('Please enter a valid email');
-    }
+    dispatch(resetPassword(email));
 
-    auth()
-      .sendPasswordResetEmail(email)
-      .then(() => {
-        console.log('password reset');
-        setShowLoading(false);
-        navigation.navigate('Home');
-      })
-      .catch((error) => {
-        setShowLoading(false);
-        console.error(error);
-        return Alert.alert('Invalid credentials \n Please try again!');
-      });
+    if (user.loggedIn) {
+      navigation.navigate('Home');
+    }
   };
 
   return (
@@ -59,7 +52,7 @@ export const Reset = ({ navigation }) => {
             }}
           />
         </View>
-        {showLoading && (
+        {user.loading && (
           <View style={styles.activity}>
             <ActivityIndicator size="large" color="#0000ff" />
           </View>
