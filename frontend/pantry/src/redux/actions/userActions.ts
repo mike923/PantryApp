@@ -30,6 +30,8 @@ const errorMessages = (err) => {
       return Alert.alert('Invalid credentials \n please try again!');
     case 'auth/weak-password':
       return Alert.alert('Invalid credentials \n please try again!');
+    case 'auth/wrong-password':
+      return Alert.alert('Invalid credentials \n please try again!');
     case 'auth/user-not-found':
       return Alert.alert('Invalid credentials \n please try again!');
     default:
@@ -43,9 +45,10 @@ const loginUser = (email, password, navigation) => {
   return (dispatch) => {
     dispatch(fetchingUser());
 
-    if (!email || !password) {
-      return Alert.alert('Please enter a valid email');
-    }
+    // if (!email || !password) {
+    //   dispatch(errorLoadingUser(err.code));
+    //   return Alert.alert('Please enter a valid email');
+    // }
 
     auth()
       .signInWithEmailAndPassword(email, password)
@@ -66,9 +69,7 @@ const loginUser = (email, password, navigation) => {
 const registerUser = (email, password) => {
   return (dispatch) => {
     dispatch(fetchingUser());
-    if (!email || !password) {
-      return Alert.alert('Please enter a valid email');
-    }
+
     //firebase functions to create a user with email and password
     //takes in email and password parameters
     //after account is created, user gets uuid and directed to the home page
@@ -91,9 +92,6 @@ const registerUser = (email, password) => {
 const resetPassword = (email) => {
   return (dispatch) => {
     dispatch(fetchingUser);
-    if (!email) {
-      return Alert.alert('Please enter a valid email');
-    }
 
     auth()
       .sendPasswordResetEmail(email)
