@@ -1,5 +1,5 @@
 {
-  "react-native": {
-    "ml_vision_ocr_model": true
-  }
+    "react-native": {
+        "ml_vision_ocr_model": true
+    }
 }
