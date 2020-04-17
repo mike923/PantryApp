@@ -8,6 +8,7 @@ import { Login } from './auth/Login';
 import { Register } from './auth/Register';
 import Home from './Home/Home';
 import { Reset } from './auth/Reset';
+import User from './User/User';
 
 import store from '../redux/store';
 import { Provider } from 'react-redux';
@@ -18,7 +19,7 @@ import UserScreen from './Screens/UserScreen';
 import ApiScreen from './Screens/ApiScreen';
 // import TestScreen from './Screens/TestScreen';
 
-// const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator();
 
 // const App = () => {
 //   return (
@@ -40,6 +41,9 @@ const RootStack = createStackNavigator(
     Register: Register,
     Home: Home,
     Reset: Reset,
+    UserScreen: UserScreen,
+    ApiScreen: ApiScreen,
+    User: User,
   },
   {
     initialRouteName: 'Login',

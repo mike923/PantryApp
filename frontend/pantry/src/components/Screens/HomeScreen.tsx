@@ -10,22 +10,6 @@ import Test from '../testComp/TestComp';
 const Stack = createStackNavigator();
 
 const HomeScreen = ({ navigation }) => {
-  const [initializing, setInitializing] = useState(true);
-  const [user, setUser] = useState();
-
-  const onAuthStateChanged = (user) => {
-    setUser(user);
-    if (initializing) setInitializing(false);
-  };
-
-  useEffect(() => {
-    return auth().onAuthStateChanged(onAuthStateChanged);
-  }, []);
-
-  if (initializing) return null;
-
-  if (!user) return navigation.navigate('Login');
-
   return (
     <Stack.Navigator>
       <Stack.Screen name="Home" component={Home} />
