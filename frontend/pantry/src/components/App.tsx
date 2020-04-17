@@ -14,6 +14,7 @@ import store from '../redux/store';
 import { Provider } from 'react-redux';
 
 // Import Component Screens
+import Test from './testComp/TestComp';
 import HomeScreen from './Screens/HomeScreen';
 import UserScreen from './Screens/UserScreen';
 import ApiScreen from './Screens/ApiScreen';
@@ -44,6 +45,7 @@ const RootStack = createStackNavigator(
     UserScreen: UserScreen,
     ApiScreen: ApiScreen,
     User: User,
+    Test: Test,
   },
   {
     initialRouteName: 'Login',

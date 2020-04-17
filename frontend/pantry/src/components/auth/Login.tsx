@@ -17,6 +17,7 @@ export const Login = ({ navigation }) => {
   //directs to log in screen after authentication
   const login = async () => {
     if (!password || !email) {
+      setShowLoading(false);
       return Alert.alert('Please fill out all fields');
     }
     setShowLoading(true);

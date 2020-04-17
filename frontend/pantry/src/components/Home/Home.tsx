@@ -39,6 +39,7 @@ const Home = ({ navigation }: Props) => {
   return (
     <View style={styles.container}>
       <Text>Home</Text>
+      <Text>Welcome {user.email}</Text>
       <TouchableOpacity onPress={navigateToUsers} style={styles.button}>
         <Text style={styles.buttonText}>Go to Users</Text>
       </TouchableOpacity>

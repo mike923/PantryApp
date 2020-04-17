@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { ActivityIndicator, View, Text, Alert } from 'react-native';
 import { Button, Input, Icon } from 'react-native-elements';
 import auth from '@react-native-firebase/auth';
+import CheckBox from 'react-native-check-box';
+
 import { styles } from './Styles';
 
 export const Register = ({ navigation }) => {
@@ -13,6 +15,7 @@ export const Register = ({ navigation }) => {
   const register = async () => {
     setShowLoading(true);
     if (!password || !email) {
+      setShowLoading(false);
       return Alert.alert('Please fill out all fields');
     }
 
@@ -71,13 +74,13 @@ export const Register = ({ navigation }) => {
             value={password}
             onChangeText={setPassword}
           />
-          <Button
-            style={styles.passVisibility}
-            onPress={() => {
+          <CheckBox
+            onClick={() => {
               setPassVisible(!passVisible);
-            }}>
-            help
-          </Button>
+            }}
+            isChecked={!passVisible}
+            leftText={'Visible'}
+          />
         </View>
         <View style={styles.subContainer}>
           <Button
