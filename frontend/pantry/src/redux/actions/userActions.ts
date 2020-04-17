@@ -30,6 +30,8 @@ const errorMessages = (err) => {
       return Alert.alert('Invalid credentials \n please try again!');
     case 'auth/weak-password':
       return Alert.alert('Invalid credentials \n please try again!');
+    case 'auth/wrong-password':
+      return Alert.alert('Invalid credentials \n please try again!');
     case 'auth/user-not-found':
       return Alert.alert('Invalid credentials \n please try again!');
     default:
@@ -53,28 +55,6 @@ const loginUser = (email, password, navigation) => {
       .catch((err) => {
         console.log(err.code);
 
-        dispatch(errorLoadingUser(err.code));
-        errorMessages(err);
-      });
-  };
-};
-
-const registerUser = (email, password) => {
-  return (dispatch) => {
-    dispatch(fetchingUser());
-
-    //firebase functions to create a user with email and password
-    //takes in email and password parameters
-    //after account is created, user gets uuid and directed to the home page
-    auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then(() => {
-        dispatch(fetchedUser);
-        dispatch(fetchedUser());
-        dispatch(setUser(email));
-        console.log('User account created & signed in!');
-      })
-      .catch((err) => {
         dispatch(errorLoadingUser(err.code));
 
         errorMessages(err);
@@ -115,9 +95,9 @@ const resetPassword = (email) => {
         console.log('password reset');
         dispatch(fetchedUser);
       })
-      .catch((error) => {
-        dispatch(fetchedUser);
-        console.error(error);
+      .catch((err) => {
+        dispatch(errorLoadingUser(err.code));
+
         errorMessages(err);
       });
   };
