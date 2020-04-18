@@ -20,6 +20,27 @@ DerivedData
 *.hmap
 *.ipa
 *.xcuserstate
+!**/*.xcodeproj
+!**/*.pbxproj
+!**/*.xcworkspacedata
+!**/*.xcsettings
+!**/*.xcscheme
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata
+*.xccheckout
+*.moved-aside
+DerivedData
+*.hmap
+*.ipa
+*.xcuserstate
+project.xcworkspace
 
 # Android/IntelliJ
 #
@@ -67,3 +88,5 @@ config.js
 node_modules
 node_modules.tmg
 node_modules.nosync
+/iosc
+/iosd
