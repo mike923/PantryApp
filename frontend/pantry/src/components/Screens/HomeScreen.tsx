@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
+
 import Home from '../Home/Home';
 import User from '../User/User';
 import Test from '../testComp/TestComp';

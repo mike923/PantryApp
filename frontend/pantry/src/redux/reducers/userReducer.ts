@@ -3,11 +3,12 @@ import {
   FETCHED_USER,
   SET_USER,
   UNSET_USER,
+  FETCHING_USER_ERROR,
 } from '../actions/actionTypes';
 
 const initUserState = {
   userInfo: {
-    username: '',
+    email: '',
   },
   loggedIn: false,
   loading: false,
@@ -15,7 +16,7 @@ const initUserState = {
   errorMsgs: [],
 };
 
-const userReducer = (state, action) => {
+const userReducer = (state = initUserState, action) => {
   const stateCopy = { ...state };
 
   switch (action.type) {
@@ -29,14 +30,20 @@ const userReducer = (state, action) => {
 
     case SET_USER:
       stateCopy.loggedIn = true;
-      stateCopy.userInfo.username = action.payload.username;
+      stateCopy.userInfo.email = action.payload;
       break;
 
     case UNSET_USER:
       stateCopy.loggedIn = false;
-      stateCopy.userInfo.username = '';
+      stateCopy.userInfo.email = '';
       break;
 
+    case FETCHING_USER_ERROR:
+      stateCopy.loading = false;
+      stateCopy.loggedIn = false;
+      stateCopy.error = true;
+      stateCopy.errorMsgs = [action.payload];
+      break;
     default:
       break;
   }
