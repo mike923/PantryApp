@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { ActivityIndicator, View, Text } from 'react-native';
 import { Button, Input } from 'react-native-elements';
 import { useSelector, useDispatch } from 'react-redux';
-import { registerUser } from '../../redux/actions/userActions';
 import CheckBox from 'react-native-check-box';
+import { registerUser } from '../../redux/actions/userActions.ts';
 
-import { styles } from './Styles';
+import { styles } from './Styles.ts';
 
 export const Register = ({ navigation }) => {
   const [email, setEmail] = useState(''); // user inputting email
@@ -15,7 +15,9 @@ export const Register = ({ navigation }) => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
-  useEffect(() => {}, [dispatch, user]);
+  useEffect(() => {
+    return undefined;
+  }, [dispatch, user]);
 
   const register = async () => {
     dispatch(registerUser(email, password));
@@ -44,7 +46,7 @@ export const Register = ({ navigation }) => {
           <Input
             style={styles.textInput}
             placeholder="Your Password"
-            secureTextEntry={passVisible ? true : false}
+            secureTextEntry={!!passVisible}
             value={password}
             onChangeText={setPassword}
           />
@@ -53,7 +55,7 @@ export const Register = ({ navigation }) => {
               setPassVisible(!passVisible);
             }}
             isChecked={!passVisible}
-            leftText={'Visible'}
+            leftText="Visible"
           />
         </View>
         <View style={styles.subContainer}>
