@@ -6,6 +6,7 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
+    "clearmods": "rm -rf node_modules/ && npm i && npm install --only=dev",
     "test": "jest",
     "lint": "npx eslint . --ext js,ts,jsx,ts,json",
     "format": "npx prettier --write src/**/*.{js,ts,tsx} && npx prettier --write *.{js,json}",
