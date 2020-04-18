@@ -1,11 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { Button, StatusBar, Alert, Platform } from 'react-native';
-import { Container, Picture, ProgressBar } from './styles';
-import { FireBaseStorage } from '../../../firebase/firebase';
+import React, { useState } from 'react';
+import {
+  Button,
+  StatusBar,
+  Alert,
+  Platform,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 import axios from 'axios';
-
-import TextRecog from './TextRecog';
+import { Container, Picture, ProgressBar, styling } from './styles.ts';
+import { FireBaseStorage } from '../../firebase/firebase';
 
 const ImageUpload = ({ navigation }) => {
   const [firebaseImgUrl, setFirebaseImgUrl] = useState('');
@@ -14,6 +20,8 @@ const ImageUpload = ({ navigation }) => {
     loading: false,
     progress: 0,
   });
+
+  console.log(firebaseImgUrl);
 
   const imagePickerOptions = { noData: true };
 
@@ -35,8 +43,8 @@ const ImageUpload = ({ navigation }) => {
         const progress = Math.round(
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100,
         );
-        console.log(`Uploading progress: `, progress + '%');
-        setUpload({ loading: true, progress: progress });
+        console.log(`Uploading progress: `, `${progress}%`);
+        setUpload({ loading: true, progress });
       },
       (error) => {
         console.log(error);
@@ -88,14 +96,43 @@ const ImageUpload = ({ navigation }) => {
     <Container>
       {/* {Alert.alert(JSON.stringify(FireBaseStorage))} */}
       <StatusBar barStyle="dark-content" />
-      <Button title="Choose Photo" onPress={uploadFile} color="green" />
-      {imageURI.uri && <Picture source={imageURI} />}
-      {upload.loading && <ProgressBar bar={upload.progress} />}
-      {imageURI.localPath ? (
-        <TextRecog localUriPath={imageURI.localPath} />
+      {!imageURI.uri ? (
+        <View>
+          <Text style={styling.uploadYourReceipt}>Upload Your Receipt</Text>
+          <TouchableOpacity style={styling.button} onPress={uploadFile} />
+        </View>
       ) : null}
+      {imageURI.uri && (
+        <View>
+          <Picture source={imageURI} />
+          <Button
+            title="Choose Another Photo"
+            onPress={uploadFile}
+            color="green"
+          />
+          {upload.progress === 100 ? (
+            <Button
+              title="Parse Text"
+              onPress={() =>
+                navigation.navigate('Parsed', {
+                  localUriPath: imageURI.localPath,
+                })
+              }
+            />
+          ) : null}
+        </View>
+      )}
+      {upload.loading && <ProgressBar bar={upload.progress} />}
+      {/* {imageURI.localPath ? (
+        <TextRecog localUriPath={imageURI.localPath} />
+      ) : null} */}
     </Container>
   );
 };
+
+ImageUpload.navigationOptions = ({ navigation }) => ({
+  title: 'Upload',
+  // headerShown: false,
+});
 
 export default ImageUpload;

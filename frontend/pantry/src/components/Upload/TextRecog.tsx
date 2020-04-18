@@ -1,11 +1,22 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { utils } from '@react-native-firebase/app';
+import React, { useState, useEffect } from 'react';
+// import { useSelector, useDispatch } from 'react-redux';
+// import { utils } from '@react-native-firebase/app';
 import vision from '@react-native-firebase/ml-vision';
 import { ScrollView, Text, Button, Alert } from 'react-native';
 
-const TextRecog = ({ localUriPath }) => {
+const TextRecog = ({ route, navigation }) => {
+  const { localUriPath } = route.params;
+
   const [text, setText] = useState([]);
+
+  useEffect(() => {
+    if (localUriPath) {
+      processImg();
+    } else {
+      errorAlert();
+    }
+    // localUriPath ? processImg : errorAlert;
+  }, []);
 
   console.log(`Local Path for TextRecog Component: `, localUriPath);
 
@@ -33,7 +44,7 @@ const TextRecog = ({ localUriPath }) => {
   return (
     <ScrollView>
       <Button
-        title={localUriPath ? 'Parse Text' : 'Choose Photo First'}
+        title={localUriPath ? 'Parsed Receipt' : 'Choose Photo First'}
         onPress={localUriPath ? processImg : errorAlert}
         color="green"
       />
