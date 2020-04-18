@@ -1,27 +1,32 @@
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
+  activity: {
+    alignItems: 'center',
+    bottom: 0,
+    justifyContent: 'center',
+    left: 0,
+    position: 'absolute',
+    right: 0,
+    top: 0,
+  },
   container: {
+    alignItems: 'center',
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
   },
   formContainer: {
     height: 400,
     padding: 20,
   },
+  passVisbility: {
+    left: 900,
+    position: 'relative',
+    right: 900,
+  },
   subContainer: {
     marginBottom: 20,
     padding: 5,
-  },
-  activity: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   textInput: {
     fontSize: 18,
@@ -31,9 +36,4 @@ export const styles = StyleSheet.create({
   // password: {
   //   flexDirection: 'row',
   // },
-  passVisbility: {
-    position: 'relative',
-    right: 900,
-    left: 900,
-  },
 });

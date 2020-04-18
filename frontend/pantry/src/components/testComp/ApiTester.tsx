@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getRandomUser } from '../../redux/actions/testActions';
 import {
   Text,
   TouchableOpacity,
@@ -8,15 +7,16 @@ import {
   SectionList,
   TextInput,
 } from 'react-native';
-import styles from './styles';
 import axios from 'axios';
 import { ScrollView } from 'react-native-gesture-handler';
+import styles from './styles.ts';
+import { getRandomUser } from '../../redux/actions/testActions.ts';
 
 const ApiTester = ({ navigation }) => {
   const [api, setApi] = useState('https://randomuser.me/api/');
   const [res, setRes] = useState([]);
 
-  const navigateToImg = () => navigation.navigate('ImageUpload')
+  const navigateToImg = () => navigation.navigate('ImageUpload');
   const displayLoading = () => <Text style={styles.p}>Loading...</Text>;
 
   const loadApi = async () => {

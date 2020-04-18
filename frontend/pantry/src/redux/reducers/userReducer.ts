@@ -4,7 +4,7 @@ import {
   SET_USER,
   UNSET_USER,
   FETCHING_USER_ERROR,
-} from '../actions/actionTypes';
+} from '../actions/actionTypes.ts';
 
 const initUserState = {
   userInfo: {

@@ -1,4 +1,4 @@
-import { FETCHING, FETCHED } from './actionTypes';
+import { FETCHING, FETCHED } from './actionTypes.ts';
 
 const getRandomUser = () => {
   return (dispatch) => {
