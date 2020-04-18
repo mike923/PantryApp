@@ -1,22 +1,17 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   button: {
-    padding: 10,
     backgroundColor: 'blue',
+    padding: 10,
   },
   buttonText: {
     color: 'white',
   },
-  p: {
-    marginBottom: 10,
-    padding: 5,
-    fontSize: 16,
+  container: {
+    alignItems: 'center',
+    flex: 1,
+    justifyContent: 'center',
   },
   h1: {
     fontSize: 24,
@@ -24,16 +19,21 @@ const styles = StyleSheet.create({
   h1View: {
     // shadowOpacity: .9,
     // shadowRadius: 1,
+    borderBottomWidth: 3,
+    borderColor: 'grey',
+    borderLeftWidth: 2,
+    borderRadius: 5,
+    borderRightWidth: 0.25,
+    borderTopWidth: 0.25,
+    marginBottom: 10,
+    padding: 8,
     shadowColor: 'red',
     shadowOffset: { height: 1, width: -1 },
-    borderLeftWidth: 2,
-    borderBottomWidth: 3,
-    borderTopWidth: 0.25,
-    borderRightWidth: 0.25,
-    borderColor: 'grey',
-    borderRadius: 5,
-    padding: 8,
+  },
+  p: {
+    fontSize: 16,
     marginBottom: 10,
+    padding: 5,
   },
 });
 

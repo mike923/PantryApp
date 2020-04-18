@@ -8,7 +8,7 @@ import {
   SET_USER,
   UNSET_USER,
   FETCHING_USER_ERROR,
-} from './actionTypes';
+} from './actionTypes.ts';
 
 const fetchingUser = () => ({ type: FETCHING_USER });
 
@@ -20,8 +20,8 @@ const unsetUser = () => ({ type: UNSET_USER });
 
 const errorLoadingUser = (err) => ({ type: FETCHING_USER_ERROR, payload: err });
 
-//checking for the error codes
-//informing the user about improper inputs
+// checking for the error codes
+// informing the user about improper inputs
 const errorMessages = (err) => {
   switch (err.code) {
     case 'auth/email-already-in-use':
@@ -35,12 +35,12 @@ const errorMessages = (err) => {
     case 'auth/user-not-found':
       return Alert.alert('Invalid credentials \n please try again!');
     default:
-      break;
+      return undefined;
   }
 };
 
-//firebase functions to log the user in with email and password
-//authenticate if the user has a valid account
+// firebase functions to log the user in with email and password
+// authenticate if the user has a valid account
 const loginUser = (email, password) => {
   return (dispatch) => {
     dispatch(fetchingUser());
@@ -65,9 +65,9 @@ const registerUser = (email, password) => {
   return (dispatch) => {
     dispatch(fetchingUser());
 
-    //firebase functions to create a user with email and password
-    //takes in email and password parameters
-    //after account is created, user gets uuid and directed to the home page
+    // firebase functions to create a user with email and password
+    // takes in email and password parameters
+    // after account is created, user gets uuid and directed to the home page
     auth()
       .createUserWithEmailAndPassword(email, password)
       .then(() => {

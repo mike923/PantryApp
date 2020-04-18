@@ -1,4 +1,4 @@
-import { FETCHING, FETCHED } from '../actions/actionTypes';
+import { FETCHING, FETCHED } from '../actions/actionTypes.ts';
 
 const init = {
   apiResults: null,
