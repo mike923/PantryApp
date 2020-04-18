@@ -22,15 +22,6 @@ const RootStack = createStackNavigator(
   },
   {
     initialRouteName: 'Login',
-    defaultNavigationOptions: {
-      headerStyle: {
-        backgroundColor: '#19AC52',
-      },
-      headerTintColor: '#fff',
-      headerTitleStyle: {
-        fontWeight: 'bold',
-      },
-    },
   },
 );
 
