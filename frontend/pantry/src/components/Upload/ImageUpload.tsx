@@ -1,8 +1,16 @@
 import React, { useState } from 'react';
-import { Button, StatusBar, Alert, Platform } from 'react-native';
+import {
+  Button,
+  StatusBar,
+  Alert,
+  Platform,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 import axios from 'axios';
-import { Container, Picture, ProgressBar } from './styles.ts';
+import { Container, Picture, ProgressBar, styling } from './styles.ts';
 import { FireBaseStorage } from '../../firebase/firebase';
 
 import TextRecog from './TextRecog.tsx';
@@ -90,12 +98,29 @@ const ImageUpload = ({ navigation }) => {
     <Container>
       {/* {Alert.alert(JSON.stringify(FireBaseStorage))} */}
       <StatusBar barStyle="dark-content" />
-      <Button title="Choose Photo" onPress={uploadFile} color="green" />
-      {imageURI.uri && <Picture source={imageURI} />}
-      {upload.loading && <ProgressBar bar={upload.progress} />}
+      <Text style={styling.uploadYourReceipt}>Upload Your Receipt</Text>
+      {!imageURI.uri ? (
+        <TouchableOpacity style={styling.button} onPress={uploadFile} />
+      ) : null}
+      {imageURI.uri && (
+        <View>
+          <Picture source={imageURI} />
+          <Button
+            title="Choose Another Photo"
+            onPress={uploadFile}
+            color="green"
+          />
+
+          <Button
+            title="Parse Text"
+            onPress={() => navigation.navigate('Home')}
+          />
+        </View>
+      )}
+      {/* {upload.loading && <ProgressBar bar={upload.progress} />}
       {imageURI.localPath ? (
         <TextRecog localUriPath={imageURI.localPath} />
-      ) : null}
+      ) : null} */}
     </Container>
   );
 };
