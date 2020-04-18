@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { ActivityIndicator, View, Text, Alert } from 'react-native';
 import { Button, Input } from 'react-native-elements';
 import { useSelector, useDispatch } from 'react-redux';
-import { loginUser } from '../../redux/actions/userActions';
 import CheckBox from 'react-native-check-box';
+import { loginUser } from '../../redux/actions/userActions.ts';
 
-import { styles } from './Styles';
+import { styles } from './Styles.ts';
 
 export const Login = ({ navigation }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('Voniel@bvoniel.com');
+  const [password, setPassword] = useState('voniel');
   const [passVisible, setPassVisible] = useState(true);
 
   const loggedUser = useSelector((state) => state.user);
@@ -21,7 +21,7 @@ export const Login = ({ navigation }) => {
     }
   }, [dispatch, loggedUser]);
 
-  //directs to log in screen after authentication
+  // directs to log in screen after authentication
   const login = () => {
     dispatch(loginUser(email, password));
 
@@ -49,7 +49,7 @@ export const Login = ({ navigation }) => {
           <Input
             style={styles.textInput}
             placeholder="Your Password"
-            secureTextEntry={passVisible ? true : false}
+            secureTextEntry={!!passVisible}
             value={password}
             onChangeText={setPassword}
           />
@@ -58,7 +58,7 @@ export const Login = ({ navigation }) => {
               setPassVisible(!passVisible);
             }}
             isChecked={!passVisible}
-            leftText={'Visible'}
+            leftText="Visible"
           />
         </View>
         <View style={styles.subContainer}>

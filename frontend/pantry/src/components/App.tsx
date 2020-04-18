@@ -21,7 +21,8 @@ const RootStack = createStackNavigator(
     Reset,
   },
   {
-    initialRouteName: 'Login',
+    // initialRouteName: 'Login',
+    initialRouteName: 'Home',
   },
 );
 
@@ -36,7 +37,8 @@ export default function App() {
   }, [show]);
   return (
     <Provider store={store}>
-      {!show ? <HomeScreen /> : <RootContainer />}
+      {/* {!show ? <HomeScreen /> : <RootContainer />} */}
+      <RootContainer />
     </Provider>
   );
 }
