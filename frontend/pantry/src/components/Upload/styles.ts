@@ -9,9 +9,8 @@ export const Container = styled.SafeAreaView`
 export const Picture = styled.Image.attrs({
   resizeMode: 'contain',
 })`
-  height: 65%;
+  height: 89%;
   width: 95%;
-  margin-top: 60%;
   margin-left: 2%;
 `;
 
@@ -25,12 +24,12 @@ export const ProgressBar = styled.View`
 export const styling = StyleSheet.create({
   button: {
     alignSelf: 'center',
-    backgroundColor: 'rgba(230, 230, 230,1)',
+    backgroundColor: '#98FB98',
     borderRadius: 43,
     height: 363,
     marginTop: 243,
     overflow: 'visible',
-    shadowOpacity: 1,
+    // shadowOpacity: 1,
     width: 310,
   },
   container: {
