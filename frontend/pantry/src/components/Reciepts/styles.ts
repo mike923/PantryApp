@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
   },
   scrollArea1: {
     // backgroundColor: 'rgba(255,255,255,1)',
-    height: 500,
+    height: 600,
     marginLeft: 14,
     // marginTop: 140,
     width: 380,
