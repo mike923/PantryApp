@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { utils } from '@react-native-firebase/app';
+// import { useSelector, useDispatch } from 'react-redux';
+// import { utils } from '@react-native-firebase/app';
 import vision from '@react-native-firebase/ml-vision';
 import { ScrollView, Text, Button, Alert } from 'react-native';
 

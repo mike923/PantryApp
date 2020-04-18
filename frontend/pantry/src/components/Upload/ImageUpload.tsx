@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Button, StatusBar, Alert, Platform } from 'react-native';
-import { Container, Picture, ProgressBar } from './styles';
-import { FireBaseStorage } from '../../../firebase/firebase';
 import ImagePicker from 'react-native-image-picker';
 import axios from 'axios';
+import { Container, Picture, ProgressBar } from './styles.ts';
+import { FireBaseStorage } from '../../firebase/firebase';
 
-import TextRecog from './TextRecog';
+import TextRecog from './TextRecog.tsx';
 
 const ImageUpload = ({ navigation }) => {
   const [firebaseImgUrl, setFirebaseImgUrl] = useState('');
@@ -14,6 +14,8 @@ const ImageUpload = ({ navigation }) => {
     loading: false,
     progress: 0,
   });
+
+  console.log(firebaseImgUrl);
 
   const imagePickerOptions = { noData: true };
 
@@ -35,8 +37,8 @@ const ImageUpload = ({ navigation }) => {
         const progress = Math.round(
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100,
         );
-        console.log(`Uploading progress: `, progress + '%');
-        setUpload({ loading: true, progress: progress });
+        console.log(`Uploading progress: `, `${progress}%`);
+        setUpload({ loading: true, progress });
       },
       (error) => {
         console.log(error);
@@ -97,5 +99,10 @@ const ImageUpload = ({ navigation }) => {
     </Container>
   );
 };
+
+ImageUpload.navigationOptions = ({ navigation }) => ({
+  title: 'Upload',
+  // headerShown: false,
+});
 
 export default ImageUpload;

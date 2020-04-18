@@ -1,7 +1,7 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import ApiTester from '../testComp/ApiTester';
-import ImageUpload from '../testComp/ImageUpload/ImageUpload';
+import ApiTester from '../testComp/ApiTester.tsx';
+import ImageUpload from '../Upload/ImageUpload.tsx';
 
 const Stack = createStackNavigator();
 
