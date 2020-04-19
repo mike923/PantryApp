@@ -14,6 +14,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import HomeScreen from '../Screens/Welcome.tsx';
 import UserScreen from '../Screens/UserScreen.tsx';
 import ApiScreen from '../Screens/ApiScreen.tsx';
+import ImageUpload from '../Upload/ImageUpload.tsx';
 
 const Tab = createBottomTabNavigator();
 
@@ -59,7 +60,7 @@ const NavBar = (props: any) => {
           }}>
           <Tab.Screen name="Cart" component={HomeScreen} />
           <Tab.Screen name="Settings" component={HomeScreen} />
-          <Tab.Screen name="Upload" component={HomeScreen} />
+          <Tab.Screen name="Upload" component={ImageUpload} />
           <Tab.Screen name="User" component={UserScreen} />
           <Tab.Screen name="API" component={ApiScreen} />
         </Tab.Navigator>

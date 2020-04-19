@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 // import { utils } from '@react-native-firebase/app';
 import vision from '@react-native-firebase/ml-vision';
 import { ScrollView, Text, Button, Alert } from 'react-native';
+import axios from 'axios';
+import { dummy } from '../../../dummydata';
 
 const TextRecog = ({ route, navigation }) => {
   const { localUriPath } = route.params;
@@ -41,14 +43,22 @@ const TextRecog = ({ route, navigation }) => {
 
   const textDisplay = (block) => <Text>{block}</Text>;
 
+  const sendData = async () => {
+    try {
+      axios.post('dge');
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <ScrollView>
+      {text}
       <Button
-        title={localUriPath ? 'Parsed Receipt' : 'Choose Photo First'}
+        title="Submit"
         onPress={localUriPath ? processImg : errorAlert}
         color="green"
       />
-      {text}
     </ScrollView>
   );
 };
