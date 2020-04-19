@@ -10,6 +10,7 @@
     "test": "jest",
     "lint": "npx eslint . --ext js,ts,jsx,ts,json --fix",
     "format": "npx prettier --write src/**/*.{js,ts,tsx} && npx prettier --write *.{js,json}",
+    "start:android": "npx react-native run-android && npm run start:debugger",
     "start:app": "cd ios/ && pod install --repo-update && cd .. && npx react-native run-ios && npm run start:debugger",
     "start:mike": "cd ios/ && pod install --repo-update && cd .. && npx react-native run-ios --device='Michael D.’s iPhone' && npm run start:debugger",
     "start:debugger": "open 'rndebugger://set-debugger-loc?host=localhost&port=8081'"
