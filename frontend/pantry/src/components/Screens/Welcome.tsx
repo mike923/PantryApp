@@ -4,9 +4,10 @@ import { StyleSheet, View, Image, Text, ImageBackground } from 'react-native';
 const WelcomeScreen = (props: any) => (
   <View style={styles.container}>
     <ImageBackground
-      source={require('../../../assets/images/background.png')}
+      source={require('../../../assets/images/backgroundskinny.png')}
       resizeMode="contain"
-      style={styles.background}>
+      style={styles.image}
+      imageStyle={styles.image_imageStyle}>
       <Image
         source={require('../../../assets/images/logo.png')}
         resizeMode="contain"
@@ -18,11 +19,7 @@ const WelcomeScreen = (props: any) => (
 );
 
 const styles = StyleSheet.create({
-  background: {
-    flex: 1,
-  },
   container: {
-    backgroundColor: 'rgba(15,15, 15,0)',
     flex: 1,
   },
   heading: {
@@ -34,6 +31,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     width: 414,
   },
+  image: {
+    height: 894,
+    marginLeft: -2,
+    width: 418,
+  },
+  image_imageStyle: {},
   logo: {
     alignSelf: 'center',
     height: 297,

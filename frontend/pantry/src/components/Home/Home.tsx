@@ -1,31 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigationContainer } from '@react-navigation/native'; // Navigation wrapper for App
+import auth from '@react-native-firebase/auth';
+
 import {
   NavigationParams,
   NavigationScreenProp,
   NavigationState,
 } from 'react-navigation';
 
-// import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import auth from '@react-native-firebase/auth';
+import NavBar from '../Style/NavBar.tsx';
 
-// import HomeScreen from '../Screens/HomeScreen.tsx';
-// import UserScreen from '../Screens/UserScreen.tsx';
-import ApiScreen from '../Screens/ApiScreen.tsx';
-
-interface Props {
+export interface Props {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
 }
-
-const Tab = createBottomTabNavigator();
 
 const Home = ({ navigation }: Props) => {
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState();
 
-  const onAuthStateChanged = (userState) => {
-    setUser(userState);
+  const onAuthStateChanged = (updatedUser) => {
+    setUser(updatedUser);
     if (initializing) setInitializing(false);
   };
 
@@ -39,26 +32,7 @@ const Home = ({ navigation }: Props) => {
 
   return (
     <>
-      <NavigationContainer>
-        <Tab.Navigator>
-          {/* <Tab.Screen
-            name="Home"
-            component={HomeScreen}
-            options={{
-              tabBarLabel: 'Profile',
-              tabBarIcon: ({ color, size }) => (
-                <MaterialCommunityIcons
-                  name="account"
-                  color={color}
-                  size={size}
-                />
-              ),
-            }}
-          />
-          <Tab.Screen name="User" component={UserScreen} /> */}
-          <Tab.Screen name="API" component={ApiScreen} />
-        </Tab.Navigator>
-      </NavigationContainer>
+      <NavBar />
     </>
   );
 };
