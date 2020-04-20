@@ -1,8 +1,8 @@
--- DROP DATABASE IF EXISTS pantry;
+DROP DATABASE IF EXISTS pantry;
 
--- CREATE DATABASE pantry;
+CREATE DATABASE pantry;
 
--- \c pantry
+\c pantry
 
 CREATE TABLE pantry (
     id SERIAL PRIMARY KEY,
@@ -22,7 +22,7 @@ CREATE TABLE users (
 CREATE TABLE receipts (
     id  SERIAL PRIMARY KEY,
     pantry_id INT REFERENCES pantry(id),
-    receipt_img_url VARCHAR NOT NULL,
+    receipt_img_url VARCHAR ,
     receipt_json JSON,
     store_name VARCHAR,
     store_coordinate JSON,

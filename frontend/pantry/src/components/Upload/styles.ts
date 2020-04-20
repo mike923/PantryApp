@@ -27,27 +27,18 @@ export const styling = StyleSheet.create({
     backgroundColor: '#98FB98',
     borderRadius: 43,
     height: 363,
-    marginTop: 243,
+    marginTop: 90,
     overflow: 'visible',
     // shadowOpacity: 1,
     width: 310,
   },
-  container: {
-    flex: 1,
-  },
-  cupertinoToolbar: {
-    height: 44,
-    marginLeft: 19,
-    marginTop: 637,
-    width: 375,
-  },
-  upload2: {
+  icon: {
     alignSelf: 'center',
     color: 'rgba(128,128,128,1)',
-    fontSize: 40,
-    height: 40,
+    fontSize: 60,
+    height: 60,
     marginTop: 143,
-    width: 31,
+    width: 51,
   },
   uploadYourReceipt: {
     color: '#121212',
@@ -55,7 +46,7 @@ export const styling = StyleSheet.create({
     justifyContent: 'space-between',
     letterSpacing: 0,
     lineHeight: 55,
-    marginTop: -474,
+    // marginTop: -274,
     textAlign: 'center',
   },
 });
