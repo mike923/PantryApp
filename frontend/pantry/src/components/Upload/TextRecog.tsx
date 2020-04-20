@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 // import { utils } from '@react-native-firebase/app';
 import vision from '@react-native-firebase/ml-vision';
 import { ScrollView, Text, Button, Alert } from 'react-native';
+import axios from 'axios';
+import { dummy } from '../../../dummydata';
 
 const TextRecog = ({ route, navigation }) => {
   const { localUriPath } = route.params;
@@ -41,16 +43,32 @@ const TextRecog = ({ route, navigation }) => {
 
   const textDisplay = (block) => <Text>{block}</Text>;
 
+  const sendData = async () => {
+    let receipt_json = dummy;
+    try {
+      const {
+        data: { payload },
+      } = await axios.post(
+        'http://localhost:8282/receipts/upload',
+        receipt_json,
+      );
+      console.log(payload);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <ScrollView>
-      <Button
-        title={localUriPath ? 'Parsed Receipt' : 'Choose Photo First'}
-        onPress={localUriPath ? processImg : errorAlert}
-        color="green"
-      />
       {text}
+      <Button title="Submit" onPress={sendData} color="green" />
     </ScrollView>
   );
 };
+
+TextRecog.navigationOptions = ({ navigation }) => ({
+  title: 'Parsed',
+  // headerShown: false,
+});
 
 export default TextRecog;

@@ -4,23 +4,23 @@ const queries = require("../db/queries/receipts");
 const { readImgData } = require("./tesseract");
 
 router.post("/upload", async (req, res, next) => {
-  const { url } = req.body;
-  console.log("You've hit /parse", url);
+  const receipt_json = req.body;
+  // console.log("You've hit /parse", url);
   try {
-    const { receipt_img_url } = await queries.addImgUrl(1, url);
-    console.log(receipt_img_url);
-    readImgData(receipt_img_url);
+    const data = await queries.addImgUrl(1, receipt_json);
+    // console.log(receipt_json);
+    // readImgData(receipt_img_url);
     res.json({
-      payload: receipt_img_url,
+      payload: data,
       message: "successfully uploaded image",
-      error: false
+      error: false,
     });
   } catch (error) {
     console.log(error);
     res.status(500).json({
       payload: null,
       message: "you can't perform this action",
-      error: true
+      error: true,
     });
   }
 });

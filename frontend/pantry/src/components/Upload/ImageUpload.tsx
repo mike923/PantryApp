@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 import axios from 'axios';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { Container, Picture, ProgressBar, styling } from './styles.ts';
 import { FireBaseStorage } from '../../firebase/firebase';
 
@@ -21,7 +22,7 @@ const ImageUpload = ({ navigation }) => {
     progress: 0,
   });
 
-  console.log(firebaseImgUrl);
+  console.log('fire url', firebaseImgUrl);
 
   const imagePickerOptions = { noData: true };
 
@@ -99,7 +100,9 @@ const ImageUpload = ({ navigation }) => {
       {!imageURI.uri ? (
         <View>
           <Text style={styling.uploadYourReceipt}>Upload Your Receipt</Text>
-          <TouchableOpacity style={styling.button} onPress={uploadFile} />
+          <TouchableOpacity style={styling.button} onPress={uploadFile}>
+            <Icon name="plus" style={styling.icon} />
+          </TouchableOpacity>
         </View>
       ) : null}
       {imageURI.uri && (
@@ -114,8 +117,11 @@ const ImageUpload = ({ navigation }) => {
             <Button
               title="Parse Text"
               onPress={() =>
-                navigation.navigate('Parsed', {
-                  localUriPath: imageURI.localPath,
+                navigation.navigate('User', {
+                  screen: 'Parsed',
+                  params: {
+                    localUriPath: imageURI.localPath,
+                  },
                 })
               }
             />
