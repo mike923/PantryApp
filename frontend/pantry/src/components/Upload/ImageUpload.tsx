@@ -22,7 +22,7 @@ const ImageUpload = ({ navigation }) => {
     progress: 0,
   });
 
-  console.log(firebaseImgUrl);
+  console.log('fire url', firebaseImgUrl);
 
   const imagePickerOptions = { noData: true };
 
@@ -117,8 +117,11 @@ const ImageUpload = ({ navigation }) => {
             <Button
               title="Parse Text"
               onPress={() =>
-                navigation.navigate('Parsed', {
-                  localUriPath: imageURI.localPath,
+                navigation.navigate('API', {
+                  screen: 'Parsed',
+                  params: {
+                    localUriPath: imageURI.localPath,
+                  },
                 })
               }
             />
