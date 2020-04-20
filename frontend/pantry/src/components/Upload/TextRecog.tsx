@@ -44,8 +44,15 @@ const TextRecog = ({ route, navigation }) => {
   const textDisplay = (block) => <Text>{block}</Text>;
 
   const sendData = async () => {
+    let receipt_json = dummy;
     try {
-      axios.post('dge');
+      const {
+        data: { payload },
+      } = await axios.post(
+        'http://localhost:8282/receipts/upload',
+        receipt_json,
+      );
+      console.log(payload);
     } catch (error) {
       console.log(error);
     }
@@ -54,13 +61,14 @@ const TextRecog = ({ route, navigation }) => {
   return (
     <ScrollView>
       {text}
-      <Button
-        title="Submit"
-        onPress={localUriPath ? processImg : errorAlert}
-        color="green"
-      />
+      <Button title="Submit" onPress={sendData} color="green" />
     </ScrollView>
   );
 };
+
+TextRecog.navigationOptions = ({ navigation }) => ({
+  title: 'Parsed',
+  // headerShown: false,
+});
 
 export default TextRecog;
