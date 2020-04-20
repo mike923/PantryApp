@@ -20,6 +20,7 @@
 		7CA6D3F26ACF89ED09FA3614 /* libPods-pantry-pantryTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FF44825AAB3F565606D815AA /* libPods-pantry-pantryTests.a */; };
 		8B0BFE11DB277725381C2001 /* libPods-pantry-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DCED5A99CB42F9EB05DC2DF7 /* libPods-pantry-tvOSTests.a */; };
 		91A548F1243F9E700034B988 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 91A548F0243F9E700034B988 /* GoogleService-Info.plist */; };
+		91FDCA4E244CDB56009C8C4C /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 91FDCA4D244CDB56009C8C4C /* Default-568h@2x.png */; };
 		B9A20BEBE85E4F4B8636F4C9 /* Vibur.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9796DE90702B4553B150D06E /* Vibur.ttf */; };
 		D9306DA764435EA2B80AFBAB /* libPods-pantry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FB6F408AD2EB975136AB46E /* libPods-pantry.a */; };
 /* End PBXBuildFile section */
@@ -57,18 +58,11 @@
 		1E052F6772CF1FECD483CB86 /* Pods-pantry-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pantry-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-pantry-tvOS/Pods-pantry-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* pantry-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "pantry-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* pantry-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "pantry-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-<<<<<<< HEAD
-		2D2E0E6FAE911BE5BAC2561E /* libPods-pantry-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-pantry-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		42680A163447468505E9AABE /* Pods-pantry-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pantry-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-pantry-tvOS/Pods-pantry-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
-		4B608E662A93CFD1CD5F1889 /* libPods-pantry-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-pantry-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		5A8D7B5DC34C97CAE72182AD /* Pods-pantry.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pantry.debug.xcconfig"; path = "Target Support Files/Pods-pantry/Pods-pantry.debug.xcconfig"; sourceTree = "<group>"; };
-		6C806B9E324B8BB27D2E26C2 /* Pods-pantry-pantryTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pantry-pantryTests.debug.xcconfig"; path = "Target Support Files/Pods-pantry-pantryTests/Pods-pantry-pantryTests.debug.xcconfig"; sourceTree = "<group>"; };
-		9131054C244BBD4A00B7D89C /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
-=======
 		3FB6F408AD2EB975136AB46E /* libPods-pantry.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-pantry.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		859A15B3B238CF55C574D158 /* Pods-pantry-pantryTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pantry-pantryTests.release.xcconfig"; path = "Target Support Files/Pods-pantry-pantryTests/Pods-pantry-pantryTests.release.xcconfig"; sourceTree = "<group>"; };
->>>>>>> 7a6d73b83b7becef3bd103e80b87ecd9a8cf9b60
+		9131054C244BBD4A00B7D89C /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		91A548F0243F9E700034B988 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		91FDCA4D244CDB56009C8C4C /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		9796DE90702B4553B150D06E /* Vibur.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Vibur.ttf; path = ../assets/fonts/Vibur.ttf; sourceTree = "<group>"; };
 		99714BB44A865346DA97A83B /* Pods-pantry.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pantry.release.xcconfig"; path = "Target Support Files/Pods-pantry/Pods-pantry.release.xcconfig"; sourceTree = "<group>"; };
 		BC60EF8D443ABF8D3C18F96C /* Pods-pantry-pantryTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pantry-pantryTests.debug.xcconfig"; path = "Target Support Files/Pods-pantry-pantryTests/Pods-pantry-pantryTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -196,6 +190,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				91FDCA4D244CDB56009C8C4C /* Default-568h@2x.png */,
 				91A548F0243F9E700034B988 /* GoogleService-Info.plist */,
 				13B07FAE1A68108700A75B9A /* pantry */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
@@ -335,7 +330,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = 25898M56CG;
+						DevelopmentTeam = WL8MW7N329;
 						LastSwiftMigration = 1120;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
@@ -385,6 +380,7 @@
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				91A548F1243F9E700034B988 /* GoogleService-Info.plist in Resources */,
+				91FDCA4E244CDB56009C8C4C /* Default-568h@2x.png in Resources */,
 				B9A20BEBE85E4F4B8636F4C9 /* Vibur.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -790,7 +786,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 25898M56CG;
+				DEVELOPMENT_TEAM = WL8MW7N329;
 				ENABLE_BITCODE = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
@@ -803,7 +799,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.pantryapp;
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.pantryappp;
 				PRODUCT_NAME = pantry;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -818,7 +814,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 25898M56CG;
+				DEVELOPMENT_TEAM = WL8MW7N329;
 				INFOPLIST_FILE = pantry/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -826,7 +822,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.pantryapp;
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.pantryappp;
 				PRODUCT_NAME = pantry;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";

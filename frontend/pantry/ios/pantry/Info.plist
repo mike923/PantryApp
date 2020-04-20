@@ -58,9 +58,6 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>Vibur.ttf</string>
-<<<<<<< HEAD
-		<string>MaterialCommunityIcons.ttf</string>
-=======
 		<string>AntDesign.ttf</string>
 		<string>Entypo.ttf</string>
 		<string>EvilIcons.ttf</string>
@@ -77,7 +74,6 @@
 		<string>Octicons.ttf</string>
 		<string>SimpleLineIcons.ttf</string>
 		<string>Zocial.ttf</string>
->>>>>>> 7a6d73b83b7becef3bd103e80b87ecd9a8cf9b60
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
