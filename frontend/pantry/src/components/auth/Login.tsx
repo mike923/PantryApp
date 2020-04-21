@@ -17,7 +17,7 @@ export const Login = ({ navigation }) => {
 
   useEffect(() => {
     if (loggedUser.loggedIn) {
-      navigation.navigate('Home');
+      navigation.navigate('AuthContainer');
     }
   }, [dispatch, loggedUser]);
 
@@ -26,7 +26,7 @@ export const Login = ({ navigation }) => {
     dispatch(loginUser(email, password));
 
     if (loggedUser.loggedIn) {
-      navigation.navigate('Home');
+      navigation.navigate('AuthContainer');
     }
   };
 

@@ -42,7 +42,7 @@ const ApiTester = ({ navigation }) => {
           value:{' '}
           {typeof data[key] === 'object'
             ? displayResults(data[key])
-            : data[key]}{' '}
+            : JSON.stringify(data[key])}{' '}
         </Text>
         <Text>-</Text>
       </>

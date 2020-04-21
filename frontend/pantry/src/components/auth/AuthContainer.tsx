@@ -13,7 +13,7 @@ export interface Props {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
 }
 
-const Home = ({ navigation }: Props) => {
+const AuthContainer = ({ navigation }: Props) => {
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState();
 
@@ -31,9 +31,9 @@ const Home = ({ navigation }: Props) => {
   return <TabBarNavigator />;
 };
 
-Home.navigationOptions = ({ navigation }) => ({
-  title: 'Home',
+AuthContainer.navigationOptions = ({ navigation }) => ({
+  title: 'AuthContainer',
   headerShown: false,
 });
 
-export default Home;
+export default AuthContainer;
