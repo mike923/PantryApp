@@ -19,26 +19,11 @@ const NavBar = (props: any) => {
           screenOptions={({ route }) => ({
             tabBarIcon: ({ focused, color, size }) => {
               let iconConfig = {
-                Pantry: {
-                  name: 'shopping-bag',
-                  size: size * 1.25,
-                },
-                Cart: {
-                  name: 'shopping-cart',
-                  size: size * 1.25,
-                },
-                Upload: {
-                  name: 'plus-circle',
-                  size: size * 1.75,
-                },
-                List: {
-                  name: 'list',
-                  size: size * 1.25,
-                },
-                Settings: {
-                  name: 'settings',
-                  size: size * 1.25,
-                },
+                Pantry: { name: 'shopping-bag', size: size * 1.25 },
+                Cart: { name: 'shopping-cart', size: size * 1.25 },
+                Upload: { name: 'plus-circle', size: size * 1.75 },
+                List: { name: 'list', size: size * 1.25 },
+                Settings: { name: 'settings', size: size * 1.25 },
               };
               let icon = iconConfig[route.name];
               return (
