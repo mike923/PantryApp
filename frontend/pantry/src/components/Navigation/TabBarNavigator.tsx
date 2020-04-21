@@ -41,6 +41,7 @@ const TabBarNavigator = (props: any) => {
               paddingHorizontal: 40,
               justifyContent: 'space-around',
               backgroundColor: '#fff',
+              borderTopWidth: 0,
             },
           }}>
           <Tab.Screen name="Pantry" component={UserScreen} />
