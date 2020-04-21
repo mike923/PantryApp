@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { ActivityIndicator, View, Text, Alert } from 'react-native';
 import { Button, Input, Icon } from 'react-native-elements';
 import { useSelector, useDispatch } from 'react-redux';
-import { resetPassword } from '../../redux/actions/userActions';
-import { styles } from './Styles';
+import { resetPassword } from '../../redux/actions/userActions.ts';
+import { styles } from './Styles.ts';
 
 export const Reset = ({ navigation }) => {
   const [email, setEmail] = useState('');
@@ -11,13 +11,13 @@ export const Reset = ({ navigation }) => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
-  useEffect(() => {}, [dispatch, user]);
+  // useEffect(() => {}, [dispatch, user]);
 
   const reset = async () => {
     dispatch(resetPassword(email));
 
     if (user.loggedIn) {
-      navigation.navigate('Home');
+      navigation.navigate('AuthContainer');
     }
   };
 

@@ -23,7 +23,7 @@ export const Register = ({ navigation }) => {
     dispatch(registerUser(email, password));
 
     if (user.loggedIn) {
-      navigation.navigate('Home');
+      navigation.navigate('AuthConatiner');
     }
   };
 
