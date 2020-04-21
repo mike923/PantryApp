@@ -5,6 +5,7 @@ import ImageUpload from '../Upload/ImageUpload.tsx';
 import Reciepts from '../Reciepts/Reciepts.tsx';
 import TextRecog from '../Upload/TextRecog.tsx';
 import Upload from '../Upload/Upload.tsx';
+import { screenOptions } from './style.ts';
 
 const Stack = createStackNavigator();
 
@@ -12,10 +13,7 @@ const UploadStack = ({ navigation }) => {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerStyle: {
-          backgroundColor: '#fff',
-        },
-        headerTintColor: '#ff5c61',
+        ...screenOptions,
       }}>
       <Stack.Screen name="Upload" component={Upload} />
       <Stack.Screen name="Api" component={ApiTester} />
