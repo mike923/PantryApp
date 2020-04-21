@@ -8,13 +8,23 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import {
+  NavigationParams,
+  NavigationScreenProp,
+  NavigationState,
+} from 'react-navigation';
 import ImagePicker from 'react-native-image-picker';
 import axios from 'axios';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Container, Picture, ProgressBar, styling } from './styles.ts';
 import { FireBaseStorage } from '../../firebase/firebase';
+// import TextRecog from './TextRecog'
 
-const ImageUpload = ({ navigation }) => {
+export interface Props {
+  navigation: NavigationScreenProp<NavigationState, NavigationParams>;
+}
+
+const ImageUpload = ({ navigation }: Props) => {
   const [firebaseImgUrl, setFirebaseImgUrl] = useState('');
   const [imageURI, setImageURI] = useState({ uri: false, localPath: '' });
   const [upload, setUpload] = useState({

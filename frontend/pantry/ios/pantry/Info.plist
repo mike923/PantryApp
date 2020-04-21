@@ -74,6 +74,16 @@
 		<string>Octicons.ttf</string>
 		<string>SimpleLineIcons.ttf</string>
 		<string>Zocial.ttf</string>
+		<string>DINPro-Black.ttf</string>
+		<string>DINPro-BlackItalic.ttf</string>
+		<string>DINPro-Bold.ttf</string>
+		<string>DINPro-BoldItalic.ttf</string>
+		<string>DINPro-Italic.ttf</string>
+		<string>DINPro-Light.ttf</string>
+		<string>DINPro-LightItalic.ttf</string>
+		<string>DINPro-Medium.ttf</string>
+		<string>DINPro-MediumItalic.ttf</string>
+		<string>DINPro.ttf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
