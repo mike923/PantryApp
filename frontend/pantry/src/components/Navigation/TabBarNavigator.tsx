@@ -42,6 +42,8 @@ const TabBarNavigator = (props: any) => {
               paddingHorizontal: 40,
               justifyContent: 'space-around',
               backgroundColor: '#fff',
+              elevation: 0,
+              shadowOpacity: 0,
               borderTopWidth: 0,
             },
           }}>
