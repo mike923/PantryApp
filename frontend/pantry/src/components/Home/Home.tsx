@@ -7,7 +7,7 @@ import {
   NavigationState,
 } from 'react-navigation';
 
-import NavBar from '../Style/NavBar.tsx';
+import TabBarNavigator from '../Navigation/TabBarNavigator.tsx';
 
 export interface Props {
   navigation: NavigationScreenProp<NavigationState, NavigationParams>;
@@ -27,14 +27,8 @@ const Home = ({ navigation }: Props) => {
   }, []);
 
   if (initializing) return null;
-
   if (!user) return navigation.navigate('Login');
-
-  return (
-    <>
-      <NavBar />
-    </>
-  );
+  return <TabBarNavigator />;
 };
 
 Home.navigationOptions = ({ navigation }) => ({
