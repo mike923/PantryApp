@@ -9,6 +9,7 @@ import UserScreen from '../Screens/UserScreen.tsx';
 import ApiScreen from '../Screens/ApiScreen.tsx';
 import ImageUpload from '../Upload/ImageUpload.tsx';
 import UploadStack from './UploadStack.tsx';
+import SettingsStack from './SettingsStack.tsx';
 
 const Tab = createBottomTabNavigator();
 
@@ -48,7 +49,7 @@ const TabBarNavigator = (props: any) => {
           <Tab.Screen name="Cart" component={HomeScreen} />
           <Tab.Screen name="Upload" component={UploadStack} />
           <Tab.Screen name="List" component={ApiScreen} />
-          <Tab.Screen name="Settings" component={HomeScreen} />
+          <Tab.Screen name="Settings" component={SettingsStack} />
         </Tab.Navigator>
       </NavigationContainer>
     </>
