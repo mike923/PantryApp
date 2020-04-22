@@ -23,7 +23,7 @@ const TabBarNavigator = (props: any) => {
               let iconConfig = {
                 Pantry: { name: 'shopping-bag', size: size * 1.25 },
                 Cart: { name: 'shopping-cart', size: size * 1.25 },
-                Upload: { name: 'plus-circle', size: size * 1.75 },
+                Upload: { name: 'plus-circle', size: size * 2 },
                 List: { name: 'list', size: size * 1.25 },
                 Settings: { name: 'settings', size: size * 1.25 },
               };
@@ -38,10 +38,13 @@ const TabBarNavigator = (props: any) => {
             activeTintColor: '#ff5c61',
             inactiveTintColor: '#000',
             style: {
-              paddingVertical: 5,
-              paddingHorizontal: 40,
+              paddingTop: 0,
+              paddingBottom: 30,
+              paddingHorizontal: 10,
               justifyContent: 'space-around',
               backgroundColor: '#fff',
+              elevation: 0,
+              shadowOpacity: 0,
               borderTopWidth: 0,
             },
           }}>
