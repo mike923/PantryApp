@@ -42,7 +42,7 @@
     $(PRODUCT_NAME) would like to use your camera to take picture and share them on your feed.
   </string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string/>
+	<string></string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>
     $(PRODUCT_NAME) would like to use your microphone for videos sharing on your feed.

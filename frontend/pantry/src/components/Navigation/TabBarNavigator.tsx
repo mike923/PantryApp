@@ -10,6 +10,7 @@ import ApiScreen from '../Screens/ApiScreen.tsx';
 import ImageUpload from '../Upload/ImageUpload.tsx';
 import UploadStack from './UploadStack.tsx';
 import SettingsStack from './SettingsStack.tsx';
+import PantryStack from './PantryStack.tsx';
 
 const Tab = createBottomTabNavigator();
 
@@ -48,7 +49,7 @@ const TabBarNavigator = (props: any) => {
               borderTopWidth: 0,
             },
           }}>
-          <Tab.Screen name="Pantry" component={UserScreen} />
+          <Tab.Screen name="Pantry" component={PantryStack} />
           <Tab.Screen name="Cart" component={HomeScreen} />
           <Tab.Screen name="Upload" component={UploadStack} />
           <Tab.Screen name="List" component={ApiScreen} />
