@@ -1,9 +1,9 @@
 import React from 'react';
-import { TouchableOpacity, Text, Image } from 'react-native';
+import { TouchableOpacity, Text, Image, StyleSheet } from 'react-native';
 
 const FoodItem = () => {
   return (
-    <TouchableOpacity>
+    <TouchableOpacity style={styles.foodItem}>
       <Image
         source={{
           uri:
@@ -17,5 +17,14 @@ const FoodItem = () => {
     </TouchableOpacity>
   );
 };
+
+const styles = StyleSheet.create({
+  foodItem: {
+    backgroundColor: '#eee',
+    marginHorizontal: 15,
+    marginVertical: 10,
+    width: 160,
+  },
+});
 
 export default FoodItem;
