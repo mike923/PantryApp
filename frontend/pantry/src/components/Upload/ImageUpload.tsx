@@ -117,11 +117,8 @@ const ImageUpload = ({ navigation }) => {
             <Button
               title="Parse Text"
               onPress={() =>
-                navigation.navigate('User', {
-                  screen: 'Parsed',
-                  params: {
-                    localUriPath: imageURI.localPath,
-                  },
+                navigation.navigate('Parsed', {
+                  localUriPath: imageURI.localPath,
                 })
               }
             />
