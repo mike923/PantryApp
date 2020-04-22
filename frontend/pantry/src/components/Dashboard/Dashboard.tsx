@@ -4,10 +4,7 @@ import UserProfile from './Profile.tsx';
 import { dashBoardStyles } from './dashBoardStyles.ts';
 
 const Dashboard = ({ navigation }) => {
-  const navigateToImg = () =>
-    navigation.navigate('Upload', {
-      screen: 'ImageUpload',
-    });
+  const navigateToImg = () => navigation.navigate('Pantry');
   const navigateToReceipts = () => navigation.navigate('Reciepts');
   return (
     <View>
@@ -17,7 +14,7 @@ const Dashboard = ({ navigation }) => {
         <TouchableOpacity
           onPress={() => navigateToImg()}
           style={dashBoardStyles.nav_button}>
-          <Text>Image Upload</Text>
+          <Text>Pantry View</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => navigateToReceipts()}
