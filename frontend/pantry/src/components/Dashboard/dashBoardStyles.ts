@@ -88,12 +88,14 @@ export const dashBoardStyles = StyleSheet.create({
   navContainer: {
     alignItems: 'center',
     height: 300,
-    justifyContent: 'space-around',
+    // justifyContent: 'space-around',
     position: 'relative',
-    top: 10,
+    top: windowHeight - 700,
   },
   nav_button: {
-    backgroundColor: 'blue',
+    alignItems: 'center',
+    backgroundColor: 'cyan',
+    borderRadius: 5,
     marginVertical: 10,
     padding: 10,
     width: windowWidth - 200,
@@ -114,7 +116,8 @@ export const dashBoardStyles = StyleSheet.create({
   welcome: {
     color: 'rgba(255,255,255,1)',
     fontSize: 24,
-    lineHeight: 20,
+    height: 50,
+    lineHeight: 30,
     marginLeft: 60,
     marginTop: -82,
   },
