@@ -7,7 +7,7 @@ import { screenOptions } from './style.ts';
 
 const Stack = createStackNavigator();
 
-const SettingsStack = ({ navigation }) => {
+const PantryStack = ({ navigation }) => {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -20,4 +20,4 @@ const SettingsStack = ({ navigation }) => {
   );
 };
 
-export default SettingsStack;
+export default PantryStack;
