@@ -9,10 +9,7 @@ const PantryView = () => {
     <ScrollView style={{ backgroundColor: 'white', flex: 1 }}>
       <View style={styles.pantryView}>
         <Text>This will be my pantry view containing all the food items</Text>
-        <FoodItem />
-        <FoodItem />
-        <FoodItem />
-        <FoodItem />
+        {Array(20).fill(<FoodItem />)}
       </View>
     </ScrollView>
   );
@@ -24,7 +21,8 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
+    padding: 10,
   },
 });
 

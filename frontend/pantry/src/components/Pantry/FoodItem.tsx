@@ -10,7 +10,7 @@ const FoodItem = () => {
             'https://www.nwcoffeesupply.com/wp-content/uploads/2019/08/Oatly-Oat-Milk-Full-Fat.jpg',
         }}
         resizeMode="contain"
-        style={{ height: 150, width: 150 }}
+        style={{ height: 160, width: 160, borderRadius: 5 }}
       />
       <Text>Food Name goes here</Text>
       <Text>Food info goes here</Text>
@@ -20,10 +20,12 @@ const FoodItem = () => {
 
 const styles = StyleSheet.create({
   foodItem: {
+    alignItems: 'center',
     backgroundColor: '#eee',
-    marginHorizontal: 15,
+    borderRadius: 10,
     marginVertical: 10,
-    width: 160,
+    padding: 9,
+    width: '45%',
   },
 });
 
