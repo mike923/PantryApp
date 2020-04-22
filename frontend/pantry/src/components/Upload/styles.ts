@@ -163,4 +163,14 @@ export const confirmStyles = StyleSheet.create({
     marginLeft: 12,
     marginRight: 7,
   },
+  totalRow: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  totalText: {
+    fontSize: 30,
+    marginHorizontal: 10,
+    marginTop: 10,
+  },
 });
