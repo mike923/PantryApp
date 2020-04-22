@@ -1,3 +1,4 @@
 import PantryView from './PantryView.tsx';
+import FoodItem from './FoodItem.tsx';
 
-export { PantryView };
+export { FoodItem, PantryView };
