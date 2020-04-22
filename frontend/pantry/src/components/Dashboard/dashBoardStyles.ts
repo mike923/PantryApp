@@ -85,6 +85,19 @@ export const dashBoardStyles = StyleSheet.create({
     marginRight: 40,
     marginTop: 98,
   },
+  navContainer: {
+    alignItems: 'center',
+    height: 300,
+    justifyContent: 'space-around',
+    position: 'relative',
+    top: 10,
+  },
+  nav_button: {
+    backgroundColor: 'blue',
+    marginVertical: 10,
+    padding: 10,
+    width: windowWidth - 200,
+  },
   time: {
     color: '#798894',
     fontSize: 16,

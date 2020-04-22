@@ -50,3 +50,113 @@ export const styling = StyleSheet.create({
     textAlign: 'center',
   },
 });
+
+export const confirmStyles = StyleSheet.create({
+  confirmBtn: {
+    backgroundColor: 'rgba(249,153,97,1)',
+    borderRadius: 5,
+    height: 58,
+    marginBottom: 20,
+    marginLeft: 96,
+    marginTop: 20,
+    width: 182,
+  },
+  confirmText: {
+    color: 'rgba(255,255,255,1)',
+    fontSize: 24,
+    marginLeft: 25,
+    marginTop: 17,
+  },
+  container: {
+    flex: 1,
+  },
+  input: {
+    fontSize: 24,
+    height: 100,
+    width: 200,
+  },
+  nameBox: {
+    backgroundColor: 'rgba(230, 230, 230,1)',
+    borderRadius: 6,
+    height: 51,
+    marginLeft: 14,
+    marginTop: 1,
+    width: 256,
+  },
+  nameText: {
+    color: '#121212',
+    fontSize: 24,
+    marginLeft: 13,
+    marginTop: 12,
+  },
+  priceBox: {
+    backgroundColor: 'rgba(230, 230, 230,1)',
+    borderRadius: 6,
+    height: 51,
+    marginLeft: 11,
+    marginTop: 1,
+    width: 71,
+  },
+  priceText: {
+    color: '#121212',
+    fontSize: 24,
+    marginLeft: 4,
+    marginTop: 14,
+  },
+  quantityBox: {
+    backgroundColor: 'rgba(230, 230, 230,1)',
+    borderRadius: 6,
+    height: 51,
+    width: 53,
+  },
+  quantityBoxRow: {
+    flexDirection: 'row',
+    height: 52,
+    marginLeft: 5,
+    marginRight: 5,
+    marginTop: 5,
+  },
+  quantityText: {
+    color: '#121212',
+    fontSize: 24,
+    marginLeft: 20,
+    marginTop: 14,
+  },
+  scrollView: {
+    borderBottomWidth: 1,
+    borderTopWidth: 1,
+  },
+  scrollViewContainer: {
+    height: 640,
+  },
+  storeContainer: {
+    height: 69,
+    width: 366,
+  },
+  storeDate: {
+    color: 'rgba(0,0,0,1)',
+    fontSize: 18,
+    marginLeft: 172,
+    marginTop: 3,
+  },
+  storeHeading: {
+    backgroundColor: 'rgba(230, 230, 230,1)',
+    flexDirection: 'row',
+    height: 70,
+    marginLeft: 10,
+    width: 395,
+  },
+  storeName: {
+    color: 'rgba(0,0,0,1)',
+    fontSize: 22,
+  },
+  storeNameRow: {
+    alignSelf: 'center',
+    flexDirection: 'row',
+    flex: 1,
+    height: 28,
+    justifyContent: 'center',
+    marginLeft: 12,
+    marginRight: 7,
+  },
+});
