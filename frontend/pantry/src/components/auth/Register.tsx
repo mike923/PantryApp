@@ -10,7 +10,7 @@ import { styles } from './Styles.ts';
 export const Register = ({ navigation }) => {
   const [email, setEmail] = useState(''); // user inputting email
   const [password, setPassword] = useState(''); // user inputting password
-  const [passVisible, setPassVisible] = useState(true); // toggling password visibility
+  const [passVisible, setPassVisible] = useState(false); // toggling password visibility
 
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
@@ -46,7 +46,7 @@ export const Register = ({ navigation }) => {
           <Input
             style={styles.textInput}
             placeholder="Your Password"
-            secureTextEntry={!!passVisible}
+            secureTextEntry={!passVisible}
             value={password}
             onChangeText={setPassword}
           />
@@ -54,7 +54,7 @@ export const Register = ({ navigation }) => {
             onClick={() => {
               setPassVisible(!passVisible);
             }}
-            isChecked={!passVisible}
+            isChecked={passVisible}
             leftText="Visible"
           />
         </View>
