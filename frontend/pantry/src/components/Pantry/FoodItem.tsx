@@ -5,11 +5,15 @@ const FoodItem = () => {
   return (
     <TouchableOpacity>
       <Image
-        source="https://www.nwcoffeesupply.com/wp-content/uploads/2019/08/Oatly-Oat-Milk-Full-Fat.jpg"
+        source={{
+          uri:
+            'https://www.nwcoffeesupply.com/wp-content/uploads/2019/08/Oatly-Oat-Milk-Full-Fat.jpg',
+        }}
         resizeMode="contain"
-        style={{ height: 50, width: 50 }}
+        style={{ height: 150, width: 150 }}
       />
-      <Text />
+      <Text>Food Name goes here</Text>
+      <Text>Food info goes here</Text>
     </TouchableOpacity>
   );
 };
