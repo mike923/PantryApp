@@ -17,6 +17,9 @@ export const AuthStack = createAppContainer(
     },
     {
       initialRouteName: 'Login',
+      defaultNavigationOptions: {
+        gestureEnabled: false,
+      },
     },
   ),
 );

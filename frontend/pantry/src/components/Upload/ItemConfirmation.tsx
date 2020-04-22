@@ -22,17 +22,12 @@ const ItemConfirmation = ({ navigation }: any) => {
       { text: 'No', onPress: () => console.log('Cancelled') },
       {
         text: 'Yes',
-        // onPress: () => navigation.navigate('PantryView'),
         onPress: () => {
           navigation.dispatch(
             CommonActions.reset({
               index: 0,
               routes: [{ name: 'Pantry' }],
             }),
-            // StackActions.reset({
-            //   index: 0,
-            //   actions: [NavigationActions.navigate({ routeName: 'Pantry' })],
-            // }),
           );
         },
       },
