@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native';
+import { CommonActions } from '@react-navigation/native';
 import { confirmStyles as styles } from './styles.ts';
 import RecieptItems from './RecieptItems.tsx';
 
@@ -14,10 +15,28 @@ import fakeParsedReciept from './dummyData/fakeParsedReciept.ts';
 
 import { priceFix, quantityFix } from './helpers/helpers.ts';
 
-const ItemConfirmation = (props: any) => {
+const ItemConfirmation = ({ navigation }: any) => {
   const [reciept, setReciept] = useState(fakeParsedReciept);
   const handleConfirm = () => {
-    Alert.alert('Confirmed');
+    Alert.alert('Confirm', '', [
+      { text: 'No', onPress: () => console.log('Cancelled') },
+      {
+        text: 'Yes',
+        // onPress: () => navigation.navigate('PantryView'),
+        onPress: () => {
+          navigation.dispatch(
+            CommonActions.reset({
+              index: 0,
+              routes: [{ name: 'Pantry' }],
+            }),
+            // StackActions.reset({
+            //   index: 0,
+            //   actions: [NavigationActions.navigate({ routeName: 'Pantry' })],
+            // }),
+          );
+        },
+      },
+    ]);
     console.log(reciept);
   };
 

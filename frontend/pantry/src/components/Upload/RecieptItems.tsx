@@ -1,6 +1,4 @@
 import React from 'react';
-import { View, Text, TextInput } from 'react-native';
-import { confirmStyles as styles } from './styles.ts';
 import Item from './Item.tsx';
 
 const RecieptItem = ({ reciept, handleChange }: any) => {
