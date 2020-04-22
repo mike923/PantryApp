@@ -3,6 +3,7 @@ import { ActivityIndicator, View, Text, Alert } from 'react-native';
 import { Button, Input } from 'react-native-elements';
 import { useSelector, useDispatch } from 'react-redux';
 import CheckBox from 'react-native-check-box';
+import { CommonActions } from '@react-navigation/native';
 import { loginUser } from '../../redux/actions/userActions.ts';
 
 import { styles } from './Styles.ts';
@@ -27,6 +28,13 @@ export const Login = ({ navigation }) => {
 
     if (loggedUser.loggedIn) {
       navigation.navigate('AuthContainer');
+      console.log(`Hitting`);
+      // navigation.dispatch(
+      //   CommonActions.reset({
+      //     index: 0,
+      //     routes: [{ name: 'Upload' }],
+      //   }),
+      // );
     }
   };
 

@@ -92,6 +92,10 @@ export const confirmStyles = StyleSheet.create({
   priceBox: {
     backgroundColor: 'rgba(230, 230, 230,1)',
     borderRadius: 6,
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
     height: 51,
     marginLeft: 11,
     marginTop: 1,
@@ -99,9 +103,9 @@ export const confirmStyles = StyleSheet.create({
   },
   priceText: {
     color: '#121212',
-    fontSize: 24,
-    marginLeft: 4,
-    marginTop: 14,
+    fontSize: 20,
+    // marginLeft: 4,
+    // marginTop: 14,
   },
   quantityBox: {
     backgroundColor: 'rgba(230, 230, 230,1)',
@@ -123,24 +127,24 @@ export const confirmStyles = StyleSheet.create({
     marginTop: 14,
   },
   scrollView: {
-    borderBottomWidth: 1,
-    borderTopWidth: 1,
+    // borderBottomWidth: 1,
+    // borderTopWidth: 1,
   },
   scrollViewContainer: {
     height: 640,
   },
   storeContainer: {
-    height: 69,
+    height: 80,
     width: 366,
   },
   storeDate: {
     color: 'rgba(0,0,0,1)',
-    fontSize: 18,
+    fontSize: 24,
     marginLeft: 172,
-    marginTop: 3,
+    // marginTop: 3,
   },
   storeHeading: {
-    backgroundColor: 'rgba(230, 230, 230,1)',
+    // backgroundColor: 'rgba(230, 230, 230,1)',
     flexDirection: 'row',
     height: 70,
     marginLeft: 10,
@@ -148,15 +152,25 @@ export const confirmStyles = StyleSheet.create({
   },
   storeName: {
     color: 'rgba(0,0,0,1)',
-    fontSize: 22,
+    fontSize: 30,
   },
   storeNameRow: {
     alignSelf: 'center',
     flexDirection: 'row',
     flex: 1,
-    height: 28,
     justifyContent: 'center',
+    alignItems: 'center',
     marginLeft: 12,
     marginRight: 7,
+  },
+  totalRow: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  totalText: {
+    fontSize: 30,
+    marginHorizontal: 10,
+    marginTop: 10,
   },
 });
