@@ -20,7 +20,7 @@ const RecieptList = ({ reciepts, selected }: Props) => {
       {reciepts.map((reciept: Reciept) =>
         reciept.name !== '-' ? (
           selected === '-' || reciept.name === selected ? (
-            <Card color="black" reciept={reciept} />
+            <Card color="#707084" reciept={reciept} />
           ) : null
         ) : null,
       )}
