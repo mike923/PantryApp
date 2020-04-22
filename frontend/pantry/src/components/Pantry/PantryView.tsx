@@ -1,12 +1,12 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
 import FoodItem from './FoodItem.tsx';
 
 const PantryView = () => {
   return (
-    <ScrollView>
+    <ScrollView style={styles.pantryView}>
       <Text>This will be my pantry view containing all the food items</Text>
       <FoodItem />
       <FoodItem />
@@ -15,5 +15,11 @@ const PantryView = () => {
     </ScrollView>
   );
 };
+
+const styles = StyleSheet.create({
+  pantryView: {
+    backgroundColor: '#fff',
+  },
+});
 
 export default PantryView;
