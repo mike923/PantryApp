@@ -5,11 +5,9 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 
 import HomeScreen from '../Screens/Welcome.tsx';
-import UserScreen from '../Screens/UserScreen.tsx';
-import ApiScreen from '../Screens/ApiScreen.tsx';
-import ImageUpload from '../Upload/ImageUpload.tsx';
 import UploadStack from './UploadStack.tsx';
 import SettingsStack from './SettingsStack.tsx';
+import DashboardStack from './DashboardStack.tsx';
 import PantryStack from './PantryStack.tsx';
 
 const Tab = createBottomTabNavigator();
@@ -49,10 +47,10 @@ const TabBarNavigator = (props: any) => {
               borderTopWidth: 0,
             },
           }}>
+          <Tab.Screen name="List" component={DashboardStack} />
           <Tab.Screen name="Pantry" component={PantryStack} />
-          <Tab.Screen name="Cart" component={HomeScreen} />
           <Tab.Screen name="Upload" component={UploadStack} />
-          <Tab.Screen name="List" component={ApiScreen} />
+          <Tab.Screen name="Cart" component={HomeScreen} />
           <Tab.Screen name="Settings" component={SettingsStack} />
         </Tab.Navigator>
       </NavigationContainer>
