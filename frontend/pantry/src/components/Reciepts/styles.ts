@@ -5,14 +5,14 @@ export const CardContainer = styled.View`
   background-color: ${(props) => `${props.color}`};
   border-radius: 4px;
   height: 150px;
-  margin-bottom: 5px;
-  shadow-color: white;
-  shadow-offset: {width: 0px, height: 2px};
-  shadow-opacity: 0.8;
-  shadow-radius: 2px;
-  elevation: 1;
+  margin-bottom: 20px;
   width: 380px;
 `;
+
+// shadow-color: red;
+// shadow-opacity: 0.7;
+// shadow-offset: -2.5px 2.5px;
+// shadow-radius: -1px;
 
 const styles = StyleSheet.create({
   cardContainer: {
@@ -82,16 +82,15 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   scrollArea1: {
-    // backgroundColor: 'rgba(255,255,255,1)',
-    height: 500,
-    marginLeft: 14,
-    // marginTop: 140,
-    width: 380,
+    height: 600,
+    marginLeft: 10,
+    width: 400,
   },
   scrollArea2: {
+    // borderWidth: 5,
     flexDirection: 'column',
-    // height: 600,
-    width: 348,
+    marginLeft: 5,
+    width: 400,
   },
   storeLogo: {
     height: 120,

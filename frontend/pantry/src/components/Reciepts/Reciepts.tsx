@@ -7,87 +7,19 @@ import {
   Picker,
   Dimensions,
 } from 'react-native';
-import styles, { CardContainer } from './styles.ts';
+import styles from './styles.ts';
 
-const dummyStores = [
-  { name: '-' },
-  { name: 'Target' },
-  { name: 'Walmart' },
-  { name: 'Whole Foods' },
-  { name: 'Food Bazaar' },
-];
+import dummyStores from './dummyData/dummyStores.ts';
+import dummyReceipts from './dummyData/dummyReciepts.ts';
+import RecieptList from './RecieptList.tsx';
+import StorePicker from './StorePicker.tsx';
 
-const dummyReceipts = [
-  { name: 'Target' },
-  { name: 'Target' },
-  { name: 'Target' },
-  { name: 'Target' },
-  { name: 'Walmart' },
-  { name: 'Walmart' },
-  { name: 'Walmart' },
-  { name: 'Whole Foods' },
-  { name: 'Whole Foods' },
-  { name: 'Food Bazaar' },
-];
+interface Props {}
 
-const RecieptList = ({ selected }) => {
-  return (
-    <>
-      {dummyReceipts.map(({ name }) =>
-        selected === '-' || name === selected ? (
-          <Card color="black" name={name} />
-        ) : null,
-      )}
-    </>
-  );
-};
-
-const Card = ({ color, name }) => {
-  return (
-    <CardContainer color={color}>
-      <View style={styles.logoContainerStackRow}>
-        <View style={styles.logoContainerStack}>
-          <View style={styles.logoContainer}>
-            <Image
-              source={{
-                uri:
-                  'https://1000logos.net/wp-content/uploads/2017/06/Target-Logo.png',
-              }}
-              resizeMode="contain"
-              style={styles.storeLogo}
-            />
-          </View>
-        </View>
-        <View style={styles.storeNameColumn}>
-          <Text style={styles.receiptStoreName}>{name}</Text>
-          <Text style={styles.receiptTotalPrice}>$53.33</Text>
-          <Text style={styles.receiptItemTotal}>18 Items</Text>
-          <Text style={styles.receiptDate}>03/22/2019</Text>
-        </View>
-      </View>
-    </CardContainer>
-  );
-};
-
-const StorePicker = ({ stores, selected, handleStoreChange }) => {
-  const storeItems = () => {
-    return stores.map(({ name }) => <Picker.Item label={name} value={name} />);
-  };
-  return (
-    <Picker
-      selectedValue={selected}
-      onValueChange={(itemValue, itemIndex) => handleStoreChange(itemValue)}
-      style={styles.picker}
-      itemStyle={styles.pickerItem}
-      mode="dropdown">
-      {storeItems()}
-    </Picker>
-  );
-};
-
-const Reciepts = (props) => {
+const Reciepts = (props: Props) => {
   const [selectedValue, setSelectedValue] = useState('-');
-  const handleStoreChange = (itemValue, itemIndex) => {
+  const handleStoreChange = (itemValue: string, itemIndex: number) => {
+    console.log(itemValue);
     setSelectedValue(itemValue);
   };
 
@@ -102,7 +34,7 @@ const Reciepts = (props) => {
         <ScrollView
           contentContainerStyle={styles.scrollArea2}
           showsVerticalScrollIndicator={false}>
-          <RecieptList selected={selectedValue} />
+          <RecieptList selected={selectedValue} reciepts={dummyReceipts} />
         </ScrollView>
       </View>
       <Text style={styles.heading}>Reciepts</Text>
