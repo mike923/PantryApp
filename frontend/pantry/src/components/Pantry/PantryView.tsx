@@ -6,12 +6,14 @@ import FoodItem from './FoodItem.tsx';
 
 const PantryView = () => {
   return (
-    <ScrollView style={styles.pantryView}>
-      <Text>This will be my pantry view containing all the food items</Text>
-      <FoodItem />
-      <FoodItem />
-      <FoodItem />
-      <FoodItem />
+    <ScrollView style={{ backgroundColor: 'white', flex: 1 }}>
+      <View style={styles.pantryView}>
+        <Text>This will be my pantry view containing all the food items</Text>
+        <FoodItem />
+        <FoodItem />
+        <FoodItem />
+        <FoodItem />
+      </View>
     </ScrollView>
   );
 };
@@ -19,6 +21,10 @@ const PantryView = () => {
 const styles = StyleSheet.create({
   pantryView: {
     backgroundColor: '#fff',
+    flex: 1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
   },
 });
 
