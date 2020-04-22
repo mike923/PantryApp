@@ -8,3 +8,5 @@ const PantryView = () => {
     </View>
   );
 };
+
+export default PantryView;
