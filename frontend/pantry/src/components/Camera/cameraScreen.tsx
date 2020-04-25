@@ -35,7 +35,9 @@ class Camera extends Component {
       console.log('uri', uri);
       const visionResp = await RNTextDetector.detectFromUri(uri);
       console.log('visionResp', visionResp);
-      this.props.navigation.navigate('Display');
+      this.props.navigation.navigate('Display', {
+        res: [...visionResp],
+      });
     } catch (e) {
       console.warn(e);
     }

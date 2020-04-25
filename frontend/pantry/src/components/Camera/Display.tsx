@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Clipboard } from 'react-native';
+import { StyleSheet, Clipboard, ActivityIndicator } from 'react-native';
 import {
   Button,
   Content,
@@ -21,13 +21,22 @@ class MemoView extends Component {
     header: null,
   };
 
-  //   constructor(props) {
-  //     super();
+  constructor(props) {
+    super(props);
 
-  //     this.state = {
-  //       visible: false,
-  //     };
-  //   }
+    this.state = {
+      visionRes: [],
+    };
+  }
+
+  componentDidMount() {
+    let { navigation, route } = this.props;
+    console.log(route.params);
+
+    this.setState({
+      visionRes: route.params,
+    });
+  }
 
   //   onCancel() {
   //     console.log('CANCEL');
@@ -39,6 +48,9 @@ class MemoView extends Component {
   //   }
 
   render() {
+    let { visionRes } = this.state;
+    console.log('state', visionRes);
+
     // const { memoStore } = this.props.store;
     // const index = this.props.navigation.getParam('otherParam', 1);
     // console.log('index memo ', index);
@@ -65,7 +77,12 @@ class MemoView extends Component {
               <Title>{header}</Title>
             </Body>
             <Right>
-              <Button transparent>
+              <Button
+                transparent
+                onPress={async () => {
+                  await Clipboard.setString(visionRes);
+                  alert('Copied to Clipboard!');
+                }}>
                 <Icon type="AntDesign" name="copy1" />
               </Button>
               {/* <Button
@@ -90,7 +107,13 @@ class MemoView extends Component {
               </Button>
             </Right>
           </Header>
-          {/* <Text>{memoStore.memoArray[index].content}</Text> */}
+          <Text>
+            {visionRes ? (
+              JSON.stringify(visionRes)
+            ) : (
+              <ActivityIndicator size="large" color="#0000ff" />
+            )}
+          </Text>
         </Content>
       </Container>
     );
