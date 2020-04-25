@@ -34,7 +34,7 @@ class MemoView extends Component {
     console.log(route.params);
 
     this.setState({
-      visionRes: route.params,
+      visionRes: route.params.res,
     });
   }
 
@@ -49,7 +49,7 @@ class MemoView extends Component {
 
   render() {
     let { visionRes } = this.state;
-    console.log('state', visionRes);
+    console.log('state', { visionRes });
 
     // const { memoStore } = this.props.store;
     // const index = this.props.navigation.getParam('otherParam', 1);
@@ -109,7 +109,9 @@ class MemoView extends Component {
           </Header>
           <Text>
             {visionRes ? (
-              JSON.stringify(visionRes)
+              visionRes.map((el) => {
+                return <Text>{el.text}</Text>;
+              })
             ) : (
               <ActivityIndicator size="large" color="#0000ff" />
             )}
