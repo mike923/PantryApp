@@ -7,3 +7,6 @@ export const FETCHING_USER_ERROR = 'FETCHING_USER_ERROR';
 // TEST ACTIONS
 export const FETCHING = 'FETCHING';
 export const FETCHED = 'FETCHED';
+
+// CAMERA ACTIONS
+export const LOADING = 'LOADING';
