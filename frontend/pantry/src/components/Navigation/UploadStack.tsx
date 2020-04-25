@@ -8,7 +8,7 @@ import Upload from '../Upload/Upload.tsx';
 import ItemConfirmation from '../Upload/ItemConfirmation.tsx';
 import { screenOptions } from './style.ts';
 import Camera from '../Camera/cameraScreen.tsx';
-import MemoView from '../Camera/Display.tsx';
+import TextView from '../Camera/Display.tsx';
 
 const Stack = createStackNavigator();
 
@@ -18,9 +18,18 @@ const UploadStack = ({ navigation }) => {
       screenOptions={{
         ...screenOptions,
       }}>
-      <Stack.Screen name="Camera" component={Camera} />
-      <Stack.Screen name="Display" component={MemoView} />
       <Stack.Screen name="Upload" component={Upload} />
+      <Stack.Screen
+        name="Camera"
+        component={Camera}
+        headerMode="screen"
+        headerShown="false"
+        options={{
+          headerMode: 'none',
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen name="Display" component={TextView} />
       <Stack.Screen name="Api" component={ApiTester} />
       <Stack.Screen name="ImageUpload" component={ImageUpload} />
       <Stack.Screen name="Reciepts" component={Reciepts} />

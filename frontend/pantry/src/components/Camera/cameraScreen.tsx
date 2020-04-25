@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import { RNCamera } from 'react-native-camera';
 import { Slider, Overlay } from 'react-native-elements';
 import { Spinner, Icon } from 'native-base';
 import RNTextDetector from 'react-native-text-detector';
 
+import { styles } from './cameraStyles.ts';
 import colors from './colors.ts';
 
 class Camera extends Component {
@@ -45,7 +46,7 @@ class Camera extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={styles.cameraContainer}>
         <RNCamera
           ref={(ref) => {
             this.camera = ref;
@@ -113,35 +114,3 @@ class Camera extends Component {
   }
 }
 export default Camera;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    backgroundColor: 'black',
-  },
-  icon: {
-    alignSelf: 'center',
-    color: 'white',
-    flex: 0,
-    fontSize: 40,
-    margin: 20,
-    padding: 15,
-    paddingHorizontal: 20,
-  },
-  preview: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'flex-end',
-    height: '100%',
-  },
-  //   spinnerStyle: {
-  //     flex: 0,
-  //     backgroundColor: '#fff',
-  //     justifyContent: 'center',
-  //     flexDirection: 'column',
-  //     height: '100%',
-  //     width: '100%',
-  //     alignSelf: 'flex-start',
-  //   },
-});
