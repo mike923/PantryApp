@@ -18,6 +18,9 @@ export const styles = StyleSheet.create({
     width: 70,
     zIndex: 90,
   },
+  camera: {
+    marginLeft: windowWidth / 4,
+  },
   cameraContainer: {
     flex: 1,
     flexDirection: 'column',
@@ -30,13 +33,6 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   flash: {
-    // alignSelf: 'center',
-    color: 'white',
-    flex: 0,
-    fontSize: 40,
-    margin: 20,
-    padding: 15,
-    // paddingHorizontal: 20,
     top: -640,
   },
   icon: {
@@ -58,14 +54,4 @@ export const styles = StyleSheet.create({
     left: 0,
     top: -600,
   },
-  //   welcome: {
-  //     fontSize: 20,
-  //     textAlign: 'center',
-  //     margin: 10,
-  //   },
-  //   instructions: {
-  //     textAlign: 'center',
-  //     color: '#333333',
-  //     marginBottom: 5,
-  //   },
 });

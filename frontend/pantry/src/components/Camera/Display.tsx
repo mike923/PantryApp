@@ -44,11 +44,11 @@ class TextView extends Component {
           <View>
             {visionRes ? (
               <View>
-                <TouchableOpacity
+                {/* <TouchableOpacity
                   onPress={() => this.props.navigation.navigate('EditView')}
                   style={styles.TouchableOpacityStyle}>
                   <Icon type="AntDesign" name="edit" />
-                </TouchableOpacity>
+                </TouchableOpacity> */}
 
                 {visionRes.map((el) => {
                   return <Text>{el.text}</Text>;

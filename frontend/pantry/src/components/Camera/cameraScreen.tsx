@@ -95,19 +95,18 @@ class Camera extends Component {
                 thumbTintColor={colors.primaryColor}
                 style={styles.zoom}
               />
-              <Icon name="camera" size={2} color="#900" style={styles.icon} />
+              <Icon
+                name="camera"
+                size={2}
+                color="#900"
+                style={[styles.icon, styles.camera]}
+                onPress={this.takePicture}
+              />
             </View>
-
-            {/* <Icon
-              type="FontAwesome"
-              onPress={this.takePicture}
-              name="flickr-with-circle"
-            /> */}
-
             <Icon
               type="Entypo"
               onPress={this.flash}
-              style={styles.flash}
+              style={[styles.flash, styles.icon]}
               name="flash"
             />
           </View>
