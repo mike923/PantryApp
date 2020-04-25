@@ -7,6 +7,7 @@ import TextRecog from '../Upload/TextRecog.tsx';
 import Upload from '../Upload/Upload.tsx';
 import ItemConfirmation from '../Upload/ItemConfirmation.tsx';
 import { screenOptions } from './style.ts';
+import Camera from '../Camera/cameraScreen.tsx';
 
 const Stack = createStackNavigator();
 
@@ -16,6 +17,7 @@ const UploadStack = ({ navigation }) => {
       screenOptions={{
         ...screenOptions,
       }}>
+      <Stack.Screen name="Camera" component={Camera} />
       <Stack.Screen name="Upload" component={Upload} />
       <Stack.Screen name="Api" component={ApiTester} />
       <Stack.Screen name="ImageUpload" component={ImageUpload} />
