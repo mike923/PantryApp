@@ -1,4 +1,7 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
+
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 export const styles = StyleSheet.create({
   TouchableOpacityStyle: {
@@ -26,6 +29,16 @@ export const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
   },
+  flash: {
+    // alignSelf: 'center',
+    color: 'white',
+    flex: 0,
+    fontSize: 40,
+    margin: 20,
+    padding: 15,
+    // paddingHorizontal: 20,
+    top: -640,
+  },
   icon: {
     alignSelf: 'center',
     color: 'white',
@@ -40,6 +53,10 @@ export const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'flex-end',
     height: '100%',
+  },
+  zoom: {
+    left: 0,
+    top: -600,
   },
   //   welcome: {
   //     fontSize: 20,

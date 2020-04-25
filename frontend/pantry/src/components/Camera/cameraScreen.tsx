@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import { RNCamera } from 'react-native-camera';
 import { Slider, Overlay } from 'react-native-elements';
-import { Spinner, Icon } from 'native-base';
+import { Spinner } from 'native-base';
 import RNTextDetector from 'react-native-text-detector';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { styles } from './cameraStyles.ts';
 import colors from './colors.ts';
@@ -83,6 +84,7 @@ class Camera extends Component {
                 flex: 1,
                 alignItems: 'stretch',
                 justifyContent: 'center',
+                // flexDirection: 'row',
               }}>
               <Slider
                 minimumValue={0}
@@ -91,20 +93,21 @@ class Camera extends Component {
                 value={this.state.zoomValue}
                 onValueChange={(zoomValue) => this.setState({ zoomValue })}
                 thumbTintColor={colors.primaryColor}
+                style={styles.zoom}
               />
+              <Icon name="camera" size={2} color="#900" style={styles.icon} />
             </View>
 
-            <Icon
-              type="Entypo"
+            {/* <Icon
+              type="FontAwesome"
               onPress={this.takePicture}
-              style={styles.icon}
               name="flickr-with-circle"
-            />
+            /> */}
 
             <Icon
               type="Entypo"
               onPress={this.flash}
-              style={styles.icon}
+              style={styles.flash}
               name="flash"
             />
           </View>
