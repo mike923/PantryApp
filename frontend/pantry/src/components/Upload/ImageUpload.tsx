@@ -124,23 +124,24 @@ const ImageUpload = ({ navigation }: Props) => {
             color="green"
           />
           {upload.progress === 100 ? (
+            // <Button
+            //   title="Parse Text"
+            //   onPress={() =>
+            //     navigation.navigate('Confirmation', {
+            //       localUriPath: imageURI.localPath,
+            //     })
+            //   }
+            // />
+            // ) :
             <Button
               title="Parse Text"
               onPress={() =>
-                navigation.navigate('Confirmation', {
+                navigation.navigate('Parsed', {
                   localUriPath: imageURI.localPath,
                 })
               }
             />
-          ) : // <Button
-          //   title="Parse Text"
-          //   onPress={() =>
-          //     navigation.navigate('Parsed', {
-          //       localUriPath: imageURI.localPath,
-          //     })
-          //   }
-          // />
-          null}
+          ) : null}
         </View>
       )}
       {upload.loading && <ProgressBar bar={upload.progress} />}
