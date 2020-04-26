@@ -1,16 +1,25 @@
-import React, { Component, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Text, View, Alert } from 'react-native';
 import { RNCamera } from 'react-native-camera';
 import { Slider, Overlay } from 'react-native-elements';
 import { Spinner } from 'native-base';
 import RNTextDetector from 'react-native-text-detector';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { useSelector, useDispatch } from 'react-redux';
+import { onBarCodeRead } from '../../redux/actions/cameraActions.ts';
 
 import { styles } from './cameraStyles.ts';
 import colors from './colors.ts';
 
 const Camera = ({ navigation }) => {
   let barcodes = new Set();
+
+  const scannedBarcodes = useSelector((state) => state.camera);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    console.log('hello world');
+  }, [dispatch, scannedBarcodes]);
 
   const [zoomValue, setZoomValue] = useState(0);
   const [flash, setFlash] = useState(RNCamera.Constants.FlashMode.off);
@@ -43,9 +52,19 @@ const Camera = ({ navigation }) => {
     }
   };
 
-  const onBarCodeRead = (scanResult) => {
+  //   const onBarCodeRead = (scanResult) => {
+  //     if (scanResult.data !== null) {
+  //       if (!barcodes.has(scanResult.data)) {
+  //         barcodes.add(scanResult.data);
+  //         console.log('onBarCodeRead call', barcodes);
+  //       }
+  //     }
+  //   };
+
+  const disnBarCodeRead = (scanResult) => {
     if (scanResult.data !== null) {
       if (!barcodes.has(scanResult.data)) {
+        dispatch(onBarCodeRead(scanResult.data));
         barcodes.add(scanResult.data);
         console.log('onBarCodeRead call', barcodes);
       }
@@ -55,7 +74,7 @@ const Camera = ({ navigation }) => {
   return (
     <View style={styles.cameraContainer}>
       <RNCamera
-        onBarCodeRead={onBarCodeRead}
+        onBarCodeRead={disnBarCodeRead}
         ref={cameraRef}
         style={styles.preview}
         type={RNCamera.Constants.Type.back}

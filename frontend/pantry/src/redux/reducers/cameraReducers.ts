@@ -12,7 +12,7 @@ const initUserState = {
   barcodes: [],
 };
 
-const userReducer = (state = initUserState, action) => {
+const cameraReducer = (state = initUserState, action) => {
   const stateCopy = { ...state };
 
   switch (action.type) {
@@ -40,4 +40,4 @@ const userReducer = (state = initUserState, action) => {
   return stateCopy;
 };
 
-export { initUserState, userReducer };
+export { initUserState, cameraReducer };
