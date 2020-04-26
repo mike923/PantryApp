@@ -70,22 +70,16 @@ const Camera = ({ navigation }) => {
         zoom={zoomValue}>
         <View
           style={{ flex: 0, flexDirection: 'row', justifyContent: 'center' }}>
-          <View
-            style={{
-              flex: 1,
-              alignItems: 'stretch',
-              justifyContent: 'center',
-              // flexDirection: 'row',
-            }}>
-            {/* <Slider
+          <View style={styles.iconView}>
+            <Slider
               minimumValue={0}
               maximumValue={1}
               step={0.1}
               value={zoomValue}
-              onValueChange={(zoomValue) => setZoomValue({ zoomValue })}
+              onValueChange={(val) => setZoomValue(val)}
               thumbTintColor={colors.primaryColor}
               style={styles.zoom}
-            /> */}
+            />
             <Icon
               name="camera"
               size={2}
