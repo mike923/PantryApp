@@ -13,6 +13,14 @@ const authRouter = require("./routes/auth");
 
 const app = express();
 
+const serviceAccount = require("./config/fbServiceAccountKey.json");
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://capstone-pantry.firebaseio.com"
+});
+
+
 app.use(cors())
 app.use(logger("dev"));
 app.use(express.json());
