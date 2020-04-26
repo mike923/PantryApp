@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, Alert } from 'react-native';
 import { RNCamera } from 'react-native-camera';
 import { Slider, Overlay } from 'react-native-elements';
 import { Spinner } from 'native-base';
@@ -45,10 +45,15 @@ class Camera extends Component {
     }
   };
 
+  onBarCodeRead = (e) => {
+    console.log(`Barcode value is ${e.data}`, `Barcode type is${e.type}`);
+  };
+
   render() {
     return (
       <View style={styles.cameraContainer}>
         <RNCamera
+          onBarCodeRead={this.onBarCodeRead}
           ref={(ref) => {
             this.camera = ref;
           }}
