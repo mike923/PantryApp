@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { ActivityIndicator, View, Text, Alert } from 'react-native';
+import {
+  ActivityIndicator,
+  View,
+  TouchableOpacity,
+  Text,
+  Alert,
+} from 'react-native';
 import { Button, Input } from 'react-native-elements';
 import { useSelector, useDispatch } from 'react-redux';
 import CheckBox from 'react-native-check-box';
@@ -42,8 +48,12 @@ export const Login = ({ navigation }) => {
     <View style={styles.container}>
       <View style={styles.formContainer}>
         <View
-          style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-          <Text style={{ fontSize: 28, height: 50 }}>Please Login!</Text>
+          style={{
+            marginTop: 200,
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
+          <Text style={{ fontSize: 28 }}>Please Login!</Text>
         </View>
         <View style={styles.subContainer}>
           <Input
@@ -69,39 +79,51 @@ export const Login = ({ navigation }) => {
             leftText="Visible"
           />
         </View>
-        <View style={styles.subContainer}>
-          <Button
-            style={styles.textInput}
-            title="Login"
-            onPress={() => login()}
-          />
-        </View>
+        <TouchableOpacity
+          style={styles.textInput}
+          onPress={() => {
+            login();
+          }}>
+          <Text style={{ color: '#fff', fontWeight: 'bold', fontSize: 18 }}>
+            Login
+          </Text>
+        </TouchableOpacity>
         <View
-          style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+          style={{
+            alignItems: 'center',
+            marginTop: 25,
+            marginBottom: 5,
+            justifyContent: 'center',
+          }}>
           <Text>Forgot Password?</Text>
         </View>
-        <View style={styles.subContainer}>
-          <Button
-            style={styles.textInput}
-            title="Reset Password"
-            onPress={() => {
-              navigation.navigate('Reset');
-            }}
-          />
-        </View>
+        <TouchableOpacity
+          style={styles.textInput}
+          onPress={() => {
+            navigation.navigate('Reset');
+          }}>
+          <Text style={{ color: '#fff', fontWeight: 'bold', fontSize: 18 }}>
+            Reset Password
+          </Text>
+        </TouchableOpacity>
         <View
-          style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+          style={{
+            alignItems: 'center',
+            marginTop: 25,
+            marginBottom: 5,
+            justifyContent: 'center',
+          }}>
           <Text>Not a user?</Text>
         </View>
-        <View style={styles.subContainer}>
-          <Button
-            style={styles.textInput}
-            title="Register"
-            onPress={() => {
-              navigation.navigate('Register');
-            }}
-          />
-        </View>
+        <TouchableOpacity
+          style={styles.textInput}
+          onPress={() => {
+            navigation.navigate('Register');
+          }}>
+          <Text style={{ color: '#fff', fontWeight: 'bold', fontSize: 18 }}>
+            Register
+          </Text>
+        </TouchableOpacity>
         {loggedUser.loading && (
           <View style={styles.activity}>
             <ActivityIndicator size="large" color="#0000ff" />

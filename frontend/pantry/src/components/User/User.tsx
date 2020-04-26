@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { View, Text, TouchableOpacity } from 'react-native';
 
-import styles from './styles';
+import styles from './styles.ts';
 
 const User = ({ navigation }) => {
   const testUser = useSelector((state) => state.testUser);

@@ -4,7 +4,7 @@ import { StyleSheet, View, Image, Text, ImageBackground } from 'react-native';
 const WelcomeScreen = (props: any) => (
   <View style={styles.container}>
     <ImageBackground
-      source={require('../../../assets/images/backgroundskinny.png')}
+      source={require('../../../assets/images/background.png')}
       resizeMode="contain"
       style={styles.image}
       imageStyle={styles.image_imageStyle}>
@@ -20,6 +20,7 @@ const WelcomeScreen = (props: any) => (
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: '#ff5c61',
     flex: 1,
   },
   heading: {

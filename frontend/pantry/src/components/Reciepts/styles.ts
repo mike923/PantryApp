@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
     width: 380,
   },
   container: {
+    backgroundColor: '#fff',
     flex: 1,
   },
   heading: {

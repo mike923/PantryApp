@@ -1,19 +1,18 @@
 import React from 'react';
 import { TouchableOpacity, Text, Image, StyleSheet } from 'react-native';
 
-const FoodItem = () => {
+const FoodItem = ({ productName, uri, purchasedDate }) => {
   return (
     <TouchableOpacity style={styles.foodItem}>
       <Image
         source={{
-          uri:
-            'https://www.nwcoffeesupply.com/wp-content/uploads/2019/08/Oatly-Oat-Milk-Full-Fat.jpg',
+          uri,
         }}
         resizeMode="contain"
         style={{ height: 160, width: 160, borderRadius: 5 }}
       />
-      <Text>Food Name goes here</Text>
-      <Text>Food info goes here</Text>
+      <Text style={{ marginTop: 3 }}>{productName}</Text>
+      <Text style={{ marginTop: 3 }}>Date Purchased: {purchasedDate}</Text>
     </TouchableOpacity>
   );
 };
@@ -21,7 +20,7 @@ const FoodItem = () => {
 const styles = StyleSheet.create({
   foodItem: {
     alignItems: 'center',
-    backgroundColor: '#eee',
+    backgroundColor: '#ffe6e6',
     borderRadius: 10,
     marginVertical: 10,
     padding: 9,

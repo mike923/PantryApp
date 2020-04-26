@@ -3,6 +3,7 @@ import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
   activity: {
     alignItems: 'center',
+    backgroundColor: 'rgba(255, 204, 206, 0.6)',
     bottom: 0,
     justifyContent: 'center',
     left: 0,
@@ -11,13 +12,15 @@ export const styles = StyleSheet.create({
     top: 0,
   },
   container: {
-    alignItems: 'center',
+    // alignItems: 'center',
     flex: 1,
-    justifyContent: 'center',
+    // justifyContent: 'center',
   },
   formContainer: {
-    height: 400,
+    flex: 1,
     padding: 20,
+    // height: 400,
+    // width: '100%',
   },
   passVisbility: {
     left: 900,
@@ -29,9 +32,14 @@ export const styles = StyleSheet.create({
     padding: 5,
   },
   textInput: {
+    alignItems: 'center',
+    backgroundColor: '#ff5c61',
+    borderRadius: 50,
+    color: '#fff',
     fontSize: 18,
-    margin: 5,
-    width: 200,
+    padding: 12,
+    width: '95%',
+    // margin: 5,
   },
   // password: {
   //   flexDirection: 'row',
