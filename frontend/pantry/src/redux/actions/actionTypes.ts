@@ -9,4 +9,8 @@ export const FETCHING = 'FETCHING';
 export const FETCHED = 'FETCHED';
 
 // CAMERA ACTIONS
-export const LOADING = 'LOADING';
+export const SCANNING = 'SCANNING';
+export const SCANNED = 'SCANNED';
+export const SCANNING_ERROR = 'SCANNING_ERROR';
+export const UNSET_SCAN = 'UNSET_SCAN';
+export const SET_BARCODES = 'SET_BARCODES';
