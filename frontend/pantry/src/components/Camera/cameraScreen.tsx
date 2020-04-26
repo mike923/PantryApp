@@ -17,7 +17,12 @@ class Camera extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { zoomValue: 0, flashMode: RNCamera.Constants.FlashMode.off };
+    this.barcodes = new Set();
+
+    this.state = {
+      zoomValue: 0,
+      flashMode: RNCamera.Constants.FlashMode.off,
+    };
   }
 
   flash = () => {
@@ -45,11 +50,18 @@ class Camera extends Component {
     }
   };
 
-  onBarCodeRead = (e) => {
-    console.log(`Barcode value is ${e.data}`, `Barcode type is${e.type}`);
+  onBarCodeRead = (scanResult) => {
+    if (scanResult.data !== null) {
+      if (!this.barcodes.has(scanResult.data)) {
+        this.barcodes.add(scanResult.data);
+        console.log('onBarCodeRead call', this.barcodes);
+      }
+    }
   };
 
   render() {
+    console.log(this.barcodes);
+
     return (
       <View style={styles.cameraContainer}>
         <RNCamera
