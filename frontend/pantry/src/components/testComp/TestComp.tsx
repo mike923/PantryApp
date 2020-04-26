@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getRandomUser } from '../../redux/actions/testActions';
 import { Text, TouchableOpacity, View } from 'react-native';
-import styles from './styles';
+import { getRandomUser } from '../../redux/actions/testActions.ts';
+import styles from './styles.ts';
 
 const API = () => {
   const testUser = useSelector((state) => state.testUser);

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import Home from '../Home/Home';
-import User from '../User/User';
-import Test from '../testComp/TestComp';
+import Home from '../Home/Home.tsx';
+import User from '../User/User.tsx';
+import Test from '../testComp/TestComp.tsx';
 
 const Stack = createStackNavigator();
 
