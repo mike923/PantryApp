@@ -1,13 +1,6 @@
 import React, { Component } from 'react';
-import {
-  StyleSheet,
-  Clipboard,
-  ActivityIndicator,
-  View,
-  TouchableOpacity,
-} from 'react-native';
-import { Content, Container, Text, Icon } from 'native-base';
-import Share from 'react-native-share';
+import { ActivityIndicator, View, TouchableOpacity } from 'react-native';
+import { Content, Container, Text } from 'native-base';
 
 import { styles } from './cameraStyles.ts';
 
