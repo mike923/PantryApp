@@ -11,7 +11,7 @@ export default function App() {
   useEffect(() => {
     setTimeout(() => {
       setshow(false);
-    }, 5000);
+    }, 1000);
   }, [show]);
   return (
     <Provider store={store}>
