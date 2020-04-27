@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { ActivityIndicator, View, Text, TouchableOpacity } from 'react-native';
+import {
+  ActivityIndicator,
+  View,
+  Text,
+  TouchableOpacity,
+  Alert,
+} from 'react-native';
 import { Button, Input } from 'react-native-elements';
 import { useSelector, useDispatch } from 'react-redux';
 import CheckBox from 'react-native-check-box';
@@ -20,11 +26,13 @@ export const Register = ({ navigation }) => {
   }, [dispatch, user]);
 
   const register = async () => {
-    dispatch(registerUser(email, password));
+    if (email && password) {
+      dispatch(registerUser(email, password));
 
-    if (user.loggedIn) {
-      navigation.navigate('AuthConatiner');
-    }
+      if (user.loggedIn) {
+        navigation.navigate('AuthConatiner');
+      }
+    } else Alert.alert('Please enter valid email and password');
   };
 
   /*

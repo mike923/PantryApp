@@ -20,17 +20,19 @@ export const Reset = ({ navigation }) => {
   // useEffect(() => {}, [dispatch, user]);
 
   const reset = async () => {
-    dispatch(resetPassword(email));
+    if (email) {
+      dispatch(resetPassword(email));
 
-    if (user.loggedIn) {
-      navigation.navigate('AuthContainer');
-    }
+      if (user.loggedIn) {
+        navigation.navigate('AuthContainer');
+      }
+    } else Alert.alert('Please enter a valid email');
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.form}>
-        <Text style={styles.header}>Register Here</Text>
+        <Text style={styles.header}>Reset Password</Text>
 
         <Input
           style={styles.input}
