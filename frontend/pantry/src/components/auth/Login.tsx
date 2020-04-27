@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   Text,
   Alert,
+  StyleSheet,
 } from 'react-native';
 import { Button, Input } from 'react-native-elements';
 import { useSelector, useDispatch } from 'react-redux';
@@ -12,7 +13,7 @@ import CheckBox from 'react-native-check-box';
 import { CommonActions } from '@react-navigation/native';
 import { loginUser } from '../../redux/actions/userActions.ts';
 
-import { styles } from './Styles.ts';
+// import { styles } from './Styles.ts';
 
 export const Login = ({ navigation }) => {
   const [email, setEmail] = useState('Voniel@bvoniel.com');
@@ -44,91 +45,52 @@ export const Login = ({ navigation }) => {
     }
   };
 
+  const old = false;
+
   return (
     <View style={styles.container}>
-      <View style={styles.formContainer}>
-        <View
-          style={{
-            marginTop: 200,
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
-          <Text style={{ fontSize: 28 }}>Please Login!</Text>
-        </View>
-        <View style={styles.subContainer}>
-          <Input
-            style={styles.textInput}
-            placeholder="Your Email"
-            value={email}
-            onChangeText={setEmail}
-          />
-        </View>
-        <View style={[styles.subContainer, styles.password]}>
-          <Input
-            style={styles.textInput}
-            placeholder="Your Password"
-            secureTextEntry={!!passVisible}
-            value={password}
-            onChangeText={setPassword}
-          />
-          <CheckBox
-            onClick={() => {
-              setPassVisible(!passVisible);
-            }}
-            isChecked={!passVisible}
-            leftText="Visible"
-          />
-        </View>
-        <TouchableOpacity
-          style={styles.textInput}
-          onPress={() => {
-            login();
-          }}>
-          <Text style={{ color: '#fff', fontWeight: 'bold', fontSize: 18 }}>
-            Login
-          </Text>
+      <View style={styles.form}>
+        <Text style={styles.header}>Please Login</Text>
+
+        <Input
+          style={styles.input}
+          placeholder="email@domain.dns"
+          value={email}
+          onChangeText={setEmail}
+        />
+        <Input
+          style={styles.input}
+          placeholder="password123"
+          secureTextEntry={!!passVisible}
+          value={password}
+          onChangeText={setPassword}
+        />
+        <CheckBox
+          onClick={() => {
+            setPassVisible(!passVisible);
+          }}
+          isChecked={!passVisible}
+          leftText="Visible"
+          style={styles.checkBox}
+        />
+
+        <TouchableOpacity style={styles.button} onPress={() => login()}>
+          <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
-        <View
-          style={{
-            alignItems: 'center',
-            marginTop: 25,
-            marginBottom: 5,
-            justifyContent: 'center',
-          }}>
-          <Text>Forgot Password?</Text>
-        </View>
+
+        <Text style={styles.helpText}>Forgot Password?</Text>
         <TouchableOpacity
-          style={styles.textInput}
-          onPress={() => {
-            navigation.navigate('Reset');
-          }}>
-          <Text style={{ color: '#fff', fontWeight: 'bold', fontSize: 18 }}>
-            Reset Password
-          </Text>
+          style={styles.button}
+          onPress={() => navigation.navigate('Reset')}>
+          <Text style={styles.buttonText}>Reset Password</Text>
         </TouchableOpacity>
-        <View
-          style={{
-            alignItems: 'center',
-            marginTop: 25,
-            marginBottom: 5,
-            justifyContent: 'center',
-          }}>
-          <Text>Not a user?</Text>
-        </View>
+
+        <Text style={styles.helpText}>Not A User?</Text>
         <TouchableOpacity
-          style={styles.textInput}
-          onPress={() => {
-            navigation.navigate('Register');
-          }}>
-          <Text style={{ color: '#fff', fontWeight: 'bold', fontSize: 18 }}>
-            Register
-          </Text>
+          style={styles.button}
+          onPress={() => navigation.navigate('Register')}>
+          <Text style={styles.buttonText}>Register</Text>
         </TouchableOpacity>
-        {loggedUser.loading && (
-          <View style={styles.activity}>
-            <ActivityIndicator size="large" color="#0000ff" />
-          </View>
-        )}
       </View>
     </View>
   );
@@ -137,4 +99,45 @@ export const Login = ({ navigation }) => {
 Login.navigationOptions = ({ navigation }) => ({
   title: 'Login',
   headerShown: false,
+});
+
+const styles = StyleSheet.create({
+  button: {
+    alignItems: 'center',
+    backgroundColor: '#ff5c61',
+    borderRadius: 50,
+    padding: 12,
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  checkBox: {
+    marginBottom: 30,
+    padding: 11,
+  },
+  container: {
+    alignItems: 'center',
+    flex: 1,
+    justifyContent: 'center',
+    padding: 20,
+  },
+  form: {
+    width: '100%',
+  },
+  header: {
+    alignSelf: 'center',
+    fontFamily: 'Vibur',
+    fontSize: 50,
+    marginBottom: 50,
+  },
+  helpText: {
+    alignSelf: 'center',
+    marginBottom: 5,
+    marginTop: 15,
+  },
+  input: {
+    marginTop: 10,
+  },
 });
