@@ -57,7 +57,11 @@ target 'pantry' do
   # Manual installaion
   pod 'RNFBAuth', :path => '../node_modules/@react-native-firebase/auth'
 
-
+ pod 'react-native-camera', path: '../node_modules/react-native-camera', subspecs: [
+  'TextDetector',
+  'FaceDetectorMLKit',
+  'BarcodeDetectorMLKit'
+  ]
 
 
   target 'pantryTests' do

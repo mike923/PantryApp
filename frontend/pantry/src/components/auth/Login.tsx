@@ -31,18 +31,20 @@ export const Login = ({ navigation }) => {
 
   // directs to log in screen after authentication
   const login = () => {
-    dispatch(loginUser(email, password));
+    if (email && password) {
+      dispatch(loginUser(email, password));
 
-    if (loggedUser.loggedIn) {
-      navigation.navigate('AuthContainer');
-      console.log(`Hitting`);
-      // navigation.dispatch(
-      //   CommonActions.reset({
-      //     index: 0,
-      //     routes: [{ name: 'Upload' }],
-      //   }),
-      // );
-    }
+      if (loggedUser.loggedIn) {
+        navigation.navigate('AuthContainer');
+        console.log(`Hitting`);
+        // navigation.dispatch(
+        //   CommonActions.reset({
+        //     index: 0,
+        //     routes: [{ name: 'Upload' }],
+        //   }),
+        // );
+      }
+    } else Alert.alert('Please enter valid email and password');
   };
 
   const old = false;

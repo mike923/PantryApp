@@ -33,7 +33,8 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   flash: {
-    top: -640,
+    bottom: windowHeight - 150,
+    right: 0,
   },
   icon: {
     alignSelf: 'center',
@@ -41,8 +42,14 @@ export const styles = StyleSheet.create({
     flex: 0,
     fontSize: 40,
     margin: 20,
-    padding: 15,
-    paddingHorizontal: 20,
+    padding: 5,
+    // paddingHorizontal: 20,
+  },
+  iconView: {
+    alignItems: 'stretch',
+    flex: 1,
+    justifyContent: 'center',
+    // flexDirection: 'row',
   },
   preview: {
     flex: 1,
@@ -51,7 +58,15 @@ export const styles = StyleSheet.create({
     height: '100%',
   },
   zoom: {
-    left: 0,
-    top: -600,
+    bottom: windowHeight - 190,
+    left: 2,
+    width: 140,
   },
 });
+
+export const colors = {
+  primaryColor: '#1e88e5',
+  secondaryColor: '#005cb2',
+  editButtonColor: '#039be5',
+  deleteButtonColor: '#6ab7ff',
+};
