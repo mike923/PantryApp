@@ -13,7 +13,7 @@ import CheckBox from 'react-native-check-box';
 import { CommonActions } from '@react-navigation/native';
 import { loginUser } from '../../redux/actions/userActions.ts';
 
-// import { styles } from './Styles.ts';
+import { styles } from './styles.ts';
 
 export const Login = ({ navigation }) => {
   const [email, setEmail] = useState('Voniel@bvoniel.com');
@@ -91,6 +91,11 @@ export const Login = ({ navigation }) => {
           onPress={() => navigation.navigate('Register')}>
           <Text style={styles.buttonText}>Register</Text>
         </TouchableOpacity>
+        {loggedUser.loading && (
+          <View style={styles.activity}>
+            <ActivityIndicator size="large" color="#0000ff" />
+          </View>
+        )}
       </View>
     </View>
   );
@@ -101,43 +106,53 @@ Login.navigationOptions = ({ navigation }) => ({
   headerShown: false,
 });
 
-const styles = StyleSheet.create({
-  button: {
-    alignItems: 'center',
-    backgroundColor: '#ff5c61',
-    borderRadius: 50,
-    padding: 12,
-  },
-  buttonText: {
-    color: 'white',
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  checkBox: {
-    marginBottom: 30,
-    padding: 11,
-  },
-  container: {
-    alignItems: 'center',
-    flex: 1,
-    justifyContent: 'center',
-    padding: 20,
-  },
-  form: {
-    width: '100%',
-  },
-  header: {
-    alignSelf: 'center',
-    fontFamily: 'Vibur',
-    fontSize: 50,
-    marginBottom: 50,
-  },
-  helpText: {
-    alignSelf: 'center',
-    marginBottom: 5,
-    marginTop: 15,
-  },
-  input: {
-    marginTop: 10,
-  },
-});
+// const styles = StyleSheet.create({
+//   activity: {
+//     alignItems: 'center',
+//     backgroundColor: 'rgba(255, 204, 206, 0.6)',
+//     bottom: 0,
+//     justifyContent: 'center',
+//     left: 0,
+//     position: 'absolute',
+//     right: 0,
+//     top: 0,
+//   },
+//   button: {
+//     alignItems: 'center',
+//     backgroundColor: '#ff5c61',
+//     borderRadius: 50,
+//     padding: 12,
+//   },
+//   buttonText: {
+//     color: 'white',
+//     fontSize: 18,
+//     fontWeight: 'bold',
+//   },
+//   checkBox: {
+//     marginBottom: 30,
+//     padding: 11,
+//   },
+//   container: {
+//     alignItems: 'center',
+//     flex: 1,
+//     justifyContent: 'center',
+//     padding: 20,
+//   },
+//   form: {
+//     width: '100%',
+//   },
+//   header: {
+//     alignSelf: 'center',
+//     fontFamily: 'Vibur',
+//     fontSize: 50,
+//     marginBottom: 50,
+//   },
+//   helpText: {
+//     alignSelf: 'center',
+//     marginBottom: 5,
+//     marginTop: 15,
+//   },
+//   input: {
+//     marginTop: 10,
+//   },
+// });
