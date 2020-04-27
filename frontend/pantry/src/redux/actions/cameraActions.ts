@@ -3,24 +3,25 @@ import {
   SCANNED,
   UNSET_SCAN,
   SCANNING_ERROR,
+  SET_BARCODES,
 } from './actionTypes.ts';
 
 const scanningBarcode = () => ({ type: SCANNING });
 
 const scannedBarcode = () => ({ type: SCANNED });
 
-const setBarcode = (barcode) => ({ type: SCANNED, payload: barcode });
+const setBarcode = (barcode) => ({ type: SET_BARCODES, payload: barcode });
 
-const unsetBarcode = () => ({ type: UNSET_SCAN });
+// const unsetBarcode = () => ({ type: UNSET_SCAN });
 
 const errorScanningBarcode = (err) => ({ type: SCANNING_ERROR, payload: err });
 
-const onBarCodeRead = (scanResult) => {
+const onBarCodeRead = (barcode) => {
   return (dispatch) => {
     dispatch(scanningBarcode());
     try {
       dispatch(scannedBarcode());
-      dispatch(setBarcode(scanResult));
+      dispatch(setBarcode(barcode));
     } catch (err) {
       dispatch(errorScanningBarcode(err));
     }
