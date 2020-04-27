@@ -42,6 +42,7 @@
     "@types/react-native-check-box": "^2.1.1",
     "axios": "^0.19.2",
     "firebase": "^7.14.0",
+    "fs": "0.0.1-security",
     "neumorphism-ui": "^1.0.2",
     "react": "16.11.0",
     "react-devtools": "^4.6.0",

@@ -15,8 +15,9 @@ import fakeParsedReciept from './dummyData/fakeParsedReciept.ts';
 
 import { priceFix, quantityFix } from './helpers/helpers.ts';
 
-const ItemConfirmation = ({ navigation }: any) => {
-  const [reciept, setReciept] = useState(fakeParsedReciept);
+const ItemConfirmation = ({ navigation, route }: any) => {
+  console.log(route.params);
+  const [reciept, setReciept] = useState(route.params.parsedText);
   const handleConfirm = () => {
     Alert.alert('Confirm', '', [
       { text: 'No', onPress: () => console.log('Cancelled') },
@@ -55,6 +56,7 @@ const ItemConfirmation = ({ navigation }: any) => {
   };
 
   const getRecieptTotal = () => {
+    console.log(`HERE`, reciept);
     return Object.keys(reciept.recieptItems)
       .reduce(
         (acc, num) =>
@@ -66,41 +68,49 @@ const ItemConfirmation = ({ navigation }: any) => {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.storeContainer}>
-        <View style={styles.storeHeading}>
-          <View style={styles.storeNameRow}>
-            <TextInput
-              style={styles.storeName}
-              onChangeText={(text) => handleChange('storeName', null, text)}>
-              {reciept.storeName}
-            </TextInput>
-            <TextInput
-              style={styles.storeDate}
-              onChangeText={(text) => handleChange('recieptDate', null, text)}>
-              {reciept.recieptDate}
-            </TextInput>
+    <>
+      {reciept ? (
+        <View style={styles.container}>
+          <View style={styles.storeContainer}>
+            <View style={styles.storeHeading}>
+              <View style={styles.storeNameRow}>
+                <TextInput
+                  style={styles.storeName}
+                  onChangeText={(text) =>
+                    handleChange('storeName', null, text)
+                  }>
+                  {reciept.storeName}
+                </TextInput>
+                <TextInput
+                  style={styles.storeDate}
+                  onChangeText={(text) =>
+                    handleChange('recieptDate', null, text)
+                  }>
+                  {reciept.recieptDate}
+                </TextInput>
+              </View>
+            </View>
+          </View>
+          <View style={styles.scrollViewContainer}>
+            <ScrollView
+              contentContainerStyle={styles.scrollView}
+              showsVerticalScrollIndicator={false}>
+              <RecieptItems
+                reciept={reciept.recieptItems}
+                handleChange={handleChange}
+              />
+              <View style={styles.totalRow}>
+                <Text style={styles.totalText}>Total</Text>
+                <Text style={styles.totalText}>{getRecieptTotal()}</Text>
+              </View>
+            </ScrollView>
+            <TouchableOpacity style={styles.confirmBtn} onPress={handleConfirm}>
+              <Text style={styles.confirmText}>Looks good!</Text>
+            </TouchableOpacity>
           </View>
         </View>
-      </View>
-      <View style={styles.scrollViewContainer}>
-        <ScrollView
-          contentContainerStyle={styles.scrollView}
-          showsVerticalScrollIndicator={false}>
-          <RecieptItems
-            reciept={reciept.recieptItems}
-            handleChange={handleChange}
-          />
-          <View style={styles.totalRow}>
-            <Text style={styles.totalText}>Total</Text>
-            <Text style={styles.totalText}>${getRecieptTotal()}</Text>
-          </View>
-        </ScrollView>
-        <TouchableOpacity style={styles.confirmBtn} onPress={handleConfirm}>
-          <Text style={styles.confirmText}>Looks good!</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+      ) : null}
+    </>
   );
 };
 
