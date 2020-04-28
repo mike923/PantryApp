@@ -18,11 +18,11 @@
   "lint-staged": {
     "src/**/*.{ts,tsx,js}": [
       "npx prettier --write",
-      "npx eslint --fix"
+      "npx eslint . --fix"
     ],
     "*.{js,json}": [
       "npx prettier --write",
-      "npx eslint --fix"
+      "npx eslint . --fix"
     ]
   },
   "husky": {
@@ -41,12 +41,15 @@
     "@react-navigation/stack": "^5.2.9",
     "@types/react-native-check-box": "^2.1.1",
     "axios": "^0.19.2",
+    "babel-plugin-root-import": "^6.5.0",
     "firebase": "^7.14.0",
     "fs": "0.0.1-security",
+    "native-base": "^2.13.12",
     "neumorphism-ui": "^1.0.2",
     "react": "16.11.0",
     "react-devtools": "^4.6.0",
     "react-native": "0.62.1",
+    "react-native-camera": "^3.23.1",
     "react-native-check-box": "^2.1.7",
     "react-native-cli": "^2.0.1",
     "react-native-elements": "^1.2.7",
@@ -56,6 +59,8 @@
     "react-native-reanimated": "^1.7.1",
     "react-native-safe-area-context": "^0.7.3",
     "react-native-screens": "^2.4.0",
+    "react-native-share": "^3.3.0",
+    "react-native-text-detector": "0.0.6",
     "react-native-vector-icons": "^6.6.0",
     "react-navigation": "^4.3.7",
     "react-navigation-stack": "^2.3.11",

@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { ActivityIndicator, View, Text, Alert } from 'react-native';
+import {
+  ActivityIndicator,
+  View,
+  Text,
+  TouchableOpacity,
+  Alert,
+} from 'react-native';
 import { Button, Input, Icon } from 'react-native-elements';
 import { useSelector, useDispatch } from 'react-redux';
 import { resetPassword } from '../../redux/actions/userActions.ts';
-import { styles } from './Styles.ts';
+import { styles } from './styles.ts';
 
 export const Reset = ({ navigation }) => {
   const [email, setEmail] = useState('');
@@ -14,44 +20,39 @@ export const Reset = ({ navigation }) => {
   // useEffect(() => {}, [dispatch, user]);
 
   const reset = async () => {
-    dispatch(resetPassword(email));
+    if (email) {
+      dispatch(resetPassword(email));
 
-    if (user.loggedIn) {
-      navigation.navigate('AuthContainer');
-    }
+      if (user.loggedIn) {
+        navigation.navigate('AuthContainer');
+      }
+    } else Alert.alert('Please enter a valid email');
   };
 
   return (
     <View style={styles.container}>
-      <View style={styles.formContainer}>
-        <View
-          style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-          <Text style={{ fontSize: 28, height: 50 }}>Reset Password!</Text>
-        </View>
-        <View style={styles.subContainer}>
-          <Input
-            style={styles.textInput}
-            placeholder="Your Email"
-            value={email}
-            onChangeText={setEmail}
-          />
-        </View>
-        <View style={styles.subContainer}>
-          <Button
-            style={styles.textInput}
-            title="Reset"
-            onPress={() => reset()}
-          />
-        </View>
-        <View style={styles.subContainer}>
-          <Button
-            style={styles.textInput}
-            title="Back to Login"
-            onPress={() => {
-              navigation.navigate('Login');
-            }}
-          />
-        </View>
+      <View style={styles.form}>
+        <Text style={styles.header}>Reset Password</Text>
+
+        <Input
+          style={styles.input}
+          placeholder="email@domain.dns"
+          value={email}
+          onChangeText={setEmail}
+        />
+
+        <TouchableOpacity
+          style={[styles.button, { marginTop: 35 }]}
+          onPress={() => reset()}>
+          <Text style={styles.buttonText}>Reset</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={[styles.button, { marginTop: 35 }]}
+          onPress={() => navigation.navigate('Login')}>
+          <Text style={styles.buttonText}>Login</Text>
+        </TouchableOpacity>
+
         {user.loading && (
           <View style={styles.activity}>
             <ActivityIndicator size="large" color="#0000ff" />
