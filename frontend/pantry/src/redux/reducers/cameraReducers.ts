@@ -3,6 +3,9 @@ import {
   SCANNED,
   SCANNING_ERROR,
   SET_BARCODES,
+  FETCHING_PRODUCT,
+  FETCHED_PRODUCT,
+  SET_PRODUCT,
 } from '../actions/actionTypes.ts';
 
 const initUserState = {
@@ -38,6 +41,20 @@ const cameraReducer = (state = initUserState, action) => {
       stateCopy.scanning = false;
       stateCopy.scanned = false;
       stateCopy.error = true;
+      break;
+    }
+
+    case FETCHING_PRODUCT: {
+      stateCopy.loading = true;
+      break;
+    }
+    case FETCHED_PRODUCT: {
+      stateCopy.loading = false;
+      break;
+    }
+    case SET_PRODUCT: {
+      stateCopy.loggedIn = true;
+      stateCopy.userInfo.email = action.payload;
       break;
     }
     default: {
