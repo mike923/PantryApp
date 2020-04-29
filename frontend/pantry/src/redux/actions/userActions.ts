@@ -47,20 +47,18 @@ const loginUser = (email, password) => {
 
     auth()
       .signInWithEmailAndPassword(email, password)
-      .then(async (res) => {
+      .then(async ({ user }) => {
         let token;
         try {
-          token = await res.user.getIdToken();
+          token = await user.getIdToken();
           console.log(token);
         } catch (error) {
           console.log(error);
         }
         try {
-          const { data } = await axios.get(
-            'http://192.168.1.50:8282/',
-            { info: 'goes here' },
-            { headers: { authtoken: token } },
-          );
+          const { data } = await axios.get('http://192.168.1.50:8282/', {
+            headers: { authtoken: token },
+          });
           console.log(data);
         } catch (error) {
           console.log(error);
@@ -78,7 +76,7 @@ const loginUser = (email, password) => {
   };
 };
 
-const registerUser = (email, password) => {
+const registerUser = (email, password, pantry) => {
   return (dispatch) => {
     dispatch(fetchingUser());
 
@@ -87,7 +85,28 @@ const registerUser = (email, password) => {
     // after account is created, user gets uuid and directed to the home page
     auth()
       .createUserWithEmailAndPassword(email, password)
-      .then(() => {
+      .then(async ({ user }) => {
+        let token;
+        try {
+          token = await user.getIdToken();
+          console.log(token);
+        } catch (error) {
+          console.log(error);
+        }
+        try {
+          const { data } = await axios.post(
+            'http://192.168.1.50:8282/users/add',
+            {
+              pantryName: pantry.pantryName,
+              newPantry: pantry.newPantry,
+              pantryId: pantry.pantryId,
+            },
+            { headers: { authtoken: token } },
+          );
+          console.log(data);
+        } catch (error) {
+          console.log(error);
+        }
         dispatch(fetchedUser());
         dispatch(setUser(email));
         console.log('User account created & signed in!');

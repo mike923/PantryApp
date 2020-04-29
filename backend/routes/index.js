@@ -9,9 +9,8 @@ router.get('/', function(req, res, next) {
 
 router.post('/', (req, res, next) => {
   console.log(Array(100).fill('@').join(''))
-  console.log(req)
-  console.log(Array(100).fill('@').join(''))
   console.log(req.headers)
+  console.log(Array(100).fill('@').join(''))
   res.json({
     title: 'hello this is a post req',
     user: res.locals.user_id,
