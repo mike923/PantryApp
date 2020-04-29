@@ -56,9 +56,11 @@ const loginUser = (email, password) => {
           console.log(error);
         }
         try {
-          const { data } = await axios.get('http://192.168.1.50:8282/', {
-            headers: { authtoken: token },
-          });
+          const { data } = await axios.get(
+            'http://192.168.1.50:8282/',
+            { info: 'goes here' },
+            { headers: { authtoken: token } },
+          );
           console.log(data);
         } catch (error) {
           console.log(error);
