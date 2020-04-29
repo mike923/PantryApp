@@ -1,3 +1,4 @@
+import { Alert } from 'react-native';
 import {
   SCANNING,
   SCANNED,
@@ -17,6 +18,7 @@ const setBarcode = (barcode) => ({ type: SET_BARCODES, payload: barcode });
 const errorScanningBarcode = (err) => ({ type: SCANNING_ERROR, payload: err });
 
 const onBarCodeRead = (barcode) => {
+  Alert.alert(`Barcode ${barcode} was scanned`);
   return (dispatch) => {
     dispatch(scanningBarcode());
     try {

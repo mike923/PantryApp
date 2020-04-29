@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { View } from 'react-native';
+import { View, TouchableOpacity, Text } from 'react-native';
 import { RNCamera } from 'react-native-camera';
 import { Slider } from 'react-native-elements';
 import RNTextDetector from 'react-native-text-detector';
@@ -10,15 +10,16 @@ import { onBarCodeRead } from '../../redux/actions/cameraActions.ts';
 import { styles, colors } from './cameraStyles.ts';
 
 const Camera = ({ navigation }) => {
-  const scannedBarcodes = useSelector((state) => state.camera);
+  const camera = useSelector((state) => state.camera);
   const dispatch = useDispatch();
 
   useEffect(() => {
     console.log('hello world');
-  }, [dispatch, scannedBarcodes]);
+  }, [dispatch, camera]);
 
   const [zoomValue, setZoomValue] = useState(0);
   const [flash, setFlash] = useState(RNCamera.Constants.FlashMode.off);
+  const [scanBarcode, setScanBarcode] = useState(false);
   let cameraRef = useRef(null);
 
   const toggleFlash = () => {
@@ -55,7 +56,7 @@ const Camera = ({ navigation }) => {
   return (
     <View style={styles.cameraContainer}>
       <RNCamera
-        onBarCodeRead={disnBarCodeRead}
+        onBarCodeRead={!scanBarcode ? null : disnBarCodeRead}
         ref={cameraRef}
         style={styles.preview}
         type={RNCamera.Constants.Type.back}
@@ -80,6 +81,7 @@ const Camera = ({ navigation }) => {
               thumbTintColor={colors.primaryColor}
               style={styles.zoom}
             />
+
             <Icon
               name="camera"
               size={2}
@@ -87,6 +89,9 @@ const Camera = ({ navigation }) => {
               style={[styles.icon, styles.camera]}
               onPress={takePicture}
             />
+            <TouchableOpacity onPress={() => setScanBarcode(!scanBarcode)}>
+              <Text style={{ color: 'white' }}>Scan Barcodes</Text>
+            </TouchableOpacity>
           </View>
           <Icon
             type="Entypo"

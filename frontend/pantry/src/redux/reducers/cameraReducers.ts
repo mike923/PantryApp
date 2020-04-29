@@ -23,6 +23,7 @@ const cameraReducer = (state = initUserState, action) => {
 
     case SCANNED: {
       stateCopy.scanning = false;
+      stateCopy.scanned = true;
       break;
     }
     case SET_BARCODES: {
