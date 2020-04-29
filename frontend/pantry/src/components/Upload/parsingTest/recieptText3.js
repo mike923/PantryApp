@@ -124,34 +124,33 @@ const getAddress = (text) => {
   );
 };
 
-const getProducts = (text) => {
-  const obj = {
-    heading: [],
-    cleaning: [],
-    grocery: [],
-  };
-  const heading = text
-    .split(/(cleaning supplies)|(grocery)/gi)[0]
-    .trim()
-    .split('\n');
+const splitByCategoy = (text) =>
+  text.split(
+    /(?=grocery)|(?=cleaning supply)|(?=apparel)|(?=test)|(?=home)|(?=subtotal)|(?=health and beauty)/gi,
+  );
 
-  const cleaningSup = text
-    .match(/apparel([\s\S]*)(?=grocery)/gi)[0]
-    .trim()
-    .split('\n');
+const makeCategoryObj = (arr) => {
+  const obj = {};
 
-  const grocerySup = text
-    .match(/grocery([\s\S]*)/gi)[0]
-    .trim()
-    .split('\n');
-
-  console.log(`Heading => `, heading);
-  console.log(`Cleaning Sup => `, cleaningSup);
-  console.log(`Grocery Sup => `, grocerySup);
-  obj.heading = heading;
-  obj.cleaning = cleaningSup;
-  obj.grocery = grocerySup;
+  for (let i = 0; i < arr.length; i++) {
+    const lines = arr[i].trim().split('\n');
+    if (i === 0) {
+      obj.heading = lines;
+    } else {
+      const category = lines[0];
+      const info = lines.splice(1);
+      // console.log(category);
+      obj[category] = info;
+    }
+  }
   return obj;
+};
+
+const getProducts = (text) => {
+  const splittedText = splitByCategoy(text);
+  const splittedTextObj = makeCategoryObj(splittedText);
+  // console.log(splittedTextObj);
+  return splittedTextObj;
 };
 
 const getPrices = (text) => {
@@ -166,9 +165,27 @@ const cleanAddress = (arr) => {
   return arr.map((ele) => (getDate(ele) ? null : ele)).join(' ');
 };
 
-const getItems = (products, prices) => {
+const getItems = (products) => {
   // console.log(getPrices('$2.99'));
   // console.log(getPrices('2.99'));
+  console.log(products);
+
+  const obj = {};
+
+  const entries = Object.entries(products);
+
+  for (let i = 0; i < entries.length; i++) {
+    const category = entries[i][0];
+    const text = entries[i][1];
+
+    if (category === 'heading') {
+      continue;
+    } else if (category === 'SUBTOTAL') {
+      continue;
+    } else {
+      console.log(category);
+    }
+  }
 
   const productsArr = [];
   const pricesArr = [];
@@ -183,7 +200,7 @@ const getItems = (products, prices) => {
       if (str.includes('@')) {
         const quantity = str.match(/^(.*?)(?=@)/g)[0].trim() * 1;
         const price = str.match(/\$*?(\d+.\d\d)/g)[0].trim();
-        console.log(`Multiple Items: `, quantity, price);
+        // console.log(`Multiple Items: `, quantity, price);
         pricesArr.push([quantity, price]);
       } else {
         priceCount += 1;
@@ -197,7 +214,7 @@ const getItems = (products, prices) => {
     }
   }
 
-  console.log(`Prices before clean up: `, pricesArr.length, pricesArr);
+  // console.log(`Prices before clean up: `, pricesArr.length, pricesArr);
   for (let i = 0; i < pricesArr.length - 1; i++) {
     if (pricesArr[i][0] > 1 && pricesArr[i - 1][0] > 1) {
       if (
@@ -210,12 +227,12 @@ const getItems = (products, prices) => {
       pricesArr.splice(i, 1);
     }
   }
-  console.log(`Prices after clean up: `, pricesArr.length, pricesArr);
-  console.log(`Price count: `, priceCount);
-  console.log(`Product # count: `, productNumCount);
-  console.log(`Products count: `, productsArr.length);
+  // console.log(`Prices after clean up: `, pricesArr.length, pricesArr);
+  // console.log(`Price count: `, priceCount);
+  // console.log(`Product # count: `, productNumCount);
+  // console.log(`Products count: `, productsArr.length);
 
-  const obj = { products: productsArr, prices: pricesArr };
+  // const obj = { products: productsArr, prices: pricesArr };
   return obj;
 };
 
@@ -239,7 +256,7 @@ const makeRecieptItems = (prod, pric) => {
 };
 
 const algoRythm3 = (text) => {
-  text = removeFN(text)
+  text = removeFN(text);
   // text = removeNewLine(text);
   // console.log(`TEXT`, text);`
   const obj = {
@@ -254,15 +271,17 @@ const algoRythm3 = (text) => {
 
   obj.recieptDate = getDate(text)[0];
   obj.prices = getPrices(text);
-  obj.products = getProducts(text);
-  obj.address = cleanAddress(obj.products.heading);
+  obj.products = getProducts(text); // Working
+  obj.storeName = obj.products.heading[0]; // Working
+  obj.address = cleanAddress(obj.products.heading.slice(1)); // Working
+  // console.log(`Address => `, obj.address);
   obj.storeName = 'Target';
-  console.log(`Get Items: `, getItems(obj.products.grocery, obj.prices));
-  const { products, prices } = getItems(obj.products.grocery, obj.prices);
-  obj.products = products;
-  obj.prices = prices;
-  obj.recieptTotal = getTotal(obj.prices);
-  obj.recieptItems = makeRecieptItems(obj.products, obj.prices);
+  console.log(`Get Items: `, getItems(obj.products));
+  // const { products, prices } = getItems(obj.products.grocery, obj.prices);
+  // obj.products = products;
+  // obj.prices = prices;
+  // obj.recieptTotal = getTotal(obj.prices);
+  // obj.recieptItems = makeRecieptItems(obj.products, obj.prices);
 
   return obj;
 };
