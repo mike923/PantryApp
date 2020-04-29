@@ -7,16 +7,20 @@ admin.initializeApp({
 });
 
 const checkAuth = (req, res, next) => {
+  console.log(Array(50).fill('@').join())
+  console.log(req)
+  console.log(Array(50).fill('@').join())
+  console.log(req.headers)
   if (req.headers.authtoken) {
     admin.auth().verifyIdToken(req.headers.authtoken)
       .then((eto) => {
         console.log(eto)
         next()
       }).catch(() => {
-        res.status(403).send('Unauthorized')
+        res.status(200).send('Unauthorized')
       });
   } else {
-    res.status(403).send('Unauthorized!')
+    res.status(200).send('Unauthorized!')
     return
   }
 }
