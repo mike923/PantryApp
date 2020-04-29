@@ -15,7 +15,7 @@ const checkAuth = (req, res, next) => {
     admin.auth().verifyIdToken(req.headers.authtoken)
       .then((eto) => {
         console.log(eto)
-        req.user_id = eto.uid
+        res.locals.user_id = eto.uid
         next()
       }).catch(() => {
         res.status(200).send('Unauthorized')
