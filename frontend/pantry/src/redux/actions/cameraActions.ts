@@ -1,4 +1,3 @@
-import { Alert } from 'react-native';
 import axios from 'axios';
 import { SPOONACULAR_API_KEY } from 'react-native-dotenv';
 import {
@@ -30,7 +29,6 @@ const fetchedProduct = () => ({ type: FETCHED_PRODUCT });
 const setProduct = (product) => ({ type: SET_PRODUCT, payload: product });
 
 const onBarCodeRead = (barcode) => {
-  Alert.alert(`Barcode ${barcode} was scanned`);
   return (dispatch) => {
     dispatch(scanningBarcode());
     try {

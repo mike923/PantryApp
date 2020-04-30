@@ -38,10 +38,10 @@ const Camera = ({ navigation }) => {
         };
         const { uri } = await cameraRef.current.takePictureAsync(options);
         console.log('uri', uri);
-        const visionResp = await RNTextDetector.detectFromUri(uri);
-        console.log('visionResp', visionResp);
-        navigation.navigate('Display', {
-          res: visionResp,
+        // const visionResp = await RNTextDetector.detectFromUri(uri);
+        // console.log('visionResp', visionResp);
+        navigation.navigate('Parsed', {
+          localUriPath: uri,
         });
       }
     } catch (e) {

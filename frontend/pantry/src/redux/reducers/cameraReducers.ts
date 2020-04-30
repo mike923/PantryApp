@@ -52,11 +52,6 @@ const cameraReducer = (state = initUserState, action) => {
       stateCopy.loading = false;
       break;
     }
-    case SET_PRODUCT: {
-      stateCopy.loggedIn = true;
-      stateCopy.userInfo.email = action.payload;
-      break;
-    }
     default: {
       return stateCopy;
     }

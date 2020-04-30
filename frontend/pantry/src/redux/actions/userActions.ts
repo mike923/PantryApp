@@ -52,11 +52,9 @@ const loginUser = (email, password) => {
         dispatch(setUser(email));
       })
       .catch((err) => {
-        console.log(err.code);
+        console.log(err);
 
         dispatch(errorLoadingUser(err.code));
-
-        errorMessages(err);
       });
   };
 };
