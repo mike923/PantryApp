@@ -2,6 +2,7 @@
 import { Alert } from 'react-native';
 
 import auth from '@react-native-firebase/auth';
+import axios from 'axios';
 import {
   FETCHING_USER,
   FETCHED_USER,
@@ -38,7 +39,6 @@ const errorMessages = (err) => {
       return undefined;
   }
 };
-
 // firebase functions to log the user in with email and password
 // authenticate if the user has a valid account
 const loginUser = (email, password) => {
@@ -47,7 +47,22 @@ const loginUser = (email, password) => {
 
     auth()
       .signInWithEmailAndPassword(email, password)
-      .then(() => {
+      .then(async ({ user }) => {
+        let token;
+        try {
+          token = await user.getIdToken();
+          console.log(token);
+        } catch (error) {
+          console.log(error);
+        }
+        try {
+          const { data } = await axios.get('http://192.168.1.50:8282/', {
+            headers: { authtoken: token },
+          });
+          console.log(data);
+        } catch (error) {
+          console.log(error);
+        }
         dispatch(fetchedUser());
         dispatch(setUser(email));
       })
@@ -59,7 +74,7 @@ const loginUser = (email, password) => {
   };
 };
 
-const registerUser = (email, password) => {
+const registerUser = (email, password, pantry) => {
   return (dispatch) => {
     dispatch(fetchingUser());
 
@@ -68,7 +83,28 @@ const registerUser = (email, password) => {
     // after account is created, user gets uuid and directed to the home page
     auth()
       .createUserWithEmailAndPassword(email, password)
-      .then(() => {
+      .then(async ({ user }) => {
+        let token;
+        try {
+          token = await user.getIdToken();
+          console.log(token);
+        } catch (error) {
+          console.log(error);
+        }
+        try {
+          const { data } = await axios.post(
+            'http://192.168.1.50:8282/users/add',
+            {
+              pantryName: pantry.pantryName,
+              newPantry: pantry.newPantry,
+              pantryId: pantry.pantryId,
+            },
+            { headers: { authtoken: token } },
+          );
+          console.log(data);
+        } catch (error) {
+          console.log(error);
+        }
         dispatch(fetchedUser());
         dispatch(setUser(email));
         console.log('User account created & signed in!');
