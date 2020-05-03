@@ -4,12 +4,17 @@ import { RNCamera } from 'react-native-camera';
 import { Slider } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useSelector, useDispatch } from 'react-redux';
-import { onBarCodeRead } from '../../redux/actions/cameraActions.ts';
+import vision from '@react-native-firebase/ml-vision';
+import { barcodeApiCalls } from '../../redux/actions/cameraActions.ts';
 
 import { styles, colors } from './cameraStyles.ts';
 
 const Camera = ({ navigation }) => {
   const camera = useSelector((state) => state.camera);
+  const [products, setProducts] = useState(new Set());
+
+  console.log(products);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -36,15 +41,23 @@ const Camera = ({ navigation }) => {
           skipProcessing: true,
         };
         const { uri } = await cameraRef.current.takePictureAsync(options);
-        dispatch(onBarCodeRead(uri));
+
+        const barcodes = await vision().barcodeDetectorProcessImage(uri);
+
+        if (barcodes) {
+          console.log('bar', barcodes);
+          setProducts((tags) => new Set(products).add(uri));
+          dispatch(barcodeApiCalls(barcodes[0].rawValue));
+        } else {
+          navigation.navigate('Parsed', {
+            localUriPath: uri,
+          });
+        }
 
         setPic(uri);
         console.log('uri', uri);
         // const visionResp = await RNTextDetector.detectFromUri(uri);
         // console.log('visionResp', visionResp);
-        // navigation.navigate('Parsed', {
-        //   localUriPath: uri,
-        // });
       }
     } catch (e) {
       console.warn(e);
