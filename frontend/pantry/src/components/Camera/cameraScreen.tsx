@@ -53,11 +53,11 @@ const Camera = ({ navigation }) => {
 
   // console.log('scanned', scannedBarcode);
 
-  const disBarCodeRead = () => {
-    navigation.navigate('Parsed', {
-      localUriPath: pic,
-    });
-  };
+  // const disBarCodeRead = () => {
+  //   navigation.navigate('Parsed', {
+  //     localUriPath: pic,
+  //   });
+  // };
 
   return (
     <View style={styles.cameraContainer}>
@@ -94,11 +94,11 @@ const Camera = ({ navigation }) => {
               style={[styles.icon, styles.camera]}
               onPress={takePicture}
             />
-            <TouchableOpacity
+            {/* <TouchableOpacity
               onPress={disBarCodeRead}
               style={[styles.icon, styles.barcode]}>
               <Text>Finish Scanning</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </View>
           <Icon
             onPress={toggleFlash}

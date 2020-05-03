@@ -9,10 +9,10 @@ import {
   UNSET_SCAN,
   SCANNING_ERROR,
   SET_BARCODES,
-  FETCHING_PRODUCT,
-  FETCHED_PRODUCT,
+  // FETCHING_PRODUCT,
+  // FETCHED_PRODUCT,
   SET_PRODUCT,
-  FETCHING_PRODUCT_ERROR,
+  // FETCHING_PRODUCT_ERROR,
 } from './actionTypes.ts';
 
 const scanningBarcode = () => ({ type: SCANNING });
@@ -25,14 +25,13 @@ const setBarcode = (barcode) => ({ type: SET_BARCODES, payload: barcode });
 
 const setError = (err) => ({ type: SCANNING_ERROR, payload: err });
 
-// api methods
-const fetchingProduct = () => ({ type: FETCHING_PRODUCT });
-
-const fetchedProduct = () => ({ type: FETCHED_PRODUCT });
-
 const setProduct = (product) => ({ type: SET_PRODUCT, payload: product });
+// api methods
+// const fetchingProduct = () => ({ type: FETCHING_PRODUCT });
 
-const setApiError = (err) => ({ type: FETCHING_PRODUCT_ERROR, payload: err });
+// const fetchedProduct = () => ({ type: FETCHED_PRODUCT });
+
+// const setApiError = (err) => ({ type: FETCHING_PRODUCT_ERROR, payload: err });
 
 const onBarCodeRead = (localPath) => {
   return async (dispatch) => {
@@ -58,13 +57,13 @@ const onBarCodeRead = (localPath) => {
 
 const barcodeApiCalls = (upc) => {
   return async (dispatch) => {
-    dispatch(fetchingProduct());
+    // dispatch(fetchingProduct());
     try {
       const { data } = await axios.get(
         `https://api.spoonacular.com/food/products/upc/${upc}?apiKey=${SPOONACULAR_API_KEY}`,
       );
       console.log(data);
-      dispatch(fetchedProduct());
+      // dispatch(fetchedProduct());
       dispatch(setProduct(data));
     } catch (err) {
       console.log(err);
