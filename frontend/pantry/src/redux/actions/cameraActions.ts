@@ -40,8 +40,6 @@ const fetchedProduct = () => ({ type: FETCHED_PRODUCT });
 // };
 
 const barcodeApiCalls = (upc) => {
-  Alert.alert(`You scanned ${upc}`);
-
   return async (dispatch) => {
     dispatch(fetchingProduct());
     try {
@@ -49,8 +47,15 @@ const barcodeApiCalls = (upc) => {
         `https://api.spoonacular.com/food/products/upc/${upc}?apiKey=${SPOONACULAR_API_KEY}`,
       );
       console.log('actions data', data);
-      dispatch(fetchedProduct());
-      dispatch(setProduct(data));
+
+      if (data.status === 'failure') {
+        dispatch(setError(data.message));
+        Alert.alert(data.message);
+      } else {
+        Alert.alert(`You successfully scanned item ${upc}`);
+        dispatch(fetchedProduct());
+        dispatch(setProduct(data));
+      }
     } catch (err) {
       console.log(err);
       dispatch(setError(err));

@@ -11,9 +11,6 @@ import { styles, colors } from './cameraStyles.ts';
 
 const Camera = ({ navigation }) => {
   const camera = useSelector((state) => state.camera);
-  const [products, setProducts] = useState(new Set());
-
-  console.log(products);
 
   const dispatch = useDispatch();
 
@@ -23,7 +20,8 @@ const Camera = ({ navigation }) => {
 
   const [zoomValue, setZoomValue] = useState(0);
   const [flash, setFlash] = useState(RNCamera.Constants.FlashMode.off);
-  const [pic, setPic] = useState('');
+
+  // camera functionalities
   let cameraRef = useRef(null);
 
   const toggleFlash = () => {
@@ -44,33 +42,19 @@ const Camera = ({ navigation }) => {
 
         const barcodes = await vision().barcodeDetectorProcessImage(uri);
 
-        if (barcodes) {
+        if (barcodes.length) {
           console.log('bar', barcodes);
-          setProducts((tags) => new Set(products).add(uri));
           dispatch(barcodeApiCalls(barcodes[0].rawValue));
         } else {
           navigation.navigate('Parsed', {
             localUriPath: uri,
           });
         }
-
-        setPic(uri);
-        console.log('uri', uri);
-        // const visionResp = await RNTextDetector.detectFromUri(uri);
-        // console.log('visionResp', visionResp);
       }
     } catch (e) {
       console.warn(e);
     }
   };
-
-  // console.log('scanned', scannedBarcode);
-
-  // const disBarCodeRead = () => {
-  //   navigation.navigate('Parsed', {
-  //     localUriPath: pic,
-  //   });
-  // };
 
   return (
     <View style={styles.cameraContainer}>
