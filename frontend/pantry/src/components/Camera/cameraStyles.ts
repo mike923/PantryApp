@@ -18,8 +18,13 @@ export const styles = StyleSheet.create({
     width: 70,
     zIndex: 90,
   },
+  barcode: {
+    backgroundColor: 'white',
+    borderRadius: 50,
+    marginLeft: windowWidth / 12,
+  },
   camera: {
-    marginLeft: windowWidth / 4,
+    marginLeft: windowWidth / 15,
   },
   cameraContainer: {
     flex: 1,
@@ -46,10 +51,10 @@ export const styles = StyleSheet.create({
     // paddingHorizontal: 20,
   },
   iconView: {
-    alignItems: 'stretch',
+    // alignItems: 'stretch',
     flex: 1,
-    justifyContent: 'center',
-    // flexDirection: 'row',
+    // justifyContent: 'center',
+    flexDirection: 'row',
   },
   preview: {
     flex: 1,

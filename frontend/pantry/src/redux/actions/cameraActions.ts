@@ -1,4 +1,7 @@
 import axios from 'axios';
+import vision from '@react-native-firebase/ml-vision';
+import { Alert } from 'react-native';
+
 import { SPOONACULAR_API_KEY } from 'react-native-dotenv';
 import {
   SCANNING,
@@ -9,6 +12,7 @@ import {
   FETCHING_PRODUCT,
   FETCHED_PRODUCT,
   SET_PRODUCT,
+  FETCHING_PRODUCT_ERROR,
 } from './actionTypes.ts';
 
 const scanningBarcode = () => ({ type: SCANNING });
@@ -28,12 +32,24 @@ const fetchedProduct = () => ({ type: FETCHED_PRODUCT });
 
 const setProduct = (product) => ({ type: SET_PRODUCT, payload: product });
 
-const onBarCodeRead = (barcode) => {
-  return (dispatch) => {
+const setApiError = (err) => ({ type: FETCHING_PRODUCT_ERROR, payload: err });
+
+const onBarCodeRead = (localPath) => {
+  return async (dispatch) => {
     dispatch(scanningBarcode());
     try {
+      const barcodes = await vision().barcodeDetectorProcessImage(localPath);
+      console.log(barcodes[0]);
+
+      // if (barcodes) {
       dispatch(scannedBarcode());
-      dispatch(setBarcode(barcode));
+      // }
+
+      // alerting user of scanned bar codes
+      Alert.alert(`You scanned ${barcodes[0].rawValue}`);
+
+      dispatch(setBarcode(barcodes[0].rawValue));
+      dispatch(barcodeApiCalls(barcodes[0].rawValue));
     } catch (err) {
       dispatch(setError(err));
     }
@@ -45,12 +61,13 @@ const barcodeApiCalls = (upc) => {
     dispatch(fetchingProduct());
     try {
       const { data } = await axios.get(
-        `https://api.spoonacular.com/food/products/upc/${upc}?${SPOONACULAR_API_KEY}`,
+        `https://api.spoonacular.com/food/products/upc/${upc}?apiKey=${SPOONACULAR_API_KEY}`,
       );
+      console.log(data);
       dispatch(fetchedProduct());
       dispatch(setProduct(data));
     } catch (err) {
-      // console.log(err);
+      console.log(err);
       dispatch(setError(err));
     }
   };

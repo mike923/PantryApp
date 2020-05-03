@@ -2,7 +2,6 @@ import React, { useEffect, useState, useRef } from 'react';
 import { View, TouchableOpacity, Text } from 'react-native';
 import { RNCamera } from 'react-native-camera';
 import { Slider } from 'react-native-elements';
-import RNTextDetector from 'react-native-text-detector';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useSelector, useDispatch } from 'react-redux';
 import { onBarCodeRead } from '../../redux/actions/cameraActions.ts';
@@ -19,7 +18,7 @@ const Camera = ({ navigation }) => {
 
   const [zoomValue, setZoomValue] = useState(0);
   const [flash, setFlash] = useState(RNCamera.Constants.FlashMode.off);
-  const [scanBarcode, setScanBarcode] = useState(false);
+  const [pic, setPic] = useState('');
   let cameraRef = useRef(null);
 
   const toggleFlash = () => {
@@ -37,26 +36,32 @@ const Camera = ({ navigation }) => {
           skipProcessing: true,
         };
         const { uri } = await cameraRef.current.takePictureAsync(options);
+        dispatch(onBarCodeRead(uri));
+
+        setPic(uri);
         console.log('uri', uri);
         // const visionResp = await RNTextDetector.detectFromUri(uri);
         // console.log('visionResp', visionResp);
-        navigation.navigate('Parsed', {
-          localUriPath: uri,
-        });
+        // navigation.navigate('Parsed', {
+        //   localUriPath: uri,
+        // });
       }
     } catch (e) {
       console.warn(e);
     }
   };
 
-  const disnBarCodeRead = (scanResult) => {
-    dispatch(onBarCodeRead(scanResult.data));
+  // console.log('scanned', scannedBarcode);
+
+  const disBarCodeRead = () => {
+    navigation.navigate('Parsed', {
+      localUriPath: pic,
+    });
   };
 
   return (
     <View style={styles.cameraContainer}>
       <RNCamera
-        onBarCodeRead={!scanBarcode ? null : disnBarCodeRead}
         ref={cameraRef}
         style={styles.preview}
         type={RNCamera.Constants.Type.back}
@@ -84,17 +89,18 @@ const Camera = ({ navigation }) => {
 
             <Icon
               name="camera"
-              size={2}
+              size={3}
               color="#900"
               style={[styles.icon, styles.camera]}
               onPress={takePicture}
             />
-            <TouchableOpacity onPress={() => setScanBarcode(!scanBarcode)}>
-              <Text style={{ color: 'white' }}>Scan Barcodes</Text>
+            <TouchableOpacity
+              onPress={disBarCodeRead}
+              style={[styles.icon, styles.barcode]}>
+              <Text>Finish Scanning</Text>
             </TouchableOpacity>
           </View>
           <Icon
-            type="Entypo"
             onPress={toggleFlash}
             style={[styles.flash, styles.icon]}
             name="flash"

@@ -6,13 +6,22 @@ import {
   FETCHING_PRODUCT,
   FETCHED_PRODUCT,
   SET_PRODUCT,
+  FETCHING_PRODUCT_ERROR,
 } from '../actions/actionTypes.ts';
 
 const initUserState = {
-  scanned: false,
-  scanning: false,
+  cameraPic: {
+    scanned: false,
+    scanning: false,
+    barcodes: [],
+  },
+  apiCalls: {
+    fetching: false,
+    fetched: false,
+    productInfo: [],
+  },
   error: false,
-  barcodes: [],
+  errorMessage: [],
 };
 
 const cameraReducer = (state = initUserState, action) => {
@@ -20,38 +29,75 @@ const cameraReducer = (state = initUserState, action) => {
 
   switch (action.type) {
     case SCANNING: {
-      stateCopy.scanning = true;
+      stateCopy.cameraPic = {
+        scanning: true,
+      };
       break;
     }
 
     case SCANNED: {
-      stateCopy.scanning = false;
-      stateCopy.scanned = true;
+      stateCopy.cameraPic = {
+        scanning: false,
+        scanned: true,
+      };
       break;
     }
     case SET_BARCODES: {
       let interceptSet = new Set(stateCopy.barcodes);
       interceptSet.add(action.payload);
-      stateCopy.scanned = true;
-      stateCopy.barcodes = [...interceptSet];
+
+      stateCopy.cameraPic = {
+        scanned: true,
+        barcodes: [...interceptSet],
+      };
       break;
     }
 
     case SCANNING_ERROR: {
-      stateCopy.scanning = false;
-      stateCopy.scanned = false;
+      stateCopy.cameraPic = {
+        scanning: false,
+        scanned: false,
+      };
       stateCopy.error = true;
+      stateCopy.errorMessage = [action.payload];
       break;
     }
 
     case FETCHING_PRODUCT: {
-      stateCopy.loading = true;
+      stateCopy.apiCalls = {
+        fetching: true,
+        fetched: false,
+      };
       break;
     }
+
     case FETCHED_PRODUCT: {
-      stateCopy.loading = false;
+      stateCopy.apiCalls = {
+        fetching: false,
+        fetched: true,
+      };
       break;
     }
+    case SET_PRODUCT: {
+      let temp = stateCopy.apiCalls.productInfo;
+      stateCopy.apiCalls = {
+        fetching: false,
+        fetched: true,
+        productInfo: [...temp, action.payload.product],
+      };
+      break;
+    }
+
+    case FETCHING_PRODUCT_ERROR: {
+      stateCopy.apiCalls = {
+        fetching: false,
+        fetched: true,
+      };
+      stateCopy.error = true;
+      stateCopy.errorMessage = [action.payload];
+      break;
+    }
+
     default: {
       return stateCopy;
     }
