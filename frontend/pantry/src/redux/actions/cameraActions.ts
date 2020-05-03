@@ -38,17 +38,17 @@ const onBarCodeRead = (localPath) => {
     dispatch(scanningBarcode());
     try {
       const barcodes = await vision().barcodeDetectorProcessImage(localPath);
-      console.log(barcodes[0]);
+      console.log(barcodes);
 
-      // if (barcodes) {
-      dispatch(scannedBarcode());
-      // }
+      if (barcodes.valueType === 5) {
+        dispatch(scannedBarcode());
 
-      // alerting user of scanned bar codes
-      Alert.alert(`You scanned ${barcodes[0].rawValue}`);
+        // alerting user of scanned bar codes
+        Alert.alert(`You scanned ${barcodes[0].rawValue}`);
 
-      dispatch(setBarcode(barcodes[0].rawValue));
-      dispatch(barcodeApiCalls(barcodes[0].rawValue));
+        dispatch(setBarcode(barcodes[0].rawValue));
+        dispatch(barcodeApiCalls(barcodes[0].rawValue));
+      }
     } catch (err) {
       dispatch(setError(err));
     }
