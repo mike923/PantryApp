@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Image } from 'react-native';
 import Modal, { ModalTitle, ModalContent } from 'react-native-modals';
-
 import { useSelector } from 'react-redux';
+import { styles, colors } from './cameraStyles.ts';
 
 const CameraModal = ({ bottomModalAndTitle, setBottomModalAndTitle }) => {
   const camera: object = useSelector((state) => state.camera);
@@ -36,7 +36,9 @@ const CameraModal = ({ bottomModalAndTitle, setBottomModalAndTitle }) => {
             backgroundColor: 'fff',
           }}>
           <View>
-            <Image source={{ uri: img }} />
+            {img.length ? (
+              <Image style={styles.modalImg} source={{ uri: img }} />
+            ) : null}
           </View>
           <Text>Bottom Modal with Title</Text>
         </ModalContent>
