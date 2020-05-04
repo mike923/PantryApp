@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { useSelector, useDispatch } from 'react-redux';
 import vision from '@react-native-firebase/ml-vision';
 import { barcodeApiCalls } from '../../redux/actions/cameraActions.ts';
+import CameraModal from './cameraModal.tsx';
 
 import { styles, colors } from './cameraStyles.ts';
 
@@ -20,6 +21,7 @@ const Camera = ({ navigation }) => {
 
   const [zoomValue, setZoomValue] = useState(0);
   const [flash, setFlash] = useState(RNCamera.Constants.FlashMode.off);
+  const [bottomModalAndTitle, setBottomModalAndTitle] = useState(false);
 
   // camera functionalities
   let cameraRef = useRef(null);
@@ -45,6 +47,7 @@ const Camera = ({ navigation }) => {
         if (barcodes.length) {
           console.log('bar', barcodes);
           dispatch(barcodeApiCalls(barcodes[0].rawValue));
+          setBottomModalAndTitle(true);
         } else {
           navigation.navigate('Parsed', {
             localUriPath: uri,
@@ -103,6 +106,10 @@ const Camera = ({ navigation }) => {
             name="flash"
           />
         </View>
+        <CameraModal
+          bottomModalAndTitle={bottomModalAndTitle}
+          setBottomModalAndTitle={setBottomModalAndTitle}
+        />
       </RNCamera>
     </View>
   );

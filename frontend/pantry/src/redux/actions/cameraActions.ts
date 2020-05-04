@@ -10,9 +10,15 @@ import {
 } from './actionTypes.ts';
 
 // api methods
-const setError = (err) => ({ type: FETCHING_PRODUCT_ERROR, payload: err });
+const setError = (err: string) => ({
+  type: FETCHING_PRODUCT_ERROR,
+  payload: err,
+});
 
-const setProduct = (product) => ({ type: SET_PRODUCT, payload: product });
+const setProduct = (product: object) => ({
+  type: SET_PRODUCT,
+  payload: product,
+});
 const fetchingProduct = () => ({ type: FETCHING_PRODUCT });
 
 const fetchedProduct = () => ({ type: FETCHED_PRODUCT });
@@ -39,7 +45,7 @@ const fetchedProduct = () => ({ type: FETCHED_PRODUCT });
 //   };
 // };
 
-const barcodeApiCalls = (upc) => {
+const barcodeApiCalls = (upc: string) => {
   return async (dispatch) => {
     dispatch(fetchingProduct());
     try {
