@@ -31,6 +31,29 @@ export const styles = StyleSheet.create({
     flexDirection: 'column',
     backgroundColor: 'black',
   },
+  closeButton: {
+    alignItems: 'center',
+    backgroundColor: '#FF3974',
+    borderRadius: 6,
+    display: 'flex',
+    height: 60,
+    justifyContent: 'center',
+    shadowColor: '#2AC062',
+    shadowOffset: {
+      height: 10,
+      width: 0,
+    },
+    shadowOpacity: 0.5,
+    shadowRadius: 25,
+  },
+  closeText: {
+    color: '#00479e',
+    fontSize: 24,
+    textAlign: 'center',
+  },
+  description: {
+    fontSize: 10,
+  },
   displayContainer: {
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
@@ -57,16 +80,24 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   modalImg: {
-    height: '90%',
-    left: '27%',
-    top: '15%',
-    width: '50%',
+    height: 450,
+    marginBottom: 10,
+    marginTop: '5%',
+    width: '100%',
   },
   preview: {
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'flex-end',
     height: '100%',
+  },
+  productTitle: {
+    fontSize: 22,
+    textAlign: 'center',
+  },
+  scrollView: {
+    height: '30%',
+    marginHorizontal: 20,
   },
   zoom: {
     bottom: windowHeight - 190,

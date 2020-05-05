@@ -21,7 +21,7 @@ const Camera = ({ navigation }) => {
 
   const [zoomValue, setZoomValue] = useState(0);
   const [flash, setFlash] = useState(RNCamera.Constants.FlashMode.off);
-  const [bottomModalAndTitle, setBottomModalAndTitle] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
 
   // camera functionalities
   let cameraRef = useRef(null);
@@ -47,7 +47,7 @@ const Camera = ({ navigation }) => {
         if (barcodes.length) {
           console.log('bar', barcodes);
           dispatch(barcodeApiCalls(barcodes[0].rawValue));
-          setBottomModalAndTitle(true);
+          setModalVisible(true);
         } else {
           navigation.navigate('Parsed', {
             localUriPath: uri,
@@ -108,8 +108,8 @@ const Camera = ({ navigation }) => {
         </View>
         {camera.products.length ? (
           <CameraModal
-            bottomModalAndTitle={bottomModalAndTitle}
-            setBottomModalAndTitle={setBottomModalAndTitle}
+            modalVisible={modalVisible}
+            setModalVisible={setModalVisible}
           />
         ) : null}
       </RNCamera>

@@ -58,7 +58,7 @@ const barcodeApiCalls = (upc: string) => {
         dispatch(setError(data.message));
         Alert.alert(data.message);
       } else {
-        Alert.alert(`You successfully scanned item ${upc}`);
+        // Alert.alert(`You successfully scanned item ${upc}`);
         dispatch(fetchedProduct());
         dispatch(setProduct(data));
       }
