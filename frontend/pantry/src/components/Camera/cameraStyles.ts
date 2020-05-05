@@ -57,8 +57,10 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   modalImg: {
-    height: 50,
-    width: 50,
+    height: '90%',
+    left: '27%',
+    top: '15%',
+    width: '50%',
   },
   preview: {
     flex: 1,

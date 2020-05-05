@@ -106,10 +106,12 @@ const Camera = ({ navigation }) => {
             name="flash"
           />
         </View>
-        <CameraModal
-          bottomModalAndTitle={bottomModalAndTitle}
-          setBottomModalAndTitle={setBottomModalAndTitle}
-        />
+        {camera.products.length ? (
+          <CameraModal
+            bottomModalAndTitle={bottomModalAndTitle}
+            setBottomModalAndTitle={setBottomModalAndTitle}
+          />
+        ) : null}
       </RNCamera>
     </View>
   );

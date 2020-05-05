@@ -40,7 +40,6 @@ const CameraModal = ({ bottomModalAndTitle, setBottomModalAndTitle }) => {
               <Image style={styles.modalImg} source={{ uri: img }} />
             ) : null}
           </View>
-          <Text>Bottom Modal with Title</Text>
         </ModalContent>
       </Modal.BottomModal>
     </View>
