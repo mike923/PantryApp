@@ -18,11 +18,6 @@ export const styles = StyleSheet.create({
     width: 70,
     zIndex: 90,
   },
-  barcode: {
-    backgroundColor: 'white',
-    borderRadius: 50,
-    marginLeft: windowWidth / 12,
-  },
   camera: {
     marginLeft: windowWidth / 15,
   },

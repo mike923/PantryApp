@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { View, TouchableOpacity, Text } from 'react-native';
+import { View } from 'react-native';
 import { RNCamera } from 'react-native-camera';
 import { Slider } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -94,11 +94,6 @@ const Camera = ({ navigation }) => {
               style={[styles.icon, styles.camera]}
               onPress={takePicture}
             />
-            {/* <TouchableOpacity
-              onPress={disBarCodeRead}
-              style={[styles.icon, styles.barcode]}>
-              <Text>Finish Scanning</Text>
-            </TouchableOpacity> */}
           </View>
           <Icon
             onPress={toggleFlash}
