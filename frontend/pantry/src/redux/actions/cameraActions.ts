@@ -1,31 +1,72 @@
+import axios from 'axios';
+import { Alert } from 'react-native';
+
+import { SPOONACULAR_API_KEY } from 'react-native-dotenv';
 import {
-  SCANNING,
-  SCANNED,
-  UNSET_SCAN,
-  SCANNING_ERROR,
-  SET_BARCODES,
+  FETCHING_PRODUCT,
+  FETCHED_PRODUCT,
+  SET_PRODUCT,
+  FETCHING_PRODUCT_ERROR,
 } from './actionTypes.ts';
 
-const scanningBarcode = () => ({ type: SCANNING });
+// api methods
+const setError = (err: string) => ({
+  type: FETCHING_PRODUCT_ERROR,
+  payload: err,
+});
 
-const scannedBarcode = () => ({ type: SCANNED });
+const setProduct = (product: object) => ({
+  type: SET_PRODUCT,
+  payload: product,
+});
+const fetchingProduct = () => ({ type: FETCHING_PRODUCT });
 
-const setBarcode = (barcode) => ({ type: SET_BARCODES, payload: barcode });
+const fetchedProduct = () => ({ type: FETCHED_PRODUCT });
 
-// const unsetBarcode = () => ({ type: UNSET_SCAN });
+// const onBarCodeRead = (localPath) => {
+//   return async (dispatch) => {
+//     dispatch(scanningBarcode());
+//     try {
+//       const barcodes = await vision().barcodeDetectorProcessImage(localPath);
+//       console.log(barcodes);
 
-const errorScanningBarcode = (err) => ({ type: SCANNING_ERROR, payload: err });
+//       if (barcodes.valueType === 5) {
+//         dispatch(scannedBarcode());
 
-const onBarCodeRead = (barcode) => {
-  return (dispatch) => {
-    dispatch(scanningBarcode());
+//         // alerting user of scanned bar codes
+//         Alert.alert(`You scanned ${barcodes[0].rawValue}`);
+
+//         dispatch(setBarcode(barcodes[0].rawValue));
+//         dispatch(barcodeApiCalls(barcodes[0].rawValue));
+//       }
+//     } catch (err) {
+//       dispatch(setError(err));
+//     }
+//   };
+// };
+
+const barcodeApiCalls = (upc: string) => {
+  return async (dispatch) => {
+    dispatch(fetchingProduct());
     try {
-      dispatch(scannedBarcode());
-      dispatch(setBarcode(barcode));
+      const { data } = await axios.get(
+        `https://api.spoonacular.com/food/products/upc/${upc}?apiKey=${SPOONACULAR_API_KEY}`,
+      );
+      console.log('actions data', data);
+
+      if (data.status === 'failure') {
+        dispatch(setError(data.message));
+        Alert.alert(data.message);
+      } else {
+        // Alert.alert(`You successfully scanned item ${upc}`);
+        dispatch(fetchedProduct());
+        dispatch(setProduct(data));
+      }
     } catch (err) {
-      dispatch(errorScanningBarcode(err));
+      console.log(err);
+      dispatch(setError(err));
     }
   };
 };
 
-export { onBarCodeRead };
+export { barcodeApiCalls };

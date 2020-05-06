@@ -19,12 +19,35 @@ export const styles = StyleSheet.create({
     zIndex: 90,
   },
   camera: {
-    marginLeft: windowWidth / 4,
+    marginLeft: windowWidth / 15,
   },
   cameraContainer: {
     flex: 1,
     flexDirection: 'column',
     backgroundColor: 'black',
+  },
+  closeButton: {
+    alignItems: 'center',
+    backgroundColor: '#FF3974',
+    borderRadius: 6,
+    display: 'flex',
+    height: 60,
+    justifyContent: 'center',
+    shadowColor: '#2AC062',
+    shadowOffset: {
+      height: 10,
+      width: 0,
+    },
+    shadowOpacity: 0.5,
+    shadowRadius: 25,
+  },
+  closeText: {
+    color: '#00479e',
+    fontSize: 24,
+    textAlign: 'center',
+  },
+  description: {
+    fontSize: 10,
   },
   displayContainer: {
     alignItems: 'center',
@@ -46,16 +69,30 @@ export const styles = StyleSheet.create({
     // paddingHorizontal: 20,
   },
   iconView: {
-    alignItems: 'stretch',
+    // alignItems: 'stretch',
     flex: 1,
-    justifyContent: 'center',
-    // flexDirection: 'row',
+    // justifyContent: 'center',
+    flexDirection: 'row',
+  },
+  modalImg: {
+    height: 450,
+    marginBottom: 10,
+    marginTop: '5%',
+    width: '100%',
   },
   preview: {
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'flex-end',
     height: '100%',
+  },
+  productTitle: {
+    fontSize: 22,
+    textAlign: 'center',
+  },
+  scrollView: {
+    height: '30%',
+    marginHorizontal: 20,
   },
   zoom: {
     bottom: windowHeight - 190,
