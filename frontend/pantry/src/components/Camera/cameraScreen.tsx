@@ -2,23 +2,28 @@ import React, { useEffect, useState, useRef } from 'react';
 import { View } from 'react-native';
 import { RNCamera } from 'react-native-camera';
 import { Slider } from 'react-native-elements';
-import RNTextDetector from 'react-native-text-detector';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useSelector, useDispatch } from 'react-redux';
-import { onBarCodeRead } from '../../redux/actions/cameraActions.ts';
+import vision from '@react-native-firebase/ml-vision';
+import { barcodeApiCalls } from '../../redux/actions/cameraActions.ts';
+import CameraModal from './cameraModal.tsx';
 
 import { styles, colors } from './cameraStyles.ts';
 
 const Camera = ({ navigation }) => {
-  const scannedBarcodes = useSelector((state) => state.camera);
+  const camera = useSelector((state) => state.camera);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     console.log('hello world');
-  }, [dispatch, scannedBarcodes]);
+  }, [dispatch, camera]);
 
   const [zoomValue, setZoomValue] = useState(0);
   const [flash, setFlash] = useState(RNCamera.Constants.FlashMode.off);
+  const [modalVisible, setModalVisible] = useState(false);
+
+  // camera functionalities
   let cameraRef = useRef(null);
 
   const toggleFlash = () => {
@@ -36,26 +41,27 @@ const Camera = ({ navigation }) => {
           skipProcessing: true,
         };
         const { uri } = await cameraRef.current.takePictureAsync(options);
-        console.log('uri', uri);
-        const visionResp = await RNTextDetector.detectFromUri(uri);
-        console.log('visionResp', visionResp);
-        navigation.navigate('Display', {
-          res: visionResp,
-        });
+
+        const barcodes = await vision().barcodeDetectorProcessImage(uri);
+
+        if (barcodes.length) {
+          console.log('bar', barcodes);
+          dispatch(barcodeApiCalls(barcodes[0].rawValue));
+          setModalVisible(true);
+        } else {
+          navigation.navigate('Parsed', {
+            localUriPath: uri,
+          });
+        }
       }
     } catch (e) {
       console.warn(e);
     }
   };
 
-  const disnBarCodeRead = (scanResult) => {
-    dispatch(onBarCodeRead(scanResult.data));
-  };
-
   return (
     <View style={styles.cameraContainer}>
       <RNCamera
-        onBarCodeRead={disnBarCodeRead}
         ref={cameraRef}
         style={styles.preview}
         type={RNCamera.Constants.Type.back}
@@ -80,21 +86,27 @@ const Camera = ({ navigation }) => {
               thumbTintColor={colors.primaryColor}
               style={styles.zoom}
             />
+
             <Icon
               name="camera"
-              size={2}
+              size={3}
               color="#900"
               style={[styles.icon, styles.camera]}
               onPress={takePicture}
             />
           </View>
           <Icon
-            type="Entypo"
             onPress={toggleFlash}
             style={[styles.flash, styles.icon]}
             name="flash"
           />
         </View>
+        {camera.products.length ? (
+          <CameraModal
+            modalVisible={modalVisible}
+            setModalVisible={setModalVisible}
+          />
+        ) : null}
       </RNCamera>
     </View>
   );

@@ -1,6 +1,6 @@
 // import React 'react';
 import { Alert } from 'react-native';
-
+import { IP_ADDRESS } from 'react-native-dotenv';
 import auth from '@react-native-firebase/auth';
 import axios from 'axios';
 import {
@@ -56,7 +56,7 @@ const loginUser = (email, password) => {
           console.log(error);
         }
         try {
-          const { data } = await axios.get('http://192.168.1.50:8282/', {
+          const { data } = await axios.get(`http://${IP_ADDRESS}:8282/`, {
             headers: { authtoken: token },
           });
           console.log(data);
@@ -67,11 +67,9 @@ const loginUser = (email, password) => {
         dispatch(setUser(email));
       })
       .catch((err) => {
-        console.log(err.code);
+        console.log(err);
 
         dispatch(errorLoadingUser(err.code));
-
-        errorMessages(err);
       });
   };
 };
