@@ -5,10 +5,12 @@ import vision from '@react-native-firebase/ml-vision';
 import { ScrollView, Text, Button, Alert } from 'react-native';
 import axios from 'axios';
 import { dummy } from '../../../dummydata';
+import algoRythm1 from './parsingTest/recieptText2';
+import ItemConfirmation from './ItemConfirmation.tsx';
 
 const TextRecog = ({ route, navigation }) => {
   const { localUriPath } = route.params;
-  const [text, setText] = useState([]);
+  const [text, setText] = useState(null);
 
   useEffect(() => {
     localUriPath ? processImg() : Alert.alert(`Choose Photo first`);
@@ -23,14 +25,18 @@ const TextRecog = ({ route, navigation }) => {
 
     console.log(`Processed Text: `, processedText);
 
-    const textJsxArr = processedText.blocks.map((block) => {
-      console.log(`Text Block: `, block.text);
-      console.log(`Confidence: `, block.confidence);
-      // console.log(`Language: `, block.recognizedLanguages);
-      return <Text>{block.text}</Text>;
-    });
+    const items = await algoRythm1(processedText.text);
+    console.log(`Items: `, items);
+    setText(items);
 
-    setText(textJsxArr);
+    // const textJsxArr = processedText.blocks.map((block) => {
+    //   console.log(`Text Block: `, block.text);
+    //   console.log(`Confidence: `, block.confidence);
+    //   // console.log(`Language: `, block.recognizedLanguages);
+    //   return <Text>{block.text}</Text>;
+    // });
+
+    // setText(textJsxArr);
   };
 
   const sendData = async () => {
@@ -48,9 +54,19 @@ const TextRecog = ({ route, navigation }) => {
     }
   };
 
+  const goToParsed = () => {
+    navigation.navigate('Confirmation', { parsedText: text });
+  };
+
   return (
     <ScrollView>
-      {text}
+      {/* {text} */}
+      {/* {text ? (
+        <ItemConfirmation navigation={navigation} parsedReciept={text} />
+      ) : null} */}
+      {text ? (
+        <Button title="Confirmation" onPress={goToParsed} color="green" />
+      ) : null}
       <Button title="Submit" onPress={sendData} color="green" />
     </ScrollView>
   );

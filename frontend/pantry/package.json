@@ -43,6 +43,7 @@
     "axios": "^0.19.2",
     "babel-plugin-root-import": "^6.5.0",
     "firebase": "^7.14.0",
+    "fs": "0.0.1-security",
     "native-base": "^2.13.12",
     "neumorphism-ui": "^1.0.2",
     "react": "16.11.0",
