@@ -43,7 +43,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 const {checkAuth} = require('./auth/firebase')
-app.use('/', checkAuth)
+// app.use('/', checkAuth)
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/receipts", receiptsRouter);
