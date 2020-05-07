@@ -472,6 +472,7 @@ PODS:
   - RNFBMLVision (6.4.0):
     - Firebase/Core (~> 6.13.0)
     - Firebase/MLVision (~> 6.13.0)
+    - Firebase/MLVisionBarcodeModel (~> 6.13.0)
     - Firebase/MLVisionTextModel (~> 6.13.0)
     - React
     - RNFBApp
@@ -737,7 +738,7 @@ SPEC CHECKSUMS:
   RNCMaskedView: 5dba3cb07493765fb66156c83c3dd281ca709a48
   RNFBApp: 69781cf10ce41f6f6db789e6264dd80119ef2fb7
   RNFBAuth: 50fcc7826344dc96caad8bc4f5b40a64904297b8
-  RNFBMLVision: 531a57741f3627ebb2c425a2df132d3da99498b0
+  RNFBMLVision: f0ee3209704db5cd2b34586a27f44f0c40c7aca4
   RNFBStorage: 24097a1d18534b9c3559f862b8d18365cd573c2c
   RNGestureHandler: 8f09cd560f8d533eb36da5a6c5a843af9f056b38
   RNReanimated: 4e102df74a9674fa943e05f97f3362b6e44d0b48
