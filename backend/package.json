@@ -9,6 +9,9 @@
   "lint-staged": {
     "*.{js,json}": [
       "npx eslint . --fix"
+    ],
+    "**/*.{js.json}": [
+      "npx eslint . --fix"
     ]
   },
   "husky": {
