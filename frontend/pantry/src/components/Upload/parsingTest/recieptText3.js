@@ -179,11 +179,15 @@ const getItems = (products) => {
     const text = entries[i][1];
 
     if (category === 'heading') {
-      continue;
-    } else if (category === 'SUBTOTAL') {
-      continue;
+      console.log(`Heading: `, category);
+    } else if (
+      category.match(
+        /(?=grocery)|(?=cleaning supply)|(?=apparel)|(?=test)|(?=home)|(?=subtotal)|(?=health and beauty)/gi,
+      )
+    ) {
+      console.log(`Category match: `, category);
     } else {
-      console.log(category);
+      console.log(`Else: `, category);
     }
   }
 
