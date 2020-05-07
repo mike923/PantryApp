@@ -1,5 +1,6 @@
 {
   "react-native": {
-    "ml_vision_ocr_model": true
+    "ml_vision_ocr_model": true,
+    "ml_vision_barcode_model": true
   }
 }
