@@ -104,7 +104,12 @@ const getItemBy = async (idOrUPC, typeUPC = true) => {
   return getDoc
 }
 
-
+const fetchFirestore = async (collection, reference) => await db
+  .collection(collection)
+  .doc(reference)
+  .get()
+  .then(doc => doc.exists ? doc.data() : null)
+  .catch(err => err)
 
 // let testupc = docRef.set()
 
@@ -127,6 +132,7 @@ const checkAuth = (req, res, next) => {
 
 module.exports = {
   checkAuth,
+  fetchFirestore,
   getItemBy,
   setData,
   // makeDocRef,
