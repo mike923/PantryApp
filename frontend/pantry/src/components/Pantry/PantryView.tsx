@@ -10,8 +10,8 @@ const PantryView = () => {
     <ScrollView style={{ backgroundColor: 'white', flex: 1 }}>
       <View style={styles.pantryView}>
         <Text>This will be my pantry view containing all the food items</Text>
-        {Foods.map((p) => (
-          <FoodItem {...p} />
+        {Foods.map((p, i) => (
+          <FoodItem {...p} key={i + 1} />
         ))}
       </View>
     </ScrollView>
