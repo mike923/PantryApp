@@ -17,10 +17,10 @@ interface Props {
 const RecieptList = ({ reciepts, selected }: Props) => {
   return (
     <>
-      {reciepts.map((reciept: Reciept) =>
+      {reciepts.map((reciept: Reciept, i: number) =>
         reciept.name !== '-' ? (
           selected === '-' || reciept.name === selected ? (
-            <Card color="#ffb3b5" reciept={reciept} />
+            <Card color="#ffb3b5" reciept={reciept} key={i + 1} />
           ) : null
         ) : null,
       )}
