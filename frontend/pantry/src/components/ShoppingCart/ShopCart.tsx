@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React, { useState, useCallback } from 'react';
 import { StyleSheet, View, Text, SafeAreaView, FlatList } from 'react-native';
 import Item from './item.tsx';
+import { cartStyles } from './cartStyles.ts';
 
 const DATA = [
   {
@@ -18,12 +19,32 @@ const DATA = [
 ];
 
 const ShopCart = (props) => {
+  const [selected, setSelected] = useState(new Map());
+
+  const onSelect = useCallback(
+    (id) => {
+      const newSelected = new Map(selected);
+      newSelected.set(id, !selected.get(id));
+      console.warn(id);
+      setSelected(newSelected);
+    },
+    [selected],
+  );
+
   return (
-    <SafeAreaView>
+    <SafeAreaView style={cartStyles.container}>
       <FlatList
         data={DATA}
-        renderItem={({ item }) => <Item title={item.title} />}
+        renderItem={({ item }) => (
+          <Item
+            id={item.id}
+            title={item.title}
+            selected={!!selected.get(item.id)}
+            onSelect={onSelect}
+          />
+        )}
         keyExtractor={(item) => item.id}
+        extraData={selected}
       />
     </SafeAreaView>
   );
