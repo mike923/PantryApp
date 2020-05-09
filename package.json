@@ -5,5 +5,8 @@
   "scripts": {
     "start": "node ./backend/bin/www",
     "heroku-postbuild": "cd backend && npm install"
+  },
+  "dependencies": {
+    "react-native-dotenv": "^0.2.0"
   }
 }
