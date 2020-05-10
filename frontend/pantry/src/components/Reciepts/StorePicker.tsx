@@ -1,5 +1,6 @@
 import React from 'react';
 import { Picker } from 'react-native';
+// import Picker from '@react-native-community/picker';
 import styles from './styles.ts';
 
 interface Stores {
@@ -14,8 +15,8 @@ interface Props {
 
 const StorePicker = ({ stores, selected, handleStoreChange }: Props) => {
   const storeItems = () => {
-    return stores.map(({ name }: Stores) => (
-      <Picker.Item label={name} value={name} />
+    return stores.map(({ name }: Stores, i: number) => (
+      <Picker.Item label={name} value={name} key={i+1}/>
     ));
   };
 
