@@ -40,7 +40,7 @@ export const cartStyles = StyleSheet.create({
     padding: 20,
     shadowColor: '#000',
     shadowOffset: { width: 9, height: 9 },
-    shadowOpacity: 0.8,
+    shadowOpacity: 0.1,
     shadowRadius: 2,
   },
   itemContainer: {

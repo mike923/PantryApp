@@ -7,9 +7,9 @@ import {
   Alert,
   TouchableOpacity,
 } from 'react-native';
-import FeatherIcon from 'react-native-vector-icons/Feather';
 import Item from './item.tsx';
 import { cartStyles } from './cartStyles.ts';
+import FloatingActionButton from './floatingCartOptionButton';
 
 const DATA = [
   {
@@ -93,7 +93,7 @@ const ShopCart = (props) => {
         extraData={selected}
       />
       <View>
-        {deleteButton ? (
+        {/* {deleteButton ? (
           <TouchableOpacity
             style={[cartStyles.deleteButton, cartStyles.button]}>
             <FeatherIcon name="trash-2" style={cartStyles.deleteIcon} />
@@ -102,7 +102,8 @@ const ShopCart = (props) => {
           <TouchableOpacity style={[cartStyles.addButton, cartStyles.button]}>
             <FeatherIcon name="plus-circle" style={cartStyles.deleteIcon} />
           </TouchableOpacity>
-        )}
+        )} */}
+        <FloatingActionButton />
       </View>
     </SafeAreaView>
   );
