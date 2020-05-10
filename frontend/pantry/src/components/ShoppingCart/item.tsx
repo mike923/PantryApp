@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { cartStyles } from './cartStyles.ts';
 
-const Item = ({ id, title, selected, onSelect }) => {
+const Item = ({ id, title, selected, onSelect, price }) => {
   return (
     <View>
       <TouchableOpacity
@@ -13,6 +13,7 @@ const Item = ({ id, title, selected, onSelect }) => {
         ]}>
         <View>
           <Text style={cartStyles.title}>{title}</Text>
+          <Text style={cartStyles.price}>${price}</Text>
         </View>
       </TouchableOpacity>
     </View>

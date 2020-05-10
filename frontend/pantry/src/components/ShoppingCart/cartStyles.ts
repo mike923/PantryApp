@@ -10,6 +10,10 @@ export const cartStyles = StyleSheet.create({
     marginVertical: 8,
     padding: 20,
   },
+  price: {
+    color: 'black',
+    fontSize: 15,
+  },
   title: {
     fontSize: 20,
     textAlign: 'center',

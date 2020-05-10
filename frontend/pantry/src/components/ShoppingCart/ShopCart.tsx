@@ -6,15 +6,26 @@ import { cartStyles } from './cartStyles.ts';
 const DATA = [
   {
     id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-    title: 'First Item',
+    name: 'Oreo Cookies',
+    price: 2.99,
+    quantity: 2,
   },
   {
     id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-    title: 'Second Item',
+    name: '2% Milk',
+    price: 4.99,
+    quantity: 1,
+  },
+  {
+    name: 'Rice Crispies Bar',
+    price: 1.99,
+    quantity: 5,
   },
   {
     id: '58694a0f-3da1-471f-bd96-145571e29d72',
-    title: 'Third Item',
+    name: 'Hagen Daas',
+    price: 6.99,
+    quantity: 1,
   },
 ];
 
@@ -38,8 +49,9 @@ const ShopCart = (props) => {
         renderItem={({ item }) => (
           <Item
             id={item.id}
-            title={item.title}
+            title={item.name}
             selected={!!selected.get(item.id)}
+            price={item.price}
             onSelect={onSelect}
           />
         )}
