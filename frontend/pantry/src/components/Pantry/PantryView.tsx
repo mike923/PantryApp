@@ -6,10 +6,8 @@ import FoodItem from './FoodItem.tsx';
 import Foods from '../Reciepts/dummyData/dummyFoodItems.ts';
 
 const PantryView = ({ navigation }) => {
-  const goTo = (props) => {
-    navigation.navigate('FoodDetailed', { ...props });
-    console.log(props);
-  };
+  const goTo = (props) => navigation.navigate('FoodDetailed', { ...props });
+
   return (
     <ScrollView style={{ backgroundColor: 'white', flex: 1 }}>
       <View style={styles.pantryView}>

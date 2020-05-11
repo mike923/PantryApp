@@ -10,7 +10,6 @@ import {
   Modal,
 } from 'react-native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
-// import DatePicker from 'react-native-datepicker';
 import DatePicker from 'react-native-date-picker';
 
 const FoodDetailed = (props: any) => {
@@ -29,7 +28,7 @@ const FoodDetailed = (props: any) => {
     <View style={styles.container}>
       <TextInput
         style={styles.name}
-        value={productName}
+        value={state.productName}
         onChangeText={(text) => setState({ ...state, productName: text })}
         editable
       />
@@ -43,7 +42,7 @@ const FoodDetailed = (props: any) => {
         />
         <TextInput
           style={styles.quantity}
-          value={`${quantity}`}
+          value={`${state.quantity}`}
           onChangeText={(text) => setState({ ...state, quantity: text })}
           keyboardType="number-pad"
           returnKeyType="done"
@@ -79,6 +78,9 @@ const FoodDetailed = (props: any) => {
           </View>
         </Modal>
       </View>
+      <TouchableOpacity>
+        <Text>Submit</Text>
+      </TouchableOpacity>
     </View>
   );
 };
