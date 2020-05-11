@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { Text, TextInput, View, StyleSheet, Image } from 'react-native';
+import FeatherIcon from 'react-native-vector-icons/Feather';
+import DatePicker from 'react-native-datepicker';
 
 const FoodDetailed = (props: any) => {
   const [state, setState] = useState({ ...props.route.params });
-  console.log(state);
   const { productName, purchasedDate, uri, quantity } = state;
+  const [date, setDate] = useState(new Date(purchasedDate));
+  console.log(state);
 
   const handleChange = (e) => {
     console.log(e.target.name, e.target.value);
@@ -19,19 +22,46 @@ const FoodDetailed = (props: any) => {
         editable
       />
       <Image source={{ uri }} resizeMode="contain" style={styles.img} />
-      <TextInput
-        style={styles.quantity}
-        value={`${quantity}`}
-        onChangeText={(text) => setState({ ...state, quantity: text })}
-        keyboardType="number-pad"
-        returnKeyType="done"
-        editable
-      />
+      <View style={styles.quantityContainer}>
+        <FeatherIcon
+          name="minus-circle"
+          size={26}
+          color="black"
+          onPress={() => setState({ ...state, quantity: state.quantity - 1 })}
+        />
+        <TextInput
+          style={styles.quantity}
+          value={`${quantity}`}
+          onChangeText={(text) => setState({ ...state, quantity: text })}
+          keyboardType="number-pad"
+          returnKeyType="done"
+          editable
+        />
+        <FeatherIcon
+          name="plus-circle"
+          size={26}
+          color="black"
+          onPress={() => setState({ ...state, quantity: state.quantity + 1 })}
+        />
+      </View>
       <TextInput
         style={styles.date}
         value={purchasedDate}
         onChangeText={(text) => setState({ ...state, date: text })}
         editable
+      />
+      <DatePicker
+        date="2020-03-02"
+        mode="date"
+        display="calendar"
+        onChange={purchasedDate}
+        style={styles.datePicker}
+        confirmBtnText="Confirm"
+        cancelBtnText="Cancel"
+        placeholder="2020-03-02"
+        format="YYYY-MMM-DD"
+        minDate="2019-01-01"
+        maxDate="2020-05-01"
       />
     </View>
   );
@@ -39,13 +69,17 @@ const FoodDetailed = (props: any) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     alignItems: 'center',
+    flex: 1,
   },
   date: {
     color: 'black',
     fontSize: 20,
     padding: 10,
+  },
+  datePicker: {
+    backgroundColor: 'white',
+    height: 20,
   },
   img: {
     backgroundColor: 'white',
@@ -63,6 +97,10 @@ const styles = StyleSheet.create({
     color: 'black',
     fontSize: 20,
     padding: 10,
+  },
+  quantityContainer: {
+    alignItems: 'center',
+    flexDirection: 'row',
   },
 });
 
