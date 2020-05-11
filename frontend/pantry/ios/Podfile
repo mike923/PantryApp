@@ -64,6 +64,8 @@ target 'pantry' do
   ]
 
 
+  pod 'react-native-date-picker', :path => '../node_modules/react-native-date-picker'
+
   target 'pantryTests' do
     inherit! :complete
     # Pods for testing
