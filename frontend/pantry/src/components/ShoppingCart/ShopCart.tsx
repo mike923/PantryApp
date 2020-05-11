@@ -1,12 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import {
-  View,
-  SafeAreaView,
-  FlatList,
-  Button,
-  Alert,
-  TouchableOpacity,
-} from 'react-native';
+import { View, SafeAreaView, FlatList } from 'react-native';
 import Item from './item.tsx';
 import { cartStyles } from './cartStyles.ts';
 import FloatingActionButton from './floatingCartOptionButton';
@@ -60,7 +53,7 @@ const DATA = [
   // },
 ];
 
-const ShopCart = (props) => {
+const ShopCart = (props: any) => {
   const [selected, setSelected] = useState(new Map());
   const [deleteButton, setDeleteButton] = useState(false);
 
@@ -92,7 +85,7 @@ const ShopCart = (props) => {
         keyExtractor={(item) => item.id}
         extraData={selected}
       />
-      <View>
+      <View style={{ flex: 1, alignItems: 'center' }}>
         {/* {deleteButton ? (
           <TouchableOpacity
             style={[cartStyles.deleteButton, cartStyles.button]}>
@@ -103,7 +96,7 @@ const ShopCart = (props) => {
             <FeatherIcon name="plus-circle" style={cartStyles.deleteIcon} />
           </TouchableOpacity>
         )} */}
-        <FloatingActionButton />
+        <FloatingActionButton style={{ button: 100 }} />
       </View>
     </SafeAreaView>
   );

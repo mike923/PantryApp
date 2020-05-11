@@ -1,28 +1,8 @@
 import { StyleSheet } from 'react-native';
 
 export const cartStyles = StyleSheet.create({
-  addButton: {
-    backgroundColor: '#92b9a4',
-  },
-  button: {
-    alignItems: 'center',
-    borderRadius: 50,
-    bottom: 20,
-    height: 70,
-    justifyContent: 'center',
-    position: 'absolute',
-    right: 10,
-    width: 70,
-  },
   container: {
     flex: 1,
-  },
-  deleteButton: {
-    backgroundColor: '#ee6e73',
-  },
-  deleteIcon: {
-    color: 'white',
-    fontSize: 26,
   },
   image: {
     height: 70,
@@ -57,5 +37,40 @@ export const cartStyles = StyleSheet.create({
   },
   title: {
     fontSize: 20,
+  },
+  floatingButtonContainer: {
+    position: 'absolute',
+    alignItems: 'center',
+  },
+  button: {
+    position: 'absolute',
+    width: 60,
+    height: 60,
+    borderRadius: 60 / 2,
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowRadius: 10,
+    shadowColor: '#F02A4B',
+    shadowOpacity: 0.5,
+    shadowOffset: { height: 10, width: 10 },
+  },
+  menu: {
+    backgroundColor: '#F02A4B',
+  },
+  secondary: {
+    width: 48,
+    height: 48,
+    borderRadius: 48 / 2,
+    backgroundColor: '#FFF',
+  },
+  deleteButton: {
+    backgroundColor: '#ee6e73',
+  },
+  deleteIcon: {
+    color: 'white',
+    fontSize: 26,
+  },
+  addButton: {
+    backgroundColor: '#92b9a4',
   },
 });
