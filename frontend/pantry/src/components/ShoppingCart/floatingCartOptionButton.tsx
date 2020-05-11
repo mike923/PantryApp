@@ -4,8 +4,6 @@ import FeatherIcon from 'react-native-vector-icons/Feather';
 import { cartStyles } from './cartStyles.ts';
 
 const FloatingActionButton = (props: any) => {
-  console.log('hello');
-
   let animation = new Animated.Value(0);
 
   let open: boolean = true;

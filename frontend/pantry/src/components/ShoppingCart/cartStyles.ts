@@ -41,6 +41,7 @@ export const cartStyles = StyleSheet.create({
   floatingButtonContainer: {
     position: 'absolute',
     alignItems: 'center',
+    right: 40,
   },
   button: {
     position: 'absolute',
