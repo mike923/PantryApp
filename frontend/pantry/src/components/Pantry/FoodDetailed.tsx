@@ -13,37 +13,42 @@ import FeatherIcon from 'react-native-vector-icons/Feather';
 import DatePicker from 'react-native-date-picker';
 
 const FoodDetailed = (props: any) => {
-  const params = { ...props.route.params };
+  console.log(props);
+  const params = { ...props.route.params, edited: false };
   params.purchasedDate = new Date(params.purchasedDate).toDateString();
   const [state, setState] = useState(params);
-  const { productName, purchasedDate, uri, quantity } = state;
   const [dateModal, setDateModal] = useState(false);
-  console.log(state);
-
-  const handleChange = (e) => {
-    console.log(e.target.name, e.target.value);
-  };
 
   return (
     <View style={styles.container}>
       <TextInput
         style={styles.name}
         value={state.productName}
-        onChangeText={(text) => setState({ ...state, productName: text })}
+        onChangeText={(text) =>
+          setState({ ...state, productName: text, edited: true })
+        }
         editable
       />
-      <Image source={{ uri }} resizeMode="contain" style={styles.img} />
+      <Image
+        source={{ uri: state.uri }}
+        resizeMode="contain"
+        style={styles.img}
+      />
       <View style={styles.quantityContainer}>
         <FeatherIcon
           name="minus-circle"
           size={26}
           color="black"
-          onPress={() => setState({ ...state, quantity: state.quantity - 1 })}
+          onPress={() =>
+            setState({ ...state, quantity: state.quantity - 1, edited: true })
+          }
         />
         <TextInput
           style={styles.quantity}
           value={`${state.quantity}`}
-          onChangeText={(text) => setState({ ...state, quantity: text })}
+          onChangeText={(text) =>
+            setState({ ...state, quantity: text, edited: true })
+          }
           keyboardType="number-pad"
           returnKeyType="done"
           editable
@@ -52,7 +57,9 @@ const FoodDetailed = (props: any) => {
           name="plus-circle"
           size={26}
           color="black"
-          onPress={() => setState({ ...state, quantity: state.quantity + 1 })}
+          onPress={() =>
+            setState({ ...state, quantity: state.quantity + 1, edited: true })
+          }
         />
       </View>
       <Text style={styles.date}>{state.purchasedDate}</Text>
@@ -66,7 +73,11 @@ const FoodDetailed = (props: any) => {
               date={new Date(state.purchasedDate)}
               mode="date"
               onDateChange={(newDate) =>
-                setState({ ...state, purchasedDate: newDate.toDateString() })
+                setState({
+                  ...state,
+                  purchasedDate: newDate.toDateString(),
+                  edited: true,
+                })
               }
               style={styles.datePicker}
             />
@@ -78,9 +89,13 @@ const FoodDetailed = (props: any) => {
           </View>
         </Modal>
       </View>
-      <TouchableOpacity>
-        <Text>Submit</Text>
-      </TouchableOpacity>
+      {state.edited ? (
+        <TouchableOpacity
+          style={styles.submitBtn}
+          onPress={() => props.navigation.goBack()}>
+          <Text style={styles.submitBtnText}>Submit</Text>
+        </TouchableOpacity>
+      ) : null}
     </View>
   );
 };
@@ -98,7 +113,7 @@ const styles = StyleSheet.create({
   datePicker: {
     alignItems: 'center',
     backgroundColor: 'white',
-    borderRadius: 10,
+    height: 200,
     justifyContent: 'center',
   },
   img: {
@@ -117,10 +132,11 @@ const styles = StyleSheet.create({
   },
   modalDoneBtnText: {
     color: 'white',
-    fontSize: 20,
+    fontSize: 24,
   },
   modalView: {
     alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
     elevation: 5,
     flex: 1,
     height: 50,
@@ -146,6 +162,17 @@ const styles = StyleSheet.create({
   quantityContainer: {
     alignItems: 'center',
     flexDirection: 'row',
+  },
+  submitBtn: {
+    backgroundColor: 'orange',
+    borderRadius: 5,
+    marginTop: 10,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+  },
+  submitBtnText: {
+    color: 'white',
+    fontSize: 20,
   },
 });
 
