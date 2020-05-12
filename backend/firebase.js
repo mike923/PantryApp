@@ -143,31 +143,8 @@ const getItemBy = async (idOrUPC, typeUPC = true) => {
   return getDoc
 }
 
-const fetchFirestore = async (collection, reference) => await db
-  .collection(collection)
-  .doc(reference)
-  .get()
-  .then(doc => doc.exists ? doc.data() : null)
-  .catch(err => err)
 
-// let testupc = docRef.set()
 
-const checkAuth = (req, res, next) => {
-  if (req.headers.authtoken) {
-    admin.auth().verifyIdToken(req.headers.authtoken)
-      .then((eto) => {
-        console.log(eto)
-        res.locals.user_id = eto.uid
-        res.locals.email = eto.email
-        next()
-      }).catch(() => {
-        res.status(403).send('Unauthorized')
-      });
-  } else {
-    res.status(403).send('Unauthorized!')
-    return
-  }
-}
 
 module.exports = {
   checkAuth,
