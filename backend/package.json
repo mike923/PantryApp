@@ -9,6 +9,9 @@
   "lint-staged": {
     "*.{js,json}": [
       "npx eslint . --fix"
+    ],
+    "**/*.{js.json}": [
+      "npx eslint . --fix"
     ]
   },
   "husky": {
@@ -17,6 +20,7 @@
     }
   },
   "dependencies": {
+    "axios": "^0.19.2",
     "bcrypt": "^4.0.1",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
@@ -25,6 +29,7 @@
     "express": "~4.16.1",
     "express-session": "^1.17.0",
     "firebase-admin": "^8.11.0",
+    "icecat": "^1.4.5",
     "morgan": "~1.9.1",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
