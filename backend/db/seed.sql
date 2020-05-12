@@ -21,140 +21,69 @@ CREATE TABLE users (
 CREATE TABLE receipts (
     id  SERIAL PRIMARY KEY,
     pantry_id INT REFERENCES pantry(id),
-    receipt_img_url VARCHAR ,
-    receipt_json JSON,
+    receipt_url VARCHAR,
     store_name VARCHAR,
-    store_coordinate JSON,
-    spent INT,
-    date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    total DECIMAL,
+    upload_date VARCHAR,
+    reciept_date VARCHAR
 );
 
-CREATE TABLE item_categories (
-    id SERIAL PRIMARY key,
-    type VARCHAR NOT NULL
-);
+-- CREATE TABLE item_categories (
+--     id SERIAL PRIMARY key,
+--     type VARCHAR NOT NULL
+-- );
 
-CREATE TABLE all_foods(
-    id SERIAL PRIMARY KEY,
-    upc VARCHAR NOT NULL,
-    type_id INT REFERENCES item_categories(id)
-); 
+-- CREATE TABLE all_foods (
+--     id SERIAL PRIMARY KEY,
+--     upc VARCHAR,
+--     type_id INT REFERENCES item_categories(id)
+-- ); 
 
-CREATE TABLE food_item(
+
+CREATE TABLE food_item (
     id SERIAL PRIMARY KEY,
     receipt_id INT REFERENCES receipts(id),
     pantry_id INT REFERENCES pantry(id),
     name VARCHAR NOT NULL,
-    price INT NOT NULL,
+    price DECIMAL NOT NULL,
     quantity INT NOT NULL,
-    food_id INT REFERENCES all_foods(id),
-    expired BOOLEAN DEFAULT FALSE
-
-); 
+    -- food_id INT REFERENCES all_foods(id),
+    img_url VARCHAR, 
+    finished BOOLEAN DEFAULT FALSE
+);  
 
 CREATE TABLE shopping_list_items (
     id SERIAL PRIMARY KEY,
-    food_id INT REFERENCES all_foods(id),
+    -- food_id INT REFERENCES all_foods(id),
     pantry_id INT REFERENCES pantry(id),
     quantity INT DEFAULT 1,
     completed BOOLEAN DEFAULT FALSE
 );
 
-INSERT INTO pantry(name)
-VALUES
-('the office'),
-('jimXpam');
+------------------------------------------------------------------------------------------
 
+INSERT INTO pantry(name) VALUES
+  ('Voniel''s Pantry')
+;
 
--- inserting test users into users table
-INSERT INTO users (id,email,pantry_id) 
-VALUES 
-('43faf51e-247f-41f','michaelscott@pursuit.org',1),--1
-('d246805b-afff-4283-9aad-7bcf6f678b42','pambeesly@pursuit.org',2);--2
+INSERT INTO users (id,email,pantry_id) VALUES 
+  ('47E1Pb7c1fTgKCdYWPm1KNDVDm02', 'voniel@bvoniel.com', 1)
+;
 
--- inserting into the receipts table for test user 1
-INSERT INTO receipts (pantry_id,receipt_img_url,receipt_json,store_name,store_coordinate,spent) 
-VALUES
-(1,'https://farm6.staticflickr.com/5530/14653691031_5c3d80b968.jpg',
-'{"DRP DT":3,"Dr pepper":3,"Dr pepper": 3 ,"Dr pepper": 3,"Dr pepper": 3}','Walmart',
-'{"latitude":41.8287,"longitude":88.0569}',
-15
-);
+INSERT INTO receipts (pantry_id, receipt_url, store_name, total, upload_date, reciept_date) VALUES
+  (
+    1, 
+    'https://firebasestorage.googleapis.com/v0/b/capstone-pantry.appspot.com/o/Test?alt=media&token=d87cb480-34ee-4e5f-9712-e7bd76bd57a6',
+    'Target',
+    35.67,
+    'Sun 03/03/2020',
+    'Sun 03/03/2020'
+  )
+;
 
--- inserting into the receipts table for test user 2
-INSERT INTO receipts (pantry_id,receipt_img_url,receipt_json,store_name,store_coordinate,spent) 
-VALUES
-(2,'https://unionadvocate.files.wordpress.com/2013/04/metsa-receipt-web.jpg',
-'{
-    "HNT SPAGETTI SAUCE": 0.88,
-    "EE SPAGETTI SAUCE": 0.88,
-    "Dr MRCHN INST LUNCH": 2.39 ,
-    "EE COFFEE FRNCH TOAST": 3.74,
-    "ESTL EVRDY PNT BTR": 4.35,
-    "CUB WHITE BREAD": 1.19,
-    "SHPERS VALU SALAMI": 1.19,
-    "ICE BERG LETTUCE": 1.48,
-    "BANANAS YELLOW": 1.04,
-    "POTATO RUSSET": 1.05,
-    "OLD O PINK LMNADE": 1.59,
-    "CUB HOMOGENIZED MILK": 2.99,
-    "ESENTL EDAY CHEESE": 2.99,
-    "CUB LARGE EGGS": 1.98 
-}',
-'CUBS',
-'{"latitude":44.9527661,"longitude":-93.1627024}',
-26.84
-);
-
--- inserting into categories table
-INSERT INTO item_categories(type)
-VALUES
-('Grocery'),
-('Meat'),
-('Produce'),
-('Frozen'),
-('Dairy');
-
--- inserting into the all_foods table
-INSERT INTO all_foods (upc,type_id)
-VALUES
-('DRP DT',1),
-('Dr pepper',4),
-('HNT SPAGETTI SAUCE',1),
-('EE SPAGETTI SAUCE',1),
-('Dr MRCHN INST LUNCH',1),
-('EE COFFEE FRNCH TOAST',1),
-('CUB WHITE BREAD',1),
-('SHPERS VALU SALAMI',3),
-('ICE BERG LETTUCE',3),
-('BANANAS YELLOW',3),
-('POTATO RUSSET',3),
-('ESTL EVRDY PNT BTR',1),
-('OLD O PINK LMNADE',4),
-('CUB HOMOGENIZED MILK',5),
-('ESENTL EDAY CHEESE',5),
-('CUB LARGE EGGS',5);
-
--- inserting data into the food items table
-INSERT INTO food_item (receipt_id,pantry_id,name,price,quantity,food_id)
- VALUES
-(1,1,'DRP DT',3,1,1),
-(1,1,'Dr pepper',3,4,2);
-
--- inserting data into the food items table
-INSERT INTO food_item (receipt_id,pantry_id,name,price,quantity,food_id)
- VALUES
-(2,2,'HNT SPAGETTI SAUCE',0.88,1,3),
-(2,2,'EE SPAGETTI SAUCE',0.88,1,4),
-(2,2,'Dr MRCHN INST LUNCH',2.39,1,5),
-(2,2,'EE COFFEE FRNCH TOAST',3.74,1,6),
-(2,2,'CUB WHITE BREAD',1.19,1,7),
-(2,2,'SHPERS VALU SALAMI',1.19,1,8),
-(2,2,'ICE BERG LETTUCE',1.19,1,9),
-(2,2,'BANANAS YELLOW',1.04,1,10),
-(2,2,'POTATO RUSSET',1.05,1,11),
-(2,2,'ESTL EVRDY PNT BTR',4.35,1,12),
-(2,2,'OLD O PINK LMNADE',1.59,1,13),
-(2,2,'CUB HOMOGENIZED MILK',2.99,1,14),
-(2,2,'ESENTL EDAY CHEESE',2.99,1,15),
-(2,2,'CUB LARGE EGGS',1.98,1,16);
+INSERT INTO food_item (receipt_id, pantry_id, name, price, quantity, img_url) VALUES
+  (1, 1, 'Oreos', 3.99, 2, 'https://target.scene7.com/is/image/Target/GUEST_03ac5a5f-b70f-4258-8861-6392e93ccc0e?wid=253&hei=253&qlt=80&fmt=pjpeg'),
+  (1, 1, 'Oat-Ly Oat Milk', 2.99, 3, 'https://target.scene7.com/is/image/Target/GUEST_1dc729a4-8089-4f44-8a96-d4248265a135?fmt=pjpeg&wid=1400&qlt=80'),
+  (1, 1, 'Rice Krispies', .99, 10, 'https://target.scene7.com/is/image/Target/GUEST_ff24a031-c9da-40e5-aa59-fad75558e077?wid=253&hei=253&qlt=80&fmt=pjpeg'),
+  (1, 1, 'Skippy Peanut Butter', 1.49, 4, 'https://target.scene7.com/is/image/Target/GUEST_dd642c00-2978-4869-a200-c7873d7744fb?wid=253&hei=253&qlt=80&fmt=pjpeg')
+;

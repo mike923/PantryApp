@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "start:dev": "nodemon"
+    "start:dev": "nodemon",
+    "start:reseed": "cd db/ && psql -f seed.sql && cd .. && npm run start:dev"
   },
   "lint-staged": {
     "*.{js,json}": [

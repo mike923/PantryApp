@@ -26,21 +26,21 @@ router.post("/upload", async (req, res, next) => {
 });
 
 router.get("/:id", async (req, res, next) => {
-  // try {
-  //   let byId = await queries.getUsersById(req.params.id);
-  //   res.json({
-  //     payload: byId,
-  //     message: "user information retrieved",
-  //     error: false,
-  //   });
-  // } catch (error) {
-  //   console.log(error);
-  //   res.status(500).json({
-  //     payload: null,
-  //     message: "you can't perform this action",
-  //     error: true,
-  //   });
-  // }
+  try {
+    const reciept = await queries.getReceiptById(req.params.id);
+    res.json({
+      payload: reciept,
+      message: "Reciept informaiton retrieved",
+      error: false,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      payload: null,
+      message: "you can't perform this action",
+      error: true,
+    });
+  }
 });
 
 module.exports = router;
