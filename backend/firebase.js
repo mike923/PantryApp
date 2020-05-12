@@ -1,5 +1,4 @@
 const admin = require("firebase-admin")
-const axios = require('axios');
 const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_KEY);
 
 admin.initializeApp({
@@ -8,6 +7,29 @@ admin.initializeApp({
 });
 
 const db = admin.firestore();
+
+const checkAuth = (req, res, next) => {
+  if (req.headers.authtoken) {
+    admin.auth().verifyIdToken(req.headers.authtoken)
+      .then((eto) => {
+        console.log(eto)
+        res.locals.user_id = eto.uid
+        res.locals.email = eto.email
+        next()
+      }).catch(() => {
+        res.status(403).send('Unauthorized')
+      });
+  } else {
+    res.status(403).send('Unauthorized!')
+    return
+  }
+}
+
+module.exports = {
+  admin,
+  checkAuth,
+  db,
+}
 
 // let docRef = db.collection('foodbyupc').doc('041631000564')
 
@@ -30,21 +52,13 @@ const db = admin.firestore();
 //     idRef: idRef.set(data),
 //   }
 // }
-
+/*
 const setData = async (collection, ref, data) => {
   return await db.collection(collection).doc(ref).set(data)
 }
 
-const fetchSpoonacular = async (idOrUPC, typeUPC = true) => {
-  const { data } = await axios.get(`https://api.spoonacular.com/food/products/${typeUPC ? 'upc/' : ''}${idOrUPC}?apiKey=${process.env.SPOONACULAR_API_KEY}`)
-  console.log('fetchSpoonacular', data)
-  if (data.status && data.status === 'failure') {
-    return null
-  }
-  return data
-}
 
-const uploadToFirestore = async ({collection, reference, data, source}) => {
+const uploadToFirestore = async ({collection, reference, data, source, valid}) => {
   console.log(collection, reference, data, source)
   let res
   try {
@@ -53,8 +67,8 @@ const uploadToFirestore = async ({collection, reference, data, source}) => {
     .doc(reference)
     .set({
       results: [{source: source, data: data}],
-      valid: true,
-    })
+      valid: valid,
+    }, { merge: true, })
   } catch (error) {
     console.log(error)
     res = error
@@ -63,6 +77,29 @@ const uploadToFirestore = async ({collection, reference, data, source}) => {
   console.log(res)
   return res
 } 
+
+
+
+const checkExistance = async (doc) => {
+  if (doc.exists) {
+    return doc.data()
+  } else {
+    return await fetchFDC(upc)
+  }
+}
+
+const getItemByUPC = async (upc) => {
+  let item = db
+    .collection('foodByUPC')
+    .doc(upc)
+
+  item = await item
+    .get()
+    .then(checkExistance)
+    .catch(handleError)
+
+  return item
+}
 
 const getItemBy = async (idOrUPC, typeUPC = true) => {
   const collection = typeUPC ? 'foodByUPC' : 'foodByID'
@@ -78,20 +115,22 @@ const getItemBy = async (idOrUPC, typeUPC = true) => {
       } else {
         console.log(idOrUPC, 'not found in the database')
         const data = await fetchSpoonacular(idOrUPC, typeUPC)
-        if (data) {
+        if (data.result) {
           uploadToFirestore({
             collection: 'foodByUPC',
-            reference: data.upc,
-            data: data,
-            source: 'spoonacular',
+            reference: data.result.upc,
+            data: data.result,
+            source: data.source,
           })
           uploadToFirestore({
             collection: 'foodByID',
-            reference: `00${data.id}`,
-            data: data,
-            source: 'spoonacular',
+            reference: data.source + data.result.id,
+            data: data.result,
+            source: data.source,
           })
-        } 
+        } else {
+          data = await fetchFDC()
+        }
         console.log('data retrieved from spoonacular in getby call', data)
         return data
       }
@@ -134,6 +173,11 @@ module.exports = {
   checkAuth,
   fetchFirestore,
   getItemBy,
+  searchAPIs,
   setData,
+  fetchFDC,
+  uploadToFirestore,
   // makeDocRef,
 }
+
+*/
