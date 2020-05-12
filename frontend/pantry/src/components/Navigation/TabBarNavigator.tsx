@@ -4,11 +4,11 @@ import FeatherIcon from 'react-native-vector-icons/Feather';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 
-import HomeScreen from '../Screens/Welcome.tsx';
 import UploadStack from './UploadStack.tsx';
 import SettingsStack from './SettingsStack.tsx';
 import DashboardStack from './DashboardStack.tsx';
 import PantryStack from './PantryStack.tsx';
+import ShopCartStack from './ShopCartStack.tsx';
 
 const Tab = createBottomTabNavigator();
 
@@ -50,7 +50,7 @@ const TabBarNavigator = (props: any) => {
           <Tab.Screen name="List" component={DashboardStack} />
           <Tab.Screen name="Pantry" component={PantryStack} />
           <Tab.Screen name="Upload" component={UploadStack} />
-          <Tab.Screen name="Cart" component={HomeScreen} />
+          <Tab.Screen name="Cart" component={ShopCartStack} />
           <Tab.Screen name="Settings" component={SettingsStack} />
         </Tab.Navigator>
       </NavigationContainer>
