@@ -1,7 +1,7 @@
 const express = require('express');
 const axios = require('axios');
 const router = express.Router();
-const { /* makeDocRef, */ getItemBy, setData, fetchFirestore } = require('../auth/firebase')
+const { /* makeDocRef, */ getItemBy, setData, fetchFirestore } = require('../firebase')
 const icecat = require('icecat')
 
 const icecatClient = new icecat('mamparo923', 'hezfas-ripvor-8viqzU')
