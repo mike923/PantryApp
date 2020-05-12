@@ -1,9 +1,17 @@
 import React from 'react';
 import { TouchableOpacity, Text, Image, StyleSheet } from 'react-native';
 
-const FoodItem = ({ productName, uri, purchasedDate }) => {
+const FoodItem = (props: any) => {
+  let { goTo } = props;
+  const { productName, uri, purchasedDate, quantity } = goTo
+    ? props
+    : props.route.params;
   return (
-    <TouchableOpacity style={styles.foodItem}>
+    <TouchableOpacity
+      style={styles.foodItem}
+      onPress={() => {
+        goTo({ productName, uri, purchasedDate, quantity });
+      }}>
       <Image
         source={{
           uri,

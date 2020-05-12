@@ -19,7 +19,7 @@ const Pantry = ({ navigation }) => {
       <Text style={styles.headingText}>
         This screen should act as a home page for all the screens in this stack
       </Text>
-      <TouchableOpacity onPress={() => goTo('FoodItem')} style={styles.button}>
+      <TouchableOpacity onPress={() => goTo('Food')} style={styles.button}>
         <Text style={styles.buttonText}>Food Item</Text>
       </TouchableOpacity>
       <TouchableOpacity

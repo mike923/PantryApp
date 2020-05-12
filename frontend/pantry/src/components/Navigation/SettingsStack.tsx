@@ -6,7 +6,7 @@ import { screenOptions } from './style.ts';
 const Stack = createStackNavigator();
 
 const Settings = () => (
-  <View>
+  <View style={{ backgroundColor: 'black' }}>
     <Text>This will be the main settings page in the stack</Text>
   </View>
 );

@@ -16,9 +16,10 @@ const UserProfile = () => {
   const [currTime, setCurrTime] = useState(new Date().toLocaleString());
 
   useEffect(() => {
-    setInterval(() => {
+    const time = setInterval(() => {
       setCurrTime(new Date().toLocaleString());
     }, 1000);
+    return () => clearInterval(time);
   });
 
   return (

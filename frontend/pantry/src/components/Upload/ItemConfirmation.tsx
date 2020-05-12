@@ -24,6 +24,7 @@ const ItemConfirmation = ({ navigation, route }: any) => {
       {
         text: 'Yes',
         onPress: () => {
+          // POST RECIEPT TO BACKEND
           navigation.dispatch(
             CommonActions.reset({
               index: 0,
