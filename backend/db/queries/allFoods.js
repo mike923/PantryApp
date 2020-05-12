@@ -1,4 +1,5 @@
 const axios = require('axios');
+const {db} = require('../../firebase')
 
 const fetchSpoonacular = async (idOrUPC, typeUPC = true) => {
   const { data } = await axios.get(`https://api.spoonacular.com/food/products/${typeUPC ? 'upc/' : ''}${idOrUPC}?apiKey=${process.env.SPOONACULAR_API_KEY}`)
@@ -30,13 +31,11 @@ const fetchFDC = async (reqBody, search = false) => {
       valid: false,
     }
   }
-
   return {
     result: data.foods,
     source: 'fdc',
     valid: true,
   }
-
 }
 
 const searchAPIs = async (upc) => {
@@ -50,14 +49,45 @@ const searchAPIs = async (upc) => {
 
 const createFirestoreReference = async (collection, reference) => {
   try {
+    let status = await db
+      .collection(collection)
+      .doc(reference)
+      .set({
+        results: [],
+        item: {
+          name: null,
+          img: null,
+        },
+        valid: false,
+      }, { merge: true })
     
+    console.log('status of createFirestoreReference', status)
+    return status
   } catch (error) {
-    console.log('createFirestoreReference ERROR: ', erroe)
+    console.log('createFirestoreReference ERROR: ', error)
   }
 }
 
+const addResultToFirestoreUPCDoc = async (collection, reference) => {
+  try {
+    let status = await db
+      .collection(collection)
+      .doc(reference)
+      .update({
+        results: [],
+        item: {
+          name: null,
+          img: null,
+        },
+        valid: false,
+      }, { merge: true })
+  } catch (error) {
+    
+  }
+}
 
 module.exports = {
+  createFirestoreReference,
   fetchFDC,
   fetchSpoonacular,
   searchAPIs,
