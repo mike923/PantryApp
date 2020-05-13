@@ -14,11 +14,16 @@ const addImgUrl = async (pantry_id, receipt_json) =>
   )
   RETURNING *
 `,
-    [pantry_id, receipt_json]
+    [pantry_id, receipt_json],
   );
 
-const getReceiptById = async (id) =>
-  await db.oneOrNone("SELECT * from receipts WHERE id = $1", [id]);
+const getReceiptById = async (id) => {
+  // try {
+  return await db.oneOrNone("SELECT * from receipts WHERE id = $1", [id]);
+  // } catch (err) {
+  //   return
+  // }
+};
 
 module.exports = {
   addImgUrl,

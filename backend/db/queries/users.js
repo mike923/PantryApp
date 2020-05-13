@@ -10,7 +10,7 @@ const getUsersById = async (id) => {
 
 //adding a new user to app
 const addNewUser = async (userObj) => await db.one(`
-  INSERT INTO users (email,id, pantry_id) 
+  INSERT INTO users (email, id, pantry_id) 
   VALUES($/email/,$/id/,$/pantryId/) 
   RETURNING pantry_id, email
 `, userObj);

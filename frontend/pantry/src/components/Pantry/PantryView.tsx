@@ -1,12 +1,30 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { IP_ADDRESS } from 'react-native-dotenv';
 import { View, Text, StyleSheet } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
+
+import axios from 'axios';
 
 import FoodItem from './FoodItem.tsx';
 import Foods from '../Reciepts/dummyData/dummyFoodItems.ts';
 
+const foodItems = `http://${IP_ADDRESS}:4004/fooditem/receiptid/1`;
+
 const PantryView = ({ navigation }) => {
   const goTo = (props) => navigation.navigate('FoodDetailed', { ...props });
+
+  useEffect(() => {
+    const apiCall = async () => {
+      try {
+        const data = await axios.get(foodItems);
+        console.log(data);
+        return data;
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    apiCall();
+  }, []);
 
   return (
     <ScrollView style={{ backgroundColor: 'white', flex: 1 }}>
