@@ -1,61 +1,20 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { View, SafeAreaView, FlatList } from 'react-native';
 import Item from './item.tsx';
 import { cartStyles } from './cartStyles.ts';
 import FloatingActionButton from './floatingCartOptionButton';
-
-const DATA = [
-  {
-    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-    name: 'Oreo Cookies',
-    price: 2.99,
-    quantity: 2,
-  },
-  {
-    id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-    name: '2% Milk',
-    price: 4.99,
-    quantity: 1,
-  },
-  {
-    name: 'Rice Crispies Bar',
-    price: 1.99,
-    quantity: 5,
-  },
-  {
-    id: '58694a0f-3da1-471f-bd96-145571e29d72',
-    name: 'Hagen Daas',
-    price: 6.99,
-    quantity: 1,
-  },
-  // {
-  //   id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-  //   name: 'Oreo Cookies',
-  //   price: 2.99,
-  //   quantity: 2,
-  // },
-  // {
-  //   id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-  //   name: '2% Milk',
-  //   price: 4.99,
-  //   quantity: 1,
-  // },
-  // {
-  //   name: 'Rice Crispies Bar',
-  //   price: 1.99,
-  //   quantity: 5,
-  // },
-  // {
-  //   id: '58694a0f-3da1-471f-bd96-145571e29d72',
-  //   name: 'Hagen Daas',
-  //   price: 6.99,
-  //   quantity: 1,
-  // },
-];
+import { useSelector, useDispatch } from 'react-redux';
 
 const ShopCart = (props: any) => {
   const [selected, setSelected] = useState(new Map());
   const [deleteButton, setDeleteButton] = useState(false);
+  const camera: object = useSelector((state) => state.camera);
+
+  useEffect(() => {
+    console.log('hey there');
+  }, [camera]);
+
+  const DATA = camera.products;
 
   const onSelect = useCallback(
     (id) => {
@@ -71,15 +30,15 @@ const ShopCart = (props: any) => {
   return (
     <SafeAreaView style={cartStyles.container}>
       <FlatList
-        data={DATA}
+        data={DATA.length ? DATA : []}
         renderItem={({ item }) => (
           <Item
             id={item.id}
-            title={item.name}
+            title={item.title}
             selected={!!selected.get(item.id)}
             price={item.price}
             onSelect={onSelect}
-            img={item.img}
+            img={item.images[0]}
           />
         )}
         keyExtractor={(item) => item.id}

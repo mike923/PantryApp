@@ -113,7 +113,9 @@ const Camera = ({ navigation }) => {
           //   modalVisible={modalVisible}
           //   setModalVisible={setModalVisible}
           // />
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => navigation.navigate('ShoppingCart')}>
             <Text>Done</Text>
           </TouchableOpacity>
         ) : null}
