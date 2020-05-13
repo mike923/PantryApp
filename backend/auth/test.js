@@ -1,5 +1,5 @@
 require("dotenv").config();
-const {searchAPIs, uploadToFirestore} = require('../firebase.js')
+const {searchAPIs, uploadToFirestore, fetchFirestore, ...e } = require('../db/queries/allFoods')
 
 const a = async () => {
   let data = await searchAPIs('044000032197')
@@ -13,4 +13,13 @@ const a = async () => {
     valid: true
   })
 }
-a()
+// a()
+
+const l = async(input) => {
+  let data = await input
+  console.log(data)
+}
+
+l(fetchFirestore('foodByUPC', '044000032197'))
+l(searchAPIs('044000032197'))
+l(e.createNewUPC('044000032197'))
