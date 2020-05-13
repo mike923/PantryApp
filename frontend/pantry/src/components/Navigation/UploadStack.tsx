@@ -8,6 +8,7 @@ import Upload from '../Upload/Upload.tsx';
 import ItemConfirmation from '../Upload/ItemConfirmation.tsx';
 import { screenOptions } from './style.ts';
 import Camera from '../Camera/cameraScreen.tsx';
+import ShopCart from '../ShoppingCart/ShopCart';
 
 const Stack = createStackNavigator();
 
@@ -32,6 +33,7 @@ const UploadStack = ({ navigation }) => {
       <Stack.Screen name="Api" component={ApiTester} />
       <Stack.Screen name="Reciepts" component={Reciepts} />
       <Stack.Screen name="Confirmation" component={ItemConfirmation} />
+      <Stack.Screen name="ShoppingCart" component={ShopCart} />
       <Stack.Screen name="Parsed" component={TextRecog} />
     </Stack.Navigator>
   );

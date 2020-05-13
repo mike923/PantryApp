@@ -99,6 +99,27 @@ export const styles = StyleSheet.create({
     left: 2,
     width: 140,
   },
+  button: {
+    // position: 'absolute',
+    width: 60,
+    height: 60,
+    borderRadius: 60 / 2,
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowRadius: 10,
+    shadowColor: '#F02A4B',
+    shadowOpacity: 0.5,
+    shadowOffset: { height: 10, width: 10 },
+    backgroundColor: 'white',
+    left: windowWidth - 110,
+    elevation: 90,
+    bottom: 70,
+  },
+  floatingButtonContainer: {
+    position: 'absolute',
+    alignItems: 'center',
+    right: 40,
+  },
 });
 
 export const colors = {

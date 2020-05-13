@@ -30,7 +30,7 @@ const Upload = ({ navigation }) => {
       <TouchableOpacity onPress={() => goTo('Camera')} style={styles.button}>
         <Text style={styles.buttonText}>Camera</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => goTo('Api')} style={styles.button}>
+      {/* <TouchableOpacity onPress={() => goTo('Api')} style={styles.button}>
         <Text style={styles.buttonText}>Api</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => goTo('Reciepts')} style={styles.button}>
@@ -38,7 +38,7 @@ const Upload = ({ navigation }) => {
       </TouchableOpacity>
       <TouchableOpacity onPress={() => goTo('Parsed')} style={styles.button}>
         <Text style={styles.buttonText}>Parsed</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </ScrollView>
   );
 };
