@@ -18,19 +18,37 @@ const fetchSpoonacular = async (idOrUPC, typeUPC = true) => {
   }
 }
 
+const fetchUPCitemDB = async (upc) => {
+  const { data } = await axios.get(`https://api.upcitemdb.com/prod/trial/lookup?upc=${upc}`)
+  console.log('fetchUPCitemDB', data)
+  if (data.code === 'INVALID_UPC') {
+    return {
+      result: null,
+      source: 'upcitemdb',
+      valid: false,
+    }
+  }
+  return {
+    result: data.items[0],
+    source: 'upcitemdb',
+    valid: true,
+  }
+}
+
 const fetchFDC = async (reqBody, search = false) => {
   const baseUrl = `https://api.nal.usda.gov/fdc/v1/foods${ search ? '/search' : '' }?api_key=`
   const apiKey = process.env.FDC_API_KEY
   const url = baseUrl + (apiKey ? apiKey : 'DEMO_KEY')
   const { data } = await axios.post(url, reqBody)
   // console.log('fetchFDC', data)
-  if (data.totalHits === 0) {
+  if (!data.totalHits) {
     return {
       result: null,
       source: 'fdc',
       valid: false,
     }
-  }
+  } 
+
   return {
     result: data.foods.length === 1 ? data.foods[0] : data.foods,
     source: 'fdc',
@@ -42,6 +60,7 @@ const searchAPIs = async (upc) => {
   let results = await Promise.all([
     fetchFDC({query: upc}, true),
     fetchSpoonacular(upc),
+    fetchUPCitemDB(upc)
   ])
   // console.log('SEARCH APIS RESULTS: ', results)
   return results
@@ -128,5 +147,32 @@ module.exports = {
   fetchFDC,
   fetchFirestore,
   fetchSpoonacular,
+  fetchUPCitemDB,
   searchAPIs,
 }
+
+
+// const https = require('https')
+// var opts = {
+//   hostname: 'api.upcitemdb.com',
+//   path: '/prod/v1/lookup',
+//   method: 'POST',
+//   headers: {
+//     "Content-Type": "application/json",
+//     "user_key": "only_for_dev_or_pro",
+//     "key_type": "3scale"
+//   }
+// }
+// var req = https.request(opts, function(res) {
+//   console.log('statusCode: ', res.statusCode);
+//   console.log('headers: ', res.headers);
+//   res.on('data', function(d) {
+//     console.log('BODY: ' + d);
+//   })
+// })
+// req.on('error', function(e) {
+//   console.log('problem with request: ' + e.message);
+// })
+// req.write('{ "upc": "4002293401102" }')
+// req.end()
+    
