@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const queries = require("../db/queries/foodItem");
 
-router.get("/id/:receipt_id", async (req, res, next) => {
+router.get("/receiptid/:receipt_id", async (req, res, next) => {
   try {
     const data = await queries.getFoodItemByReceiptID(req.params.receipt_id);
     res.status(200).json({

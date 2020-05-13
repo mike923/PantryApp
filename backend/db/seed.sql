@@ -66,7 +66,7 @@ INSERT INTO pantry(name) VALUES
   ('Voniel''s Pantry')
 ;
 
-INSERT INTO users (id,email,pantry_id) VALUES 
+INSERT INTO users (id, email, pantry_id) VALUES 
   ('47E1Pb7c1fTgKCdYWPm1KNDVDm02', 'voniel@bvoniel.com', 1)
 ;
 
