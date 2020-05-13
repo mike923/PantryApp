@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { View } from 'react-native';
+import { View, TouchableOpacity, Text } from 'react-native';
 import { RNCamera } from 'react-native-camera';
 import { Slider } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import vision from '@react-native-firebase/ml-vision';
 import { barcodeApiCalls } from '../../redux/actions/cameraActions.ts';
 import CameraModal from './cameraModal.tsx';
+// import { cartStyles } from '../ShoppingCart/cartStyles.ts';
 
 import { styles, colors } from './cameraStyles.ts';
 
@@ -101,11 +102,15 @@ const Camera = ({ navigation }) => {
             name="flash"
           />
         </View>
+        <View></View>
         {camera.products.length ? (
-          <CameraModal
-            modalVisible={modalVisible}
-            setModalVisible={setModalVisible}
-          />
+          // <CameraModal
+          //   modalVisible={modalVisible}
+          //   setModalVisible={setModalVisible}
+          // />
+          <TouchableOpacity style={styles.button}>
+            <Text>Done</Text>
+          </TouchableOpacity>
         ) : null}
       </RNCamera>
     </View>
