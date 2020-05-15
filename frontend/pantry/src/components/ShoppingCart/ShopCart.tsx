@@ -1,9 +1,17 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { View, SafeAreaView, FlatList } from 'react-native';
+import {
+  View,
+  SafeAreaView,
+  FlatList,
+  Text,
+  TouchableOpacity,
+} from 'react-native';
 import Item from './item.tsx';
 import { cartStyles } from './cartStyles.ts';
 import FloatingActionButton from './floatingCartOptionButton';
 import { useSelector, useDispatch } from 'react-redux';
+import SwipeValueBasedUi from './SwipeAbleList';
+import DraggableFlatList from 'react-native-draggable-flatlist';
 
 const ShopCart = (props: any) => {
   const [selected, setSelected] = useState(new Map());
@@ -14,7 +22,9 @@ const ShopCart = (props: any) => {
     console.log('hey there');
   }, [camera]);
 
-  const DATA = camera.products;
+  const [data, setData] = useState(camera.products);
+
+  // const DATA = camera.products;
 
   const onSelect = useCallback(
     (id) => {
@@ -23,13 +33,36 @@ const ShopCart = (props: any) => {
       console.warn(id);
       setSelected(newSelected);
       setDeleteButton(!deleteButton);
+      console.log();
     },
     [selected],
   );
 
+  const renderItem = ({ item, index, drag, isActive }) => {
+    return (
+      <TouchableOpacity
+        style={{
+          height: 100,
+          backgroundColor: isActive ? 'blue' : item.backgroundColor,
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+        onLongPress={drag}>
+        <Text
+          style={{
+            fontWeight: 'bold',
+            color: 'white',
+            fontSize: 32,
+          }}>
+          {item.label}
+        </Text>
+      </TouchableOpacity>
+    );
+  };
+
   return (
     <SafeAreaView style={cartStyles.container}>
-      <FlatList
+      {/* <FlatList
         data={DATA.length ? DATA : []}
         renderItem={({ item }) => (
           <Item
@@ -43,6 +76,12 @@ const ShopCart = (props: any) => {
         )}
         keyExtractor={(item) => item.id}
         extraData={selected}
+      /> */}
+      <DraggableFlatList
+        data={data}
+        enderItem={renderItem}
+        keyExtractor={(item: object) => `draggable-item-${item.id}`}
+        onDragEnd={({ data }) => setData({ data })}
       />
       <View style={{ flex: 1, alignItems: 'center' }}>
         {/* {deleteButton ? (
