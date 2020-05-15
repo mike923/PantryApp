@@ -6,13 +6,13 @@ import {
   Text,
   TouchableOpacity,
 } from 'react-native';
-import Item from './item.tsx';
-import { cartStyles } from './cartStyles.ts';
-import FloatingActionButton from './floatingCartOptionButton';
+// import Item from './item.tsx';
+// import { cartStyles } from './cartStyles.ts';
+// import FloatingActionButton from './floatingCartOptionButton';
 import { useSelector, useDispatch } from 'react-redux';
-import SwipeValueBasedUi from './SwipeAbleList';
-import DraggableFlatList from 'react-native-draggable-flatlist';
-import List from './SwipeAbleList';
+// import SwipeValueBasedUi from '../SwipeAbleList/SwipeAbleList';
+// import DraggableFlatList from 'react-native-draggable-flatlist';
+import List from '../SwipeAbleList/SwipeAbleList';
 
 const ShopCart = (props: any) => {
   const [selected, setSelected] = useState(new Map());
@@ -26,18 +26,6 @@ const ShopCart = (props: any) => {
   const [data, setData] = useState(camera.products);
 
   // const DATA = camera.products;
-
-  const onSelect = useCallback(
-    (id) => {
-      const newSelected = new Map(selected);
-      newSelected.set(id, !selected.get(id));
-      console.warn(id);
-      setSelected(newSelected);
-      setDeleteButton(!deleteButton);
-      console.log();
-    },
-    [selected],
-  );
 
   const renderItem = ({ item, index, drag, isActive }) => {
     return (

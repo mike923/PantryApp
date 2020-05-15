@@ -7,9 +7,9 @@ import {
   PanResponder,
   TouchableOpacity,
   Easing,
-  StyleSheet,
 } from 'react-native';
 import { Icon } from 'react-native-elements';
+import { swipeStyles } from './swipeStyle.ts';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const RIGHT_BUTTON_THRESHOLD = SCREEN_WIDTH / 15;
@@ -97,7 +97,7 @@ class Item extends React.Component {
     }).start();
   }
 
-  completeSwipe(dimension, callback) {
+  completeSwipe(dimension: string, callback: any) {
     const x = dimension === 'right' ? SCREEN_WIDTH : -SCREEN_WIDTH;
     Animated.timing(this.position, {
       toValue: { x, y: 0 },
@@ -107,7 +107,7 @@ class Item extends React.Component {
     callback();
   }
 
-  enableScrollView(isEnabled) {
+  enableScrollView(isEnabled: any) {
     if (this.scrollView !== isEnabled) {
       this.props.swipingCheck(isEnabled);
       this.scrollView = isEnabled;
@@ -135,7 +135,7 @@ class Item extends React.Component {
     }
   }
 
-  showButton(side): string {
+  showButton(side: string) {
     const x = side === 'right' ? SCREEN_WIDTH / 4 : -SCREEN_WIDTH / 2.5; // 4 from 4.5 // BURASI DEĞİŞTİRİLECEK
     Animated.timing(this.position, {
       toValue: { x, y: 0 },
@@ -146,40 +146,30 @@ class Item extends React.Component {
   }
 
   render() {
-    const {
-      containerStyle,
-      leftButtonContainer,
-      textContainer,
-      rightButtonContainer,
-    } = styles;
     return (
-      <View style={containerStyle}>
-        <Animated.View // LEFT BUTTON
-          style={[leftButtonContainer, this.getLeftButtonProps()]}>
+      <View style={swipeStyles.containerStyle}>
+        <Animated.View
+          style={[swipeStyles.leftButtonContainer, this.getLeftButtonProps()]}>
           <TouchableOpacity
             onPress={() =>
               this.completeSwipe('right', () => this.props.leftButtonPressed())
             }>
             <Icon type="font-awesome" name="check" />
-            <Text
-              style={styles.textStyle}
-              numberOfLines={1} // to keep the text in one line when it the container gets narrow
-              //ellipsizeMode='clip' // to show the text without three dot but doesnt work on android
-            >
+            <Text style={swipeStyles.textStyle} numberOfLines={1}>
               Accept
             </Text>
           </TouchableOpacity>
         </Animated.View>
 
-        <Animated.View // THE CONTENT OF ITEM
-          style={[textContainer, this.position.getLayout()]}
+        <Animated.View
+          style={[swipeStyles.textContainer, this.position.getLayout()]}
           {...this.panResponder.panHandlers}>
-          <Text style={styles.textStyle}>{this.props.message}</Text>
+          <Text style={swipeStyles.textStyle}>{this.props.message}</Text>
         </Animated.View>
 
         <Animated.View
           style={[
-            rightButtonContainer,
+            swipeStyles.rightButtonContainer,
             { left: SCREEN_WIDTH / 1.7 },
             this.getRightButtonProps(),
           ]}>
@@ -188,71 +178,24 @@ class Item extends React.Component {
               this.completeSwipe('left', () => this.props.deleteButtonPressed())
             }>
             <Icon type="font-awesome" name="trash" />
-            <Text style={styles.textStyle}>Delete</Text>
+            <Text style={swipeStyles.textStyle}>Delete</Text>
           </TouchableOpacity>
         </Animated.View>
 
         <Animated.View
           style={[
-            rightButtonContainer,
+            swipeStyles.rightButtonContainer,
             { backgroundColor: '#FFC400' },
             this.getRightButtonProps(),
           ]}>
           <TouchableOpacity onPress={() => this.props.editButtonPressed()}>
             <Icon type="font-awesome" name="edit" />
-            <Text style={styles.textStyle}>Edit</Text>
+            <Text style={swipeStyles.textStyle}>Edit</Text>
           </TouchableOpacity>
         </Animated.View>
       </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  leftButtonContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginRight: 5,
-    borderRadius: 7,
-    paddingHorizontal: 18,
-    paddingVertical: 23,
-    backgroundColor: '#50f442',
-    position: 'absolute',
-    elevation: 3,
-  },
-  containerStyle: {
-    flex: 1,
-    flexDirection: 'row',
-    marginBottom: 5,
-    marginHorizontal: 5,
-    marginTop: 30,
-    elevation: 3,
-  },
-  textContainer: {
-    paddingHorizontal: 30,
-    paddingVertical: 35,
-    width: SCREEN_WIDTH / 1.03,
-    borderRadius: 7,
-    backgroundColor: '#CFD8DC',
-    elevation: 3,
-    zIndex: 2,
-  },
-  textStyle: {
-    fontSize: 17,
-  },
-  rightButtonContainer: {
-    position: 'absolute',
-    left: SCREEN_WIDTH / 1.24,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginRight: 5,
-    borderRadius: 7,
-    paddingHorizontal: 18,
-    paddingVertical: 23,
-    elevation: 3,
-    backgroundColor: '#D50000',
-    zIndex: 1,
-  },
-});
 
 export default Item;
