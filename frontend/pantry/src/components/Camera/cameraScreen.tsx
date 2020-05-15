@@ -115,7 +115,7 @@ const Camera = ({ navigation }) => {
           // />
           <TouchableOpacity
             style={styles.button}
-            onPress={() => navigation.navigate('ShoppingCart')}>
+            onPress={() => navigation.navigate('Shopping Cart')}>
             <Text>Done</Text>
           </TouchableOpacity>
         ) : null}

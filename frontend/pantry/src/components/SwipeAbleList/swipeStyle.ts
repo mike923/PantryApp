@@ -59,4 +59,8 @@ export const swipeStyles = StyleSheet.create({
     width: 70,
     marginRight: 5,
   },
+  delete: {
+    marginRight: 20,
+    marginLeft: 30,
+  },
 });

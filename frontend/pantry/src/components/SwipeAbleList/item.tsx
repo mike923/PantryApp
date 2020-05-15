@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Easing,
   Image,
+  TextInput,
 } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { swipeStyles } from './swipeStyle.ts';
@@ -173,7 +174,18 @@ class Item extends React.Component {
             }}
             style={swipeStyles.image}
           />
-          <Text style={swipeStyles.textStyle}>{this.props.message}</Text>
+          <View>
+            {this.props.isEditing ? (
+              <TextInput
+                value={this.props.message}
+                onChangeText={this.props.setTitle()}
+                autoFocus
+                onBlur={() => this.setState({ isEditing: false })}
+              />
+            ) : (
+              <Text style={swipeStyles.textStyle}>{this.props.message}</Text>
+            )}
+          </View>
         </Animated.View>
 
         <Animated.View
@@ -185,13 +197,14 @@ class Item extends React.Component {
           <TouchableOpacity
             onPress={() =>
               this.completeSwipe('left', () => this.props.deleteButtonPressed())
-            }>
+            }
+            style={swipeStyles.delete}>
             <Icon type="font-awesome" name="trash" />
             <Text style={swipeStyles.textStyle}>Delete</Text>
           </TouchableOpacity>
         </Animated.View>
 
-        <Animated.View
+        {/* <Animated.View
           style={[
             swipeStyles.rightButtonContainer,
             { backgroundColor: '#FFC400' },
@@ -201,7 +214,7 @@ class Item extends React.Component {
             <Icon type="font-awesome" name="edit" />
             <Text style={swipeStyles.textStyle}>Edit</Text>
           </TouchableOpacity>
-        </Animated.View>
+        </Animated.View> */}
       </View>
     );
   }

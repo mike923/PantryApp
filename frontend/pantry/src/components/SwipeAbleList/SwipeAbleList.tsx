@@ -6,6 +6,8 @@ class List extends React.Component {
   state = {
     data: this.props.data,
     swiping: false,
+    itemName: '',
+    isEditing: false,
   };
 
   componentUpdate() {
@@ -20,11 +22,14 @@ class List extends React.Component {
     });
     this.setState({ data });
   }
+  setTitle = (value: string) => this.setState({ itemName: value });
 
   renderItems() {
     return this.state.data.map((item) => {
       return (
         <Item
+          setTitle={this.setTitle}
+          isEditing={this.state.isEditing}
           img={item.images[0]}
           key={item.id}
           swipingCheck={(swiping) => this.setState({ swiping })}
@@ -33,7 +38,7 @@ class List extends React.Component {
           cleanFromScreen={(id) => this.cleanFromScreen(id)}
           leftButtonPressed={() => console.log('left button pressed')}
           deleteButtonPressed={() => console.log('delete button pressed')}
-          editButtonPressed={() => console.log('edit button pressed')}
+          editButtonPressed={() => this.setState({ isEditing: true })}
         />
       );
     });
