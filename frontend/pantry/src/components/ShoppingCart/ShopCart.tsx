@@ -79,7 +79,7 @@ const ShopCart = (props: any) => {
       /> */}
       <DraggableFlatList
         data={data}
-        enderItem={renderItem}
+        renderItem={renderItem}
         keyExtractor={(item: object) => `draggable-item-${item.id}`}
         onDragEnd={({ data }) => setData({ data })}
       />
