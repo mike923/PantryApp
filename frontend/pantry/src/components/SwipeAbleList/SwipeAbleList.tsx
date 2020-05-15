@@ -16,6 +16,7 @@ class List extends React.Component {
     LayoutAnimation.spring();
   }
 
+  //cleaning the screen of the item from the screen
   cleanFromScreen(id) {
     const data = this.state.data.filter((item) => {
       return item.id !== id;
@@ -24,6 +25,7 @@ class List extends React.Component {
   }
   setTitle = (value: string) => this.setState({ itemName: value });
 
+  //rendering the items in the state to the screen in the items component
   renderItems() {
     return this.state.data.map((item) => {
       return (

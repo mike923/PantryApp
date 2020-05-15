@@ -28,12 +28,17 @@ class Item extends React.Component {
     this.scrollStopped = false;
 
     const panResponder = PanResponder.create({
-      onStartShouldSetPanResponder: () => false, // we don't want the item to be animated with a touch
-      onMoveShouldSetPanResponder: () => true, // we want to animate the item with a movement
+      onStartShouldSetPanResponder: () => false,
+      onMoveShouldSetPanResponder: () => true,
       onResponderTerminationRequest: () => false,
       onPanResponderGrant: () => {
-        this.position.setOffset({ x: this.position.x._value, y: 0 }); // we specify the offset to continue swiping from the place where user left.
-        this.position.setValue({ x: 0, y: 0 }); // clearing the position
+        // specifying the offset to continue swiping from the position where user left.
+        this.position.setOffset({
+          x: this.position.x._value,
+          y: 0,
+        });
+        // clearing the current position
+        this.position.setValue({ x: 0, y: 0 });
       },
       onPanResponderMove: (event, gesture) => {
         if (gesture.dx >= SCROLL_THRESHOLD) {
@@ -47,7 +52,8 @@ class Item extends React.Component {
         }
       },
       onPanResponderRelease: (event, gesture) => {
-        this.position.flattenOffset(); // adding animated value to the offset value then it reset the offset to 0.
+        // adding animated value to the offset value then it reset the offset to 0.
+        this.position.flattenOffset();
         if (gesture.dx > 0) {
           this.userSwipedRight(gesture);
         } else {
@@ -91,6 +97,7 @@ class Item extends React.Component {
     };
   }
 
+  // resetting the position of the item to original position
   resetPosition() {
     Animated.timing(this.position, {
       toValue: { x: 0, y: 0 },
@@ -99,6 +106,11 @@ class Item extends React.Component {
     }).start();
   }
 
+  /**completing the user swipe
+    takes in two parameters dimension and callback function
+    dimension sets wether to move item to the left or right
+    callback function clears the screen of the item
+  **/
   completeSwipe(dimension: string, callback: any) {
     const x = dimension === 'right' ? SCREEN_WIDTH : -SCREEN_WIDTH;
     Animated.timing(this.position, {
@@ -109,6 +121,7 @@ class Item extends React.Component {
     callback();
   }
 
+  //sets the view to be scrollable
   enableScrollView(isEnabled: any) {
     if (this.scrollView !== isEnabled) {
       this.props.swipingCheck(isEnabled);
@@ -116,6 +129,7 @@ class Item extends React.Component {
     }
   }
 
+  //allow the user to swipe left
   userSwipedLeft(gesture: object) {
     if (gesture.dx <= -RIGHT_BUTTON_THRESHOLD) {
       this.showButton('left');
@@ -124,6 +138,7 @@ class Item extends React.Component {
     }
   }
 
+  //allow the user to swipe right
   userSwipedRight(gesture: object) {
     if (gesture.dx >= FORCE_TO_OPEN_THRESHOLD) {
       this.completeSwipe('right', this.props.leftButtonPressed.bind(this));
@@ -137,8 +152,9 @@ class Item extends React.Component {
     }
   }
 
+  //toggling the visibility of the buttons
   showButton(side: string) {
-    const x = side === 'right' ? SCREEN_WIDTH / 4 : -SCREEN_WIDTH / 2.5; // 4 from 4.5 // BURASI DEĞİŞTİRİLECEK
+    const x = side === 'right' ? SCREEN_WIDTH / 4 : -SCREEN_WIDTH / 2.5;
     Animated.timing(this.position, {
       toValue: { x, y: 0 },
       duration: 400,
@@ -197,10 +213,11 @@ class Item extends React.Component {
           <TouchableOpacity
             onPress={() =>
               this.completeSwipe('left', () => this.props.deleteButtonPressed())
-            }
-            style={swipeStyles.delete}>
+            }>
             <Icon type="font-awesome" name="trash" />
-            <Text style={swipeStyles.textStyle}>Delete</Text>
+            <Text style={[swipeStyles.textStyle, swipeStyles.delete]}>
+              Delete
+            </Text>
           </TouchableOpacity>
         </Animated.View>
 
