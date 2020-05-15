@@ -25,9 +25,10 @@ class List extends React.Component {
     return this.state.data.map((item) => {
       return (
         <Item
+          img={item.images[0]}
           key={item.id}
           swipingCheck={(swiping) => this.setState({ swiping })}
-          message={item.message}
+          message={item.title}
           id={item.id}
           cleanFromScreen={(id) => this.cleanFromScreen(id)}
           leftButtonPressed={() => console.log('left button pressed')}

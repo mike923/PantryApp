@@ -7,6 +7,7 @@ import {
   PanResponder,
   TouchableOpacity,
   Easing,
+  Image,
 } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { swipeStyles } from './swipeStyle.ts';
@@ -164,6 +165,14 @@ class Item extends React.Component {
         <Animated.View
           style={[swipeStyles.textContainer, this.position.getLayout()]}
           {...this.panResponder.panHandlers}>
+          <Image
+            source={{
+              uri:
+                this.props.img ||
+                'https://cdn0.iconfinder.com/data/icons/ecommerce-57/100/Ecommerce_RTE-03-512.png',
+            }}
+            style={swipeStyles.image}
+          />
           <Text style={swipeStyles.textStyle}>{this.props.message}</Text>
         </Animated.View>
 
