@@ -12,6 +12,7 @@ import FloatingActionButton from './floatingCartOptionButton';
 import { useSelector, useDispatch } from 'react-redux';
 import SwipeValueBasedUi from './SwipeAbleList';
 import DraggableFlatList from 'react-native-draggable-flatlist';
+import List from './SwipeAbleList';
 
 const ShopCart = (props: any) => {
   const [selected, setSelected] = useState(new Map());
@@ -59,45 +60,18 @@ const ShopCart = (props: any) => {
       </TouchableOpacity>
     );
   };
+  const DATA = [
+    { id: 1, message: 'Message #1' },
+    { id: 2, message: 'Message #2' },
+    { id: 3, message: 'Message #3' },
+    { id: 4, message: 'Message #4' },
+    { id: 5, message: 'Message #5' },
+    { id: 6, message: 'Message #6' },
+    { id: 7, message: 'Message #7' },
+    { id: 8, message: 'Message #8' },
+  ];
 
-  return (
-    <SafeAreaView style={cartStyles.container}>
-      {/* <FlatList
-        data={DATA.length ? DATA : []}
-        renderItem={({ item }) => (
-          <Item
-            id={item.id}
-            title={item.title}
-            selected={!!selected.get(item.id)}
-            price={item.price}
-            onSelect={onSelect}
-            img={item.images[0]}
-          />
-        )}
-        keyExtractor={(item) => item.id}
-        extraData={selected}
-      /> */}
-      <DraggableFlatList
-        data={data}
-        renderItem={renderItem}
-        keyExtractor={(item: object) => `draggable-item-${item.id}`}
-        onDragEnd={({ data }) => setData({ data })}
-      />
-      <View style={{ flex: 1, alignItems: 'center' }}>
-        {/* {deleteButton ? (
-          <TouchableOpacity
-            style={[cartStyles.deleteButton, cartStyles.button]}>
-            <FeatherIcon name="trash-2" style={cartStyles.deleteIcon} />
-          </TouchableOpacity>
-        ) : (
-          <TouchableOpacity style={[cartStyles.addButton, cartStyles.button]}>
-            <FeatherIcon name="plus-circle" style={cartStyles.deleteIcon} />
-          </TouchableOpacity>
-        )} */}
-        <FloatingActionButton style={{ button: 100 }} />
-      </View>
-    </SafeAreaView>
-  );
+  return <List data={DATA} />;
 };
 
 export default ShopCart;
