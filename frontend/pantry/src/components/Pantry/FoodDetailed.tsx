@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Text,
   TextInput,
@@ -11,26 +11,56 @@ import {
 } from 'react-native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import DatePicker from 'react-native-date-picker';
+import axios from 'axios';
+
+import { IP_ADDRESS } from 'react-native-dotenv';
+
+const updateFood = `http://${IP_ADDRESS}:4004/fooditem/update`;
 
 const FoodDetailed = (props: any) => {
   console.log(props);
-  const params = { ...props.route.params, edited: false };
-  params.purchasedDate = new Date(params.purchasedDate).toDateString();
-  const [state, setState] = useState(params);
+  // const params = { ...props.route.params, edited: false };
+  // params. = new Date(params.receipt_date).toDateString();
+  const item_id = props.route.params.item_id;
+  const receipt_date = props.route.params.receipt_date;
+  const [state, setState] = useState({ loaded: false, edited: false, item_id, receipt_date });
   const [dateModal, setDateModal] = useState(false);
+  console.log(`HERE`, state);
 
-  return (
+  useEffect(() => {
+    const apiCall = async () => {
+      try {
+        const { data } = await axios.get(
+          `http://${IP_ADDRESS}:4004/fooditem/itemid/${state.item_id}`,
+        );
+        console.log(data);
+        setState({ ...state, ...data.payload[0], loaded: true });
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    apiCall();
+  }, []);
+
+  const handleSubmit = async () => {
+    // IF DATE CHANGED UPDATE DATE FINISHED COLUMN
+    console.log(`Submitted`, state);
+    const data = await axios.patch(`${updateFood}/${state.item_id}`, state);
+    props.navigation.goBack();
+  };
+
+  return state.loaded ? (
     <View style={styles.container}>
       <TextInput
         style={styles.name}
-        value={state.productName}
+        value={state.name}
         onChangeText={(text) =>
-          setState({ ...state, productName: text, edited: true })
+          setState({ ...state, name: text, edited: true })
         }
         editable
       />
       <Image
-        source={{ uri: state.uri }}
+        source={{ uri: state.img_url }}
         resizeMode="contain"
         style={styles.img}
       />
@@ -62,7 +92,7 @@ const FoodDetailed = (props: any) => {
           }
         />
       </View>
-      <Text style={styles.date}>{state.purchasedDate}</Text>
+      <Text style={styles.date}>{state.receipt_date}</Text>
       <TouchableOpacity onPress={() => setDateModal(!dateModal)}>
         <Text>Change Date</Text>
       </TouchableOpacity>
@@ -70,12 +100,12 @@ const FoodDetailed = (props: any) => {
         <Modal animationType="slide" visible={dateModal} transparent>
           <View style={styles.modalView}>
             <DatePicker
-              date={new Date(state.purchasedDate)}
+              date={new Date(state.receipt_date)}
               mode="date"
               onDateChange={(newDate) =>
                 setState({
                   ...state,
-                  purchasedDate: newDate.toDateString(),
+                  receipt_date: newDate.toDateString(),
                   edited: true,
                 })
               }
@@ -90,14 +120,12 @@ const FoodDetailed = (props: any) => {
         </Modal>
       </View>
       {state.edited ? (
-        <TouchableOpacity
-          style={styles.submitBtn}
-          onPress={() => props.navigation.goBack()}>
+        <TouchableOpacity style={styles.submitBtn} onPress={handleSubmit}>
           <Text style={styles.submitBtnText}>Submit</Text>
         </TouchableOpacity>
       ) : null}
     </View>
-  );
+  ) : null;
 };
 
 const styles = StyleSheet.create({
