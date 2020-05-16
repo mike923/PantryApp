@@ -494,7 +494,7 @@ PODS:
     - RNFBApp
   - RNGestureHandler (1.6.1):
     - React
-  - RNReanimated (1.7.1):
+  - RNReanimated (1.8.0):
     - React
   - RNScreens (2.4.0):
     - React
@@ -772,7 +772,7 @@ SPEC CHECKSUMS:
   RNFBMLVision: f0ee3209704db5cd2b34586a27f44f0c40c7aca4
   RNFBStorage: 24097a1d18534b9c3559f862b8d18365cd573c2c
   RNGestureHandler: 8f09cd560f8d533eb36da5a6c5a843af9f056b38
-  RNReanimated: 4e102df74a9674fa943e05f97f3362b6e44d0b48
+  RNReanimated: 955cf4068714003d2f1a6e2bae3fb1118f359aff
   RNScreens: b5c0e1b2b04512919e78bd3898e144a157ce2363
   RNShare: fea1801315aa8875d6db73a4010b14afcd568765
   RNTextDetector: 3983fcecbd4a95ea4664d3269a62c1b14c3a712b

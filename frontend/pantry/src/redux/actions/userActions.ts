@@ -1,8 +1,8 @@
 // import React 'react';
 import { Alert } from 'react-native';
-import { IP_ADDRESS } from 'react-native-dotenv';
 import auth from '@react-native-firebase/auth';
 import axios from 'axios';
+import { PROXY } from '../../../proxy';
 import {
   FETCHING_USER,
   FETCHED_USER,
@@ -56,7 +56,7 @@ const loginUser = (email, password) => {
           console.log(error);
         }
         try {
-          const { data } = await axios.get(`http://${await IP_ADDRESS}:8282/`, {
+          const { data } = await axios.get(PROXY, {
             headers: { authtoken: token },
           });
           console.log(data);
@@ -93,7 +93,7 @@ const registerUser = (email, password, pantry) => {
         }
         try {
           const { data } = await axios.post(
-            `http://${await IP_ADDRESS}:8282/users/add`,
+            `${PROXY}/users/add`,
             {
               pantryName: pantry.pantryName,
               newPantry: pantry.newPantry,

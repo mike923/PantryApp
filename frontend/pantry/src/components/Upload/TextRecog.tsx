@@ -29,14 +29,14 @@ const TextRecog = ({ route, navigation }) => {
     console.log(`Items: `, items);
     setText(items);
 
-    // const textJsxArr = processedText.blocks.map((block) => {
-    //   console.log(`Text Block: `, block.text);
-    //   console.log(`Confidence: `, block.confidence);
-    //   // console.log(`Language: `, block.recognizedLanguages);
-    //   return <Text>{block.text}</Text>;
-    // });
+    const textJsxArr = processedText.blocks.map((block) => {
+      console.log(`Text Block: `, block.text);
+      console.log(`Confidence: `, block.confidence);
+      // console.log(`Language: `, block.recognizedLanguages);
+      return <Text>{block.text}</Text>;
+    });
 
-    // setText(textJsxArr);
+    setText(textJsxArr);
   };
 
   const sendData = async () => {
@@ -61,9 +61,9 @@ const TextRecog = ({ route, navigation }) => {
   return (
     <ScrollView>
       {/* {text} */}
-      {/* {text ? (
-        <ItemConfirmation navigation={navigation} parsedReciept={text} />
-      ) : null} */}
+      {text ? (
+        <ItemConfirmation navigation={navigation} parsedReceipt={text} />
+      ) : null}
       {text ? (
         <Button title="Confirmation" onPress={goToParsed} color="green" />
       ) : null}
