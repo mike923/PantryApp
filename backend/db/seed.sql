@@ -44,7 +44,7 @@ CREATE TABLE food_item (
     item_id SERIAL PRIMARY KEY,
     receipt_id INT REFERENCES receipts(id),
     pantry_id INT REFERENCES pantry(id),
-    name_on_receipt VARCHAR NOT NULL,
+    name VARCHAR NOT NULL,
     price DECIMAL NOT NULL,
     quantity INT NOT NULL,
     -- food_id INT REFERENCES all_foods(id),
