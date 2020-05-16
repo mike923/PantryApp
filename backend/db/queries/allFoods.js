@@ -27,7 +27,7 @@ const fetchUPCitemDB = async (upc) => {
     `https://api.upcitemdb.com/prod/trial/lookup?upc=${upc}`
   );
   console.log("fetchUPCitemDB", data);
-  if (data.code === "INVALID_UPC") {
+  if (data.code === "INVALID_UPC" || data.total === 0) {
     return {
       result: null,
       source: "upcitemdb",
@@ -105,7 +105,7 @@ const addResultToFirestoreUPCDoc = async (collection, UPCRef, resultData) => {
     let status = await db.runTransaction(async (doc) => {
       try {
         let data = await doc.get(ref);
-
+        console.log(Array(299).fill('+').join(), data.data(), Array(299).fill('+').join(), resultData, Array(299).fill('+').join())
         if (data.exists) data = data.data().results;
         else return null;
 
@@ -198,10 +198,13 @@ const createQuickItemLookup = async (collection, reference) => {
         let doc = await snap.get(ref);
         if (doc.exists) {
           // console.log('createQuickItemLookup', doc.data())
-          doc = consolidateResults(doc.data().results);
+          const results = doc.data().results
+          console.log(Array(299).fill('+').join(), results ,Array(299).fill('+').join())
+          doc = consolidateResults(results);
 
           snap.update(ref, {
             item: doc ? doc : `Item not found: ${reference}`,
+            results: results,
             valid: !!doc,
           });
         }

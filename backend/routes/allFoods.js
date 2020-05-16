@@ -6,7 +6,7 @@ router.get("/checkByUPC/:upc", async (req, res, next) => {
   const { upc } = req.params
 
   try {
-    let data = await queries.fetchFirestore('foodByUPC', upc)
+    let data = await queries.fetchFirestore('foodByUPC', upc, false)
     console.log('/check/upc/', data)
     if (typeof data === 'string') {
       // data = await queries.createNewUPC('foodByUPC', upc)
