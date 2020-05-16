@@ -10,6 +10,7 @@ const usersRouter = require("./routes/users");
 const receiptsRouter = require("./routes/receipts");
 const authRouter = require("./routes/auth");
 const foodItemRouter = require("./routes/foodItem");
+const allFoodsRouter = require("./routes/allFoods")
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
+app.use("/allFoods", allFoodsRouter);
 app.use("/users", usersRouter);
 app.use("/receipts", receiptsRouter);
 app.use("/auth", authRouter);
