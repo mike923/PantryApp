@@ -98,37 +98,37 @@ $1.99`;
 
 // console.log(text);
 
-const removeFN = (text) => text.replace(/FN/gi, '\n');
+const removeFN = (fullText) => fullText.replace(/FN/gi, '\n');
 
-const removeNewLine = (text) => text.replace(/(\r\n|\n|\r)/gm, ' ');
+const removeNewLine = (fullText) => fullText.replace(/(\r\n|\n|\r)/gm, ' ');
 
-const getDate = (text) => {
-  return text.match(/(\d{1,4}([.\-/])\d{1,2}([.\-/])\d{1,4})/g);
+const getDate = (fullText) => {
+  return fullText.match(/(\d{1,4}([.\-/])\d{1,2}([.\-/])\d{1,4})/g);
 };
 
-const getAddress = (text) => {
-  return text.match(
-    /^(?n:(?<address1>(\d{1,5}(\ 1\/[234])?(\x20[A-Z]([a-z])+)+ )|(P\.O\.\ Box\ \d{1,5}))\s{1,2}(?i:(?<address2>(((APT|B LDG|DEPT|FL|HNGR|LOT|PIER|RM|S(LIP|PC|T(E|OP))|TRLR|UNIT)\x20\w{1,5})|(BSMT|FRNT|LBBY|LOWR|OFC|PH|REAR|SIDE|UPPR)\.?)\s{1,2})?)(?<city>[A-Z]([a-z])+(\.?)(\x20[A-Z]([a-z])+){0,2})\, \x20(?<state>A[LKSZRAP]|C[AOT]|D[EC]|F[LM]|G[AU]|HI|I[ADL N]|K[SY]|LA|M[ADEHINOPST]|N[CDEHJMVY]|O[HKR]|P[ARW]|RI|S[CD] |T[NX]|UT|V[AIT]|W[AIVY])\x20(?<zipcode>(?!0{5})\d{5}(-\d {4})?))$/,
+const getAddress = (fullText) => {
+  return fullText.match(
+    /^(?n:(?<address1>(\d{1,5}( 1\/[234])?(\x20[A-Z]([a-z])+)+ )|(P\.O\. Box \d{1,5}))\s{1,2}(?i:(?<address2>(((APT|B LDG|DEPT|FL|HNGR|LOT|PIER|RM|S(LIP|PC|T(E|OP))|TRLR|UNIT)\x20\w{1,5})|(BSMT|FRNT|LBBY|LOWR|OFC|PH|REAR|SIDE|UPPR)\.?)\s{1,2})?)(?<city>[A-Z]([a-z])+(\.?)(\x20[A-Z]([a-z])+){0,2}), \x20(?<state>A[LKSZRAP]|C[AOT]|D[EC]|F[LM]|G[AU]|HI|I[ADL N]|K[SY]|LA|M[ADEHINOPST]|N[CDEHJMVY]|O[HKR]|P[ARW]|RI|S[CD] |T[NX]|UT|V[AIT]|W[AIVY])\x20(?<zipcode>(?!0{5})\d{5}(-\d {4})?))$/,
   );
 };
 
-const getProducts = (text) => {
+const getProducts = (fullText) => {
   const obj = {
     heading: [],
     cleaning: [],
     grocery: [],
   };
-  const heading = text
+  const heading = fullText
     .split(/(cleaning supplies)|(grocery)/gi)[0]
     .trim()
     .split('\n');
 
-  const cleaningSup = text
+  const cleaningSup = fullText
     .match(/cleaning supplies([\s\S]*)(?=grocery)/gi)[0]
     .trim()
     .split('\n');
 
-  const grocerySup = text
+  const grocerySup = fullText
     .match(/grocery([\s\S]*)/gi)[0]
     .trim()
     .split('\n');
@@ -142,12 +142,12 @@ const getProducts = (text) => {
   return obj;
 };
 
-const getPrices = (text) => {
-  return text.match(/[$]\d+(\.)(\d{1,2})?/g);
+const getPrices = (fullText) => {
+  return fullText.match(/[$]\d+(\.)(\d{1,2})?/g);
 };
 
-const isProductNum = (text) => {
-  return !isNaN(text) && text.length === 9;
+const isProductNum = (fullText) => {
+  return !isNaN(fullText) && fullText.length === 9;
 };
 
 const cleanAddress = (arr) => {
@@ -213,23 +213,24 @@ const getTotal = (arr) => {
 
 const makeRecieptItems = (prod, pric) => {
   const obj = {};
-  prod.map((ele, i) => {
-    ele = ele.trim();
-    if (pric[i]) {
-      obj[ele] = {
-        name: ele,
-        price: pric[i][1].slice(1),
-        quantity: pric[i][0],
-      };
-    }
-  });
+  prod
+    .map((e) => e.trim())
+    .forEach((ele, i) => {
+      if (pric[i]) {
+        obj[ele] = {
+          name: ele,
+          price: pric[i][1].slice(1),
+          quantity: pric[i][0],
+        };
+      }
+    });
   return obj;
 };
 
-const algoRythm1 = (text) => {
-  text = removeFN(text);
-  // text = removeNewLine(text);
-  // console.log(`TEXT`, text);
+const algoRythm1 = (fullText) => {
+  let trimmedText = removeFN(fullText);
+  // fullText = removeNewLine(fullText);
+  // console.log(`TEXT`, fullText);
   const obj = {
     address: null,
     storeName: null,
@@ -240,9 +241,9 @@ const algoRythm1 = (text) => {
     recieptTotal: 0,
   };
 
-  obj.recieptDate = getDate(text)[0];
-  obj.prices = getPrices(text);
-  obj.products = getProducts(text);
+  obj.recieptDate = getDate(trimmedText)[0];
+  obj.prices = getPrices(trimmedText);
+  obj.products = getProducts(trimmedText);
   obj.address = cleanAddress(obj.products.heading);
   obj.storeName = 'Target';
   console.log(`Get Items: `, getItems(obj.products.grocery, obj.prices));
