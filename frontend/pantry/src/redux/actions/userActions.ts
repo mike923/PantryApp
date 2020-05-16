@@ -56,7 +56,7 @@ const loginUser = (email, password) => {
           console.log(error);
         }
         try {
-          const { data } = await axios.get(`http://${IP_ADDRESS}:8282/`, {
+          const { data } = await axios.get(`http://${await IP_ADDRESS}:8282/`, {
             headers: { authtoken: token },
           });
           console.log(data);
@@ -93,7 +93,7 @@ const registerUser = (email, password, pantry) => {
         }
         try {
           const { data } = await axios.post(
-            'http://192.168.1.50:8282/users/add',
+            `http://${await IP_ADDRESS}:8282/users/add`,
             {
               pantryName: pantry.pantryName,
               newPantry: pantry.newPantry,

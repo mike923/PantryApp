@@ -16,7 +16,7 @@ class List extends React.Component {
     LayoutAnimation.spring();
   }
 
-  //cleaning the screen of the item from the screen
+  //cleaning the screen of the item from the screenf
   cleanFromScreen(id) {
     const data = this.state.data.filter((item) => {
       return item.id !== id;
