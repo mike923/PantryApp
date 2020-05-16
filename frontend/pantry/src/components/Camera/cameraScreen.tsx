@@ -20,8 +20,7 @@ const Camera = ({ navigation }) => {
   useEffect(() => {
     if (camera.products.length) {
       let last: number = camera.products.length - 1;
-      setTitle(camera.products[last].title);
-      Toast.showWithGravity(`${title} was scanned`, Toast.LONG, Toast.TOP);
+      setTitle(camera.products[last].name);
     }
   }, [dispatch, camera]);
 
@@ -54,6 +53,7 @@ const Camera = ({ navigation }) => {
           console.log('bar', barcodes);
           dispatch(barcodeApiCalls(barcodes[0].rawValue));
           setModalVisible(true);
+          Toast.showWithGravity(`${title} was scanned`, Toast.LONG, Toast.TOP);
         } else {
           navigation.navigate('Parsed', {
             localUriPath: uri,
