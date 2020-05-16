@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { IP_ADDRESS } from 'react-native-dotenv';
 import { View, Text, StyleSheet } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
 import axios from 'axios';
+import { PROXY } from '../../../proxy';
 
 import FoodItem from './FoodItem.tsx';
 import Foods from '../Reciepts/dummyData/dummyFoodItems.ts';
 
-const foodItems = `http://${IP_ADDRESS}:4004/fooditem/receiptid/1`;
+const foodItems = `${PROXY}/fooditem/receiptid/1`;
 
 const PantryView = ({ navigation }) => {
   const [state, setState] = useState([]);
