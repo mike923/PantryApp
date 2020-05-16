@@ -7,15 +7,15 @@ router.get("/receiptid/:receipt_id", async (req, res, next) => {
     const data = await queries.getFoodItemByReceiptID(req.params.receipt_id);
     res.status(200).json({
       payload: data,
-      msg: `Retrieved receipt data`,
+      message: `Retrieved receipt data`,
       error: false,
     });
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.log(error);
     res.status(500).json({
       payload: null,
-      msg: `Something went horribly wrong`,
-      error: err,
+      message: `Something went horribly wrong`,
+      error: error,
     });
   }
 });
@@ -25,15 +25,15 @@ router.get("/itemid/:item_id", async (req, res, next) => {
     const data = await queries.getFoodItemByItemID(req.params.item_id);
     res.status(200).json({
       payload: data,
-      msg: `Retrieved item data`,
+      message: `Retrieved item data`,
       error: false,
     });
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.log(error);
     res.status(500).json({
       payload: null,
-      msg: `Something went horribly wrong`,
-      error: err,
+      message: `Something went horribly wrong`,
+      error: error,
     });
   }
 });
@@ -42,21 +42,17 @@ router.post("/add", async (req, res, next) => {
   console.log(req.body);
   try {
     const data = await queries.addFoodItem(req.body)
-    res
-      .status(200)
-      .json({
+    res.status(200).json({
         payload: data,
-        msg: `Successfully added food item`,
+        message: `Successfully added food item`,
         error: false
       })
-  } catch (err) {
-    console.log(err)
-    res
-      .status(500)
-      .json({
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({
         payload: null,
-        msg: `Something went horribly wrong`,
-        error: err
+        message: `Something went horribly wrong`,
+        error: error
       })
   }
 });
@@ -65,23 +61,19 @@ router.patch("/update/:id", async (req, res, next) => {
   console.log(`Update Food item route hit with: `, req.params.id, req.body)
   try {
     const data = await queries.updateFoodItem(req.params.id, req.body)
-    res
-      .status(200)
-      .json({
+    res.status(200).json({
         payload: data,
-        msg: `Successfully updated food item`,
+        message: `Successfully updated food item`,
         error: false
       })
       
 
-  } catch (err) {
-    console.log(err)
-    res
-      .status(500)
-      .json({
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({
         payload: null,
-        msg: `Something went horribly wrong`,
-        error: err
+        message: `Something went horribly wrong`,
+        error: error
       })
   }
 })

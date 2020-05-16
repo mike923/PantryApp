@@ -59,7 +59,7 @@ const FoodDetailed = (props: any) => {
     <View style={styles.container}>
       <TextInput
         style={styles.name}
-        value={state.name}
+        value={state.preferred_name}
         onChangeText={(text) =>
           setState({ ...state, name: text, edited: true })
         }
