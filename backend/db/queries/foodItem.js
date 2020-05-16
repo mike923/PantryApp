@@ -1,35 +1,25 @@
 const db = require("../db");
 
-const getFoodItemByReceiptID = async (recieptId) => {
-  const query = `
-    SELECT * FROM food_item 
-    JOIN receipts ON food_item.receipt_id = receipts.id
-    WHERE receipt_id = 1
-  ;`;
-  const data = await db.any(query, [recieptId]);
-  return data;
-};
+const getFoodItemByReceiptID = async (recieptId) => await db.any(`
+  SELECT * FROM food_item 
+  JOIN receipts ON food_item.receipt_id = receipts.id
+  WHERE receipt_id = 1;
+`, [recieptId]);
 
 const getFoodItemByItemID = async (itemId) => {
-  const query = `
+  let data = await db.any(`
     SELECT * FROM food_item
-    WHERE item_id = $1
-  ;`;
-  const data = await db.any(query, [itemId]);
-  return data;
-};
+    WHERE item_id = $1;
+  `, [itemId]);
 
-const addFoodItem = async (receiptData) => {
-  const { receiptId, pantryId, name, price, quantity, imgUrl } = receiptData;
-  const values = [receiptId, pantryId, name, price, quantity, imgUrl];
+  console.log(data)
+  return data
+}
 
-  const query = `
-    INSERT INTO food_item (receipt_id, pantry_id, name, price, quantity, img_url) VALUES
-    ($1, $2, $3, $4, $5, $6) RETURNING *
-  `;
-  const data = await db.oneOrNone(query, values);
-  return data;
-};
+const addFoodItem = async (receiptData) => await db.oneOrNone(`
+  INSERT INTO food_item (receipt_id, pantry_id, preferred_name, price, quantity, img_url) 
+  VALUES ( $/receiptId/, $/pantryId/, $/preferred_name/, $/price/, $/quantity/, $/imgUrl/ ) RETURNING *;
+`, receiptData);
 
 const updateFoodItem = async (id, data) => {
   delete data.receipt_date
@@ -38,19 +28,21 @@ const updateFoodItem = async (id, data) => {
 
   const keys = Object.keys(data);
   console.log(keys);
-  let str = keys.map(key => `${key} = $/${key}/`).join(', ');
+  let str = keys.map((key, i) => `${key} = $/values.${key}/`).join(', ');
   console.log(str);
   
   const query = `
     UPDATE food_item
     SET ${str}
     WHERE item_id = ${id}
-    RETURNING *
+    RETURNING *;
   `
-
   console.log(query)
 
-  const updatedData = await db.one(query, data);
+  const updatedData = await db.one(query, {
+    keys: keys, 
+    values: data
+  });
   console.log(updatedData);
   return updatedData;
 }

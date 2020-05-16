@@ -44,10 +44,10 @@ CREATE TABLE food_item (
     item_id SERIAL PRIMARY KEY,
     receipt_id INT REFERENCES receipts(id),
     pantry_id INT REFERENCES pantry(id),
-    name VARCHAR NOT NULL,
+    preferred_name VARCHAR NOT NULL,
     price DECIMAL NOT NULL,
     quantity INT NOT NULL,
-    -- food_id INT REFERENCES all_foods(id),
+    upc VARCHAR,
     img_url VARCHAR, 
     finished BOOLEAN DEFAULT FALSE
 );  
@@ -81,9 +81,16 @@ INSERT INTO receipts (pantry_id, receipt_url, store_name, total, upload_date, re
   )
 ;
 
-INSERT INTO food_item (receipt_id, pantry_id, name, price, quantity, img_url) VALUES
-  (1, 1, 'Oreos', 3.99, 2, 'https://target.scene7.com/is/image/Target/GUEST_03ac5a5f-b70f-4258-8861-6392e93ccc0e?wid=253&hei=253&qlt=80&fmt=pjpeg'),
-  (1, 1, 'Oat-Ly Oat Milk', 2.99, 3, 'https://target.scene7.com/is/image/Target/GUEST_1dc729a4-8089-4f44-8a96-d4248265a135?fmt=pjpeg&wid=1400&qlt=80'),
-  (1, 1, 'Rice Krispies', .99, 10, 'https://target.scene7.com/is/image/Target/GUEST_ff24a031-c9da-40e5-aa59-fad75558e077?wid=253&hei=253&qlt=80&fmt=pjpeg'),
-  (1, 1, 'Skippy Peanut Butter', 1.49, 4, 'https://target.scene7.com/is/image/Target/GUEST_dd642c00-2978-4869-a200-c7873d7744fb?wid=253&hei=253&qlt=80&fmt=pjpeg')
-;
+INSERT INTO food_item (receipt_id, pantry_id, preferred_name, price, quantity, upc, img_url) VALUES
+  (1, 1, 'Oreos', 3.99, 2, '044000033279',
+    'https://target.scene7.com/is/image/Target/GUEST_03ac5a5f-b70f-4258-8861-6392e93ccc0e?wid=253&hei=253&qlt=80&fmt=pjpeg'
+  ),
+  (1, 1, 'Oat-Ly Oat Milk', 2.99, 3, '190646630089',
+    'https://target.scene7.com/is/image/Target/GUEST_1dc729a4-8089-4f44-8a96-d4248265a135?fmt=pjpeg&wid=1400&qlt=80'
+  ),
+  (1, 1, 'Rice Krispies', .99, 10, '038000231537',
+    'https://target.scene7.com/is/image/Target/GUEST_ff24a031-c9da-40e5-aa59-fad75558e077?wid=253&hei=253&qlt=80&fmt=pjpeg'
+  ),
+  (1, 1, 'Skippy Peanut Butter', 1.49, 4, '037600105064',
+    'https://target.scene7.com/is/image/Target/GUEST_dd642c00-2978-4869-a200-c7873d7744fb?wid=253&hei=253&qlt=80&fmt=pjpeg'
+  );

@@ -13,17 +13,20 @@ import FeatherIcon from 'react-native-vector-icons/Feather';
 import DatePicker from 'react-native-date-picker';
 import axios from 'axios';
 
-import { IP_ADDRESS } from 'react-native-dotenv';
-
-const updateFood = `http://${IP_ADDRESS}:4004/fooditem/update`;
+import { PROXY } from '../../../proxy';
 
 const FoodDetailed = (props: any) => {
   console.log(props);
   // const params = { ...props.route.params, edited: false };
   // params. = new Date(params.receipt_date).toDateString();
-  const item_id = props.route.params.item_id;
-  const receipt_date = props.route.params.receipt_date;
-  const [state, setState] = useState({ loaded: false, edited: false, item_id, receipt_date });
+  const { item_id } = props.route.params;
+  const { receipt_date } = props.route.params;
+  const [state, setState] = useState({
+    loaded: false,
+    edited: false,
+    item_id,
+    receipt_date,
+  });
   const [dateModal, setDateModal] = useState(false);
   console.log(`HERE`, state);
 
@@ -31,7 +34,7 @@ const FoodDetailed = (props: any) => {
     const apiCall = async () => {
       try {
         const { data } = await axios.get(
-          `http://${IP_ADDRESS}:4004/fooditem/itemid/${state.item_id}`,
+          `${PROXY}/fooditem/itemid/${state.item_id}`,
         );
         console.log(data);
         setState({ ...state, ...data.payload[0], loaded: true });
@@ -45,7 +48,10 @@ const FoodDetailed = (props: any) => {
   const handleSubmit = async () => {
     // IF DATE CHANGED UPDATE DATE FINISHED COLUMN
     console.log(`Submitted`, state);
-    const data = await axios.patch(`${updateFood}/${state.item_id}`, state);
+    const data = await axios.patch(
+      `${PROXY}/fooditem/update/${state.item_id}`,
+      state,
+    );
     props.navigation.goBack();
   };
 
@@ -53,7 +59,7 @@ const FoodDetailed = (props: any) => {
     <View style={styles.container}>
       <TextInput
         style={styles.name}
-        value={state.name}
+        value={state.preferred_name}
         onChangeText={(text) =>
           setState({ ...state, name: text, edited: true })
         }
