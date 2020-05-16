@@ -115,7 +115,11 @@ const Camera = ({ navigation }) => {
           // />
           <TouchableOpacity
             style={styles.button}
-            onPress={() => navigation.navigate('Shopping Cart')}>
+            onPress={() => {
+              flash === RNCamera.Constants.FlashMode.torch ? toggleFlash : null;
+
+              navigation.navigate('Shopping Cart');
+            }}>
             <Text>Done</Text>
           </TouchableOpacity>
         ) : null}
