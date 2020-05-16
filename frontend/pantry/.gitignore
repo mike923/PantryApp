@@ -91,3 +91,4 @@ node_modules.nosync
 /iosc
 /iosd
 .env
+proxy.js

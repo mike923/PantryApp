@@ -15,9 +15,11 @@ import fakeParsedReciept from './dummyData/fakeParsedReciept.ts';
 
 import { priceFix, quantityFix } from './helpers/helpers.ts';
 
-const ItemConfirmation = ({ navigation, route }: any) => {
-  console.log(`Params: `, route.params);
-  const [reciept, setReciept] = useState(route.params.parsedText);
+const ItemConfirmation = (props: any) => {
+  // console.log(route.params);
+  const { navigation, parsedReceipt } = props;
+  const [reciept, setReciept] = useState(parsedReceipt);
+
   const handleConfirm = () => {
     Alert.alert('Confirm', '', [
       { text: 'No', onPress: () => console.log('Cancelled') },
