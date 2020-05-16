@@ -3,24 +3,25 @@ import { TouchableOpacity, Text, Image, StyleSheet } from 'react-native';
 
 const FoodItem = (props: any) => {
   let { goTo } = props;
-  const { productName, uri, purchasedDate, quantity } = goTo
+  const { name, img_url, receipt_date, quantity, item_id } = goTo
     ? props
     : props.route.params;
+
   return (
     <TouchableOpacity
       style={styles.foodItem}
       onPress={() => {
-        goTo({ productName, uri, purchasedDate, quantity });
+        goTo({ item_id, receipt_date });
       }}>
       <Image
         source={{
-          uri,
+          uri: img_url,
         }}
         resizeMode="contain"
         style={{ height: 160, width: 160, borderRadius: 5 }}
       />
-      <Text style={{ marginTop: 3 }}>{productName}</Text>
-      <Text style={{ marginTop: 3 }}>Date Purchased: {purchasedDate}</Text>
+      <Text style={{ marginTop: 3 }}>{name}</Text>
+      <Text style={{ marginTop: 3 }}>{receipt_date}</Text>
     </TouchableOpacity>
   );
 };

@@ -25,7 +25,7 @@ CREATE TABLE receipts (
     store_name VARCHAR,
     total DECIMAL,
     upload_date VARCHAR,
-    reciept_date VARCHAR
+    receipt_date VARCHAR
 );
 
 -- CREATE TABLE item_categories (
@@ -41,7 +41,7 @@ CREATE TABLE receipts (
 
 
 CREATE TABLE food_item (
-    id SERIAL PRIMARY KEY,
+    item_id SERIAL PRIMARY KEY,
     receipt_id INT REFERENCES receipts(id),
     pantry_id INT REFERENCES pantry(id),
     name VARCHAR NOT NULL,
@@ -70,9 +70,9 @@ INSERT INTO users (id, email, pantry_id) VALUES
   ('47E1Pb7c1fTgKCdYWPm1KNDVDm02', 'voniel@bvoniel.com', 1)
 ;
 
-INSERT INTO receipts (pantry_id, receipt_url, store_name, total, upload_date, reciept_date) VALUES
+INSERT INTO receipts (pantry_id, receipt_url, store_name, total, upload_date, receipt_date) VALUES
   (
-    1, 
+    1,
     'https://firebasestorage.googleapis.com/v0/b/capstone-pantry.appspot.com/o/Test?alt=media&token=d87cb480-34ee-4e5f-9712-e7bd76bd57a6',
     'Target',
     35.67,
