@@ -199,7 +199,9 @@ class Item extends React.Component {
                 onBlur={() => this.setState({ isEditing: false })}
               />
             ) : (
-              <Text style={swipeStyles.textStyle}>{this.props.message}</Text>
+              <Text style={[swipeStyles.textStyle, swipeStyles.title]}>
+                {this.props.message}
+              </Text>
             )}
           </View>
         </Animated.View>

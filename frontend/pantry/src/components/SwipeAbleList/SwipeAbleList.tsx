@@ -32,10 +32,10 @@ class List extends React.Component {
         <Item
           setTitle={this.setTitle}
           isEditing={this.state.isEditing}
-          img={item.images[0]}
+          img={item.image}
           key={item.id}
           swipingCheck={(swiping) => this.setState({ swiping })}
-          message={item.title}
+          message={item.name}
           id={item.id}
           cleanFromScreen={(id) => this.cleanFromScreen(id)}
           leftButtonPressed={() => console.log('left button pressed')}

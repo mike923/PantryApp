@@ -11,7 +11,7 @@ const ShopCart = (props: any) => {
   }, [camera]);
 
   let last = camera.products.length - 1;
-  console.log('prod', camera.products[last]);
+  console.log('prod', camera.products);
 
   return <List data={camera.products} />;
 };

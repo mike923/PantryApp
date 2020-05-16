@@ -56,13 +56,13 @@ const barcodeApiCalls = (upc: string) => {
       // `https://api.spoonacular.com/food/products/upc/${upc}?apiKey=${SPOONACULAR_API_KEY}`,
       console.log('actions data', data);
 
-      if (data.status === 'failure') {
+      if (data.error) {
         dispatch(setError(data.message));
         Alert.alert(data.message);
       } else {
         // Alert.alert(`You successfully scanned item ${upc}`);
         dispatch(fetchedProduct());
-        dispatch(setProduct(data));
+        dispatch(setProduct(data.payload));
       }
     } catch (err) {
       console.log(err);
