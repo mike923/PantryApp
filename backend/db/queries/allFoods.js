@@ -122,11 +122,9 @@ const fetchFirestore = async (collection, reference, item = true) => {
     // console.log(doc)
     if (doc.exists) {
       doc = item ? doc.data().item : doc.data()
-      console.log(Array(100).fill('#').join(), doc, Array(100).fill('#').join())
     } else {
       doc = await createNewUPC(reference)
       doc = item ? doc.simplifiedData : doc.data
-      console.log(Array(100).fill('#').join(), doc, Array(100).fill('#').join())
     }
 
     return doc
@@ -171,12 +169,16 @@ const extract = {
 const consolidateResults = (results) => {
   let item = {}
 
-  const valid = results.map(({result, source, valid}) => 
-    valid ? extract[source](result) : false
-  )
-  console.log(Array(100).fill('&').join(), valid)
-  if (valid.every(r => r === false)) return false
+  const inValid = results.every(({valid}) => valid === false)
+  if (inValid) return false
 
+  results.map(({result, source, valid}) => 
+    valid ? extract[source](result) : {}
+  ).forEach(extract => 
+    Object.keys(extract).forEach(property => 
+      item[property] = extract[property]
+    )
+  )
   return item
 }
 
@@ -186,8 +188,8 @@ const createQuickItemLookup = async (collection, reference) => {
     let status = await db.runTransaction(async snap => {
       try {
         let doc = await snap.get(ref)
-        console.log('createQuickItemLookup', doc)
         if (doc.exists) {
+          // console.log('createQuickItemLookup', doc.data())
           doc = consolidateResults(doc.data().results)
           
           snap.update(ref, { item: doc ? doc : `Item not found: ${reference}`, valid: !!doc })
