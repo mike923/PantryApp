@@ -5,7 +5,7 @@ import vision from '@react-native-firebase/ml-vision';
 import { ScrollView, Text, Button, Alert } from 'react-native';
 import axios from 'axios';
 import { dummy } from '../../../dummydata';
-// import algoRythm1 from './parsingTest/recieptText2';
+import algoRythm1 from './parsingTest/recieptText2';
 import ItemConfirmation from './ItemConfirmation.tsx';
 
 const TextRecog = ({ route, navigation }) => {
@@ -25,9 +25,9 @@ const TextRecog = ({ route, navigation }) => {
 
     console.log(`Processed Text: `, processedText);
 
-    // const items = await algoRythm1(processedText.text);
-    // console.log(`Items: `, items);
-    // setText(items);
+    const items = await algoRythm1(processedText.text);
+    console.log(`Items: `, items);
+    setText(items);
 
     // const textJsxArr = processedText.blocks.map((block) => {
     //   console.log(`Text Block: `, block.text);
