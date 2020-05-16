@@ -58,27 +58,12 @@ const fetchFDC = async (reqBody, search = false) => {
 
 const searchAPIs = async (upc) => {
   let results = await Promise.all([
-    fetchFDC({query: upc}, true),
     fetchSpoonacular(upc),
-    fetchUPCitemDB(upc)
+    fetchUPCitemDB(upc),
+    fetchFDC({query: upc}, true),
   ])
   // console.log('SEARCH APIS RESULTS: ', results)
   return results
-}
-
-
-const fetchFirestore = async (collection, reference) => {
-  try {
-    let doc = await db
-      .collection(collection)
-      .doc(reference)
-      .get()
-    
-    // console.log(doc)
-    return doc.exists ? doc.data() : doc
-  } catch (error) {
-    console.log('fetchFirestore ERROR: ', error)
-  }
 }
 
 const createFirestoreReference = async (collection, reference) => {
@@ -104,7 +89,7 @@ const createFirestoreReference = async (collection, reference) => {
 
 const addResultToFirestoreUPCDoc = async (collection, UPCRef, resultData) => {
   let ref = db.collection(collection).doc(UPCRef)
-
+  
   try {
     let status = await db.runTransaction(async doc => {
       try {
@@ -112,7 +97,7 @@ const addResultToFirestoreUPCDoc = async (collection, UPCRef, resultData) => {
         
         if (data.exists) data = data.data().results
         else return null
-
+        
         data = data.concat(resultData)
         doc.update(ref, { results: data })
       } catch (error) {
@@ -127,52 +112,125 @@ const addResultToFirestoreUPCDoc = async (collection, UPCRef, resultData) => {
   }
 }
 
+const fetchFirestore = async (collection, reference, item = true) => {
+  try {
+    let doc = await db
+      .collection(collection)
+      .doc(reference)
+      .get()
+    
+    // console.log(doc)
+    if (doc.exists) {
+      doc = item ? doc.data().item : doc.data()
+    } else {
+      doc = await createNewUPC(reference)
+      doc = item ? doc.simplifiedData : doc.data
+    }
+
+    return doc
+  } catch (error) {
+    console.log('fetchFirestore ERROR: ', error)
+  }
+}
+
+const extractFDC = (data) => ({
+  upc: data.gtinUpc,
+  name: data.description,
+  brand: data.brandOwner,
+  nutrients: data.foodNutrients,
+  ingredients: data.ingredients,
+  fdc_data: data,
+})
+
+const extractSpoonacular = (data) => ({
+  name: data.title,
+  image: data.images[0],
+  description: data.description,
+  upc: data.upc, 
+  nutrition: data.nutrition,
+  ingredients: data.ingredients,
+  spoonacular_data: data,
+})
+
+const extractUPCitemDB = (data) => ({
+  upc: data.ean,
+  image: data.images[0],
+  shopNow: data.offers[0],
+  name: data.title,
+  upcitemdb_data: data,
+})
+
+const extract = {
+  fdc: extractFDC,
+  upcitemdb: extractUPCitemDB,
+  spoonacular: extractSpoonacular,
+}
+
+const consolidateResults = (results) => {
+  let item = {}
+
+  const inValid = results.every(({valid}) => valid === false)
+  if (inValid) return false
+
+  results.map(({result, source, valid}) => 
+    valid ? extract[source](result) : {}
+  ).forEach(extract => 
+    Object.keys(extract).forEach(property => 
+      item[property] = extract[property]
+    )
+  )
+  return item
+}
+
+const createQuickItemLookup = async (collection, reference) => {
+  const ref = db.collection(collection).doc(reference)
+  try {
+    let status = await db.runTransaction(async snap => {
+      try {
+        let doc = await snap.get(ref)
+        if (doc.exists) {
+          // console.log('createQuickItemLookup', doc.data())
+          doc = consolidateResults(doc.data().results)
+          
+          snap.update(ref, { item: doc ? doc : `Item not found: ${reference}`, valid: !!doc })
+        }
+        return doc
+      } catch (error) {
+        console.log(`There was an error fetching ${reference} from ${collection} collection in firestore: `, error)
+      }
+    })
+    return status
+    // console.log(doc)
+  } catch (error) {
+    console.log('fetchFirestore ERROR: ', error)
+  }
+}
+
 const createNewUPC = async (upc) => {
   let data = await searchAPIs(upc)
-  console.log('createNewUPC DATA: ', data)
+  // console.log('createNewUPC DATA: ', data)
   let status1 = await createFirestoreReference('foodByUPC', upc)
-  console.log('createNewUPC STATUS1: ', status1)
+  // console.log('createNewUPC STATUS1: ', status1)
   let status2 = await addResultToFirestoreUPCDoc('foodByUPC', upc, data)
-  console.log('createNewUPC STATUS2: ', status2)
+  // console.log('createNewUPC STATUS2: ', status2)
+  let simplifiedData = await createQuickItemLookup('foodByUPC', upc)
+  // console.log('createNewUPC STATUS3: ', status3)
   // let status3 = await addResultToFirestoreUPCDoc('foodByUPC', upc, data[1])
   // console.log('createNewUPC STATUS3: ', status3)
-  return data
+  return { data, simplifiedData }
 }
 
 
 module.exports = {
   addResultToFirestoreUPCDoc,
+  consolidateResults,
   createNewUPC,
   createFirestoreReference,
+  createQuickItemLookup,
+  extract,
   fetchFDC,
   fetchFirestore,
   fetchSpoonacular,
   fetchUPCitemDB,
   searchAPIs,
 }
-
-
-// const https = require('https')
-// var opts = {
-//   hostname: 'api.upcitemdb.com',
-//   path: '/prod/v1/lookup',
-//   method: 'POST',
-//   headers: {
-//     "Content-Type": "application/json",
-//     "user_key": "only_for_dev_or_pro",
-//     "key_type": "3scale"
-//   }
-// }
-// var req = https.request(opts, function(res) {
-//   console.log('statusCode: ', res.statusCode);
-//   console.log('headers: ', res.headers);
-//   res.on('data', function(d) {
-//     console.log('BODY: ' + d);
-//   })
-// })
-// req.on('error', function(e) {
-//   console.log('problem with request: ' + e.message);
-// })
-// req.write('{ "upc": "4002293401102" }')
-// req.end()
-    

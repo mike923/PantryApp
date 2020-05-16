@@ -15,11 +15,13 @@ const a = async () => {
 }
 // a()
 
-const l = async(input) => {
-  let data = await input
-  console.log(data)
+const l = async(callback, ...args) => {
+  console.log(args, callback)
+  let data = await callback(...args)
+  console.log(Array(99).fill('@').join(), '\nTHIS IS FROM THE FUNCTION WE ARE CREATING!!!\n', data, '=====the end======')
 }
 
-l(fetchFirestore('foodByUPC', '044000032197'))
-l(searchAPIs('044000032197'))
-l(e.createNewUPC('044000032197'))
+l(fetchFirestore, 'foodByUPC', '038000402906')
+// l(e.createQuickItemLookup, 'foodByUPC', '044000032197')
+// l(searchAPIs('044000032197'))
+// l(e.createNewUPC, '044000058678')
