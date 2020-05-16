@@ -6,8 +6,13 @@ router.get("/checkByUPC/:upc", async (req, res, next) => {
   const { upc } = req.params
 
   try {
-    let data = await getItemBy(upc)
+    let data = await queries.fetchFirestore('foodByUPC', upc)
     console.log('/check/upc/', data)
+    if (typeof data === 'string') {
+      // data = await queries.createNewUPC('foodByUPC', upc)
+      // console.log("data = await queries.createNewUPC('foodByUPC', upc).simplifiedData", data)
+      if (typeof data === 'string') throw new Error(`upc ${upc} not found`)
+    }
     if (!data) throw new Error('Data retrieved from firestore returned null')
     res.status(200).json({
       payload: data, 
@@ -23,5 +28,10 @@ router.get("/checkByUPC/:upc", async (req, res, next) => {
     })
   }
 });
+
+router.get("/pantry", async (req, res, next) => {
+  
+})
+
 
 module.exports = router;
