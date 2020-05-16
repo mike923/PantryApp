@@ -33,7 +33,7 @@ class List extends React.Component {
           setTitle={this.setTitle}
           isEditing={this.state.isEditing}
           img={item.image}
-          key={item.id}
+          key={item.upc}
           swipingCheck={(swiping) => this.setState({ swiping })}
           message={item.name}
           id={item.id}
