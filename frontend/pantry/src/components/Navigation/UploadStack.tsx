@@ -33,7 +33,7 @@ const UploadStack = ({ navigation }) => {
       <Stack.Screen name="Api" component={ApiTester} />
       <Stack.Screen name="Reciepts" component={Reciepts} />
       <Stack.Screen name="Confirmation" component={ItemConfirmation} />
-      <Stack.Screen name="ShoppingCart" component={ShopCart} />
+      <Stack.Screen name="Shopping Cart" component={ShopCart} />
       <Stack.Screen name="Parsed" component={TextRecog} />
     </Stack.Navigator>
   );

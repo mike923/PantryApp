@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { Alert } from 'react-native';
+import { IP_ADDRESS } from 'react-native-dotenv';
 
 import { SPOONACULAR_API_KEY } from 'react-native-dotenv';
 import {
@@ -50,17 +51,18 @@ const barcodeApiCalls = (upc: string) => {
     dispatch(fetchingProduct());
     try {
       const { data } = await axios.get(
-        `https://api.spoonacular.com/food/products/upc/${upc}?apiKey=${SPOONACULAR_API_KEY}`,
+        `http://${await IP_ADDRESS}:8282/allFoods/checkByUPC/${upc}`,
       );
+      // `https://api.spoonacular.com/food/products/upc/${upc}?apiKey=${SPOONACULAR_API_KEY}`,
       console.log('actions data', data);
 
-      if (data.status === 'failure') {
+      if (data.error) {
         dispatch(setError(data.message));
         Alert.alert(data.message);
       } else {
         // Alert.alert(`You successfully scanned item ${upc}`);
         dispatch(fetchedProduct());
-        dispatch(setProduct(data));
+        dispatch(setProduct(data.payload));
       }
     } catch (err) {
       console.log(err);
