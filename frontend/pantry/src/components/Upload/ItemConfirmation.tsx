@@ -19,6 +19,7 @@ const ItemConfirmation = (props: any) => {
   // console.log(route.params);
   const { navigation, parsedReceipt } = props;
   const [reciept, setReciept] = useState(parsedReceipt);
+
   const handleConfirm = () => {
     Alert.alert('Confirm', '', [
       { text: 'No', onPress: () => console.log('Cancelled') },

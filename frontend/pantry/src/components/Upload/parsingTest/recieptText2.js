@@ -118,17 +118,20 @@ const getProducts = (fullText) => {
     cleaning: [],
     grocery: [],
   };
+
   const heading = fullText
     .split(/(cleaning supplies)|(grocery)/gi)[0]
     .trim()
     .split('\n');
 
   const cleaningSup = fullText
+
     .match(/cleaning supplies([\s\S]*)(?=grocery)/gi)[0]
     .trim()
     .split('\n');
 
   const grocerySup = fullText
+
     .match(/grocery([\s\S]*)/gi)[0]
     .trim()
     .split('\n');
