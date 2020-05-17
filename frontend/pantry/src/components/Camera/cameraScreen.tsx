@@ -95,30 +95,30 @@ const Camera = ({ navigation, modalVisible }) => {
           name="flash"
         />
         <View>
-          <View style={styles.iconView}>
+          {/* <View style={styles.iconView}> */}
+          <Icon
+            name="camera"
+            size={3}
+            color="#900"
+            style={[styles.icon, styles.camera]}
+            onPress={takePicture}
+          />
+          {/* </View> */}
+          {camera.products.length ? (
             <Icon
-              name="camera"
+              name="check-square"
               size={3}
               color="#900"
-              style={[styles.icon, styles.camera]}
-              onPress={takePicture}
-            />
-            {camera.products.length ? (
-              <Icon
-                name="check-square"
-                size={3}
-                color="#900"
-                style={[styles.icon, styles.button]}
-                onPress={() => {
-                  flash === RNCamera.Constants.FlashMode.torch
-                    ? toggleFlash
-                    : null;
+              style={[styles.icon, styles.button]}
+              onPress={() => {
+                flash === RNCamera.Constants.FlashMode.torch
+                  ? toggleFlash
+                  : null;
 
-                  modalVisible ? null : navigation.navigate('Shopping Cart');
-                }}
-              />
-            ) : null}
-          </View>
+                modalVisible ? null : navigation.navigate('Shopping Cart');
+              }}
+            />
+          ) : null}
         </View>
         <View />
       </RNCamera>
