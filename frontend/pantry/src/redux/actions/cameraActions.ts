@@ -2,12 +2,12 @@ import axios from 'axios';
 import { Alert } from 'react-native';
 import { IP_ADDRESS } from 'react-native-dotenv';
 
-import { SPOONACULAR_API_KEY } from 'react-native-dotenv';
 import {
   FETCHING_PRODUCT,
   FETCHED_PRODUCT,
   SET_PRODUCT,
   FETCHING_PRODUCT_ERROR,
+  DELETE_PRODUCT,
 } from './actionTypes.ts';
 
 // api methods
@@ -23,6 +23,8 @@ const setProduct = (product: object) => ({
 const fetchingProduct = () => ({ type: FETCHING_PRODUCT });
 
 const fetchedProduct = () => ({ type: FETCHED_PRODUCT });
+
+const deleteProduct = (data: any) => ({ type: DELETE_PRODUCT, payload: data });
 
 // const onBarCodeRead = (localPath) => {
 //   return async (dispatch) => {
@@ -71,4 +73,12 @@ const barcodeApiCalls = (upc: string) => {
   };
 };
 
-export { barcodeApiCalls };
+const deleteItem = (data: object) => {
+  console.log('rargagag');
+
+  return (dispatch: any) => {
+    dispatch(deleteProduct(data));
+  };
+};
+
+export { barcodeApiCalls, deleteItem };

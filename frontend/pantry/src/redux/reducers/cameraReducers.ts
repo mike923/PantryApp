@@ -2,7 +2,7 @@ import {
   SCANNING,
   SCANNED,
   SCANNING_ERROR,
-  SET_BARCODES,
+  DELETE_PRODUCT,
   FETCHING_PRODUCT,
   FETCHED_PRODUCT,
   SET_PRODUCT,
@@ -34,9 +34,25 @@ const cameraReducer = (state = initUserState, action) => {
 
     case SET_PRODUCT: {
       let productSet = new Set(stateCopy.products);
+
+      if (!productSet.has(action.payload.upc)) {
+        productSet.add(action.payload);
+      }
       productSet.add(action.payload);
       stateCopy.fetchedProduct = true;
       stateCopy.products = [...productSet];
+      break;
+    }
+
+    case DELETE_PRODUCT: {
+      // let productSet = new Set(stateCopy.products);
+
+      // if (!productSet.has(action.payload.upc)) {
+      //   productSet.add(action.payload);
+      // }
+      // productSet.add(action.payload);
+      // stateCopy.fetchedProduct = true;
+      stateCopy.products = action.payload;
       break;
     }
 
