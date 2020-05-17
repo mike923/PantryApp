@@ -52,6 +52,12 @@ export const styling = StyleSheet.create({
 });
 
 export const confirmStyles = StyleSheet.create({
+  buttons: {
+    flex: 0,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
   confirmBtn: {
     backgroundColor: 'rgba(249,153,97,1)',
     borderRadius: 5,
@@ -125,6 +131,19 @@ export const confirmStyles = StyleSheet.create({
     fontSize: 24,
     marginLeft: 20,
     marginTop: 14,
+  },
+  scanBarcode: {
+    //  position: 'absolute',
+    alignItems: 'center',
+    backgroundColor: 'orange',
+    borderRadius: 70 / 2,
+    height: 70,
+    justifyContent: 'center',
+    shadowColor: '#F02A4B',
+    shadowOpacity: 0.5,
+    shadowRadius: 10,
+    width: 70,
+    // shadowOffset: { height: 10, width: 10 },
   },
   scrollView: {
     // borderBottomWidth: 1,

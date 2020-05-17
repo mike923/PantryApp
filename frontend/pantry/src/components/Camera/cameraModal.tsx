@@ -9,8 +9,9 @@ import {
 } from 'react-native';
 import { useSelector } from 'react-redux';
 import { styles, colors } from './cameraStyles.ts';
+import Camera from './cameraScreen.tsx';
 
-const CameraModal = ({ modalVisible, setModalVisible }) => {
+const CameraModal = ({ modalVisible, setModalVisible, navigation }) => {
   const camera: object = useSelector((state) => state.camera);
   const [title, setTitle] = useState('');
   const [img, setImg] = useState(
@@ -37,13 +38,14 @@ const CameraModal = ({ modalVisible, setModalVisible }) => {
       onRequestClose={() => {
         Alert.alert('Modal has now been closed.');
       }}>
-      <Text style={styles.productTitle}>{title}</Text>
+      {/* <Text style={styles.productTitle}>{title}</Text>
       <Image style={styles.modalImg} source={{ uri: img }} />
       <SafeAreaView>
         <ScrollView style={styles.scrollView}>
           <Text style={styles.description}>{description}</Text>
         </ScrollView>
-      </SafeAreaView>
+      </SafeAreaView> */}
+      <Camera navigation={navigation} />
       <Text
         style={styles.closeText}
         onPress={() => {

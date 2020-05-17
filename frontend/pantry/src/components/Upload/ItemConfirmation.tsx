@@ -14,11 +14,13 @@ import RecieptItems from './RecieptItems.tsx';
 import fakeParsedReciept from './dummyData/fakeParsedReciept.ts';
 
 import { priceFix, quantityFix } from './helpers/helpers.ts';
+import CameraModal from '../Camera/cameraModal.tsx';
 
 const ItemConfirmation = (props: any) => {
   // console.log(route.params);
   const { navigation, parsedReceipt } = props;
   const [reciept, setReciept] = useState(parsedReceipt);
+  const [modalVisible, setModalVisible] = useState(false);
 
   const handleConfirm = () => {
     Alert.alert('Confirm', '', [
@@ -107,9 +109,25 @@ const ItemConfirmation = (props: any) => {
                 <Text style={styles.totalText}>{getRecieptTotal()}</Text>
               </View>
             </ScrollView>
-            <TouchableOpacity style={styles.confirmBtn} onPress={handleConfirm}>
-              <Text style={styles.confirmText}>Looks good!</Text>
-            </TouchableOpacity>
+            <View style={styles.buttons}>
+              <TouchableOpacity
+                style={styles.confirmBtn}
+                onPress={handleConfirm}>
+                <Text style={styles.confirmText}>Looks good!</Text>
+              </TouchableOpacity>
+              {!modalVisible ? (
+                <TouchableOpacity
+                  style={styles.scanBarcode}
+                  onPress={() => setModalVisible(!modalVisible)}>
+                  <Text>Scan</Text>
+                </TouchableOpacity>
+              ) : (
+                <CameraModal
+                  modalVisible={modalVisible}
+                  setModalVisible={setModalVisible}
+                />
+              )}
+            </View>
           </View>
         </View>
       ) : null}
