@@ -11,7 +11,7 @@ import { barcodeApiCalls } from '../../redux/actions/cameraActions.ts';
 
 import { styles, colors } from './cameraStyles.ts';
 
-const Camera = ({ navigation }) => {
+const Camera = ({ navigation, modalVisible }) => {
   const camera: object = useSelector((state) => state.camera);
   const [title, setTitle] = useState('');
 
@@ -26,7 +26,7 @@ const Camera = ({ navigation }) => {
 
   const [zoomValue, setZoomValue] = useState(0);
   const [flash, setFlash] = useState(RNCamera.Constants.FlashMode.off);
-  const [modalVisible, setModalVisible] = useState(false);
+  // const [modalVisible, setModalVisible] = useState(false);
 
   // camera functionalities
   let cameraRef = useRef(null);
@@ -52,7 +52,7 @@ const Camera = ({ navigation }) => {
         if (barcodes.length) {
           console.log('bar', barcodes);
           dispatch(barcodeApiCalls(barcodes[0].rawValue));
-          setModalVisible(true);
+          // setModalVisible(true);
           Toast.showWithGravity(`${title} was scanned`, Toast.LONG, Toast.TOP);
         } else {
           navigation.navigate('Parsed', {
@@ -118,7 +118,7 @@ const Camera = ({ navigation }) => {
             onPress={() => {
               flash === RNCamera.Constants.FlashMode.torch ? toggleFlash : null;
 
-              navigation.navigate('Shopping Cart');
+              modalVisible ? null : navigation.navigate('Shopping Cart');
             }}>
             <Text>Done</Text>
           </TouchableOpacity>
