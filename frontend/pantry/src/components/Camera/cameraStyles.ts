@@ -18,8 +18,24 @@ export const styles = StyleSheet.create({
     width: 70,
     zIndex: 90,
   },
+  button: {
+    alignItems: 'center',
+    bottom: -9,
+    elevation: 90,
+    height: 60,
+    justifyContent: 'center',
+    left: windowWidth - 350,
+    shadowColor: '#F02A4B',
+    shadowOffset: { height: 10, width: 10 },
+    shadowOpacity: 0.5,
+    shadowRadius: 10,
+    width: 60,
+    // position: 'absolute',
+    // borderRadius: 60 / 2,
+    // backgroundColor: 'white',
+  },
   camera: {
-    marginLeft: windowWidth / 15,
+    marginLeft: windowWidth / 3,
   },
   cameraContainer: {
     flex: 1,
@@ -56,8 +72,15 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   flash: {
-    bottom: windowHeight - 150,
+    position: 'absolute',
     right: 0,
+    top: 0,
+    // bottom: windowHeight - 180,
+  },
+  floatingButtonContainer: {
+    alignItems: 'center',
+    position: 'absolute',
+    right: 40,
   },
   icon: {
     alignSelf: 'center',
@@ -69,10 +92,11 @@ export const styles = StyleSheet.create({
     // paddingHorizontal: 20,
   },
   iconView: {
-    // alignItems: 'stretch',
+    alignItems: 'center',
+    bottom: 38,
     flex: 1,
-    // justifyContent: 'center',
     flexDirection: 'row',
+    justifyContent: 'center',
   },
   modalImg: {
     height: 450,
@@ -83,8 +107,8 @@ export const styles = StyleSheet.create({
   preview: {
     flex: 1,
     flexDirection: 'column',
-    justifyContent: 'flex-end',
     height: '100%',
+    justifyContent: 'flex-end',
   },
   productTitle: {
     fontSize: 22,
@@ -95,36 +119,16 @@ export const styles = StyleSheet.create({
     marginHorizontal: 20,
   },
   zoom: {
-    bottom: windowHeight - 190,
-    left: 2,
-    width: 140,
-  },
-  button: {
-    // position: 'absolute',
-    width: 60,
-    height: 60,
-    borderRadius: 60 / 2,
-    alignItems: 'center',
-    justifyContent: 'center',
-    shadowRadius: 10,
-    shadowColor: '#F02A4B',
-    shadowOpacity: 0.5,
-    shadowOffset: { height: 10, width: 10 },
-    backgroundColor: 'white',
-    left: windowWidth - 110,
-    elevation: 90,
-    bottom: 70,
-  },
-  floatingButtonContainer: {
+    left: 0,
     position: 'absolute',
-    alignItems: 'center',
-    right: 40,
+    top: 0,
+    width: 140,
   },
 });
 
 export const colors = {
-  primaryColor: '#1e88e5',
-  secondaryColor: '#005cb2',
   editButtonColor: '#039be5',
   deleteButtonColor: '#6ab7ff',
+  primaryColor: '#1e88e5',
+  secondaryColor: '#005cb2',
 };

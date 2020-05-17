@@ -80,19 +80,22 @@ const Camera = ({ navigation, modalVisible }) => {
           buttonNegative: 'Cancel',
         }}
         zoom={zoomValue}>
-        <View
-          style={{ flex: 0, flexDirection: 'row', justifyContent: 'center' }}>
+        <Slider
+          minimumValue={0}
+          maximumValue={1}
+          step={0.1}
+          value={zoomValue}
+          onValueChange={(val) => setZoomValue(val)}
+          thumbTintColor={colors.primaryColor}
+          style={styles.zoom}
+        />
+        <Icon
+          onPress={toggleFlash}
+          style={[styles.flash, styles.icon]}
+          name="flash"
+        />
+        <View>
           <View style={styles.iconView}>
-            <Slider
-              minimumValue={0}
-              maximumValue={1}
-              step={0.1}
-              value={zoomValue}
-              onValueChange={(val) => setZoomValue(val)}
-              thumbTintColor={colors.primaryColor}
-              style={styles.zoom}
-            />
-
             <Icon
               name="camera"
               size={3}
@@ -100,29 +103,24 @@ const Camera = ({ navigation, modalVisible }) => {
               style={[styles.icon, styles.camera]}
               onPress={takePicture}
             />
+            {camera.products.length ? (
+              <Icon
+                name="check-square"
+                size={3}
+                color="#900"
+                style={[styles.icon, styles.button]}
+                onPress={() => {
+                  flash === RNCamera.Constants.FlashMode.torch
+                    ? toggleFlash
+                    : null;
+
+                  modalVisible ? null : navigation.navigate('Shopping Cart');
+                }}
+              />
+            ) : null}
           </View>
-          <Icon
-            onPress={toggleFlash}
-            style={[styles.flash, styles.icon]}
-            name="flash"
-          />
         </View>
         <View />
-        {camera.products.length ? (
-          // <CameraModal
-          //   modalVisible={modalVisible}
-          //   setModalVisible={setModalVisible}
-          // />
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => {
-              flash === RNCamera.Constants.FlashMode.torch ? toggleFlash : null;
-
-              modalVisible ? null : navigation.navigate('Shopping Cart');
-            }}>
-            <Text>Done</Text>
-          </TouchableOpacity>
-        ) : null}
       </RNCamera>
     </View>
   );

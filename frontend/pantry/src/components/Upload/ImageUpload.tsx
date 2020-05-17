@@ -18,6 +18,7 @@ import axios from 'axios';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Container, Picture, ProgressBar, styling } from './styles.ts';
 import { FireBaseStorage } from '../../firebase/firebase';
+import { PROXY } from '../../../proxy';
 // import TextRecog from './TextRecog'
 
 export interface Props {
@@ -65,12 +66,9 @@ const ImageUpload = ({ navigation }: Props) => {
         completed.ref.getDownloadURL().then(async (url) => {
           console.log(`Firebase Hosted Url`, url);
           try {
-            const { data } = await axios.post(
-              'http://localhost:8282/receipts/upload',
-              {
-                url,
-              },
-            );
+            const { data } = await axios.post(`${PROXY}/receipts/upload`, {
+              url,
+            });
             console.log(`Posted to backend successfully`, data);
           } catch (err) {
             console.log(`Post to backedn error`, err);
