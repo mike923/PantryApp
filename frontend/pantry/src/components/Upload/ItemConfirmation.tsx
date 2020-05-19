@@ -16,7 +16,7 @@ import CameraModal from '../Camera/cameraModal.tsx';
 import { client } from '../../../proxy';
 
 const ItemConfirmation = (props: any) => {
-  const recog: object = useSelector((state) => state.camera);
+  const recog: object = useSelector((state) => state.recog);
   const dispatch = useDispatch();
 
   // console.log(route.params);

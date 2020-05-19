@@ -9,20 +9,16 @@ import ItemConfirmation from './ItemConfirmation.tsx';
 import { client } from '../../../proxy';
 
 const TextRecog = ({ route, navigation }: Props) => {
-  const recog: object = useSelector((state) => state.camera);
+  const recog: object = useSelector((state) => state.recog);
   const dispatch = useDispatch();
 
   const { localUriPath, firebaseImageURL } = route.params;
-  const [text, setText] = useState({ receipt_url: null });
-  const didMountRef = useRef(false);
+  // const [text, setText] = useState({ receipt_url: null });
 
   useEffect(() => {
     localUriPath ? processImg() : Alert.alert(`Choose Photo first`);
-
-    // if (didMountRef.current) {
-    dispatch(parseReceipt(text));
-    // } else didMountRef.current = true;
-  }, [dispatch, recog]);
+  }, []);
+  console.log('recognition', recog);
 
   console.log(`Local Path for TextRecog Component: `, localUriPath);
 
@@ -35,8 +31,8 @@ const TextRecog = ({ route, navigation }: Props) => {
 
     const items = await algoRythm1(processedText.text);
     console.log(`Items: `, items);
-    // dispatch(parseReceipt({ receipt_url: firebaseImageURL, ...items }))
-    setText({ receipt_url: firebaseImageURL, ...items });
+    dispatch(parseReceipt({ receipt_url: firebaseImageURL, ...items }));
+    // setText({ receipt_url: firebaseImageURL, ...items });
     // const textJsxArr = processedText.blocks.map((block) => {
     //   console.log(`Text Block: `, block.text);
     //   console.log(`Confidence: `, block.confidence);
@@ -58,14 +54,14 @@ const TextRecog = ({ route, navigation }: Props) => {
   };
 
   const goToParsed = () => {
-    navigation.navigate('Confirmation', { parsedText: text });
+    navigation.navigate('Confirmation');
   };
 
   return (
     <ScrollView>
       {/* {text} */}
-      {text.receipt_url ? (
-        <ItemConfirmation navigation={navigation} parsedReceipt={text} />
+      {recog.text.receipt_url ? (
+        <ItemConfirmation navigation={navigation} />
       ) : null}
       {/* {text ? (
         <Button title="Confirmation" onPress={goToParsed} color="green" />
