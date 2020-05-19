@@ -1,7 +1,7 @@
 const express = require('express');
 const axios = require('axios');
 const router = express.Router();
-const { /* makeDocRef, */ getItemBy, setData, fetchFirestore } = require('../firebase')
+const { /* makeDocRef, */ getItemBy, setData, fetchFirestore, checkAuth } = require('../firebase')
 const icecat = require('icecat')
 
 const icecatClient = new icecat('mamparo923', 'hezfas-ripvor-8viqzU')
@@ -9,6 +9,16 @@ const icecatClient = new icecat('mamparo923', 'hezfas-ripvor-8viqzU')
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.json({ title: 'Welcome to Pantry Backend' });
+});
+
+router.get('/test', checkAuth, async (req, res, next) => {
+  const { locals } = res
+
+  res.status(200).json({
+    payload: locals,
+    message: 'This is the test route used for development',
+    error: false,
+  })
 });
 
 router.get('/firestore/:collection/doc/:reference', async (req, res, next) => {
