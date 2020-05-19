@@ -5,7 +5,4 @@ import {
   FETCHED_FOOD_ITEMS,
   SET_FOOD_ITEMS,
   FETCHING_FOOD_ITEMS_ERROR,
-} from './actionTypes';
-
-
-
+} from './actionTypes.ts';
