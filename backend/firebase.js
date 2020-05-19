@@ -1,4 +1,5 @@
 const admin = require("firebase-admin")
+const { getPantryByUserId } = require('./db/queries/users')
 const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_KEY);
 
 admin.initializeApp({
@@ -11,8 +12,11 @@ const db = admin.firestore();
 const checkAuth = (req, res, next) => {
   if (req.headers.authtoken) {
     admin.auth().verifyIdToken(req.headers.authtoken)
-      .then((eto) => {
+      .then(async (eto) => {
         console.log(eto)
+        const { pantry_id } = await getPantryByUserId(eto.uid)
+        console.log(pantry_id)
+        res.locals.pantry_id = pantry_id
         res.locals.user_id = eto.uid
         res.locals.email = eto.email
         next()

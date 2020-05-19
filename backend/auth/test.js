@@ -1,5 +1,6 @@
 require("dotenv").config();
 const {searchAPIs, uploadToFirestore, fetchFirestore, ...e } = require('../db/queries/allFoods')
+const fi = require('../db/queries/foodItem')
 
 const a = async () => {
   let data = await searchAPIs('044000032197')
@@ -18,10 +19,11 @@ const a = async () => {
 const l = async(callback, ...args) => {
   console.log(args, callback)
   let data = await callback(...args)
-  console.log(Array(99).fill('@').join(), '\nTHIS IS FROM THE FUNCTION WE ARE CREATING!!!\n', data, '=====the end======')
+  console.log(Array(99).fill('@').join(''), '\nTHIS IS FROM THE FUNCTION WE ARE CREATING!!!\n', data, '\n=====the end======')
 }
 
-l(fetchFirestore, 'foodByUPC', '038000402906')
+// l(fetchFirestore, 'foodByUPC', '038000402906')
 // l(e.createQuickItemLookup, 'foodByUPC', '044000032197')
 // l(searchAPIs('044000032197'))
 // l(e.createNewUPC, '044000058678')
+l(fi.getFoodItemByItemID, 1)

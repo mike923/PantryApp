@@ -17,6 +17,15 @@ const addImgUrl = async (pantry_id, receipt_json) =>
     [pantry_id, receipt_json],
   );
 
+const uploadReceiptData = async (receipt) => {
+  let query = `
+    INSERT INTO receipts
+    VALUES ($1)
+
+  `
+  return await db.oneOrNone('', [receipt])
+}
+
 const getReceiptById = async (id) => {
   // try {
   return await db.oneOrNone("SELECT * from receipts WHERE id = $1", [id]);
