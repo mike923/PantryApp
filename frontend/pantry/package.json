@@ -18,11 +18,11 @@
   "lint-staged": {
     "src/**/*.{ts,tsx,js}": [
       "npx prettier --write",
-      "npx eslint . --fix"
+      "npx eslint --fix"
     ],
     "*.{js,json}": [
       "npx prettier --write",
-      "npx eslint . --fix"
+      "npx eslint --fix"
     ]
   },
   "husky": {
