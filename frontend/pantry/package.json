@@ -6,13 +6,13 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
-    "clearmods": "rm -rf node_modules/ && npm i && npm install --only=dev",
+    "clearmods": "rm -rf node_modules/ && npm i && npm install --only=dev && cd ios/ && pod install --repo-update && cd ..",
     "test": "jest",
     "lint": "npx eslint . --ext js,ts,jsx,ts,json --fix",
     "format": "npx prettier --write src/**/*.{js,ts,tsx} && npx prettier --write *.{js,json}",
-    "start:android": "npx react-native run-android && npm run start:debugger",
-    "start:app": "cd ios/ && pod install --repo-update && cd .. && npx react-native run-ios && npm run start:debugger",
-    "start:mike": "cd ios/ && pod install --repo-update && cd .. && npx react-native run-ios --device='Michael D.’s iPhone' && npm run start:debugger",
+    "start:android": "npm run start:debugger && npx react-native run-android",
+    "start:app": "cd ios/ && pod install --repo-update && cd .. && npm run start:debugger && npx react-native run-ios",
+    "start:mike": "npm run start:debugger && npx react-native run-ios --device='Michael D.’s iPhone'",
     "start:debugger": "open 'rndebugger://set-debugger-loc?host=localhost&port=8081'"
   },
   "lint-staged": {

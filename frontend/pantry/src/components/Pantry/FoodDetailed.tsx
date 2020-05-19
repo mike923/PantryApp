@@ -11,9 +11,8 @@ import {
 } from 'react-native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import DatePicker from 'react-native-date-picker';
-import axios from 'axios';
 
-import { PROXY } from '../../../proxy';
+import { client } from '../../../proxy';
 
 const FoodDetailed = (props: any) => {
   console.log(props);
@@ -33,9 +32,7 @@ const FoodDetailed = (props: any) => {
   useEffect(() => {
     const apiCall = async () => {
       try {
-        const { data } = await axios.get(
-          `${PROXY}/fooditem/itemid/${state.item_id}`,
-        );
+        const { data } = await client.get(`/fooditem/itemid/${state.item_id}`);
         console.log(data);
         setState({ ...state, ...data.payload[0], loaded: true });
       } catch (err) {
@@ -48,10 +45,8 @@ const FoodDetailed = (props: any) => {
   const handleSubmit = async () => {
     // IF DATE CHANGED UPDATE DATE FINISHED COLUMN
     console.log(`Submitted`, state);
-    const data = await axios.patch(
-      `${PROXY}/fooditem/update/${state.item_id}`,
-      state,
-    );
+    const data = await client.patch(`/fooditem/update/${state.item_id}`, state);
+    console.log(data);
     props.navigation.goBack();
   };
 

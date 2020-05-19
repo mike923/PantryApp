@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { Alert } from 'react-native';
 
 import { SPOONACULAR_API_KEY } from 'react-native-dotenv';
@@ -8,7 +7,7 @@ import {
   SET_PRODUCT,
   FETCHING_PRODUCT_ERROR,
 } from './actionTypes.ts';
-import { PROXY } from '../../../proxy';
+import { client } from '../../../proxy';
 
 // api methods
 const setError = (err: string) => ({
@@ -50,7 +49,7 @@ const barcodeApiCalls = (upc: string) => {
   return async (dispatch) => {
     dispatch(fetchingProduct());
     try {
-      const { data } = await axios.get(`${PROXY}/allFoods/checkByUPC/${upc}`);
+      const { data } = await client.get(`/allFoods/checkByUPC/${upc}`);
       // `https://api.spoonacular.com/food/products/upc/${upc}?apiKey=${SPOONACULAR_API_KEY}`,
       console.log('actions data', data);
 

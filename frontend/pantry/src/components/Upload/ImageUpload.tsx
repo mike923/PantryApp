@@ -14,10 +14,10 @@ import {
   NavigationState,
 } from 'react-navigation';
 import ImagePicker from 'react-native-image-picker';
-import axios from 'axios';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Container, Picture, ProgressBar, styling } from './styles.ts';
 import { FireBaseStorage } from '../../firebase/firebase';
+// import { client } from '../../../proxy';
 // import TextRecog from './TextRecog'
 
 export interface Props {
@@ -64,17 +64,14 @@ const ImageUpload = ({ navigation }: Props) => {
         console.log(`Upload Completed`);
         completed.ref.getDownloadURL().then(async (url) => {
           console.log(`Firebase Hosted Url`, url);
-          try {
-            const { data } = await axios.post(
-              'http://localhost:8282/receipts/upload',
-              {
-                url,
-              },
-            );
-            console.log(`Posted to backend successfully`, data);
-          } catch (err) {
-            console.log(`Post to backedn error`, err);
-          }
+          // try {
+          //   const { data } = await client.post('/receipts/upload', {
+          //     url,
+          //   });
+          //   console.log(`Posted to backend successfully`, data);
+          // } catch (err) {
+          //   console.log(`Post to backedn error`, err);
+          // }
           setFirebaseImgUrl(url);
         });
       },
@@ -138,6 +135,7 @@ const ImageUpload = ({ navigation }: Props) => {
               onPress={() =>
                 navigation.navigate('Parsed', {
                   localUriPath: imageURI.localPath,
+                  firebaseImageURL: firebaseImgUrl,
                 })
               }
             />
