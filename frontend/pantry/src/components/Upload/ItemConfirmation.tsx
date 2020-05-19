@@ -14,14 +14,15 @@ import RecieptItems from './RecieptItems.tsx';
 import { priceFix, quantityFix } from './helpers/helpers.ts';
 import CameraModal from '../Camera/cameraModal.tsx';
 import { client } from '../../../proxy';
+import { parseReceipt } from '../../redux/actions/textRecogActions.ts';
 
 const ItemConfirmation = (props: any) => {
-  const recog: object = useSelector((state) => state.recog);
+  const receipt: object = useSelector((state) => state.recog.receipt);
   const dispatch = useDispatch();
 
   // console.log(route.params);
   const { navigation, parsedReceipt } = props;
-  const [reciept, setReciept] = useState(parsedReceipt);
+  // const [reciept, setReciept] = useState(parsedReceipt);
   const [modalVisible, setModalVisible] = useState(false);
 
   const handleConfirm = () => {
@@ -42,33 +43,35 @@ const ItemConfirmation = (props: any) => {
         },
       },
     ]);
-    console.log(reciept);
+    console.log(receipt);
   };
 
   const handleChange = (item: any, name: any, text: any) => {
     console.log(item, name, text);
-    const updatedReciept = { ...reciept };
+    const updatedReceipt = { ...receipt };
     if (item === 'storeName') {
-      updatedReciept.storeName = text;
+      updatedReceipt.storeName = text;
     } else if (item === 'recieptDate') {
-      updatedReciept.recieptDate = text;
+      updatedReceipt.recieptDate = text;
     } else if (name === 'quantity') {
-      updatedReciept.recieptItems[item][name] = quantityFix(text);
+      updatedReceipt.recieptItems[item][name] = quantityFix(text);
     } else if (name === 'price') {
-      updatedReciept.recieptItems[item][name] = priceFix(text);
+      updatedReceipt.recieptItems[item][name] = priceFix(text);
     } else {
-      updatedReciept.recieptItems[item][name] = text;
+      updatedReceipt.recieptItems[item][name] = text;
     }
-    setReciept(updatedReciept);
+    dispatch(parseReceipt(updatedReceipt));
+    // setReciept(updatedReceipt);
   };
 
   const getRecieptTotal = () => {
-    console.log(`HERE`, reciept);
-    return Object.keys(reciept.recieptItems)
+    // TODO fix the NaN displaying instead of the total
+    console.log(`HERE`, receipt);
+    return Object.keys(receipt.recieptItems)
       .reduce(
         (acc, num) =>
           acc +
-          reciept.recieptItems[num].quantity * reciept.recieptItems[num].price,
+          receipt.recieptItems[num].quantity * receipt.recieptItems[num].price,
         0,
       )
       .toFixed(2);
@@ -76,7 +79,7 @@ const ItemConfirmation = (props: any) => {
 
   return (
     <>
-      {reciept ? (
+      {receipt ? (
         <View style={styles.container}>
           <View style={styles.storeContainer}>
             <View style={styles.storeHeading}>
@@ -86,14 +89,14 @@ const ItemConfirmation = (props: any) => {
                   onChangeText={(text) =>
                     handleChange('storeName', null, text)
                   }>
-                  {reciept.storeName}
+                  {receipt.storeName}
                 </TextInput>
                 <TextInput
                   style={styles.storeDate}
                   onChangeText={(text) =>
                     handleChange('recieptDate', null, text)
                   }>
-                  {reciept.recieptDate}
+                  {receipt.recieptDate}
                 </TextInput>
               </View>
             </View>
@@ -103,7 +106,7 @@ const ItemConfirmation = (props: any) => {
               contentContainerStyle={styles.scrollView}
               showsVerticalScrollIndicator={false}>
               <RecieptItems
-                reciept={reciept.recieptItems}
+                reciept={receipt.recieptItems}
                 handleChange={handleChange}
               />
               <View style={styles.totalRow}>

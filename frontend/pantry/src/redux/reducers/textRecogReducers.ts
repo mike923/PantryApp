@@ -8,7 +8,7 @@ const initUserState = {
   scanningReceipt: false,
   scannedReceipt: false,
   error: false,
-  text: {},
+  receipt: {},
   errorMessage: [],
 };
 
@@ -23,7 +23,7 @@ const textRecogReducer = (state = initUserState, action: any) => {
     case SCANNED_RECEIPT: {
       stateCopy.scanningReceipt = true;
       stateCopy.scannedReceipt = true;
-      stateCopy.text = action.payload;
+      stateCopy.receipt = action.payload;
       console.log('text', action.payload);
 
       break;

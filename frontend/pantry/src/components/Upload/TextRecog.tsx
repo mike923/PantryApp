@@ -9,7 +9,7 @@ import ItemConfirmation from './ItemConfirmation.tsx';
 import { client } from '../../../proxy';
 
 const TextRecog = ({ route, navigation }: Props) => {
-  const recog: object = useSelector((state) => state.recog);
+  const receipt: object = useSelector((state) => state.recog.receipt);
   const dispatch = useDispatch();
 
   const { localUriPath, firebaseImageURL } = route.params;
@@ -18,9 +18,9 @@ const TextRecog = ({ route, navigation }: Props) => {
   useEffect(() => {
     localUriPath ? processImg() : Alert.alert(`Choose Photo first`);
   }, []);
-  console.log('recognition', recog);
+  console.log('recognition', receipt);
 
-  console.log(`Local Path for TextRecog Component: `, localUriPath);
+  console.log(`Local Path for Texeiptreceipt Component: `, localUriPath);
 
   const processImg = async () => {
     const processedText = await vision().textRecognizerProcessImage(
@@ -60,7 +60,7 @@ const TextRecog = ({ route, navigation }: Props) => {
   return (
     <ScrollView>
       {/* {text} */}
-      {recog.text.receipt_url ? (
+      {receipt.receipt_url ? (
         <ItemConfirmation navigation={navigation} />
       ) : null}
       {/* {text ? (
