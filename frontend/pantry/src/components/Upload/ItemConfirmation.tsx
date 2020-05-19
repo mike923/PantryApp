@@ -15,7 +15,7 @@ import RecieptItems from './RecieptItems.tsx';
 import fakeParsedReciept from './dummyData/fakeParsedReciept.ts';
 
 import { priceFix, quantityFix } from './helpers/helpers.ts';
-import { PROXY } from '../../../proxy';
+import { client } from '../../../proxy';
 
 const ItemConfirmation = (props: any) => {
   // console.log(route.params);
@@ -28,7 +28,7 @@ const ItemConfirmation = (props: any) => {
       {
         text: 'Yes',
         onPress: async () => {
-          const { data } = await axios.get(`${PROXY}`);
+          const data = await client.get('/test');
           console.log(data);
           // POST RECIEPT TO BACKEND
           navigation.dispatch(

@@ -3,11 +3,10 @@ import React, { useState, useEffect, Props } from 'react';
 // import { utils } from '@react-native-firebase/app';
 import vision from '@react-native-firebase/ml-vision';
 import { ScrollView, Text, Button, Alert } from 'react-native';
-import axios from 'axios';
 import { dummy } from '../../../dummydata';
 import algoRythm1 from './parsingTest/recieptText2';
 import ItemConfirmation from './ItemConfirmation.tsx';
-import { PROXY } from '../../../proxy';
+import { client } from '../../../proxy';
 
 const TextRecog = ({ route, navigation }: Props) => {
   const { localUriPath, firebaseImageURL } = route.params;
@@ -43,10 +42,7 @@ const TextRecog = ({ route, navigation }: Props) => {
   const sendData = async () => {
     let receipt_json = dummy;
     try {
-      const { data } = await axios.post(
-        `${PROXY}/receipts/upload`,
-        receipt_json,
-      );
+      const { data } = await client.post('/receipts/upload', receipt_json);
       console.log(data);
     } catch (error) {
       console.log(error);
