@@ -1,11 +1,25 @@
 import React from 'react';
 import { TouchableOpacity, Text, Image, StyleSheet } from 'react-native';
 
+interface FoodItemProp {
+  preferred_name: string;
+  img_url: string;
+  receipt_date: string;
+  item_id: number;
+  foodItem: any;
+}
+
 const FoodItem = (props: any) => {
   let { goTo } = props;
-  const { preferred_name, img_url, receipt_date, quantity, item_id } = goTo
-    ? props
-    : props.route.params;
+  const {
+    preferred_name,
+    img_url,
+    receipt_date,
+    item_id,
+    ...foodItem
+  }: FoodItemProp = goTo ? props : props.route.params;
+
+  console.log(foodItem, props);
 
   return (
     <TouchableOpacity

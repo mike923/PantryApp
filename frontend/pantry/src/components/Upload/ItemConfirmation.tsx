@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import {
   View,
   Text,
@@ -10,11 +11,9 @@ import {
 import { CommonActions } from '@react-navigation/native';
 import { confirmStyles as styles } from './styles.ts';
 import RecieptItems from './RecieptItems.tsx';
-
-import fakeParsedReciept from './dummyData/fakeParsedReciept.ts';
-
 import { priceFix, quantityFix } from './helpers/helpers.ts';
 import CameraModal from '../Camera/cameraModal.tsx';
+import { PROXY } from '../../../proxy';
 
 const ItemConfirmation = (props: any) => {
   // console.log(route.params);
@@ -27,7 +26,9 @@ const ItemConfirmation = (props: any) => {
       { text: 'No', onPress: () => console.log('Cancelled') },
       {
         text: 'Yes',
-        onPress: () => {
+        onPress: async () => {
+          const { data } = await axios.get(`${PROXY}`);
+          console.log(data);
           // POST RECIEPT TO BACKEND
           navigation.dispatch(
             CommonActions.reset({
@@ -43,21 +44,19 @@ const ItemConfirmation = (props: any) => {
 
   const handleChange = (item: any, name: any, text: any) => {
     console.log(item, name, text);
-    setReciept(() => {
-      const updatedReciept = { ...reciept };
-      if (item === 'storeName') {
-        updatedReciept.storeName = text;
-      } else if (item === 'recieptDate') {
-        updatedReciept.recieptDate = text;
-      } else if (name === 'quantity') {
-        updatedReciept.recieptItems[item][name] = quantityFix(text);
-      } else if (name === 'price') {
-        updatedReciept.recieptItems[item][name] = priceFix(text);
-      } else {
-        updatedReciept.recieptItems[item][name] = text;
-      }
-      return updatedReciept;
-    });
+    const updatedReciept = { ...reciept };
+    if (item === 'storeName') {
+      updatedReciept.storeName = text;
+    } else if (item === 'recieptDate') {
+      updatedReciept.recieptDate = text;
+    } else if (name === 'quantity') {
+      updatedReciept.recieptItems[item][name] = quantityFix(text);
+    } else if (name === 'price') {
+      updatedReciept.recieptItems[item][name] = priceFix(text);
+    } else {
+      updatedReciept.recieptItems[item][name] = text;
+    }
+    setReciept(updatedReciept);
   };
 
   const getRecieptTotal = () => {

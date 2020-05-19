@@ -5,6 +5,7 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const cors = require("cors")
 
+const { checkAuth } = require("./firebase");
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const receiptsRouter = require("./routes/receipts");
@@ -24,8 +25,8 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", indexRouter);
 app.use("/allFoods", allFoodsRouter);
 app.use("/users", usersRouter);
-app.use("/receipts", receiptsRouter);
+app.use("/receipts", checkAuth, receiptsRouter);
 app.use("/auth", authRouter);
-app.use("/fooditem", foodItemRouter);
+app.use("/fooditem", checkAuth, foodItemRouter);
 
 module.exports = app;
