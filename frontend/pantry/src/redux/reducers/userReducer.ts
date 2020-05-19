@@ -9,6 +9,7 @@ import {
 const initUserState = {
   userInfo: {
     email: '',
+    token: '',
   },
   loggedIn: false,
   loading: false,
@@ -30,7 +31,8 @@ const userReducer = (state = initUserState, action) => {
 
     case SET_USER:
       stateCopy.loggedIn = true;
-      stateCopy.userInfo.email = action.payload;
+      stateCopy.userInfo.email = action.payload.email;
+      stateCopy.userInfo.token = action.payload.token;
       break;
 
     case UNSET_USER:
