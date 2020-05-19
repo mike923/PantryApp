@@ -45,13 +45,6 @@ const cameraReducer = (state = initUserState, action) => {
     }
 
     case DELETE_PRODUCT: {
-      // let productSet = new Set(stateCopy.products);
-
-      // if (!productSet.has(action.payload.upc)) {
-      //   productSet.add(action.payload);
-      // }
-      // productSet.add(action.payload);
-      // stateCopy.fetchedProduct = true;
       stateCopy.products = action.payload;
       break;
     }

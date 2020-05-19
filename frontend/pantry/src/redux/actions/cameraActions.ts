@@ -26,28 +26,6 @@ const fetchedProduct = () => ({ type: FETCHED_PRODUCT });
 
 const deleteProduct = (data: any) => ({ type: DELETE_PRODUCT, payload: data });
 
-// const onBarCodeRead = (localPath) => {
-//   return async (dispatch) => {
-//     dispatch(scanningBarcode());
-//     try {
-//       const barcodes = await vision().barcodeDetectorProcessImage(localPath);
-//       console.log(barcodes);
-
-//       if (barcodes.valueType === 5) {
-//         dispatch(scannedBarcode());
-
-//         // alerting user of scanned bar codes
-//         Alert.alert(`You scanned ${barcodes[0].rawValue}`);
-
-//         dispatch(setBarcode(barcodes[0].rawValue));
-//         dispatch(barcodeApiCalls(barcodes[0].rawValue));
-//       }
-//     } catch (err) {
-//       dispatch(setError(err));
-//     }
-//   };
-// };
-
 const barcodeApiCalls = (upc: string) => {
   return async (dispatch) => {
     dispatch(fetchingProduct());
