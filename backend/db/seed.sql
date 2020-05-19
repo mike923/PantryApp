@@ -5,27 +5,27 @@ CREATE DATABASE pantry;
 \c pantry
 
 CREATE TABLE pantry (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR NOT NULL
+  id SERIAL PRIMARY KEY,
+  name VARCHAR NOT NULL
 );
 
 
 CREATE TABLE users (
-    id  VARCHAR PRIMARY KEY,
-    email VARCHAR NOT NULL UNIQUE,
-    pantry_id INT REFERENCES pantry (id)
+  id  VARCHAR PRIMARY KEY,
+  email VARCHAR NOT NULL UNIQUE,
+  pantry_id INT REFERENCES pantry (id)
 );
 
 
 -- reciepts need status
 CREATE TABLE receipts (
-    id  SERIAL PRIMARY KEY,
-    pantry_id INT REFERENCES pantry(id),
-    receipt_url VARCHAR,
-    store_name VARCHAR,
-    total DECIMAL,
-    upload_date VARCHAR,
-    receipt_date VARCHAR
+  id SERIAL PRIMARY KEY,
+  pantry_id INT REFERENCES pantry(id),
+  receipt_url VARCHAR,
+  store_name VARCHAR,
+  total DECIMAL,
+  upload_date VARCHAR,
+  receipt_date VARCHAR
 );
 
 -- CREATE TABLE item_categories (
@@ -41,25 +41,27 @@ CREATE TABLE receipts (
 
 
 CREATE TABLE food_item (
-    item_id SERIAL PRIMARY KEY,
-    receipt_id INT REFERENCES receipts(id),
-    pantry_id INT REFERENCES pantry(id),
-    preferred_name VARCHAR NOT NULL,
-    price DECIMAL NOT NULL,
-    quantity INT NOT NULL,
-    upc VARCHAR,
-    img_url VARCHAR, 
-    finished BOOLEAN DEFAULT FALSE
+  item_id SERIAL PRIMARY KEY,
+  receipt_id INT REFERENCES receipts(id),
+  pantry_id INT REFERENCES pantry(id),
+  preferred_name VARCHAR NOT NULL,
+  price DECIMAL NOT NULL,
+  quantity INT NOT NULL,
+  upc VARCHAR,
+  img_url VARCHAR, 
+  finished BOOLEAN DEFAULT FALSE
 );  
 
 CREATE TABLE shopping_list_items (
-    id SERIAL PRIMARY KEY,
-    -- food_id INT REFERENCES all_foods(id),
-    pantry_id INT REFERENCES pantry(id),
-    quantity INT DEFAULT 1,
-    completed BOOLEAN DEFAULT FALSE
+  id SERIAL PRIMARY KEY,
+  -- food_id INT REFERENCES all_foods(id),
+  pantry_id INT REFERENCES pantry(id),
+  quantity INT DEFAULT 1,
+  completed BOOLEAN DEFAULT FALSE
 );
 
+------------------------------------------------------------------------------------------
+-- What are these lines?!!?!?!?!?!?!?!!???!?!?!?!?!??!????!???!?!?!?!?!!?!!!!?!??!?!?!?!?!
 ------------------------------------------------------------------------------------------
 
 INSERT INTO pantry(name) VALUES
@@ -67,7 +69,7 @@ INSERT INTO pantry(name) VALUES
 ;
 
 INSERT INTO users (id, email, pantry_id) VALUES 
-  ('47E1Pb7c1fTgKCdYWPm1KNDVDm02', 'voniel@bvoniel.com', 1)
+  ('PJrztv4Y0BMsHcbEd9bmn2fjzxD2', 'voniel@bvoniel.com', 1)
 ;
 
 INSERT INTO receipts (pantry_id, receipt_url, store_name, total, upload_date, receipt_date) VALUES

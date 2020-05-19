@@ -8,6 +8,8 @@ const getUsersById = async (id) => {
   return await db.oneOrNone("SELECT id,email from users WHERE id = $1", [id]);
 };
 
+const getPantryByUserId = async (id) => await db.oneOrNone("SELECT pantry_id FROM users WHERE id = $1", [id]);
+
 //adding a new user to app
 const addNewUser = async (userObj) => await db.one(`
   INSERT INTO users (email, id, pantry_id) 
@@ -37,6 +39,7 @@ const hardDeleteUSer = async (id) => {
 
 module.exports = {
   getAllUsers,
+  getPantryByUserId,
   getUsersById,
   addNewUser,
   getUserByEmail,
