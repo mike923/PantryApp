@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Props } from 'react';
 // import { useSelector, useDispatch } from 'react-redux';
 // import { utils } from '@react-native-firebase/app';
 import vision from '@react-native-firebase/ml-vision';
@@ -7,10 +7,11 @@ import axios from 'axios';
 import { dummy } from '../../../dummydata';
 import algoRythm1 from './parsingTest/recieptText2';
 import ItemConfirmation from './ItemConfirmation.tsx';
+import { PROXY } from '../../../proxy';
 
-const TextRecog = ({ route, navigation }) => {
-  const { localUriPath } = route.params;
-  const [text, setText] = useState(null);
+const TextRecog = ({ route, navigation }: Props) => {
+  const { localUriPath, firebaseImageURL } = route.params;
+  const [text, setText] = useState({ receipt_url: null });
 
   useEffect(() => {
     localUriPath ? processImg() : Alert.alert(`Choose Photo first`);
@@ -27,28 +28,26 @@ const TextRecog = ({ route, navigation }) => {
 
     const items = await algoRythm1(processedText.text);
     console.log(`Items: `, items);
-    setText(items);
+    setText({ receipt_url: firebaseImageURL, ...items });
 
-    const textJsxArr = processedText.blocks.map((block) => {
-      console.log(`Text Block: `, block.text);
-      console.log(`Confidence: `, block.confidence);
-      // console.log(`Language: `, block.recognizedLanguages);
-      return <Text>{block.text}</Text>;
-    });
+    // const textJsxArr = processedText.blocks.map((block) => {
+    //   console.log(`Text Block: `, block.text);
+    //   console.log(`Confidence: `, block.confidence);
+    //   // console.log(`Language: `, block.recognizedLanguages);
+    //   return <Text>{block.text}</Text>;
+    // });
 
-    setText(textJsxArr);
+    // setText(textJsxArr);
   };
 
   const sendData = async () => {
     let receipt_json = dummy;
     try {
-      const {
-        data: { payload },
-      } = await axios.post(
-        'http://localhost:8282/receipts/upload',
+      const { data } = await axios.post(
+        `${PROXY}/receipts/upload`,
         receipt_json,
       );
-      console.log(payload);
+      console.log(data);
     } catch (error) {
       console.log(error);
     }
@@ -61,13 +60,13 @@ const TextRecog = ({ route, navigation }) => {
   return (
     <ScrollView>
       {/* {text} */}
-      {text ? (
+      {text.receipt_url ? (
         <ItemConfirmation navigation={navigation} parsedReceipt={text} />
       ) : null}
-      {text ? (
+      {/* {text ? (
         <Button title="Confirmation" onPress={goToParsed} color="green" />
       ) : null}
-      <Button title="Submit" onPress={sendData} color="green" />
+      <Button title="Submit" onPress={sendData} color="green" /> */}
     </ScrollView>
   );
 };
