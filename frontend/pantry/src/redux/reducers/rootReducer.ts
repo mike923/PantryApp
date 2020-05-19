@@ -8,7 +8,7 @@ const rootReducer = combineReducers({
   testUser: testReducer,
   user: userReducer,
   camera: cameraReducer,
-  textRecog: textRecogReducer,
+  Recog: textRecogReducer,
 });
 
 export default rootReducer;

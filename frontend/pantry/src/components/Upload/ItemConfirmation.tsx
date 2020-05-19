@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import {
   View,
@@ -9,6 +9,7 @@ import {
   Alert,
 } from 'react-native';
 import { CommonActions } from '@react-navigation/native';
+import { useSelector, useDispatch } from 'react-redux';
 import { confirmStyles as styles } from './styles.ts';
 import RecieptItems from './RecieptItems.tsx';
 import { priceFix, quantityFix } from './helpers/helpers.ts';
@@ -16,6 +17,9 @@ import CameraModal from '../Camera/cameraModal.tsx';
 import { PROXY } from '../../../proxy';
 
 const ItemConfirmation = (props: any) => {
+  const recog: object = useSelector((state) => state.camera);
+  const dispatch = useDispatch();
+
   // console.log(route.params);
   const { navigation, parsedReceipt } = props;
   const [reciept, setReciept] = useState(parsedReceipt);
