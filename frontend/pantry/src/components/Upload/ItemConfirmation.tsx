@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -14,7 +13,7 @@ import { confirmStyles as styles } from './styles.ts';
 import RecieptItems from './RecieptItems.tsx';
 import { priceFix, quantityFix } from './helpers/helpers.ts';
 import CameraModal from '../Camera/cameraModal.tsx';
-import { PROXY } from '../../../proxy';
+import { client } from '../../../proxy';
 
 const ItemConfirmation = (props: any) => {
   const recog: object = useSelector((state) => state.camera);
@@ -31,7 +30,7 @@ const ItemConfirmation = (props: any) => {
       {
         text: 'Yes',
         onPress: async () => {
-          const { data } = await axios.get(`${PROXY}`);
+          const data = await client.get('/test');
           console.log(data);
           // POST RECIEPT TO BACKEND
           navigation.dispatch(

@@ -1,8 +1,7 @@
 // import React 'react';
 import { Alert } from 'react-native';
 import auth from '@react-native-firebase/auth';
-import axios from 'axios';
-import { PROXY } from '../../../proxy';
+import { client } from '../../../proxy';
 import {
   FETCHING_USER,
   FETCHED_USER,
@@ -15,11 +14,17 @@ const fetchingUser = () => ({ type: FETCHING_USER });
 
 const fetchedUser = () => ({ type: FETCHED_USER });
 
-const setUser = (email) => ({ type: SET_USER, payload: email });
+const setUser = (email: string, token: string) => ({
+  type: SET_USER,
+  payload: { email, token },
+});
 
 const unsetUser = () => ({ type: UNSET_USER });
 
-const errorLoadingUser = (err) => ({ type: FETCHING_USER_ERROR, payload: err });
+const errorLoadingUser = (err: any) => ({
+  type: FETCHING_USER_ERROR,
+  payload: err,
+});
 
 // checking for the error codes
 // informing the user about improper inputs
@@ -47,24 +52,27 @@ const loginUser = (email, password) => {
 
     auth()
       .signInWithEmailAndPassword(email, password)
-      .then(async ({ user }) => {
+      .then(async (res: any) => {
+        let { user } = res;
+        console.log(res);
         let token;
         try {
           token = await user.getIdToken();
           console.log(token);
+          client.defaults.headers.common.authtoken = token;
         } catch (error) {
           console.log(error);
         }
+
         try {
-          const { data } = await axios.get(PROXY, {
-            headers: { authtoken: token },
-          });
-          console.log(data);
+          let response = await client.get('/test');
+          console.log('response from client', response);
         } catch (error) {
-          console.log(error);
+          console.log('error with the client', client, error);
         }
+
         dispatch(fetchedUser());
-        dispatch(setUser(email));
+        dispatch(setUser(email, token));
       })
       .catch((err) => {
         console.log(err);
@@ -92,21 +100,17 @@ const registerUser = (email, password, pantry) => {
           console.log(error);
         }
         try {
-          const { data } = await axios.post(
-            `${PROXY}/users/add`,
-            {
-              pantryName: pantry.pantryName,
-              newPantry: pantry.newPantry,
-              pantryId: pantry.pantryId,
-            },
-            { headers: { authtoken: token } },
-          );
+          const { data } = await client.post('/users/add', {
+            pantryName: pantry.pantryName,
+            newPantry: pantry.newPantry,
+            pantryId: pantry.pantryId,
+          });
           console.log(data);
         } catch (error) {
           console.log(error);
         }
         dispatch(fetchedUser());
-        dispatch(setUser(email));
+        dispatch(setUser(email, token));
         console.log('User account created & signed in!');
       })
       .catch((err) => {

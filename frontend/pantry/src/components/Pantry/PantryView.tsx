@@ -2,13 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
-import axios from 'axios';
-import { PROXY } from '../../../proxy';
+import { client } from '../../../proxy';
 
 import FoodItem from './FoodItem.tsx';
 import Foods from '../Reciepts/dummyData/dummyFoodItems.ts';
 
-const foodItems = `${PROXY}/fooditem/receiptid/1`;
+const foodItems = `/fooditem/receiptid/1`;
 
 const PantryView = ({ navigation }) => {
   const [state, setState] = useState([]);
@@ -17,7 +16,7 @@ const PantryView = ({ navigation }) => {
   useEffect(() => {
     const apiCall = async () => {
       try {
-        const { data } = await axios.get(foodItems);
+        const { data } = await client.get(foodItems);
         console.log(data.payload);
         setState(data.payload);
         return data;
