@@ -1,9 +1,4 @@
-import { StyleSheet, Dimensions } from 'react-native';
-
-const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
-console.log(windowHeight / 60);
-console.log(windowWidth / 50);
+import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
   TouchableOpacityStyle: {
