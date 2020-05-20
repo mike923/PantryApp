@@ -16,7 +16,7 @@ export const dashBoardStyles = StyleSheet.create({
   container: {
     backgroundColor: '#1c2a38',
     height: 400,
-    width: windowWidth,
+    width: '100%',
   },
   edit_button: {
     alignSelf: 'center',

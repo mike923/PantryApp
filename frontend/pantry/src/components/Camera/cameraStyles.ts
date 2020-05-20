@@ -2,6 +2,8 @@ import { StyleSheet, Dimensions } from 'react-native';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
+console.log(windowHeight / 60);
+console.log(windowWidth / 50);
 
 export const styles = StyleSheet.create({
   TouchableOpacityStyle: {
@@ -21,7 +23,7 @@ export const styles = StyleSheet.create({
   button: {
     alignItems: 'center',
     justifyContent: 'center',
-    left: windowWidth - 250,
+    left: '35%',
     shadowColor: '#F02A4B',
     shadowOffset: { height: 10, width: 10 },
     shadowOpacity: 0.5,
@@ -29,8 +31,8 @@ export const styles = StyleSheet.create({
   },
   camera: {
     bottom: 0,
-    marginBottom: windowHeight / 60,
-    marginLeft: windowWidth / 50,
+    marginBottom: '3%',
+    // marginLeft: '2%',
     position: 'absolute',
   },
   cameraContainer: {
