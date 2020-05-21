@@ -2,6 +2,8 @@ import {
   SCANNING_RECEIPT,
   SCANNED_RECEIPT,
   SCANNING_RECEIPT_ERROR,
+  SET_ITEM,
+  // BARCODE_SCANNED,
 } from '../actions/actionTypes.ts';
 
 const initUserState = {
@@ -21,13 +23,20 @@ const textRecogReducer = (state = initUserState, action: any) => {
       break;
     }
     case SCANNED_RECEIPT: {
-      stateCopy.scanningReceipt = true;
+      stateCopy.scanningReceipt = false;
       stateCopy.scannedReceipt = true;
-      stateCopy.receipt = action.payload;
       console.log('text', action.payload);
 
       break;
     }
+    case SET_ITEM: {
+      stateCopy.receipt = action.payload;
+      break;
+    }
+    // case BARCODE_SCANNED: {
+    //   stateCopy.receipt = action.payload;
+    //   break;
+    // }
     case SCANNING_RECEIPT_ERROR: {
       stateCopy.scanningReceipt = false;
       stateCopy.scannedReceipt = false;

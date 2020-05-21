@@ -17,8 +17,11 @@ import { client } from '../../../proxy';
 import { parseReceipt } from '../../redux/actions/textRecogActions.ts';
 
 const ItemConfirmation = (props: any) => {
+  // connecting component to text recognition redux state with redux hooks
   const receipt: object = useSelector((state) => state.recog.receipt);
   const dispatch = useDispatch();
+
+  // TODO connect component to camera redux state
 
   // console.log(route.params);
   const { navigation, parsedReceipt } = props;
@@ -46,6 +49,8 @@ const ItemConfirmation = (props: any) => {
     console.log(receipt);
   };
 
+  // TODO grab the scanned barcodes from the camera state
+  // TODO dump those scanned items in the receipt array receipt = [...receipt,...scannedBarcodes]
   const handleChange = (item: any, name: any, text: any) => {
     console.log(item, name, text);
     const updatedReceipt = { ...receipt };
@@ -65,7 +70,7 @@ const ItemConfirmation = (props: any) => {
   };
 
   const getRecieptTotal = () => {
-    // TODO fix the NaN displaying instead of the total
+    // FIXME fix the NaN displaying instead of the total
     console.log(`HERE`, receipt);
     return Object.keys(receipt.recieptItems)
       .reduce(
