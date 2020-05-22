@@ -3,7 +3,6 @@ import {
   SCANNED_RECEIPT,
   SCANNING_RECEIPT_ERROR,
   SET_ITEM,
-  // BARCODE_SCANNED,
 } from '../actions/actionTypes.ts';
 
 const initUserState = {

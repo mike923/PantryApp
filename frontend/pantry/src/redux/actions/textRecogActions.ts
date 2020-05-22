@@ -1,16 +1,10 @@
-import axios from 'axios';
-import { Alert } from 'react-native';
-
 import {
   SCANNING_RECEIPT,
   SCANNED_RECEIPT,
   SCANNING_RECEIPT_ERROR,
   SET_ITEM,
-  // SCANNING_BARCODE,
-  // SCANNED_BARCODE,
   // UNSET_RECEIPT_ITEM,
 } from './actionTypes.ts';
-// import { PROXY } from '../../../proxy';
 
 // api methods
 const setError = (err: string) => ({
@@ -27,11 +21,6 @@ const setParsedReceipt = (receipt: object) => ({
   payload: receipt,
 });
 
-// const setProductFromBarcode = (product: object) => ({
-//   type: SCANNED_BARCODE,
-//   payload: product,
-// });
-
 // const deleteProduct = (data: any) => ({ type: DELETE_PRODUCT, payload: data });
 
 const parseReceipt = (receipt: any) => {
@@ -45,18 +34,6 @@ const parseReceipt = (receipt: any) => {
     }
   };
 };
-
-// const scanToAddProduct = (product: any) => {
-//   return async (dispatch: any) => {
-//     dispatch(scanningReceipt());
-//     try {
-//       dispatch(scannedReceipt());
-//       dispatch(setProductFromBarcode(product));
-//     } catch (error) {
-//       dispatch(setError(error));
-//     }
-//   };
-// };
 
 // const deleteItem = (data: object) => {
 //   console.log('rargagag');

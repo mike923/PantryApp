@@ -22,16 +22,8 @@ const ItemConfirmation = (props: any) => {
   // connecting component to text recognition redux state with redux hooks
   const receipt: object = useSelector((state) => state.recog.receipt);
 
-  // connecting camera state to component
-  const scannedProducts: void = useSelector((state) => {
-    state.camera.products;
-  });
-
-  // TODO connect component to camera redux state
-
   // console.log(route.params);
-  const { navigation, parsedReceipt } = props;
-  // const [reciept, setReciept] = useState(parsedReceipt);
+  const { navigation } = props;
   const [modalVisible, setModalVisible] = useState(false);
 
   const handleConfirm = () => {
@@ -42,7 +34,7 @@ const ItemConfirmation = (props: any) => {
         onPress: async () => {
           const data = await client.get('/test');
           console.log(data);
-          // POST RECIEPT TO BACKEND
+          // TODO POST RECIEPT TO BACKEND
           navigation.dispatch(
             CommonActions.reset({
               index: 0,
@@ -55,11 +47,7 @@ const ItemConfirmation = (props: any) => {
     console.log(receipt);
   };
 
-  // TODO grab the scanned barcodes from the camera state
-  // TODO dump those scanned items in the receipt array receipt = [...receipt,...scannedBarcodes]
   const handleChange = (item: any, name: any, text: any) => {
-    receipt.scannedItems = scannedProducts;
-
     console.log(item, name, text);
     const updatedReceipt = { ...receipt };
     if (item === 'storeName') {
@@ -74,7 +62,6 @@ const ItemConfirmation = (props: any) => {
       updatedReceipt.recieptItems[item][name] = text;
     }
     dispatch(parseReceipt(updatedReceipt));
-    // setReciept(updatedReceipt);
   };
 
   const getRecieptTotal = () => {

@@ -12,6 +12,11 @@ import { styles, colors } from './cameraStyles.ts';
 
 const Camera = ({ navigation, modalVisible }) => {
   const camera: object = useSelector((state) => state.camera);
+  const receipt: object = useSelector(
+    (state) => state.recog.receipt.recieptItems,
+  );
+  // const receipt: object = useSelector((state) => state.recog.receipt);
+
   const [title, setTitle] = useState('');
 
   const dispatch = useDispatch();
@@ -63,6 +68,17 @@ const Camera = ({ navigation, modalVisible }) => {
       console.warn(e);
     }
   };
+  console.log('cam cam', receipt);
+
+  const constructObj = () => {
+    return camera.products.forEach((product: any) => {
+      receipt.scnnedProduct = {
+        name: product.name,
+        price: 1,
+        quantity: 1,
+      };
+    });
+  };
 
   return (
     <View style={styles.cameraContainer}>
@@ -111,10 +127,12 @@ const Camera = ({ navigation, modalVisible }) => {
               style={[styles.icon, styles.button]}
               onPress={() => {
                 flash === RNCamera.Constants.FlashMode.torch
-                  ? toggleFlash
+                  ? toggleFlash()
                   : null;
 
-                modalVisible ? null : navigation.navigate('Shopping Cart');
+                modalVisible
+                  ? constructObj()
+                  : navigation.navigate('Shopping Cart');
               }}
             />
           ) : null}
