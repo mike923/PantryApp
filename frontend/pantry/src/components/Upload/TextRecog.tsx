@@ -4,7 +4,7 @@ import React, { useState, useEffect, Props } from 'react';
 import vision from '@react-native-firebase/ml-vision';
 import { ScrollView, Text, Button, Alert } from 'react-native';
 import { dummy } from '../../../dummydata';
-import algoRythm1 from './parsingTest/recieptText2';
+import algoRythm1 from './parsingTest/recieptText2.ts';
 import ItemConfirmation from './ItemConfirmation.tsx';
 import { client } from '../../../proxy';
 
