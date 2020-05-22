@@ -4,7 +4,8 @@ import { ScrollView, Text, Button, Alert } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { dummy } from '../../../dummydata';
 import { parseReceipt } from '../../redux/actions/textRecogActions.ts';
-import algoRythm1 from './parsingTest/recieptText2';
+
+import algoRythm1 from './parsingTest/recieptText2.ts';
 import ItemConfirmation from './ItemConfirmation.tsx';
 import { client } from '../../../proxy';
 
