@@ -10,7 +10,7 @@ import {
   // SCANNED_BARCODE,
   // UNSET_RECEIPT_ITEM,
 } from './actionTypes.ts';
-import { PROXY } from '../../../proxy';
+// import { PROXY } from '../../../proxy';
 
 // api methods
 const setError = (err: string) => ({

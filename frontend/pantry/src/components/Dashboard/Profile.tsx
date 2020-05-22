@@ -38,12 +38,8 @@ const UserProfile = () => {
         </View>
       </View>
       <View style={dashBoardStyles.metadata}>
-        <View style={dashBoardStyles.location_container}>
-          <Text style={dashBoardStyles.location}>New York, NY</Text>
-        </View>
-        <View style={dashBoardStyles.time_container}>
-          <Text style={dashBoardStyles.time}>{currTime}</Text>
-        </View>
+        <Text style={dashBoardStyles.location}>New York, NY</Text>
+        <Text style={dashBoardStyles.time}>{currTime}</Text>
       </View>
       <Text style={dashBoardStyles.welcome}>Welcome {loggedUser.email}</Text>
     </View>

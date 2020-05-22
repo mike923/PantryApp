@@ -17,9 +17,15 @@ import { client } from '../../../proxy';
 import { parseReceipt } from '../../redux/actions/textRecogActions.ts';
 
 const ItemConfirmation = (props: any) => {
+  const dispatch = useDispatch();
+
   // connecting component to text recognition redux state with redux hooks
   const receipt: object = useSelector((state) => state.recog.receipt);
-  const dispatch = useDispatch();
+
+  // connecting camera state to component
+  const scannedProducts: void = useSelector((state) => {
+    state.camera.products;
+  });
 
   // TODO connect component to camera redux state
 
@@ -52,6 +58,8 @@ const ItemConfirmation = (props: any) => {
   // TODO grab the scanned barcodes from the camera state
   // TODO dump those scanned items in the receipt array receipt = [...receipt,...scannedBarcodes]
   const handleChange = (item: any, name: any, text: any) => {
+    receipt.scannedItems = scannedProducts;
+
     console.log(item, name, text);
     const updatedReceipt = { ...receipt };
     if (item === 'storeName') {
