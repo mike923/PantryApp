@@ -10,11 +10,9 @@ import { barcodeApiCalls } from '../../redux/actions/cameraActions.ts';
 
 import { styles, colors } from './cameraStyles.ts';
 
-const Camera = ({ navigation, modalVisible }) => {
-  const camera: object = useSelector((state) => state.camera);
-  const receipt: object = useSelector(
-    (state) => state.recog.receipt.recieptItems,
-  );
+const Camera = ({ navigation, modalVisible }: any) => {
+  const camera: any = useSelector((state) => state.camera);
+  const receipt: any = useSelector((state) => state.recog.receipt.recieptItems);
   // const receipt: object = useSelector((state) => state.recog.receipt);
 
   const [title, setTitle] = useState('');
@@ -41,6 +39,7 @@ const Camera = ({ navigation, modalVisible }) => {
     } else setFlash(RNCamera.Constants.FlashMode.off);
   };
 
+  // function that takes picture and dispatch barcode search
   const takePicture = async () => {
     try {
       if (cameraRef.current) {
@@ -49,13 +48,14 @@ const Camera = ({ navigation, modalVisible }) => {
           base64: true,
           skipProcessing: true,
         };
-        const { uri } = await cameraRef.current.takePictureAsync(options);
+        const { uri } = await cameraRef.current.takePictureAsync(options); // RNCamera method to take picture
 
-        const barcodes = await vision().barcodeDetectorProcessImage(uri);
+        const barcodes: any = await vision().barcodeDetectorProcessImage(uri); // mlkit barcode reading function
 
         if (barcodes.length) {
+          // checking to ensure that something return from firebase scan
           console.log('bar', barcodes);
-          dispatch(barcodeApiCalls(barcodes[0].rawValue));
+          dispatch(barcodeApiCalls(barcodes[0].rawValue)); // redux action to searching product based on barcode
           // setModalVisible(true);
           Toast.showWithGravity(`${title} was scanned`, Toast.LONG, Toast.TOP);
         } else {
@@ -69,13 +69,19 @@ const Camera = ({ navigation, modalVisible }) => {
     }
   };
 
-  const constructObj = () => {
+  // adding scanned product to item confirmation screen
+  // connecting both camera and text recognition redux states together
+  // each item in camera product state are added to the text recognition receiptItems
+  const constructReceiptObj = () => {
+    receipt.scannedProducts = [];
     return camera.products.forEach((product: any) => {
-      receipt.scnnedProduct = {
+      let obj: any = {
         name: product.name,
-        price: 1,
+        price: '12',
         quantity: 1,
       };
+
+      receipt.scannedProducts.push(obj);
     });
   };
 
@@ -99,7 +105,7 @@ const Camera = ({ navigation, modalVisible }) => {
           maximumValue={1}
           step={0.1}
           value={zoomValue}
-          onValueChange={(val) => setZoomValue(val)}
+          onValueChange={(val: any) => setZoomValue(val)}
           thumbTintColor={colors.primaryColor}
           style={styles.zoom}
         />
@@ -129,8 +135,8 @@ const Camera = ({ navigation, modalVisible }) => {
                   ? toggleFlash()
                   : null;
 
-                modalVisible
-                  ? constructObj()
+                modalVisible // checking the parent component
+                  ? constructReceiptObj()
                   : navigation.navigate('Shopping Cart');
               }}
             />

@@ -10,7 +10,8 @@ import ItemConfirmation from './ItemConfirmation.tsx';
 import { client } from '../../../proxy';
 
 const TextRecog = ({ route, navigation }: Props) => {
-  const receipt: object = useSelector((state) => state.recog.receipt);
+  // connect redux state tot component
+  const receipt: any = useSelector((state) => state.recog.receipt);
   const dispatch = useDispatch();
 
   const { localUriPath, firebaseImageURL } = route.params;
@@ -32,7 +33,7 @@ const TextRecog = ({ route, navigation }: Props) => {
 
     const items = await algoRythm1(processedText.text);
     console.log(`Items: `, items);
-    dispatch(parseReceipt({ receipt_url: firebaseImageURL, ...items }));
+    dispatch(parseReceipt({ receipt_url: firebaseImageURL, ...items })); // setting redux state with result from parsing
     // setText({ receipt_url: firebaseImageURL, ...items });
     // const textJsxArr = processedText.blocks.map((block) => {
     //   console.log(`Text Block: `, block.text);
@@ -72,7 +73,7 @@ const TextRecog = ({ route, navigation }: Props) => {
   );
 };
 
-TextRecog.navigationOptions = ({ navigation }) => ({
+TextRecog.navigationOptions = ({ navigation }: any) => ({
   title: 'Parsed',
   // headerShown: false,
 });

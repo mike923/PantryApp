@@ -9,7 +9,15 @@ import {
   FETCHING_PRODUCT_ERROR,
 } from '../actions/actionTypes.ts';
 
-const initUserState = {
+interface InitCameraState {
+  fetchingProduct: boolean;
+  fetchedProduct: boolean;
+  error: boolean;
+  products: any;
+  errorMessage: any;
+}
+
+const initCameraState: InitCameraState = {
   fetchingProduct: false,
   fetchedProduct: false,
   error: false,
@@ -17,7 +25,7 @@ const initUserState = {
   errorMessage: [],
 };
 
-const cameraReducer = (state = initUserState, action) => {
+const cameraReducer = (state = initCameraState, action) => {
   const stateCopy = { ...state };
 
   switch (action.type) {
@@ -64,4 +72,4 @@ const cameraReducer = (state = initUserState, action) => {
   return stateCopy;
 };
 
-export { initUserState, cameraReducer };
+export { initCameraState, cameraReducer };
