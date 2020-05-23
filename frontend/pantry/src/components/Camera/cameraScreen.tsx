@@ -68,7 +68,6 @@ const Camera = ({ navigation, modalVisible }) => {
       console.warn(e);
     }
   };
-  console.log('cam cam', receipt);
 
   const constructObj = () => {
     return camera.products.forEach((product: any) => {
