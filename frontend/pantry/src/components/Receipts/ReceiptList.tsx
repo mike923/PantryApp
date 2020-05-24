@@ -1,7 +1,7 @@
 import React from 'react';
 import Card from './Card.tsx';
 
-interface Reciept {
+interface Receipt {
   name: string;
   uri: string | null;
   totalPrice: number | null;
@@ -10,18 +10,18 @@ interface Reciept {
 }
 
 interface Props {
-  reciepts: Array<Reciept>;
+  receipts: Array<Receipt>;
   selected: string;
 }
 
-const RecieptList = ({ reciepts, selected }: Props) => {
+const ReceiptList = ({ receipts, selected }: Props) => {
   return (
     <>
-      {reciepts.map((reciept: Reciept, i: number) => {
+      {receipts.map((receipt: Receipt, i: number) => {
         const d = i + 1;
-        return reciept.name !== '-' ? (
-          selected === '-' || reciept.name === selected ? (
-            <Card color="#ffb3b5" reciept={reciept} key={d} />
+        return receipt.name !== '-' ? (
+          selected === '-' || receipt.name === selected ? (
+            <Card color="#ffb3b5" receipt={receipt} key={d} />
           ) : null
         ) : null;
       })}
@@ -29,4 +29,4 @@ const RecieptList = ({ reciepts, selected }: Props) => {
   );
 };
 
-export default RecieptList;
+export default ReceiptList;

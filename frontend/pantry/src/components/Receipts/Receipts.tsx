@@ -11,12 +11,12 @@ import styles from './styles.ts';
 
 import dummyStores from './dummyData/dummyStores.ts';
 import dummyReceipts from './dummyData/dummyReceipts.ts';
-import RecieptList from './ReceiptList.tsx';
+import ReceiptList from './ReceiptList.tsx';
 import StorePicker from './StorePicker.tsx';
 
 // interface Props {}
 
-const Reciepts = (props: any) => {
+const Receipts = (props: any) => {
   const [selectedValue, setSelectedValue] = useState('-');
   const handleStoreChange = (itemValue: string, itemIndex: number) => {
     console.log(itemValue);
@@ -34,12 +34,12 @@ const Reciepts = (props: any) => {
         <ScrollView
           contentContainerStyle={styles.scrollArea2}
           showsVerticalScrollIndicator={false}>
-          <RecieptList selected={selectedValue} reciepts={dummyReceipts} />
+          <ReceiptList selected={selectedValue} receipts={dummyReceipts} />
         </ScrollView>
       </View>
-      <Text style={styles.heading}>Reciepts</Text>
+      <Text style={styles.heading}>Receipts</Text>
     </View>
   );
 };
 
-export default Reciepts;
+export default Receipts;

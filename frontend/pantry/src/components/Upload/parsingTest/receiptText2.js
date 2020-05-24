@@ -214,7 +214,7 @@ const getTotal = (arr) => {
   return arr.reduce((acc, num) => acc + num[0] * Number(num[1].slice(1)), 0);
 };
 
-const makeRecieptItems = (prod, pric) => {
+const makeReceiptItems = (prod, pric) => {
   const obj = {};
   prod
     .map((e) => e.trim())
@@ -240,11 +240,11 @@ const algoRythm1 = (fullText) => {
     phone: null,
     products: {},
     prices: [],
-    recieptDate: null,
-    recieptTotal: 0,
+    receiptDate: null,
+    receiptTotal: 0,
   };
 
-  obj.recieptDate = getDate(trimmedText)[0];
+  obj.receiptDate = getDate(trimmedText)[0];
   obj.prices = getPrices(trimmedText);
   obj.products = getProducts(trimmedText);
   obj.address = cleanAddress(obj.products.heading);
@@ -253,8 +253,8 @@ const algoRythm1 = (fullText) => {
   const { products, prices } = getItems(obj.products.grocery, obj.prices);
   obj.products = products;
   obj.prices = prices;
-  obj.recieptTotal = getTotal(obj.prices);
-  obj.recieptItems = makeRecieptItems(obj.products, obj.prices);
+  obj.receiptTotal = getTotal(obj.prices);
+  obj.receiptItems = makeReceiptItems(obj.products, obj.prices);
 
   return obj;
 };

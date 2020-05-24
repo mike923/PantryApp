@@ -5,7 +5,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { client } from '../../../proxy';
 
 import FoodItem from './FoodItem.tsx';
-import Foods from '../Reciepts/dummyData/dummyFoodItems.ts';
+import Foods from '../Receipts/dummyData/dummyFoodItems.ts';
 
 const foodItems = `/fooditem/receiptid/1`;
 

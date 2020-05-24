@@ -253,7 +253,7 @@
 //   return arr.reduce((acc, num) => acc + num[0] * Number(num[1].slice(1)), 0);
 // };
 
-// const makeRecieptItems = (prod, pric) => {
+// const makeReceiptItems = (prod, pric) => {
 //   const obj = {};
 //   prod.map((ele, i) => {
 //     ele = ele.trim();
@@ -278,11 +278,11 @@
 //     phone: null,
 //     products: {},
 //     prices: [],
-//     recieptDate: null,
-//     recieptTotal: 0,
+//     receiptDate: null,
+//     receiptTotal: 0,
 //   };
 
-//   obj.recieptDate = getDate(text)[0];
+//   obj.receiptDate = getDate(text)[0];
 //   obj.prices = getPrices(text);
 //   obj.products = getProducts(text); // Working
 //   obj.storeName = obj.products.heading[0]; // Working
@@ -293,8 +293,8 @@
 //   // const { products, prices } = getItems(obj.products.grocery, obj.prices);
 //   // obj.products = products;
 //   // obj.prices = prices;
-//   // obj.recieptTotal = getTotal(obj.prices);
-//   // obj.recieptItems = makeRecieptItems(obj.products, obj.prices);
+//   // obj.receiptTotal = getTotal(obj.prices);
+//   // obj.receiptItems = makeReceiptItems(obj.products, obj.prices);
 
 //   return obj;
 // };
