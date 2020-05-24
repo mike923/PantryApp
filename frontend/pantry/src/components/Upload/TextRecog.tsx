@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Props, useRef } from 'react';
 import vision from '@react-native-firebase/ml-vision';
-import { ScrollView, Text, Button, Alert } from 'react-native';
+import { ScrollView, Text, Button, Alert, View } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { dummy } from '../../../dummydata';
 import { parseReceipt } from '../../redux/actions/textRecogActions.ts';
@@ -60,7 +60,7 @@ const TextRecog = ({ route, navigation }: Props) => {
   };
 
   return (
-    <ScrollView>
+    <View>
       {/* {text} */}
       {receipt.receipt_url ? (
         <ItemConfirmation navigation={navigation} />
@@ -69,7 +69,7 @@ const TextRecog = ({ route, navigation }: Props) => {
         <Button title="Confirmation" onPress={goToParsed} color="green" />
       ) : null}
       <Button title="Submit" onPress={sendData} color="green" /> */}
-    </ScrollView>
+    </View>
   );
 };
 
