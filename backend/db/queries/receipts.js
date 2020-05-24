@@ -17,14 +17,11 @@ const addImgUrl = async (pantry_id, receipt_json) =>
     [pantry_id, receipt_json],
   );
 
-const uploadReceiptData = async (receipt) => {
-  let query = `
-    INSERT INTO receipts
-    VALUES ($1)
-
-  `
-  return await db.oneOrNone('', [receipt])
-}
+const uploadReceiptData = async (receipt) => 
+  await db.oneOrNone(`
+    INSERT INTO receipts (pantry_id, receipt_url, store_name, total, receipt_date)
+    VALUES ($/pantry_id/, $/receipt_url/, $/store_name/, $/total/, $/receipt_date/)
+  `, receipt);
 
 const getReceiptById = async (id) => {
   // try {
@@ -37,4 +34,5 @@ const getReceiptById = async (id) => {
 module.exports = {
   addImgUrl,
   getReceiptById,
+  uploadReceiptData
 };

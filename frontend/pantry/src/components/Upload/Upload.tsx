@@ -33,8 +33,8 @@ const Upload = ({ navigation }) => {
       {/* <TouchableOpacity onPress={() => goTo('Api')} style={styles.button}>
         <Text style={styles.buttonText}>Api</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => goTo('Reciepts')} style={styles.button}>
-        <Text style={styles.buttonText}>Reciepts</Text>
+      <TouchableOpacity onPress={() => goTo('Receipts')} style={styles.button}>
+        <Text style={styles.buttonText}>Receipts</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => goTo('Parsed')} style={styles.button}>
         <Text style={styles.buttonText}>Parsed</Text>

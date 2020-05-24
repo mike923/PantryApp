@@ -17,14 +17,14 @@ CREATE TABLE users (
 );
 
 
--- reciepts need status
+-- receipts need status
 CREATE TABLE receipts (
   id SERIAL PRIMARY KEY,
   pantry_id INT REFERENCES pantry(id),
   receipt_url VARCHAR,
   store_name VARCHAR,
   total DECIMAL,
-  upload_date VARCHAR,
+  upload_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   receipt_date VARCHAR
 );
 
@@ -72,13 +72,12 @@ INSERT INTO users (id, email, pantry_id) VALUES
   ('PJrztv4Y0BMsHcbEd9bmn2fjzxD2', 'voniel@bvoniel.com', 1)
 ;
 
-INSERT INTO receipts (pantry_id, receipt_url, store_name, total, upload_date, receipt_date) VALUES
+INSERT INTO receipts (pantry_id, receipt_url, store_name, total, receipt_date) VALUES
   (
     1,
     'https://firebasestorage.googleapis.com/v0/b/capstone-pantry.appspot.com/o/Test?alt=media&token=d87cb480-34ee-4e5f-9712-e7bd76bd57a6',
     'Target',
     35.67,
-    'Sun 03/03/2020',
     'Sun 03/03/2020'
   )
 ;

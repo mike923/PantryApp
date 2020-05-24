@@ -17,7 +17,7 @@ const ApiTester = ({ navigation }) => {
   const [res, setRes] = useState([]);
 
   const navigateToImg = () => navigation.navigate('ImageUpload');
-  const navigateToReciepts = () => navigation.navigate('Reciepts');
+  const navigateToReceipts = () => navigation.navigate('Receipts');
   const displayLoading = () => <Text style={styles.p}>Loading...</Text>;
 
   const loadApi = async () => {
@@ -65,9 +65,9 @@ const ApiTester = ({ navigation }) => {
         <Text style={styles.buttonText}>Image Upload</Text>
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={() => navigateToReciepts()}
+        onPress={() => navigateToReceipts()}
         style={styles.button}>
-        <Text style={styles.buttonText}>Reciepts List</Text>
+        <Text style={styles.buttonText}>Receipts List</Text>
       </TouchableOpacity>
       <ScrollView>{res}</ScrollView>
     </View>

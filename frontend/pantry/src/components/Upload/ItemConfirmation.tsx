@@ -34,7 +34,7 @@ const ItemConfirmation = (props: any) => {
         onPress: async () => {
           const data = await client.get('/test');
           console.log(data);
-          // TODO POST RECIEPT TO BACKEND
+          // TODO POST RECEIPT TO BACKEND
           navigation.dispatch(
             CommonActions.reset({
               index: 0,
@@ -52,26 +52,26 @@ const ItemConfirmation = (props: any) => {
     const updatedReceipt = { ...receipt };
     if (item === 'storeName') {
       updatedReceipt.storeName = text;
-    } else if (item === 'recieptDate') {
-      updatedReceipt.recieptDate = text;
+    } else if (item === 'receiptDate') {
+      updatedReceipt.receiptDate = text;
     } else if (name === 'quantity') {
-      updatedReceipt.recieptItems[item][name] = quantityFix(text);
+      updatedReceipt.receiptItems[item][name] = quantityFix(text);
     } else if (name === 'price') {
-      updatedReceipt.recieptItems[item][name] = priceFix(text);
+      updatedReceipt.receiptItems[item][name] = priceFix(text);
     } else {
-      updatedReceipt.recieptItems[item][name] = text;
+      updatedReceipt.receiptItems[item][name] = text;
     }
     dispatch(parseReceipt(updatedReceipt));
   };
 
-  const getRecieptTotal = () => {
+  const getReceiptTotal = () => {
     // FIXME fix the NaN displaying instead of the total
-    console.log(`HERE`, Object.values(receipt.recieptItems));
-    return Object.keys(receipt.recieptItems)
+    console.log(`HERE`, Object.values(receipt.receiptItems));
+    return Object.keys(receipt.receiptItems)
       .reduce(
         (acc, num) =>
           acc +
-          receipt.recieptItems[num].quantity * receipt.recieptItems[num].price,
+          receipt.receiptItems[num].quantity * receipt.receiptItems[num].price,
         0,
       )
       .toFixed(2);
@@ -79,15 +79,15 @@ const ItemConfirmation = (props: any) => {
 
   let mergedProducts: any = [];
   // checking if the user scanned any items
-  if (receipt.recieptItems.scannedProducts) {
+  if (receipt.receiptItems.scannedProducts) {
     // if items were scanned merge the the receiptItems values with the barcodes
     mergedProducts = [
-      ...Object.values(receipt.recieptItems),
-      ...receipt.recieptItems.scannedProducts,
+      ...Object.values(receipt.receiptItems),
+      ...receipt.receiptItems.scannedProducts,
     ];
   } else {
     // if nothing was scanned user only needs to confirm the items on the receipt
-    mergedProducts = Object.values(receipt.recieptItems);
+    mergedProducts = Object.values(receipt.receiptItems);
   }
 
   return (
@@ -107,9 +107,9 @@ const ItemConfirmation = (props: any) => {
                 <TextInput
                   style={styles.storeDate}
                   onChangeText={(text) =>
-                    handleChange('recieptDate', null, text)
+                    handleChange('receiptDate', null, text)
                   }>
-                  {receipt.recieptDate}
+                  {receipt.receiptDate}
                 </TextInput>
               </View>
             </View>
@@ -124,7 +124,7 @@ const ItemConfirmation = (props: any) => {
               />
               <View style={styles.totalRow}>
                 <Text style={styles.totalText}>Total</Text>
-                <Text style={styles.totalText}>{getRecieptTotal()}</Text>
+                <Text style={styles.totalText}>{getReceiptTotal()}</Text>
               </View>
             </ScrollView>
             <View style={styles.buttons}>
