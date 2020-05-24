@@ -1,8 +1,8 @@
 export default {
   storeName: 'Target',
-  recieptDate: '03/22/2019',
-  recieptTotal: 23.54,
-  recieptItems: {
+  receiptDate: '03/22/2019',
+  receiptTotal: 23.54,
+  receiptItems: {
     'Oreo Cookies': {
       name: 'Oreo Cookies',
       price: 2.99,

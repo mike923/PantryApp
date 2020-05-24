@@ -5,7 +5,7 @@ import { dashBoardStyles } from './dashBoardStyles.ts';
 
 const Dashboard = ({ navigation }) => {
   const navigateToImg = () => navigation.navigate('Pantry');
-  const navigateToReceipts = () => navigation.navigate('Reciepts');
+  const navigateToReceipts = () => navigation.navigate('Receipts');
   return (
     <View style={{ backgroundColor: '#fff' }}>
       <UserProfile />

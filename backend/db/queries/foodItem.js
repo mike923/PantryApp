@@ -1,6 +1,6 @@
 const db = require("../db");
 
-const getFoodItemByReceiptID = async (recieptId) => await db.any(`
+const getFoodItemsByReceiptID = async (recieptId) => await db.any(`
   SELECT * FROM food_item 
   JOIN receipts ON food_item.receipt_id = receipts.id
   WHERE receipt_id = 1;
@@ -16,9 +16,14 @@ const getFoodItemByItemID = async (itemId) => {
   return data
 }
 
+const getFoodItemsByPantry = async (pantryId) => {
+  
+}
+
 const addFoodItem = async (receiptData) => await db.oneOrNone(`
   INSERT INTO food_item (receipt_id, pantry_id, preferred_name, price, quantity, img_url) 
-  VALUES ( $/receiptId/, $/pantryId/, $/preferred_name/, $/price/, $/quantity/, $/imgUrl/ ) RETURNING *;
+  VALUES ( $/receiptId/, $/pantryId/, $/preferred_name/, $/price/, $/quantity/, $/imgUrl/ ) 
+  RETURNING *;
 `, receiptData);
 
 const updateFoodItem = async (id, data) => {
@@ -48,7 +53,7 @@ const updateFoodItem = async (id, data) => {
 }
 
 module.exports = {
-  getFoodItemByReceiptID,
+  getFoodItemsByReceiptID,
   addFoodItem,
   updateFoodItem,
   getFoodItemByItemID,

@@ -1,7 +1,7 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createAppContainer } from 'react-navigation';
-import Reciepts from '../Reciepts/Reciepts.tsx';
+import Receipts from '../Receipts/Receipts.tsx';
 import Dashboard from '../Dashboard/Dashboard.tsx';
 import PantryView from '../Pantry/PantryView.tsx';
 import { screenOptions } from './style.ts';
@@ -14,7 +14,7 @@ import { screenOptions } from './style.ts';
 //   header: null,
 // },
 //     },
-//     Reciepts,
+//     Receipts,
 //     Pantry: {
 //       screen: PantryView,
 //     },
@@ -42,7 +42,7 @@ const DashboardStack = ({ navigation }) => {
           headerShown: false,
         }}
       />
-      <Stack.Screen name="Reciepts" component={Reciepts} />
+      <Stack.Screen name="Receipts" component={Receipts} />
       <Stack.Screen name="Pantry" component={PantryView} />
     </Stack.Navigator>
   );

@@ -12,7 +12,7 @@ import { styles, colors } from './cameraStyles.ts';
 
 const Camera = ({ navigation, modalVisible }: any) => {
   const camera: any = useSelector((state) => state.camera);
-  const receipt: any = useSelector((state) => state.recog.receipt.recieptItems);
+  const receipt: any = useSelector((state) => state.recog.receipt.receiptItems);
   // const receipt: object = useSelector((state) => state.recog.receipt);
 
   const [title, setTitle] = useState('');

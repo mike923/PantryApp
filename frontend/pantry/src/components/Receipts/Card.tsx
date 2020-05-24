@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Image, Text } from 'react-native';
 import styles, { CardContainer } from './styles.ts';
 
-interface Reciept {
+interface Receipt {
   name: string;
   uri: string | null;
   totalPrice: number | null;
@@ -12,11 +12,11 @@ interface Reciept {
 
 interface Props {
   color: string;
-  reciept: Reciept;
+  receipt: Receipt;
 }
 
-const Card = ({ color, reciept }: Props) => {
-  const { name, uri, totalPrice, totalItems, purchasedDate } = reciept;
+const Card = ({ color, receipt }: Props) => {
+  const { name, uri, totalPrice, totalItems, purchasedDate } = receipt;
   return (
     <CardContainer color={color}>
       <View style={styles.logoContainerStackRow}>
