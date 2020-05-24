@@ -15,9 +15,10 @@ interface Props {
 
 const StorePicker = ({ stores, selected, handleStoreChange }: Props) => {
   const storeItems = () => {
-    return stores.map(({ name }: Stores, i: number) => (
-      <Picker.Item label={name} value={name} key={i+1}/>
-    ));
+    return stores.map(({ name }: Stores, i: number) => {
+      const d = i + 1;
+      return <Picker.Item label={name} value={name} key={d} />;
+    });
   };
 
   return (

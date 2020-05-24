@@ -17,13 +17,14 @@ interface Props {
 const RecieptList = ({ reciepts, selected }: Props) => {
   return (
     <>
-      {reciepts.map((reciept: Reciept, i: number) =>
-        reciept.name !== '-' ? (
+      {reciepts.map((reciept: Reciept, i: number) => {
+        const d = i + 1;
+        return reciept.name !== '-' ? (
           selected === '-' || reciept.name === selected ? (
-            <Card color="#ffb3b5" reciept={reciept} key={i + 1} />
+            <Card color="#ffb3b5" reciept={reciept} key={d} />
           ) : null
-        ) : null,
-      )}
+        ) : null;
+      })}
     </>
   );
 };
