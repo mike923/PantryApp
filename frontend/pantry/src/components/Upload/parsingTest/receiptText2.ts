@@ -285,6 +285,6 @@ const algoRythm1 = (fulltext: string) => {
 
 // algoRythm1(text);
 
-console.log(algoRythm1(receiptText));
+// console.log(algoRythm1(receiptText));
 
 export default algoRythm1;
