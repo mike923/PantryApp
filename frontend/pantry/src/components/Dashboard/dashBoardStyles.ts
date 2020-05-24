@@ -1,7 +1,4 @@
-import { StyleSheet, Dimensions } from 'react-native';
-
-const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
+import { StyleSheet } from 'react-native';
 
 export const dashBoardStyles = StyleSheet.create({
   button: {
@@ -16,7 +13,7 @@ export const dashBoardStyles = StyleSheet.create({
   container: {
     backgroundColor: '#1c2a38',
     height: 400,
-    width: windowWidth,
+    width: '100%',
   },
   edit_button: {
     alignSelf: 'center',
@@ -70,13 +67,6 @@ export const dashBoardStyles = StyleSheet.create({
     lineHeight: 20,
     width: 130,
   },
-  location_container: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    height: 20,
-    justifyContent: 'space-between',
-    width: 150,
-  },
   metadata: {
     flexDirection: 'row',
     height: 20,
@@ -108,20 +98,27 @@ export const dashBoardStyles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 20,
   },
-  time_container: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    height: 20,
-    justifyContent: 'space-between',
-    marginLeft: 16,
-    width: 170,
-  },
   welcome: {
+    alignSelf: 'center',
     color: 'rgba(255,255,255,1)',
     fontSize: 24,
     height: 50,
     lineHeight: 30,
-    marginLeft: 60,
     marginTop: -82,
   },
+  // time_container: {
+  //   alignItems: 'center',
+  //   flexDirection: 'row',
+  //   height: 20,
+  //   justifyContent: 'space-between',
+  //   marginLeft: 16,
+  //   width: 170,
+  // },
+  // location_container: {
+  //   alignItems: 'center',
+  //   flexDirection: 'row',
+  //   height: 20,
+  //   justifyContent: 'space-between',
+  //   width: 150,
+  // },
 });

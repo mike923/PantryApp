@@ -8,18 +8,23 @@ import {
   Alert,
 } from 'react-native';
 import { CommonActions } from '@react-navigation/native';
+import { useSelector, useDispatch } from 'react-redux';
 import { confirmStyles as styles } from './styles.ts';
-import RecieptItems from './RecieptItems.tsx';
-
-import fakeParsedReciept from './dummyData/fakeParsedReciept.ts';
-
+import ReceiptItems from './ReceiptItems.tsx';
 import { priceFix, quantityFix } from './helpers/helpers.ts';
+import CameraModal from '../Camera/cameraModal.tsx';
 import { client } from '../../../proxy';
+import { parseReceipt } from '../../redux/actions/textRecogActions.ts';
 
 const ItemConfirmation = (props: any) => {
+  const dispatch = useDispatch();
+
+  // connecting component to text recognition redux state with redux hooks
+  const receipt: any = useSelector((state) => state.recog.receipt);
+
   // console.log(route.params);
-  const { navigation, parsedReceipt } = props;
-  const [reciept, setReciept] = useState(parsedReceipt);
+  const { navigation } = props;
+  const [modalVisible, setModalVisible] = useState(false);
 
   const handleConfirm = () => {
     Alert.alert('Confirm', '', [
@@ -29,7 +34,7 @@ const ItemConfirmation = (props: any) => {
         onPress: async () => {
           const data = await client.get('/test');
           console.log(data);
-          // POST RECIEPT TO BACKEND
+          // TODO POST RECIEPT TO BACKEND
           navigation.dispatch(
             CommonActions.reset({
               index: 0,
@@ -39,41 +44,55 @@ const ItemConfirmation = (props: any) => {
         },
       },
     ]);
-    console.log(reciept);
+    console.log(receipt);
   };
 
   const handleChange = (item: any, name: any, text: any) => {
     console.log(item, name, text);
-    const updatedReciept = { ...reciept };
+    const updatedReceipt = { ...receipt };
     if (item === 'storeName') {
-      updatedReciept.storeName = text;
+      updatedReceipt.storeName = text;
     } else if (item === 'recieptDate') {
-      updatedReciept.recieptDate = text;
+      updatedReceipt.recieptDate = text;
     } else if (name === 'quantity') {
-      updatedReciept.recieptItems[item][name] = quantityFix(text);
+      updatedReceipt.recieptItems[item][name] = quantityFix(text);
     } else if (name === 'price') {
-      updatedReciept.recieptItems[item][name] = priceFix(text);
+      updatedReceipt.recieptItems[item][name] = priceFix(text);
     } else {
-      updatedReciept.recieptItems[item][name] = text;
+      updatedReceipt.recieptItems[item][name] = text;
     }
-    setReciept(updatedReciept);
+    dispatch(parseReceipt(updatedReceipt));
   };
 
   const getRecieptTotal = () => {
-    console.log(`HERE`, reciept);
-    return Object.keys(reciept.recieptItems)
+    // FIXME fix the NaN displaying instead of the total
+    console.log(`HERE`, Object.values(receipt.recieptItems));
+    return Object.keys(receipt.recieptItems)
       .reduce(
         (acc, num) =>
           acc +
-          reciept.recieptItems[num].quantity * reciept.recieptItems[num].price,
+          receipt.recieptItems[num].quantity * receipt.recieptItems[num].price,
         0,
       )
       .toFixed(2);
   };
 
+  let mergedProducts: any = [];
+  // checking if the user scanned any items
+  if (receipt.recieptItems.scannedProducts) {
+    // if items were scanned merge the the receiptItems values with the barcodes
+    mergedProducts = [
+      ...Object.values(receipt.recieptItems),
+      ...receipt.recieptItems.scannedProducts,
+    ];
+  } else {
+    // if nothing was scanned user only needs to confirm the items on the receipt
+    mergedProducts = Object.values(receipt.recieptItems);
+  }
+
   return (
     <>
-      {reciept ? (
+      {receipt ? (
         <View style={styles.container}>
           <View style={styles.storeContainer}>
             <View style={styles.storeHeading}>
@@ -83,14 +102,14 @@ const ItemConfirmation = (props: any) => {
                   onChangeText={(text) =>
                     handleChange('storeName', null, text)
                   }>
-                  {reciept.storeName}
+                  {receipt.storeName}
                 </TextInput>
                 <TextInput
                   style={styles.storeDate}
                   onChangeText={(text) =>
                     handleChange('recieptDate', null, text)
                   }>
-                  {reciept.recieptDate}
+                  {receipt.recieptDate}
                 </TextInput>
               </View>
             </View>
@@ -99,8 +118,8 @@ const ItemConfirmation = (props: any) => {
             <ScrollView
               contentContainerStyle={styles.scrollView}
               showsVerticalScrollIndicator={false}>
-              <RecieptItems
-                reciept={reciept.recieptItems}
+              <ReceiptItems
+                receipt={mergedProducts}
                 handleChange={handleChange}
               />
               <View style={styles.totalRow}>
@@ -108,9 +127,25 @@ const ItemConfirmation = (props: any) => {
                 <Text style={styles.totalText}>{getRecieptTotal()}</Text>
               </View>
             </ScrollView>
-            <TouchableOpacity style={styles.confirmBtn} onPress={handleConfirm}>
-              <Text style={styles.confirmText}>Looks good!</Text>
-            </TouchableOpacity>
+            <View style={styles.buttons}>
+              <TouchableOpacity
+                style={styles.confirmBtn}
+                onPress={handleConfirm}>
+                <Text style={styles.confirmText}>Looks good!</Text>
+              </TouchableOpacity>
+              {!modalVisible ? (
+                <TouchableOpacity
+                  style={styles.scanBarcode}
+                  onPress={() => setModalVisible(!modalVisible)}>
+                  <Text>Scan</Text>
+                </TouchableOpacity>
+              ) : (
+                <CameraModal
+                  modalVisible={modalVisible}
+                  setModalVisible={setModalVisible}
+                />
+              )}
+            </View>
           </View>
         </View>
       ) : null}

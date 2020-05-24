@@ -2,14 +2,22 @@ import {
   SCANNING,
   SCANNED,
   SCANNING_ERROR,
-  SET_BARCODES,
+  DELETE_PRODUCT,
   FETCHING_PRODUCT,
   FETCHED_PRODUCT,
   SET_PRODUCT,
   FETCHING_PRODUCT_ERROR,
 } from '../actions/actionTypes.ts';
 
-const initUserState = {
+interface InitCameraState {
+  fetchingProduct: boolean;
+  fetchedProduct: boolean;
+  error: boolean;
+  products: any;
+  errorMessage: any;
+}
+
+const initCameraState: InitCameraState = {
   fetchingProduct: false,
   fetchedProduct: false,
   error: false,
@@ -17,7 +25,7 @@ const initUserState = {
   errorMessage: [],
 };
 
-const cameraReducer = (state = initUserState, action) => {
+const cameraReducer = (state = initCameraState, action) => {
   const stateCopy = { ...state };
 
   switch (action.type) {
@@ -34,9 +42,18 @@ const cameraReducer = (state = initUserState, action) => {
 
     case SET_PRODUCT: {
       let productSet = new Set(stateCopy.products);
+
+      if (!productSet.has(action.payload.upc)) {
+        productSet.add(action.payload);
+      }
       productSet.add(action.payload);
       stateCopy.fetchedProduct = true;
       stateCopy.products = [...productSet];
+      break;
+    }
+
+    case DELETE_PRODUCT: {
+      stateCopy.products = action.payload;
       break;
     }
 
@@ -55,4 +72,4 @@ const cameraReducer = (state = initUserState, action) => {
   return stateCopy;
 };
 
-export { initUserState, cameraReducer };
+export { initCameraState, cameraReducer };
