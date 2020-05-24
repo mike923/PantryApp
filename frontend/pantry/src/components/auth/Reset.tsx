@@ -5,19 +5,23 @@ import {
   Text,
   TouchableOpacity,
   Alert,
+  TextInput,
 } from 'react-native';
 import { Button, Input, Icon } from 'react-native-elements';
 import { useSelector, useDispatch } from 'react-redux';
 import { resetPassword } from '../../redux/actions/userActions.ts';
 import { styles } from './styles.ts';
 
+interface StateProps {
+  user: any;
+}
+
 export const Reset = ({ navigation }) => {
   const [email, setEmail] = useState('');
+  const [inputStyle, setInputStyle] = useState(18);
 
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state: StateProps) => state.user);
   const dispatch = useDispatch();
-
-  // useEffect(() => {}, [dispatch, user]);
 
   const reset = async () => {
     if (email) {
@@ -31,24 +35,26 @@ export const Reset = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.form}>
+      <View style={[styles.image, styles.form]}>
         <Text style={styles.header}>Reset Password</Text>
 
-        <Input
-          style={styles.input}
-          placeholder="email@domain.dns"
+        <TextInput
+          style={[styles.input, styles.bottomMargin, { fontSize: inputStyle }]}
+          placeholder="Email"
           value={email}
           onChangeText={setEmail}
+          onFocus={() => setInputStyle(22)}
+          onBlur={() => setInputStyle(18)}
         />
 
         <TouchableOpacity
-          style={[styles.button, { marginTop: 35 }]}
+          style={[styles.button, styles.buttonLogin, styles.shadowButton]}
           onPress={() => reset()}>
           <Text style={styles.buttonText}>Reset</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
-          style={[styles.button, { marginTop: 35 }]}
+          style={[styles.button, styles.buttonSignup, styles.shadowButton]}
           onPress={() => navigation.navigate('Login')}>
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
