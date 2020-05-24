@@ -1,11 +1,11 @@
 import { Alert } from 'react-native';
 
-import { SPOONACULAR_API_KEY } from 'react-native-dotenv';
 import {
   FETCHING_PRODUCT,
   FETCHED_PRODUCT,
   SET_PRODUCT,
   FETCHING_PRODUCT_ERROR,
+  DELETE_PRODUCT,
 } from './actionTypes.ts';
 import { client } from '../../../proxy';
 
@@ -23,27 +23,7 @@ const fetchingProduct = () => ({ type: FETCHING_PRODUCT });
 
 const fetchedProduct = () => ({ type: FETCHED_PRODUCT });
 
-// const onBarCodeRead = (localPath) => {
-//   return async (dispatch) => {
-//     dispatch(scanningBarcode());
-//     try {
-//       const barcodes = await vision().barcodeDetectorProcessImage(localPath);
-//       console.log(barcodes);
-
-//       if (barcodes.valueType === 5) {
-//         dispatch(scannedBarcode());
-
-//         // alerting user of scanned bar codes
-//         Alert.alert(`You scanned ${barcodes[0].rawValue}`);
-
-//         dispatch(setBarcode(barcodes[0].rawValue));
-//         dispatch(barcodeApiCalls(barcodes[0].rawValue));
-//       }
-//     } catch (err) {
-//       dispatch(setError(err));
-//     }
-//   };
-// };
+const deleteProduct = (data: any) => ({ type: DELETE_PRODUCT, payload: data });
 
 const barcodeApiCalls = (upc: string) => {
   return async (dispatch) => {
@@ -68,4 +48,12 @@ const barcodeApiCalls = (upc: string) => {
   };
 };
 
-export { barcodeApiCalls };
+const deleteItem = (data: object) => {
+  console.log('rargagag');
+
+  return (dispatch: any) => {
+    dispatch(deleteProduct(data));
+  };
+};
+
+export { barcodeApiCalls, deleteItem };
