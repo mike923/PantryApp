@@ -1,13 +1,13 @@
 const express = require("express");
 const router = express.Router();
 const queries = require("../db/queries/receipts");
-const { readImgData } = require("./tesseract");
 
 router.post("/upload", async (req, res, next) => {
-  const receipt_json = req.body;
+  const { receipt } = req.body;
+  console.log(receipt);
   // console.log("You've hit /parse", url);
   try {
-    const data = await queries.addImgUrl(1, receipt_json);
+    // const data = await queries.uploadReceiptData(receipt);
     // console.log(receipt_json);
     // readImgData(receipt_img_url);
     res.json({
@@ -27,10 +27,10 @@ router.post("/upload", async (req, res, next) => {
 
 router.get("/:id", async (req, res, next) => {
   try {
-    const reciept = await queries.getReceiptById(req.params.id);
+    const receipt = await queries.getReceiptById(req.params.id);
     res.json({
-      payload: reciept,
-      message: "Reciept informaiton retrieved",
+      payload: receipt,
+      message: "Receipt informaiton retrieved",
       error: false,
     });
   } catch (error) {
