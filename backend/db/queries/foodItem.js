@@ -3,7 +3,7 @@ const db = require("../db");
 const getFoodItemsByReceiptID = async (recieptId) => await db.any(`
   SELECT * FROM food_item 
   JOIN receipts ON food_item.receipt_id = receipts.id
-  WHERE receipt_id = 1;
+  WHERE receipt_id = $1;
 `, [recieptId]);
 
 const getFoodItemByItemID = async (itemId) => {

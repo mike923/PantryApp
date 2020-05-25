@@ -19,8 +19,11 @@ const ShoppingList = ({ navigation }: any) => {
   const [productInfo, setProductInfo] = useState('');
   const fetchShoppingList = async () => {
     try {
-      const { data } = await client.get(`/shoppingList/`);
-      console.log('list', data);
+      const {
+        data: { payload },
+      } = await client.get(`/shoppingList/`);
+      console.log('list', payload);
+      setProducts(payload);
     } catch (error) {
       console.log(error);
     }
@@ -32,7 +35,12 @@ const ShoppingList = ({ navigation }: any) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.scrollContainer} />
+      <ScrollView style={styles.scrollContainer}>
+        {products.map((item) => {
+          return <Product item={item} />;
+          // return <Text>{item.product}</Text>;
+        })}
+      </ScrollView>
       <View style={styles.footer}>
         <TextInput
           style={styles.textInput}
