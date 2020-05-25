@@ -54,7 +54,7 @@ CREATE TABLE food_item (
 
 CREATE TABLE shopping_list_items (
   id SERIAL PRIMARY KEY,
-  -- food_id INT REFERENCES all_foods(id),
+  product VARCHAR NOT NULL,
   pantry_id INT REFERENCES pantry(id),
   quantity INT DEFAULT 1,
   completed BOOLEAN DEFAULT FALSE
@@ -95,3 +95,7 @@ INSERT INTO food_item (receipt_id, pantry_id, preferred_name, price, quantity, u
   (1, 1, 'Skippy Peanut Butter', 1.49, 4, '037600105064',
     'https://target.scene7.com/is/image/Target/GUEST_dd642c00-2978-4869-a200-c7873d7744fb?wid=253&hei=253&qlt=80&fmt=pjpeg'
   );
+
+
+INSERT INTO shopping_list_items(product,pantry_id) VALUES
+('Oreos',1)

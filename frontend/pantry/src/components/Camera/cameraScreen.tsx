@@ -5,7 +5,7 @@ import { Slider } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useSelector, useDispatch } from 'react-redux';
 import vision from '@react-native-firebase/ml-vision';
-import Toast from 'react-native-simple-toast';
+// import Toast from 'react-native-simple-toast';
 import { barcodeApiCalls } from '../../redux/actions/cameraActions.ts';
 
 import { styles, colors } from './cameraStyles.ts';
@@ -57,7 +57,7 @@ const Camera = ({ navigation, modalVisible }: any) => {
           console.log('bar', barcodes);
           dispatch(barcodeApiCalls(barcodes[0].rawValue)); // redux action to searching product based on barcode
           // setModalVisible(true);
-          Toast.showWithGravity(`${title} was scanned`, Toast.LONG, Toast.TOP);
+          // Toast.showWithGravity(`${title} was scanned`, Toast.LONG, Toast.TOP);
         } else {
           navigation.navigate('Parsed', {
             localUriPath: uri,
