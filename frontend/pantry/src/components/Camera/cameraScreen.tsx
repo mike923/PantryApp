@@ -137,7 +137,7 @@ const Camera = ({ navigation, modalVisible }: any) => {
 
                 modalVisible // checking the parent component
                   ? constructReceiptObj()
-                  : navigation.navigate('Shopping Cart');
+                  : navigation.navigate('Cart');
               }}
             />
           ) : null}
