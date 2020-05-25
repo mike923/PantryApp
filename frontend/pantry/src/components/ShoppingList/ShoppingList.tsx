@@ -7,6 +7,7 @@ import {
   TextInput,
   StyleSheet,
   SafeAreaView,
+  KeyboardAvoidingView,
 } from 'react-native';
 import Product from './Product.tsx';
 
@@ -33,12 +34,14 @@ const ShoppingList = ({ navigation }: any) => {
     fetchShoppingList();
   }, []);
 
+  console.log('info', productInfo);
+
   return (
-    <SafeAreaView style={styles.container}>
+    <KeyboardAvoidingView style={styles.container}>
+      {/* <SafeAreaView> */}
       <ScrollView style={styles.scrollContainer}>
         {products.map((item) => {
-          return <Product item={item} />;
-          // return <Text>{item.product}</Text>;
+          return <Product item={item} key={item.id} />;
         })}
       </ScrollView>
       <View style={styles.footer}>
@@ -47,12 +50,15 @@ const ShoppingList = ({ navigation }: any) => {
           placeholder="Item"
           placeholderTextColor="white"
           underlineColorAndroid="transparent"
+          onChangeText={(text) => setProductInfo(text)}
+          value={productInfo}
         />
       </View>
       <TouchableOpacity style={styles.addButton}>
         <Text>+</Text>
       </TouchableOpacity>
-    </SafeAreaView>
+      {/* </SafeAreaView> */}
+    </KeyboardAvoidingView>
   );
 };
 

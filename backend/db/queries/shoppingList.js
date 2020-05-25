@@ -6,9 +6,10 @@ const getAllItems = async () =>
 
 //getting a shopping list by id
 const getShoppingListById = async (pantry_id) =>
-  await db.any("SELECT * FROM shopping_list_items WHERE pantry_id = $1", [
-    pantry_id,
-  ]);
+  await db.any(
+    "SELECT * FROM shopping_list_items WHERE (pantry_id = $1) AND completed = false",
+    [pantry_id]
+  );
 
 // //adding a new item to the shopping list
 const addNewItem = async (product, pantry_id, quantity) =>
