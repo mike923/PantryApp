@@ -3,7 +3,8 @@ const router = express.Router();
 const queries = require("../db/queries/shoppingList");
 
 router.post("/upload", async (req, res, next) => {
-  const { product, pantry_id, quantity } = req.body;
+  const { product, quantity } = req.body;
+  const { pantry_id } = res.locals;
   console.log(product, pantry_id, quantity);
   try {
     const data = await queries.addNewItem(product, pantry_id, quantity);
@@ -23,13 +24,14 @@ router.post("/upload", async (req, res, next) => {
   }
 });
 
-router.get("/:id", async (req, res, next) => {
+router.get("/", async (req, res, next) => {
+  const { pantry_id } = res.locals;
   try {
-    const receipt = await queries.getShoppingListById(req.params.id);
-    console.log("ri ri", receipt);
+    const shoppingList = await queries.getShoppingListById(pantry_id);
+    console.log("ri ri", shoppingList);
 
     res.json({
-      payload: receipt,
+      payload: shoppingList,
       message: "Shopping list items retrieved",
       error: false,
     });

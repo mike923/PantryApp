@@ -29,6 +29,6 @@ app.use("/users", usersRouter);
 app.use("/receipts", checkAuth, receiptsRouter);
 app.use("/auth", authRouter);
 app.use("/fooditem", checkAuth, foodItemRouter);
-app.use("/shoppingList", shoppingList);
+app.use("/shoppingList", checkAuth, shoppingList);
 
 module.exports = app;

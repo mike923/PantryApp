@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -6,17 +6,32 @@ import {
   ScrollView,
   TextInput,
   StyleSheet,
+  SafeAreaView,
 } from 'react-native';
 import Product from './Product.tsx';
+
+import { client } from '../../../proxy';
 
 const ShoppingList = ({ navigation }: any) => {
   //   const navigateToImg = () => navigation.navigate('Pantry');
   //   const navigateToReceipts = () => navigation.navigate('Receipts');
   const [products, setProducts] = useState([]);
   const [productInfo, setProductInfo] = useState('');
+  const fetchShoppingList = async () => {
+    try {
+      const { data } = await client.get(`/shoppingList/`);
+      console.log('list', data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchShoppingList();
+  }, []);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollContainer} />
       <View style={styles.footer}>
         <TextInput
@@ -29,7 +44,7 @@ const ShoppingList = ({ navigation }: any) => {
       <TouchableOpacity style={styles.addButton}>
         <Text>+</Text>
       </TouchableOpacity>
-    </View>
+    </SafeAreaView>
   );
 };
 
