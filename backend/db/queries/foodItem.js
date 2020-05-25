@@ -1,10 +1,10 @@
 const db = require("../db");
 
-const getFoodItemsByReceiptID = async (recieptId) => await db.any(`
+const getFoodItemsByReceiptID = async (receiptId) => await db.any(`
   SELECT * FROM food_item 
   JOIN receipts ON food_item.receipt_id = receipts.id
   WHERE receipt_id = 1;
-`, [recieptId]);
+`, [receiptId]);
 
 const getFoodItemByItemID = async (itemId) => {
   let data = await db.any(`
