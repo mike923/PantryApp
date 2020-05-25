@@ -4,7 +4,7 @@ const queries = require("../db/queries/foodItem");
 
 router.get("/receiptid/:receipt_id", async (req, res, next) => {
   try {
-    const data = await queries.getFoodItemByReceiptID(req.params.receipt_id);
+    const data = await queries.getFoodItemsByReceiptID(req.params.receipt_id);
     res.status(200).json({
       payload: data,
       message: `Retrieved receipt data`,
@@ -39,7 +39,8 @@ router.get("/itemid/:item_id", async (req, res, next) => {
 });
 
 router.post("/add", async (req, res, next) => {
-  console.log(req.body);
+  const { foodItem } = req.body.foodItem;
+  console.log(foodItem);
   try {
     const data = await queries.addFoodItem(req.body)
     res.status(200).json({
