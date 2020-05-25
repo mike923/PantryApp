@@ -64,6 +64,7 @@ const fetchFDC = async (reqBody, search = false) => {
   };
 };
 
+// TODO explain the order
 const searchAPIs = async (upc) => {
   let results = await Promise.all([
     fetchSpoonacular(upc),
