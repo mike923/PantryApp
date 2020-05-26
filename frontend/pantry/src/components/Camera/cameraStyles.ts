@@ -67,7 +67,7 @@ export const styles = StyleSheet.create({
   flash: {
     position: 'absolute',
     right: 0,
-    top: 0,
+    top: '3%',
   },
   floatingButtonContainer: {
     alignItems: 'center',
@@ -111,7 +111,7 @@ export const styles = StyleSheet.create({
   zoom: {
     left: 0,
     position: 'absolute',
-    top: 0,
+    top: '5%',
     width: 140,
   },
 });
