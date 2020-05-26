@@ -21,8 +21,8 @@ const getFoodItemsByPantry = async (pantryId) => {
 }
 
 const addFoodItem = async (receiptData) => await db.oneOrNone(`
-  INSERT INTO food_item (receipt_id, pantry_id, preferred_name, price, quantity, img_url) 
-  VALUES ( $/receiptId/, $/pantryId/, $/preferred_name/, $/price/, $/quantity/, $/imgUrl/ ) 
+  INSERT INTO food_item (receipt_id, pantry_id, preferred_name, price, quantity, upc, img_url) 
+  VALUES ( $/receiptId/, $/pantry_id/, $/preferred_name/, $/price/, $/quantity/, $/upc/, $/imgUrl/ ) 
   RETURNING *;
 `, receiptData);
 
