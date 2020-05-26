@@ -71,6 +71,7 @@ const ItemForm = ({
                 ...itemFormStyles.submitButton,
               }}
               onPress={() => {
+                setAddItem(!addItem);
                 handleSubmit();
               }}>
               <Text style={itemFormStyles.textStyle}>Submit</Text>

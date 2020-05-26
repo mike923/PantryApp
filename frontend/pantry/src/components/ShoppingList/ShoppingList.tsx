@@ -66,7 +66,6 @@ const ShoppingList = ({ navigation }: any) => {
   // };
 
   const handleSubmit = async () => {
-    setAddItem(false);
     console.log('item name', itemName);
 
     try {
@@ -78,6 +77,7 @@ const ShoppingList = ({ navigation }: any) => {
     } catch (error) {
       console.log(error);
     }
+    fetchShoppingList();
   };
 
   console.log('name:', itemName, 'quant:', Number(quantity));
