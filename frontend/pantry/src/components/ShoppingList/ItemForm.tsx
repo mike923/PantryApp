@@ -1,30 +1,7 @@
-// import React, { useState, useEffect } from 'react';
-// import { View, Text, Modal } from 'react-native';
-// import { itemFormStyles } from './shoppingListStyles';
-
-// const ItemForm = ({ addItem, setAddItem }: any) => {
-//   return (
-//     <Modal
-//       animationType="slide"
-//       transparent={false}
-//       visible={addItem}
-//       presentationStyle={itemFormStyles.modal}>
-//       <Text>Yolo</Text>
-//       <Text
-//         onPress={() => {
-//           setAddItem(!addItem);
-//         }}>
-//         Close
-//       </Text>
-//     </Modal>
-//   );
-// };
-
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Alert,
   Modal,
-  StyleSheet,
   Text,
   TouchableHighlight,
   View,
@@ -32,7 +9,14 @@ import {
 } from 'react-native';
 import { itemFormStyles, shoppingListStyles } from './shoppingListStyles.ts';
 
-const ItemForm = ({ addItem, setAddItem, postItem }: any) => {
+const ItemForm = ({
+  addItem,
+  setAddItem,
+  itemName,
+  setItemName,
+  quantity,
+  setQuantity,
+}: any) => {
   return (
     <View style={itemFormStyles.centeredView}>
       <Modal
@@ -52,7 +36,22 @@ const ItemForm = ({ addItem, setAddItem, postItem }: any) => {
                 placeholder="Item"
                 placeholderTextColor="white"
                 underlineColorAndroid="transparent"
+                onChangeText={(text) => setItemName(text)}
               />
+              <TextInput
+                style={shoppingListStyles.textInput}
+                placeholder="Quantity"
+                placeholderTextColor="white"
+                underlineColorAndroid="transparent"
+                onChangeText={(num) => setQuantity(num)}
+                keyboardType="numeric"
+              />
+              {/* <TextInput
+                style={shoppingListStyles.placeholder}
+                placeholder="Item"
+                placeholderTextColor="white"
+                underlineColorAndroid="transparent"
+              /> */}
             </View>
 
             <TouchableHighlight

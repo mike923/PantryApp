@@ -19,7 +19,8 @@ const ShoppingList = ({ navigation }: any) => {
   //   const navigateToImg = () => navigation.navigate('Pantry');
   //   const navigateToReceipts = () => navigation.navigate('Receipts');
   const [products, setProducts] = useState([]);
-  const [productInfo, setProductInfo] = useState('');
+  const [itemName, setItemName] = useState('');
+  const [quantity, setQuantity] = useState(1);
   const [addItem, setAddItem] = useState(false);
 
   const fetchShoppingList = async () => {
@@ -48,37 +49,47 @@ const ShoppingList = ({ navigation }: any) => {
     };
   }, []);
 
-  const _keyboardDidHide = () => {
-    alert('Keyboard Hidden');
+  const handleSubmit = async () => {
+    console.log('item name', itemName);
+
+    try {
+      const { data }: any = await client.post('/shoppingList/upload', {
+        product: itemName,
+        quantity,
+      });
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  console.log('info', productInfo);
+  const _keyboardDidHide = async () => {
+    await handleSubmit();
+    setQuantity(1);
+    setItemName('');
+    setAddItem(false);
+  };
+
+  console.log('name:', itemName, 'quant:', Number(quantity));
 
   return (
     <KeyboardAvoidingView style={shoppingListStyles.container}>
-      {/* <SafeAreaView> */}
       <ScrollView style={shoppingListStyles.scrollContainer}>
-        {products.map((item) => {
+        {products.map((item: any) => {
           return <Product item={item} key={item.id} />;
         })}
-      </ScrollView>
-      {/* <View style={shoppingListStyles.footer}>
-        <TextInput
-          style={shoppingListStyles.textInput}
-          placeholder="Item"
-          placeholderTextColor="white"
-          underlineColorAndroid="transparent"
-          onChangeText={(text) => setProductInfo(text)}
-          value={productInfo}
+        <TouchableOpacity
+          style={shoppingListStyles.addButton}
+          onPress={() => setAddItem(!addItem)}>
+          <Text>+</Text>
+        </TouchableOpacity>
+        <ItemForm
+          addItem={addItem}
+          setAddItem={setAddItem}
+          setItemName={setItemName}
+          setQuantity={setQuantity}
         />
-      </View> */}
-      <TouchableOpacity
-        style={shoppingListStyles.addButton}
-        onPress={() => setAddItem(!addItem)}>
-        <Text>+</Text>
-      </TouchableOpacity>
-      <ItemForm addItem={addItem} setAddItem={setAddItem} />
-      {/* </SafeAreaView> */}
+      </ScrollView>
     </KeyboardAvoidingView>
   );
 };

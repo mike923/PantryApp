@@ -28,16 +28,22 @@ export const shoppingListStyles = StyleSheet.create({
     zIndex: 20,
   },
   scrollContainer: {
+    bottom: 0,
     flex: 1,
-    marginBottom: 100,
+    height: '100%',
+    // marginBottom: 100,
   },
   textInput: {
     alignSelf: 'stretch',
     backgroundColor: '#252525',
+    borderRadius: 9,
     borderTopColor: '#ededed',
     borderTopWidth: 2,
     color: '#fff',
+    left: 6,
+    marginBottom: 10,
     padding: 20,
+    width: '96%',
   },
 });
 
