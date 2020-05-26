@@ -16,8 +16,6 @@ import { shoppingListStyles } from './shoppingListStyles.ts';
 import ItemForm from './ItemForm.tsx';
 
 const ShoppingList = ({ navigation }: any) => {
-  //   const navigateToImg = () => navigation.navigate('Pantry');
-  //   const navigateToReceipts = () => navigation.navigate('Receipts');
   const [products, setProducts] = useState([]);
   const [itemName, setItemName] = useState('');
   const [quantity, setQuantity] = useState(1);
@@ -40,14 +38,14 @@ const ShoppingList = ({ navigation }: any) => {
     fetchShoppingList();
   }, []);
 
-  useEffect(() => {
-    // keyboard
-    Keyboard.addListener('keyboardDidHide', _keyboardDidHide);
+  // useEffect(() => {
+  //   // keyboard
+  //   Keyboard.addListener('keyboardDidHide', _keyboardDidHide);
 
-    return () => {
-      Keyboard.removeListener('keyboardDidHide', _keyboardDidHide);
-    };
-  }, []);
+  //   return () => {
+  //     Keyboard.removeListener('keyboardDidHide', _keyboardDidHide);
+  //   };
+  // }, []);
 
   const handleSubmit = async () => {
     console.log('item name', itemName);
@@ -63,12 +61,12 @@ const ShoppingList = ({ navigation }: any) => {
     }
   };
 
-  const _keyboardDidHide = async () => {
-    await handleSubmit();
-    setQuantity(1);
-    setItemName('');
-    setAddItem(false);
-  };
+  // const _keyboardDidHide = async () => {
+  //   await handleSubmit();
+  //   setQuantity(1);
+  //   setItemName('');
+  //   setAddItem(false);
+  // };
 
   console.log('name:', itemName, 'quant:', Number(quantity));
 
@@ -83,12 +81,15 @@ const ShoppingList = ({ navigation }: any) => {
           onPress={() => setAddItem(!addItem)}>
           <Text>+</Text>
         </TouchableOpacity>
-        <ItemForm
-          addItem={addItem}
-          setAddItem={setAddItem}
-          setItemName={setItemName}
-          setQuantity={setQuantity}
-        />
+        {addItem ? (
+          <ItemForm
+            addItem={addItem}
+            setAddItem={setAddItem}
+            setItemName={setItemName}
+            setQuantity={setQuantity}
+            handleSubmit={handleSubmit}
+          />
+        ) : null}
       </ScrollView>
     </KeyboardAvoidingView>
   );

@@ -37,6 +37,7 @@ const ItemForm = ({
                 placeholderTextColor="white"
                 underlineColorAndroid="transparent"
                 onChangeText={(text) => setItemName(text)}
+                value={itemName}
               />
               <TextInput
                 style={shoppingListStyles.textInput}
@@ -45,6 +46,7 @@ const ItemForm = ({
                 underlineColorAndroid="transparent"
                 onChangeText={(num) => setQuantity(num)}
                 keyboardType="numeric"
+                value={quantity}
               />
               {/* <TextInput
                 style={shoppingListStyles.placeholder}
