@@ -5,19 +5,23 @@ import {
   TouchableOpacity,
   ScrollView,
   TextInput,
-  StyleSheet,
   SafeAreaView,
   KeyboardAvoidingView,
+  Keyboard,
 } from 'react-native';
 import Product from './Product.tsx';
 
 import { client } from '../../../proxy';
+import { shoppingListStyles } from './shoppingListStyles.ts';
+import ItemForm from './ItemForm.tsx';
 
 const ShoppingList = ({ navigation }: any) => {
   //   const navigateToImg = () => navigation.navigate('Pantry');
   //   const navigateToReceipts = () => navigation.navigate('Receipts');
   const [products, setProducts] = useState([]);
   const [productInfo, setProductInfo] = useState('');
+  const [addItem, setAddItem] = useState(false);
+
   const fetchShoppingList = async () => {
     try {
       const {
@@ -31,76 +35,52 @@ const ShoppingList = ({ navigation }: any) => {
   };
 
   useEffect(() => {
+    // useEffect to fetch shopping list data
     fetchShoppingList();
   }, []);
+
+  useEffect(() => {
+    // keyboard
+    Keyboard.addListener('keyboardDidHide', _keyboardDidHide);
+
+    return () => {
+      Keyboard.removeListener('keyboardDidHide', _keyboardDidHide);
+    };
+  }, []);
+
+  const _keyboardDidHide = () => {
+    alert('Keyboard Hidden');
+  };
 
   console.log('info', productInfo);
 
   return (
-    <KeyboardAvoidingView style={styles.container}>
+    <KeyboardAvoidingView style={shoppingListStyles.container}>
       {/* <SafeAreaView> */}
-      <ScrollView style={styles.scrollContainer}>
+      <ScrollView style={shoppingListStyles.scrollContainer}>
         {products.map((item) => {
           return <Product item={item} key={item.id} />;
         })}
       </ScrollView>
-      <View style={styles.footer}>
+      {/* <View style={shoppingListStyles.footer}>
         <TextInput
-          style={styles.textInput}
+          style={shoppingListStyles.textInput}
           placeholder="Item"
           placeholderTextColor="white"
           underlineColorAndroid="transparent"
           onChangeText={(text) => setProductInfo(text)}
           value={productInfo}
         />
-      </View>
-      <TouchableOpacity style={styles.addButton}>
+      </View> */}
+      <TouchableOpacity
+        style={shoppingListStyles.addButton}
+        onPress={() => setAddItem(!addItem)}>
         <Text>+</Text>
       </TouchableOpacity>
+      <ItemForm addItem={addItem} setAddItem={setAddItem} />
       {/* </SafeAreaView> */}
     </KeyboardAvoidingView>
   );
 };
 
 export default ShoppingList;
-
-const styles = StyleSheet.create({
-  addButton: {
-    alignItems: 'center',
-    alignSelf: 'flex-end',
-    backgroundColor: 'orange',
-    borderRadius: 70 / 2,
-    bottom: '15%',
-    height: 70,
-    justifyContent: 'center',
-    position: 'absolute',
-    right: '5%',
-    shadowColor: '#F02A4B',
-    shadowRadius: 10,
-    width: 70,
-    zIndex: 30,
-  },
-
-  container: {
-    flex: 1,
-  },
-  footer: {
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
-    right: 0,
-    zIndex: 20,
-  },
-  scrollContainer: {
-    flex: 1,
-    marginBottom: 100,
-  },
-  textInput: {
-    alignSelf: 'stretch',
-    backgroundColor: '#252525',
-    borderTopColor: '#ededed',
-    borderTopWidth: 2,
-    color: '#fff',
-    padding: 20,
-  },
-});
