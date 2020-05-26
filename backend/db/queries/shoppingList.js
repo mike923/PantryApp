@@ -7,7 +7,7 @@ const getAllItems = async () =>
 //getting a shopping list by id
 const getShoppingListById = async (pantry_id) =>
   await db.any(
-    "SELECT * FROM shopping_list_items WHERE (pantry_id = $1) AND completed = false",
+    "SELECT * FROM shopping_list_items WHERE (pantry_id = $1) AND completed = false ORDER BY shopping_list_items.id DESC",
     [pantry_id]
   );
 

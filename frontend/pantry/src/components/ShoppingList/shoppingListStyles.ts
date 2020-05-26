@@ -3,10 +3,9 @@ import { StyleSheet } from 'react-native';
 export const shoppingListStyles = StyleSheet.create({
   addButton: {
     alignItems: 'center',
-    alignSelf: 'flex-end',
     backgroundColor: 'orange',
     borderRadius: 70 / 2,
-    bottom: '15%',
+    bottom: '10%',
     height: 70,
     justifyContent: 'center',
     position: 'absolute',
@@ -16,7 +15,6 @@ export const shoppingListStyles = StyleSheet.create({
     width: 70,
     zIndex: 30,
   },
-
   container: {
     flex: 1,
   },
@@ -31,7 +29,6 @@ export const shoppingListStyles = StyleSheet.create({
     bottom: 0,
     flex: 1,
     height: '100%',
-    // marginBottom: 100,
   },
   textInput: {
     alignSelf: 'stretch',
@@ -55,7 +52,6 @@ export const productStyles = StyleSheet.create({
     position: 'absolute',
     right: 0,
     top: 10,
-    // padding: 10,
   },
   product: {
     borderBottomColor: '#ededed',
@@ -80,7 +76,7 @@ export const itemFormStyles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   closeButton: {
-    backgroundColor: '#F194FF',
+    backgroundColor: '#f7665e',
     borderRadius: 90,
     elevation: 5,
     padding: 10,
@@ -91,9 +87,11 @@ export const itemFormStyles = StyleSheet.create({
     zIndex: 50,
   },
   modalText: {
-    // marginBottom: 15,
-    // marginTop: 0,
-    // bottom: 0,
+    alignSelf: 'center',
+    bottom: 0,
+    fontSize: 25,
+
+    top: '12%',
   },
   modalView: {
     alignItems: 'center',
@@ -110,6 +108,17 @@ export const itemFormStyles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
+  },
+  submitButton: {
+    alignSelf: 'center',
+    backgroundColor: '#2196F3',
+    borderRadius: 10,
+    bottom: 0,
+    elevation: 5,
+    padding: 10,
+    position: 'absolute',
+    width: 90,
+    zIndex: 50,
   },
   textStyle: {
     color: 'white',

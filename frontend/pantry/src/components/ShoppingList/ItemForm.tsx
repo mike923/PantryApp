@@ -16,6 +16,7 @@ const ItemForm = ({
   setItemName,
   quantity,
   setQuantity,
+  handleSubmit,
 }: any) => {
   return (
     <View style={itemFormStyles.centeredView}>
@@ -28,7 +29,7 @@ const ItemForm = ({
         }}>
         <View style={itemFormStyles.centeredView}>
           <View style={itemFormStyles.modalView}>
-            <Text style={itemFormStyles.modalText}>Add Item Information</Text>
+            <Text style={itemFormStyles.modalText}>Enter Item Information</Text>
 
             <View style={shoppingListStyles.footer}>
               <TextInput
@@ -59,12 +60,20 @@ const ItemForm = ({
             <TouchableHighlight
               style={{
                 ...itemFormStyles.closeButton,
-                backgroundColor: '#2196F3',
               }}
               onPress={() => {
                 setAddItem(!addItem);
               }}>
               <Text style={itemFormStyles.textStyle}>X</Text>
+            </TouchableHighlight>
+            <TouchableHighlight
+              style={{
+                ...itemFormStyles.submitButton,
+              }}
+              onPress={() => {
+                handleSubmit();
+              }}>
+              <Text style={itemFormStyles.textStyle}>Submit</Text>
             </TouchableHighlight>
           </View>
         </View>
