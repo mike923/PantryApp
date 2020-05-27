@@ -3,6 +3,15 @@ const router = express.Router();
 const queries = require("../db/queries/foodItem");
 const { sendError } = require("../db/queries/helpers");
 
+router.get('/pantry', async (req, res, next) => {
+  const data = await queries.getFoodItemsByPantry(res.locals.pantry_id)
+    .catch(error => sendError(error, res));
+  res.status(200).json({
+    payload: data,
+    message: `Successfully retrieved all food items for pantry with id: ${res.locals.pantry_id}`,
+    error: false,
+  });
+});
 
 router.get("/receiptid/:receipt_id", async (req, res, next) => {
   const data = await queries.getFoodItemsByReceiptID(req.params.receipt_id)
