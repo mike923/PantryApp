@@ -47,7 +47,9 @@ export const shoppingListStyles = StyleSheet.create({
 export const productStyles = StyleSheet.create({
   deleteBtn: {
     alignItems: 'center',
+    backgroundColor: 'red',
     bottom: 10,
+    height: 20,
     justifyContent: 'center',
     position: 'absolute',
     right: 0,

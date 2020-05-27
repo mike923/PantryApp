@@ -21,8 +21,42 @@ const addNewItem = async (product, pantry_id, quantity) =>
     { product, pantry_id, quantity }
   );
 
+const updateItem = async (itemObj, id) => {
+  if (itemObj.product) {
+    return await db.oneOrNone(
+      `UPDATE shopping_list_items
+      SET product = $1 
+      WHERE id = $2
+      RETURNING  *`,
+      [itemObj.product, Number(id)]
+    );
+  } else if (itemObj.quantity) {
+    return await db.oneOrNone(
+      `UPDATE shopping_list_items
+      SET quantity = $1
+      WHERE id = $2
+      RETURNING *`,
+      [itemObj.quantity, Number(id)]
+    );
+  }
+};
+
+const removeItem = async (id) => {
+  console.log("id", id);
+
+  return await db.oneOrNone(
+    `UPDATE shopping_list_items
+      SET completed = true
+      WHERE id = $1
+      RETURNING  *`,
+    [Number(id)]
+  );
+};
+
 module.exports = {
   getAllItems,
   getShoppingListById,
   addNewItem,
+  updateItem,
+  removeItem,
 };

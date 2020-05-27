@@ -1,8 +1,8 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { productStyles } from './shoppingListStyles.ts';
 
-const Product = ({ navigation, keyVal, item, deleteProduct }: any) => {
+const Product = ({ keyVal, item, setItemToComplete }: any) => {
   return (
     <View key={keyVal} style={productStyles.product}>
       <View>
@@ -10,8 +10,10 @@ const Product = ({ navigation, keyVal, item, deleteProduct }: any) => {
         <Text style={productStyles.productInfo}>{item.quantity}</Text>
       </View>
 
-      <TouchableOpacity onPress={deleteProduct}>
-        <Text style={productStyles.deleteBtn}>delete</Text>
+      <TouchableOpacity
+        onPress={() => setItemToComplete(keyVal)}
+        style={productStyles.deleteBtn}>
+        <Text style={productStyles.deleteBtnText}>delete</Text>
       </TouchableOpacity>
     </View>
   );

@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  Alert,
-  Modal,
-  Text,
-  TouchableHighlight,
-  View,
-  TextInput,
-} from 'react-native';
+import { Modal, Text, TouchableHighlight, View, TextInput } from 'react-native';
 import { itemFormStyles, shoppingListStyles } from './shoppingListStyles.ts';
 
 const ItemForm = ({
@@ -20,13 +13,7 @@ const ItemForm = ({
 }: any) => {
   return (
     <View style={itemFormStyles.centeredView}>
-      <Modal
-        animationType="slide"
-        transparent
-        visible={addItem}
-        onRequestClose={() => {
-          Alert.alert('Modal has been closed.');
-        }}>
+      <Modal animationType="slide" transparent visible={addItem}>
         <View style={itemFormStyles.centeredView}>
           <View style={itemFormStyles.modalView}>
             <Text style={itemFormStyles.modalText}>Enter Item Information</Text>

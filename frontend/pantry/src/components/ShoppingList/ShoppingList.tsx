@@ -50,6 +50,18 @@ const ShoppingList = ({ navigation }: any) => {
     wait(2000).then(() => setRefreshing(false));
   }, [refreshing]);
 
+  const setItemToComplete = async (id: any) => {
+    console.log('hit', id);
+
+    try {
+      const { data } = await client.patch(`/shoppingList/completed/${id}`);
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+    fetchShoppingList();
+  };
+
   // useEffect(() => {
   //   // keyboard
   //   Keyboard.addListener('keyboardDidHide', _keyboardDidHide);
@@ -94,7 +106,14 @@ const ShoppingList = ({ navigation }: any) => {
         }>
         {products.length ? (
           products.map((item: any) => {
-            return <Product item={item} key={item.id} />;
+            return (
+              <Product
+                item={item}
+                key={item.id}
+                keyVal={item.id}
+                setItemToComplete={setItemToComplete}
+              />
+            );
           })
         ) : (
           <ActivityIndicator style={shoppingListStyles.activityIndicator} />
