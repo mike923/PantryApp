@@ -1,8 +1,10 @@
-import React, { Component } from 'react';
-import { StyleSheet, View } from 'react-native';
+import React, { useEffect } from 'react';
+// import { StyleSheet, View } from 'react-native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
+import NetInfo from '@react-native-community/netinfo';
+import { useSelector, useDispatch } from 'react-redux';
 
 import UploadStack from './UploadStack.tsx';
 // import SettingsStack from './SettingsStack.tsx';
@@ -10,10 +12,29 @@ import DashboardStack from './DashboardStack.tsx';
 import PantryStack from './PantryStack.tsx';
 import ShopCartStack from './ShopCartStack.tsx';
 import ShoppingListStack from './ShoppingListStack.tsx';
+import { connectionState } from '../../redux/actions/appActions.ts';
 
 const Tab = createBottomTabNavigator();
 
 const TabBarNavigator = (props: any) => {
+  const netConnection: any = useSelector(
+    (state: any) => state.appReducer.isConnected,
+  );
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const unsubscribe = NetInfo.addEventListener((state) => {
+      console.log('Connection type', state.type);
+      console.log('Is connected?', state.isConnected);
+      dispatch(connectionState(state.isConnected, state.type));
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
   return (
     <>
       <NavigationContainer>
