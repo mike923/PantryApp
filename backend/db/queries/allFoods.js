@@ -124,7 +124,8 @@ const addResultToFirestoreUPCDoc = async (collection, UPCRef, resultData) => {
   }
 };
 
-const fetchFirestore = async (collection, reference, item = true) => {
+const fetchFirestore = async (reference, collection = 'foodByUPC', item = true) => {
+  console.log('asdfasdf', reference, collection, item);
   try {
     let doc = await db.collection(collection).doc(reference).get();
 
