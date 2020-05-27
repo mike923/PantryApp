@@ -32,7 +32,7 @@ const ItemConfirmation = (props: any) => {
       {
         text: 'Yes',
         onPress: async () => {
-          const data = await client.post('/receipts/upload');
+          const data = await client.post('/receipts/upload', { receipt });
           console.log(data);
           // TODO POST RECEIPT TO BACKEND
           navigation.dispatch(
