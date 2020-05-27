@@ -29,7 +29,7 @@ const getFoodItemsByPantry = async (pantryId) => await db.any(`
 
 const addFoodItem = async (receiptData) => await db.oneOrNone(`
   INSERT INTO food_item (receipt_id, pantry_id, preferred_name, price, quantity, upc, img_url) 
-  VALUES ( $/receiptId/, $/pantry_id/, $/preferred_name/, $/price/, $/quantity/, $/upc/, $/imgUrl/ ) 
+  VALUES ( $/receipt_id/, $/pantry_id/, $/preferred_name/, $/price/, $/quantity/, $/upc/, $/img_url/ ) 
   RETURNING *;
 `, receiptData);
 
@@ -48,10 +48,7 @@ const updateFoodItem = async (id, data) => {
   `
   console.log(query)
 
-  const updatedData = await db.one(query, {
-    keys: keys, 
-    values: data
-  });
+  const updatedData = await db.one(query, data);
   console.log(updatedData);
   return updatedData;
 }

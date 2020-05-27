@@ -10,7 +10,7 @@ const sendError = (error, res) => {
 const createUpdateString = (updateData) => {
   const updateColumns = Object.keys(updateData);
   console.log('creating update string...', updateColumns);
-  const updateString = updateColumns.map(updateColumn => `${updateColumn} = $/values.${updateColumn}/`).join(', ');
+  const updateString = updateColumns.map(updateColumn => `${updateColumn} = $/${updateColumn}/`).join(', ');
   console.log('update string created: ', updateString);
   return [updateColumns, updateString];
 };
