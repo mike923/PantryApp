@@ -500,8 +500,6 @@ PODS:
     - React
   - RNShare (3.3.0):
     - React
-  - RNSVG (12.1.0):
-    - React
   - RNTextDetector (0.0.6):
     - React
     - TesseractOCRiOS (~> 4.0.0)
@@ -565,7 +563,6 @@ DEPENDENCIES:
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNShare (from `../node_modules/react-native-share`)
-  - RNSVG (from `../node_modules/react-native-svg`)
   - RNTextDetector (from `../node_modules/react-native-text-detector/ios`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
@@ -694,8 +691,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-screens"
   RNShare:
     :path: "../node_modules/react-native-share"
-  RNSVG:
-    :path: "../node_modules/react-native-svg"
   RNTextDetector:
     :path: "../node_modules/react-native-text-detector/ios"
   RNVectorIcons:
@@ -780,7 +775,6 @@ SPEC CHECKSUMS:
   RNReanimated: 955cf4068714003d2f1a6e2bae3fb1118f359aff
   RNScreens: b5c0e1b2b04512919e78bd3898e144a157ce2363
   RNShare: fea1801315aa8875d6db73a4010b14afcd568765
-  RNSVG: ce9d996113475209013317e48b05c21ee988d42e
   RNTextDetector: 3983fcecbd4a95ea4664d3269a62c1b14c3a712b
   RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
   TesseractOCRiOS: 90638afbe43d082433f2e76b384c7901d23956df

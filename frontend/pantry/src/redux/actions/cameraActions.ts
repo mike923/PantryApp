@@ -1,6 +1,5 @@
 import { Alert } from 'react-native';
 
-import Toast from 'react-native-simple-toast';
 import {
   FETCHING_PRODUCT,
   FETCHED_PRODUCT,
@@ -33,11 +32,6 @@ const barcodeApiCalls = (upc: string) => {
       const { data } = await client.get(`/allFoods/checkByUPC/${upc}`);
       // `https://api.spoonacular.com/food/products/upc/${upc}?apiKey=${SPOONACULAR_API_KEY}`,
       console.log('actions data', data);
-      Toast.showWithGravity(
-        `${data.payload.name} was scanned`,
-        Toast.LONG,
-        Toast.TOP,
-      );
 
       if (data.error) {
         dispatch(setError(data.message));

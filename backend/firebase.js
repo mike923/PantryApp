@@ -13,19 +13,19 @@ const checkAuth = (req, res, next) => {
   if (req.headers.authtoken) {
     admin.auth().verifyIdToken(req.headers.authtoken)
       .then(async (eto) => {
-        console.log(eto)
-        const { pantry_id } = await getPantryByUserId(eto.uid)
-        console.log(pantry_id)
-        res.locals.pantry_id = pantry_id
-        res.locals.user_id = eto.uid
-        res.locals.email = eto.email
-        next()
+        console.log('checkauth', eto.uid);
+        const { pantry_id } = await getPantryByUserId(eto.uid);
+        console.log('checkauth', pantry_id);
+        res.locals.pantry_id = pantry_id;
+        res.locals.user_id = eto.uid;
+        res.locals.email = eto.email;
+        next();
       }).catch(() => {
-        res.status(403).send('Unauthorized')
+        res.status(403).send('Unauthorized');
       });
   } else {
-    res.status(403).send('Unauthorized!')
-    return
+    res.status(403).send('Unauthorized!');
+    return;
   }
 }
 
@@ -33,7 +33,7 @@ module.exports = {
   admin,
   checkAuth,
   db,
-}
+};
 
 // let docRef = db.collection('foodbyupc').doc('041631000564')
 

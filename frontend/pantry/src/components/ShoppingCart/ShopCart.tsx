@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
-import List from '../SwipeAbleList/SwipeAbleList.tsx';
-import EmptyCart from './emptyCart.tsx';
+import List from '../SwipeAbleList/SwipeAbleList';
 
-const ShopCart = ({ navigation }: any) => {
+const ShopCart = (props: any) => {
   const camera: object = useSelector((state) => state.camera);
 
   useEffect(() => {
@@ -14,11 +13,7 @@ const ShopCart = ({ navigation }: any) => {
   let last = camera.products.length - 1;
   console.log('prod', camera.products);
 
-  return camera.products.length ? (
-    <List data={camera.products} />
-  ) : (
-    <EmptyCart navigation={navigation} />
-  );
+  return <List data={camera.products} />;
 };
 
 export default ShopCart;
