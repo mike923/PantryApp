@@ -4,15 +4,14 @@ const queries = require("../db/queries/receipts");
 
 router.post("/upload", async (req, res, next) => {
   const { receipt } = req.body;
-  receipt.pantry_id = res.locals.pantry_id;
   console.log(receipt);
   // console.log("You've hit /parse", url);
   try {
-    const data = await queries.uploadReceiptData(receipt);
-    console.log(data);
+    // const data = await queries.uploadReceiptData(receipt);
+    // console.log(receipt_json);
     // readImgData(receipt_img_url);
     res.json({
-      payload: receipt,
+      payload: data,
       message: "successfully uploaded image",
       error: false,
     });

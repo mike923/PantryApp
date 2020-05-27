@@ -20,8 +20,7 @@ const addImgUrl = async (pantry_id, receipt_json) =>
 const uploadReceiptData = async (receipt) => 
   await db.oneOrNone(`
     INSERT INTO receipts (pantry_id, receipt_url, store_name, total, receipt_date)
-    VALUES ($/pantry_id/, $/receipt_url/, $/storeName/, $/receiptTotal/, $/receiptDate/)
-    RETURNING *
+    VALUES ($/pantry_id/, $/receipt_url/, $/store_name/, $/total/, $/receipt_date/)
   `, receipt);
 
 const getReceiptById = async (id) => {

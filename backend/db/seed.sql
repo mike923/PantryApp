@@ -48,7 +48,7 @@ CREATE TABLE food_item (
   price DECIMAL NOT NULL,
   quantity INT NOT NULL,
   upc VARCHAR,
-  img_url VARCHAR DEFAULT 'https://cdn1.iconfinder.com/data/icons/smashicons-gastronomy-outline-vol-3/57/140_-_Grocery_Bag_gastronomy_food_cooking-512.png', 
+  img_url VARCHAR, 
   finished BOOLEAN DEFAULT FALSE
 );  
 

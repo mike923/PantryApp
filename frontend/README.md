@@ -2,7 +2,7 @@
 
 ## About
 
-This is a [React Native app](https://reactnative.dev/) that helps people track their food inventory, which we call **Pantry**, by scanning your grocery receipts to know whats in stock and what's not inorder to make your next grocery shopping a breeze.
+This is a [React Native app](https://reactnative.dev/) that helps people track their food inventory, which we call **Pantry**, by scanning your grocery reciepts to know whats in stock and what's not inorder to make your next grocery shopping a breeze.
 
 ## 🚨 Setting up your enviroment 🚨
 

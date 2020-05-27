@@ -24,7 +24,7 @@ router.get('/test', checkAuth, async (req, res, next) => {
 router.get('/firestore/:collection/doc/:reference', async (req, res, next) => {
   const { collection, reference } = req.params
   try {
-    const data = await fetchFirestore(reference, collection)
+    const data = await fetchFirestore(collection, reference)
     console.log(data)
     res.status(200).json({
       payload: data,
