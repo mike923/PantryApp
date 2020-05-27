@@ -16,8 +16,6 @@ const appInitialState: AppInitialState = {
 };
 
 const appReducer = (stateCopy = appInitialState, action: any) => {
-  console.log('acto', action.payload);
-
   switch (action.type) {
     case FETCHING_CONNECTION_STATE: {
       stateCopy.checkingStatus = true;

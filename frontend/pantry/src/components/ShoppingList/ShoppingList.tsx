@@ -5,6 +5,7 @@ import {
   ScrollView,
   KeyboardAvoidingView,
   RefreshControl,
+  ActivityIndicator,
 } from 'react-native';
 import Product from './Product.tsx';
 import { client } from '../../../proxy';
@@ -78,6 +79,8 @@ const ShoppingList = ({ navigation }: any) => {
       console.log(error);
     }
     fetchShoppingList();
+    setItemName('');
+    setQuantity(1);
   };
 
   console.log('name:', itemName, 'quant:', Number(quantity));
@@ -89,9 +92,13 @@ const ShoppingList = ({ navigation }: any) => {
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }>
-        {products.map((item: any) => {
-          return <Product item={item} key={item.id} />;
-        })}
+        {products.length ? (
+          products.map((item: any) => {
+            return <Product item={item} key={item.id} />;
+          })
+        ) : (
+          <ActivityIndicator style={shoppingListStyles.activityIndicator} />
+        )}
 
         {addItem ? (
           <ItemForm

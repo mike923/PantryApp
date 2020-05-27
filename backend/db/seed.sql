@@ -54,7 +54,7 @@ CREATE TABLE food_item (
 
 CREATE TABLE shopping_list_items (
   id SERIAL PRIMARY KEY,
-  product VARCHAR NOT NULL,
+  product VARCHAR NOT NULL UNIQUE,
   pantry_id INT REFERENCES pantry(id),
   quantity INT DEFAULT 1,
   completed BOOLEAN DEFAULT FALSE

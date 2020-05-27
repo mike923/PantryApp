@@ -71,6 +71,9 @@ export const productStyles = StyleSheet.create({
 });
 
 export const itemFormStyles = StyleSheet.create({
+  activityIndicator: {
+    alignSelf: 'center',
+  },
   centeredView: {
     flex: 1,
     justifyContent: 'flex-end',

@@ -14,8 +14,11 @@ const getShoppingListById = async (pantry_id) =>
 // //adding a new item to the shopping list
 const addNewItem = async (product, pantry_id, quantity) =>
   await db.one(
-    `INSERT INTO shopping_list_items (product,pantry_id,quantity) VALUES($1,$2,$3) RETURNING *`,
-    [product, pantry_id, quantity]
+    `INSERT INTO shopping_list_items (product,pantry_id,quantity) 
+    VALUES($/product/,$/pantry_id/,$/quantity/)
+     ON CONFLICT (product) DO UPDATE SET completed = false
+     RETURNING *`,
+    { product, pantry_id, quantity }
   );
 
 module.exports = {
