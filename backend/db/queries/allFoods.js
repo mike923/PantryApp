@@ -124,25 +124,6 @@ const addResultToFirestoreUPCDoc = async (collection, UPCRef, resultData) => {
   }
 };
 
-const fetchFirestore = async (reference, collection = 'foodByUPC', item = true) => {
-  console.log('asdfasdf', reference, collection, item);
-  try {
-    let doc = await db.collection(collection).doc(reference).get();
-
-    // console.log(doc)
-    if (doc.exists) {
-      doc = item ? doc.data().item : doc.data();
-    } else {
-      doc = await createNewUPC(reference);
-      doc = item ? doc.simplifiedData : doc.data;
-    }
-
-    return doc;
-  } catch (error) {
-    console.log("fetchFirestore ERROR: ", error);
-  }
-};
-
 const extractFDC = (data) => ({
   upc: data.gtinUpc,
   name: data.description,
@@ -237,6 +218,25 @@ const createNewUPC = async (upc) => {
   // let status3 = await addResultToFirestoreUPCDoc('foodByUPC', upc, data[1])
   // console.log('createNewUPC STATUS3: ', status3)
   return { data, simplifiedData };
+};
+
+const fetchFirestore = async (reference, collection = 'foodByUPC', item = true) => {
+  console.log('asdfasdf', reference, collection, item);
+  try {
+    let doc = await db.collection(collection).doc(reference).get();
+
+    // console.log(doc)
+    if (doc.exists) {
+      doc = item ? doc.data().item : doc.data();
+    } else {
+      doc = await createNewUPC(reference);
+      doc = item ? doc.simplifiedData : doc.data;
+    }
+
+    return doc;
+  } catch (error) {
+    console.log("fetchFirestore ERROR: ", error);
+  }
 };
 
 module.exports = {
