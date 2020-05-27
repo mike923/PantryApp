@@ -1,15 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const queries = require("../db/queries/foodItem");
+const { sendError } = require("../db/queries/helpers");
 
-const sendError = (error, res) => {
-  console.log('Food Item error', error);
-  res.status(500).json({
-    payload: null,
-    message: error.message,
-    error: true,
-  });
-};
 
 router.get("/receiptid/:receipt_id", async (req, res, next) => {
   const data = await queries.getFoodItemsByReceiptID(req.params.receipt_id)
