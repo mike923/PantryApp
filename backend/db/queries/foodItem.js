@@ -1,4 +1,5 @@
 const db = require("../db");
+const { fetchFirestore } = require("./allFoods");
 
 const getFoodItemsByReceiptID = async (receiptId) => await db.any(`
   SELECT * FROM food_item 
@@ -7,13 +8,24 @@ const getFoodItemsByReceiptID = async (receiptId) => await db.any(`
 `, [receiptId]);
 
 const getFoodItemByItemID = async (itemId) => {
-  let data = await db.any(`
+  const data = await db.oneOrNone(`
     SELECT * FROM food_item
     WHERE item_id = $1;
   `, [itemId]);
+  console.log(data);
+  
+  const foodDetail = await fetchFirestore(data.upc)
+    .catch(error => {
+      console.log('there was an error retrieving food detail: ', error.message);
+    });
+  console.log('getFoodItemByItemID food detailed: ', foodDetail);
 
-  console.log(data)
-  return data
+  if (data) {
+    data.details = foodDetail;
+  }
+
+  if (!data) return null;
+  return data;
 }
 
 const getFoodItemsByPantry = async (pantryId) => {
