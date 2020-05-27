@@ -10,6 +10,7 @@ const initUserState = {
   userInfo: {
     email: '',
     token: '',
+    pantryId: '',
   },
   loggedIn: false,
   loading: false,
@@ -33,6 +34,7 @@ const userReducer = (state = initUserState, action) => {
       stateCopy.loggedIn = true;
       stateCopy.userInfo.email = action.payload.email;
       stateCopy.userInfo.token = action.payload.token;
+      stateCopy.userInfo.pantryId = action.payload.pantryId;
       break;
 
     case UNSET_USER:
