@@ -22,7 +22,13 @@ const ShoppingList = ({ navigation }: any) => {
   //   const navigateToImg = () => navigation.navigate('Pantry');
   //   const navigateToReceipts = () => navigation.navigate('Receipts');
   const [products, setProducts] = useState([]);
-  const [productInfo, setProductInfo] = useState('');
+  const [itemName, setItemName] = useState('');
+  const [quantity, setQuantity] = useState(1);
+  const [addItem, setAddItem] = useState(false);
+  const [editable, setEditable] = useState(false);
+
+  const [refreshing, setRefreshing] = React.useState(false);
+
   const fetchShoppingList = async () => {
     try {
       const {
@@ -39,7 +45,63 @@ const ShoppingList = ({ navigation }: any) => {
     fetchShoppingList();
   }, []);
 
-  console.log('info', productInfo);
+  const onRefresh = React.useCallback(() => {
+    // pull down on screen to refresh page
+    setRefreshing(true);
+    fetchShoppingList();
+    wait(2000).then(() => setRefreshing(false));
+  }, [refreshing]);
+
+  const setItemToComplete = async (id: any) => {
+    console.log('hit', id);
+
+    try {
+      const { data } = await client.patch(`/shoppingList/completed/${id}`);
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+    fetchShoppingList();
+  };
+
+  const editItem = (type: any, text: any) => {
+    setEditable(!editable);
+  };
+
+  // useEffect(() => {
+  //   // keyboard
+  //   Keyboard.addListener('keyboardDidHide', _keyboardDidHide);
+
+  //   return () => {
+  //     Keyboard.removeListener('keyboardDidHide', _keyboardDidHide);
+  //   };
+  // }, []);
+
+  // const _keyboardDidHide = async () => {
+  //   await handleSubmit();
+  //   setQuantity(1);
+  //   setItemName('');
+  //   setAddItem(false);
+  // };
+
+  const handleSubmit = async () => {
+    console.log('item name', itemName);
+
+    try {
+      const { data }: any = await client.post('/shoppingList/upload', {
+        product: itemName,
+        quantity,
+      });
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+    fetchShoppingList();
+    setItemName('');
+    setQuantity(1);
+  };
+
+  console.log('name:', itemName, 'quant:', Number(quantity));
 
   return (
     <KeyboardAvoidingView style={shoppingListStyles.container}>
@@ -52,10 +114,14 @@ const ShoppingList = ({ navigation }: any) => {
           products.map((item: any) => {
             return (
               <Product
-                item={item}
+                item={item.product}
+                quant={item.quantity}
                 key={item.id}
                 keyVal={item.id}
                 setItemToComplete={setItemToComplete}
+                editable={editable}
+                setEditable={setEditable}
+                handleChange={editItem}
               />
             );
           })
