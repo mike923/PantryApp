@@ -103,6 +103,8 @@ export const emptyCart = StyleSheet.create({
   primaryText: {
     color: 'black',
     fontSize: 45,
+    position: 'absolute',
+    top: 0,
   },
   secondaryText: {
     color: 'black',

@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { productStyles } from './shoppingListStyles.ts';
 
 const Product = ({ keyVal, item, setItemToComplete }: any) => {
@@ -10,11 +11,11 @@ const Product = ({ keyVal, item, setItemToComplete }: any) => {
         <Text style={productStyles.productInfo}>{item.quantity}</Text>
       </View>
 
-      <TouchableOpacity
+      <Icon
+        name="trash"
         onPress={() => setItemToComplete(keyVal)}
-        style={productStyles.deleteBtn}>
-        <Text style={productStyles.deleteBtnText}>delete</Text>
-      </TouchableOpacity>
+        style={productStyles.deleteBtn}
+      />
     </View>
   );
 };

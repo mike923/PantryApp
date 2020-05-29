@@ -47,13 +47,13 @@ export const shoppingListStyles = StyleSheet.create({
 export const productStyles = StyleSheet.create({
   deleteBtn: {
     alignItems: 'center',
-    backgroundColor: 'red',
     bottom: 10,
-    height: 20,
+    fontSize: 25,
+    height: 30,
     justifyContent: 'center',
     position: 'absolute',
-    right: 0,
-    top: 10,
+    right: '8%',
+    top: '70%',
   },
   product: {
     borderBottomColor: '#ededed',
@@ -141,5 +141,8 @@ export const emptyShoppingList = StyleSheet.create({
   listSvg: {
     height: 380,
     width: 180,
+  },
+  primaryText: {
+    fontSize: 20,
   },
 });
