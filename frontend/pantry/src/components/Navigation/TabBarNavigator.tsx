@@ -10,10 +10,35 @@ import DashboardStack from './DashboardStack.tsx';
 import PantryStack from './PantryStack.tsx';
 import ShopCartStack from './ShopCartStack.tsx';
 import ShoppingListStack from './ShoppingListStack.tsx';
+import {
+  connectionState,
+  connectionAlert,
+} from '../../redux/actions/appActions.ts';
 
 const Tab = createBottomTabNavigator();
 
 const TabBarNavigator = (props: any) => {
+  const netConnection: any = useSelector((state: any) => state.appReducer);
+
+  const dispatch = useDispatch();
+
+  // checking the user connected to a network
+  useEffect(() => {
+    const unsubscribe = NetInfo.addEventListener((state: any) => {
+      console.log('Connection type', state.type);
+      console.log('Is connected?', state.isConnected);
+      console.log('Expensive connection?', state.details.isConnectionExpensive);
+      dispatch(connectionState(state.isConnected, state.type));
+      return connectionAlert(state.isConnected, state.type);
+    });
+
+    // connectionAlert();
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
   return (
     <>
       <NavigationContainer>
