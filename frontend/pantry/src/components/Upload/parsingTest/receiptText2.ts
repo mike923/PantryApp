@@ -98,8 +98,6 @@ $1.99`;
 
 // console.log(text);
 
-const priceRegex = new RegExp(/\$\s*\d+\s*\.\s*\d{2}/, 'g');
-
 const removeFN = (text: string) => text.replace(/FN/gi, '\n');
 
 // const removeNewLine = (text) => text.replace(/(\r\n|\n|\r)/gm, ' ');
@@ -145,7 +143,7 @@ const getProducts = (text: string | any) => {
 };
 
 const getPrices = (text: string) => {
-  return text.match(priceRegex);
+  return text.match(/[$]\d+(\.)(\d{1,2})?/g);
 };
 
 const isProductNum = (text: any) => {
@@ -174,8 +172,8 @@ const getItems = (products: string | any[], prices: never[]) => {
         const quantityRegex = new RegExp(/^(.*?)(?=@)/, 'g');
         let quantity = str.match(quantityRegex);
         quantity = quantity[0].trim() * 1;
-        // const priceRegex = new RegExp(/\$*?(\d+.\d\d)/, 'g');
-        let price = str.match(priceRegex);
+        const priceRegex = new RegExp(/\$*?(\d+.\d\d)/, 'g');
+        let price = str.match(/\$*?(\d+.\d\d)/g);
         console.log(
           Array(99).fill('@').join(''),
           'THIS IS WHERE IS BREAKSn hb',

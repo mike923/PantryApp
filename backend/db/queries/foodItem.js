@@ -1,35 +1,28 @@
 const db = require("../db");
-const { createUpdateString } = require('./helpers');
-const { fetchFirestore } = require("./allFoods");
 
-const getFoodItemsByReceiptID = async (receiptId) => await db.any(`
+const getFoodItemsByReceiptID = async (recieptId) => await db.any(`
   SELECT * FROM food_item 
   JOIN receipts ON food_item.receipt_id = receipts.id
-  WHERE receipt_id = 1;
-`, [receiptId]);
+  WHERE receipt_id = $1;
+`, [recieptId]);
 
 const getFoodItemByItemID = async (itemId) => {
-  let data = await db.oneOrNone(`
+  let data = await db.any(`
     SELECT * FROM food_item
     WHERE item_id = $1;
   `, [itemId]);
-  
-  if (data) {
-    data.details = await fetchFirestore(data.upc)
-      .catch(error => console.log('food detail error: ', error.message));
-  }
-  
-  console.log('getFoodItemByID: ', data);
-  return !data ? null : data;
+
+  console.log(data)
+  return data
 }
 
-const getFoodItemsByPantry = async (pantryId) => await db.any(`
-  SELECT * FROM food_item WHERE pantry_id = $1
-`, [pantryId]);
+const getFoodItemsByPantry = async (pantryId) => {
+  
+}
 
 const addFoodItem = async (receiptData) => await db.oneOrNone(`
-  INSERT INTO food_item (receipt_id, pantry_id, preferred_name, price, quantity, upc, img_url) 
-  VALUES ( $/receiptId/, $/pantry_id/, $/preferred_name/, $/price/, $/quantity/, $/upc/, $/imgUrl/ ) 
+  INSERT INTO food_item (receipt_id, pantry_id, preferred_name, price, quantity, img_url) 
+  VALUES ( $/receiptId/, $/pantryId/, $/preferred_name/, $/price/, $/quantity/, $/imgUrl/ ) 
   RETURNING *;
 `, receiptData);
 
@@ -38,7 +31,10 @@ const updateFoodItem = async (id, data) => {
   delete data.edited
   delete data.loaded
 
-  const [keys, str] = createUpdateString(data);
+  const keys = Object.keys(data);
+  console.log(keys);
+  let str = keys.map((key, i) => `${key} = $/values.${key}/`).join(', ');
+  console.log(str);
   
   const query = `
     UPDATE food_item
@@ -61,5 +57,4 @@ module.exports = {
   addFoodItem,
   updateFoodItem,
   getFoodItemByItemID,
-  getFoodItemsByPantry,
 };
