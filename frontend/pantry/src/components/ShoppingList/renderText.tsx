@@ -4,15 +4,16 @@ import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 import { productStyles } from './shoppingListStyles.ts';
 
 const RenderText = ({
-  name,
+  item,
   quant,
-  setName,
-  setQuantity,
   editableName,
   editableQuant,
   setEditableName,
   setEditableQuant,
 }: any) => {
+  const [name, setName] = useState(item);
+  const [quantity, setQuantity] = useState(quant);
+
   const handleChange = (type: string, val: any) => {
     switch (type) {
       case 'name':
@@ -24,8 +25,6 @@ const RenderText = ({
     }
     return val;
   };
-
-  console.log(name, 'names');
 
   return (
     <View style={productStyles.productInfo}>
@@ -51,7 +50,7 @@ const RenderText = ({
       {editableQuant ? (
         <TextInput
           style={productStyles.item}
-          value={`${quant}`}
+          value={`${quantity}`}
           onChangeText={(text) => handleChange('quantity', text)}
           onSubmitEditing={() => {
             console.log('edit');
@@ -63,7 +62,7 @@ const RenderText = ({
           onPress={() => {
             setEditableQuant(!editableQuant);
           }}>
-          <Text>{quant}</Text>
+          <Text>{quantity}</Text>
         </TouchableOpacity>
       )}
     </View>

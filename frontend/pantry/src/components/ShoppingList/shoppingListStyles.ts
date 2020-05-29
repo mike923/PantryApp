@@ -55,6 +55,14 @@ export const productStyles = StyleSheet.create({
     right: '8%',
     top: '70%',
   },
+  editable: {
+    alignSelf: 'center',
+    position: 'absolute',
+    right: '20%',
+  },
+  item: {
+    color: 'black',
+  },
   product: {
     borderBottomColor: '#ededed',
     borderBottomWidth: 2,
@@ -71,7 +79,7 @@ export const productStyles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     height: 50,
-    justifyContent: 'space-between',
+    // justifyContent: 'space-around',
     paddingLeft: 20,
   },
 });

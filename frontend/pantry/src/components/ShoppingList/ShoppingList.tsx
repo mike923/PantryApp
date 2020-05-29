@@ -34,6 +34,7 @@ const ShoppingList = ({ navigation }: any) => {
   const [itemName, setItemName] = useState('');
   const [quantity, setQuantity] = useState(1);
   const [addItem, setAddItem] = useState(false);
+  const [editable, setEditable] = useState(false);
 
   const [refreshing, setRefreshing] = React.useState(false);
 
@@ -72,6 +73,10 @@ const ShoppingList = ({ navigation }: any) => {
     fetchShoppingList();
   };
 
+  const editItem = (type: any, text: any) => {
+    setEditable(!editable);
+  };
+
   // useEffect(() => {
   //   // keyboard
   //   Keyboard.addListener('keyboardDidHide', _keyboardDidHide);
@@ -89,7 +94,6 @@ const ShoppingList = ({ navigation }: any) => {
   // };
 
   const handleSubmit = async () => {
-    // submit new list item
     console.log('item name', itemName);
 
     try {
@@ -106,20 +110,6 @@ const ShoppingList = ({ navigation }: any) => {
     setQuantity(1);
   };
 
-  // updates the text of the list
-  const updateItem = async (id: any, product: string, quant: any) => {
-    try {
-      const { data }: any = await client.patch(`/shoppingList/update/${id}`, {
-        product,
-        quantity: quant,
-      });
-      console.log('item update', data);
-    } catch (error) {
-      console.log('update error', error);
-    }
-    fetchShoppingList();
-  };
-
   console.log('name:', itemName, 'quant:', Number(quantity));
 
   return (
@@ -133,10 +123,14 @@ const ShoppingList = ({ navigation }: any) => {
           products.map((item: any) => {
             return (
               <Product
-                item={item}
+                item={item.product}
+                quant={item.quantity}
                 key={item.id}
                 keyVal={item.id}
                 setItemToComplete={setItemToComplete}
+                editable={editable}
+                setEditable={setEditable}
+                handleChange={editItem}
               />
             );
           })
