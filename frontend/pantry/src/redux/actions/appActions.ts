@@ -21,12 +21,12 @@ const connectionAlert = (status: any, connectionType: any) => {
         Toast.SHORT,
         Toast.TOP,
       );
-    case 'cellular':
-      return Toast.showWithGravity(
-        `Your are now on a cellular connection`,
-        Toast.SHORT,
-        Toast.TOP,
-      );
+    // case 'cellular':
+    //   return Toast.showWithGravity(
+    //     `Your are now on a cellular connection`,
+    //     Toast.SHORT,
+    //     Toast.TOP,
+    //   );
     default:
       break;
   }

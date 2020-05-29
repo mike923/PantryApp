@@ -11,7 +11,7 @@ const EmptyShoppingList = ({ navigation }: any) => {
   //   };
   return (
     <View style={emptyShoppingList.emptyListContainer}>
-      <Text style={emptyShoppingList.primaryText}>
+      <Text style={emptyShoppingList.headerText}>
         Your Shopping list is empty
       </Text>
       <List style={emptyShoppingList.listSvg} />
