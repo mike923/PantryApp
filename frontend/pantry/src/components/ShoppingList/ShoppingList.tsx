@@ -8,8 +8,13 @@ import {
   StyleSheet,
   SafeAreaView,
   KeyboardAvoidingView,
+  RefreshControl,
 } from 'react-native';
 import Product from './Product.tsx';
+import { client } from '../../../proxy';
+import { shoppingListStyles } from './shoppingListStyles.ts';
+import ItemForm from './ItemForm.tsx';
+import EmptyShoppingList from './emptyShoppinglist.tsx';
 
 import { client } from '../../../proxy';
 
@@ -37,12 +42,36 @@ const ShoppingList = ({ navigation }: any) => {
   console.log('info', productInfo);
 
   return (
-    <KeyboardAvoidingView style={styles.container}>
-      {/* <SafeAreaView> */}
-      <ScrollView style={styles.scrollContainer}>
-        {products.map((item) => {
-          return <Product item={item} key={item.id} />;
-        })}
+    <KeyboardAvoidingView style={shoppingListStyles.container}>
+      <ScrollView
+        style={shoppingListStyles.scrollContainer}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }>
+        {products.length ? (
+          products.map((item: any) => {
+            return (
+              <Product
+                item={item}
+                key={item.id}
+                keyVal={item.id}
+                setItemToComplete={setItemToComplete}
+              />
+            );
+          })
+        ) : (
+          <EmptyShoppingList />
+        )}
+
+        {addItem ? (
+          <ItemForm
+            addItem={addItem}
+            setAddItem={setAddItem}
+            setItemName={setItemName}
+            setQuantity={setQuantity}
+            handleSubmit={handleSubmit}
+          />
+        ) : null}
       </ScrollView>
       <View style={styles.footer}>
         <TextInput
