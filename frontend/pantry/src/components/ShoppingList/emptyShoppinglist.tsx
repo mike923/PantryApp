@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { emptyShoppingList } from './shoppingListStyles.ts';
 import List from '../../../assets/images/support-notes-colour.svg';
 
@@ -11,9 +11,7 @@ const EmptyShoppingList = ({ navigation }: any) => {
   //   };
   return (
     <View style={emptyShoppingList.emptyListContainer}>
-      <Text style={emptyShoppingList.headerText}>
-        Your Shopping list is empty
-      </Text>
+      <Text style={emptyShoppingList.primaryText}>Shopping list is empty</Text>
       <List style={emptyShoppingList.listSvg} />
       <Text style={emptyShoppingList.secondaryText}>Start Planning</Text>
     </View>

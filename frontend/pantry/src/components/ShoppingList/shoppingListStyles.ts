@@ -47,21 +47,13 @@ export const shoppingListStyles = StyleSheet.create({
 export const productStyles = StyleSheet.create({
   deleteBtn: {
     alignItems: 'center',
+    backgroundColor: 'red',
     bottom: 10,
-    fontSize: 25,
-    height: 30,
+    height: 20,
     justifyContent: 'center',
     position: 'absolute',
-    right: '8%',
-    top: '70%',
-  },
-  editable: {
-    alignSelf: 'center',
-    position: 'absolute',
-    right: '20%',
-  },
-  item: {
-    color: 'black',
+    right: 0,
+    top: 10,
   },
   product: {
     borderBottomColor: '#ededed',
@@ -76,10 +68,6 @@ export const productStyles = StyleSheet.create({
   productInfo: {
     borderLeftColor: 'black',
     borderLeftWidth: 10,
-    flex: 1,
-    flexDirection: 'row',
-    height: 50,
-    // justifyContent: 'space-around',
     paddingLeft: 20,
   },
 });
@@ -149,10 +137,6 @@ export const emptyShoppingList = StyleSheet.create({
     alignItems: 'center',
     flex: 1,
     justifyContent: 'center',
-  },
-  headerText: {
-    fontSize: 20,
-    top: 20,
   },
   listSvg: {
     height: 380,

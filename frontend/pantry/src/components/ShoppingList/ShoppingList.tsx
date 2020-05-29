@@ -17,6 +17,15 @@ import ItemForm from './ItemForm.tsx';
 import EmptyShoppingList from './emptyShoppinglist.tsx';
 
 import { client } from '../../../proxy';
+import { shoppingListStyles } from './shoppingListStyles.ts';
+import ItemForm from './ItemForm.tsx';
+import EmptyShoppingList from './emptyShoppinglist.tsx';
+
+const wait = (timeout: any) => {
+  return new Promise((resolve) => {
+    setTimeout(resolve, timeout);
+  });
+};
 
 const ShoppingList = ({ navigation }: any) => {
   //   const navigateToImg = () => navigation.navigate('Pantry');
@@ -118,28 +127,24 @@ const ShoppingList = ({ navigation }: any) => {
       <ScrollView
         style={shoppingListStyles.scrollContainer}
         refreshControl={
-          // allows for pull down to refresh page
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }>
         {products.length ? (
           products.map((item: any) => {
             return (
-              // component the renders each item in the list
               <Product
+                item={item}
                 key={item.id}
                 keyVal={item.id}
-                item={item.product}
-                quant={item.quantity}
-                updateItem={updateItem}
                 setItemToComplete={setItemToComplete}
               />
             );
           })
         ) : (
-          <EmptyShoppingList /> // rendering empty screen message
+          <EmptyShoppingList />
         )}
 
-        {addItem ? ( // checking if the user clicked button to add new item
+        {addItem ? (
           <ItemForm
             addItem={addItem}
             setAddItem={setAddItem}
