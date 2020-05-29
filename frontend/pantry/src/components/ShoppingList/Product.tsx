@@ -1,5 +1,7 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { productStyles } from './shoppingListStyles.ts';
 
 const Product = ({ navigation, keyVal, item, deleteProduct }: any) => {
   //   const navigateToImg = () => navigation.navigate('Pantry');
@@ -12,9 +14,11 @@ const Product = ({ navigation, keyVal, item, deleteProduct }: any) => {
       </View>
       {/* <Text style={styles.productInfo}>{val.text}</Text> */}
 
-      <TouchableOpacity onPress={deleteProduct}>
-        <Text style={styles.deleteBtn}>delete</Text>
-      </TouchableOpacity>
+      <Icon
+        name="trash"
+        onPress={() => setItemToComplete(keyVal)}
+        style={productStyles.deleteBtn}
+      />
     </View>
   );
 };
