@@ -5,12 +5,12 @@ import {
   ScrollView,
   KeyboardAvoidingView,
   RefreshControl,
-  ActivityIndicator,
 } from 'react-native';
 import Product from './Product.tsx';
 import { client } from '../../../proxy';
 import { shoppingListStyles } from './shoppingListStyles.ts';
 import ItemForm from './ItemForm.tsx';
+import EmptyShoppingList from './emptyShoppinglist.tsx';
 
 const wait = (timeout: any) => {
   return new Promise((resolve) => {
@@ -116,7 +116,7 @@ const ShoppingList = ({ navigation }: any) => {
             );
           })
         ) : (
-          <ActivityIndicator style={shoppingListStyles.activityIndicator} />
+          <EmptyShoppingList />
         )}
 
         {addItem ? (

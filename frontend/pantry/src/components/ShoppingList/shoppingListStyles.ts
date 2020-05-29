@@ -5,7 +5,7 @@ export const shoppingListStyles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'orange',
     borderRadius: 70 / 2,
-    bottom: '10%',
+    bottom: '5%',
     height: 70,
     justifyContent: 'center',
     position: 'absolute',
@@ -129,5 +129,17 @@ export const itemFormStyles = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold',
     textAlign: 'center',
+  },
+});
+
+export const emptyShoppingList = StyleSheet.create({
+  emptyListContainer: {
+    alignItems: 'center',
+    flex: 1,
+    justifyContent: 'center',
+  },
+  listSvg: {
+    height: 380,
+    width: 180,
   },
 });
