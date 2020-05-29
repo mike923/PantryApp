@@ -68,6 +68,10 @@ export const productStyles = StyleSheet.create({
   productInfo: {
     borderLeftColor: 'black',
     borderLeftWidth: 10,
+    flex: 1,
+    flexDirection: 'row',
+    height: 50,
+    justifyContent: 'space-between',
     paddingLeft: 20,
   },
 });
@@ -138,11 +142,12 @@ export const emptyShoppingList = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
   },
+  headerText: {
+    fontSize: 20,
+    top: 20,
+  },
   listSvg: {
     height: 380,
     width: 180,
-  },
-  primaryText: {
-    fontSize: 20,
   },
 });

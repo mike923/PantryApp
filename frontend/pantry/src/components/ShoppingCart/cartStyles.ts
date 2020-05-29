@@ -104,11 +104,11 @@ export const emptyCart = StyleSheet.create({
     color: 'black',
     fontSize: 45,
     position: 'absolute',
-    top: 0,
   },
   secondaryText: {
     color: 'black',
     fontSize: 35,
+    top: '5%',
   },
   svgImg: {
     height: 210,

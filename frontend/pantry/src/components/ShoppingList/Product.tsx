@@ -1,16 +1,19 @@
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { TextInput } from 'react-native-gesture-handler';
 import { productStyles } from './shoppingListStyles.ts';
 
 const Product = ({ navigation, keyVal, item, deleteProduct }: any) => {
   //   const navigateToImg = () => navigation.navigate('Pantry');
   //   const navigateToReceipts = () => navigation.navigate('Receipts');
   return (
-    <View key={keyVal} style={styles.product}>
-      <View>
-        <Text style={styles.productInfo}>{item.product}</Text>
-        <Text style={styles.productInfo}>{item.quantity}</Text>
+    <View key={keyVal} style={productStyles.product}>
+      <View style={productStyles.productInfo}>
+        <TextInput editable={false} value={item.product} />
+        <TextInput editable={false} value={JSON.stringify(item.quantity)} />
+        {/* <Text style={productStyles.productInfo}>{item.product}</Text> */}
+        {/* <Text style={productStyles.productInfo}>{item.quantity}</Text> */}
       </View>
       {/* <Text style={styles.productInfo}>{val.text}</Text> */}
 
