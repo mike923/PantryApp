@@ -1,18 +1,44 @@
-import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { View } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { TextInput } from 'react-native-gesture-handler';
 import { productStyles } from './shoppingListStyles.ts';
+import RenderText from './renderText.tsx';
 
-const Product = ({ keyVal, item, setItemToComplete }: any) => {
+const Product = ({
+  keyVal,
+  item,
+  setItemToComplete,
+  editable,
+  quant,
+  setEditable,
+}: any) => {
+  const [editableName, setEditableName] = useState(false);
+  const [editableQuant, setEditableQuant] = useState(false);
   return (
     <View key={keyVal} style={productStyles.product}>
-      <View style={productStyles.productInfo}>
-        <TextInput editable={false} value={item.product} />
-        <TextInput editable={false} value={JSON.stringify(item.quantity)} />
-        {/* <Text style={productStyles.productInfo}>{item.product}</Text> */}
-        {/* <Text style={productStyles.productInfo}>{item.quantity}</Text> */}
-      </View>
+      <RenderText
+        editable={editable}
+        item={item}
+        quant={quant}
+        setEditable={setEditable}
+        editableName={editableName}
+        setEditableName={setEditableName}
+        editableQuant={editableQuant}
+        setEditableQuant={setEditableQuant}
+      />
+
+      {editableQuant || editableName ? (
+        <Icon
+          name="check"
+          size={25}
+          color="#900"
+          style={productStyles.editable}
+          onPress={() => {
+            setEditableQuant(false);
+            setEditableName(false);
+          }}
+        />
+      ) : null}
 
       <Icon
         name="trash"

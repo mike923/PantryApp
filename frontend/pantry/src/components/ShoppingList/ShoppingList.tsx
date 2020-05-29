@@ -23,6 +23,7 @@ const ShoppingList = ({ navigation }: any) => {
   const [itemName, setItemName] = useState('');
   const [quantity, setQuantity] = useState(1);
   const [addItem, setAddItem] = useState(false);
+  const [editable, setEditable] = useState(false);
 
   const [refreshing, setRefreshing] = React.useState(false);
 
@@ -60,6 +61,10 @@ const ShoppingList = ({ navigation }: any) => {
       console.log(error);
     }
     fetchShoppingList();
+  };
+
+  const editItem = (type: any, text: any) => {
+    setEditable(!editable);
   };
 
   // useEffect(() => {
@@ -108,10 +113,14 @@ const ShoppingList = ({ navigation }: any) => {
           products.map((item: any) => {
             return (
               <Product
-                item={item}
+                item={item.product}
+                quant={item.quantity}
                 key={item.id}
                 keyVal={item.id}
                 setItemToComplete={setItemToComplete}
+                editable={editable}
+                setEditable={setEditable}
+                handleChange={editItem}
               />
             );
           })
