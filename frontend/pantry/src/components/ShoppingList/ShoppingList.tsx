@@ -23,7 +23,6 @@ const ShoppingList = ({ navigation }: any) => {
   const [itemName, setItemName] = useState('');
   const [quantity, setQuantity] = useState(1);
   const [addItem, setAddItem] = useState(false);
-  const [editable, setEditable] = useState(false);
 
   const [refreshing, setRefreshing] = React.useState(false);
 
@@ -63,10 +62,6 @@ const ShoppingList = ({ navigation }: any) => {
     fetchShoppingList();
   };
 
-  const editItem = (type: any, text: any) => {
-    setEditable(!editable);
-  };
-
   // useEffect(() => {
   //   // keyboard
   //   Keyboard.addListener('keyboardDidHide', _keyboardDidHide);
@@ -84,6 +79,7 @@ const ShoppingList = ({ navigation }: any) => {
   // };
 
   const handleSubmit = async () => {
+    // submit new list item
     console.log('item name', itemName);
 
     try {
@@ -100,6 +96,20 @@ const ShoppingList = ({ navigation }: any) => {
     setQuantity(1);
   };
 
+  // updates the text of the list
+  const updateItem = async (id: any, product: string, quant: any) => {
+    try {
+      const { data }: any = client.patch(`/shoppingList/update/${id}`, {
+        product,
+        quantity: quant,
+      });
+      console.log('item update', data);
+    } catch (error) {
+      console.log('update error', error);
+    }
+    fetchShoppingList();
+  };
+
   console.log('name:', itemName, 'quant:', Number(quantity));
 
   return (
@@ -107,28 +117,28 @@ const ShoppingList = ({ navigation }: any) => {
       <ScrollView
         style={shoppingListStyles.scrollContainer}
         refreshControl={
+          // allows for pull down to refresh page
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }>
         {products.length ? (
           products.map((item: any) => {
             return (
+              // component the renders each item in the list
               <Product
-                item={item.product}
-                quant={item.quantity}
                 key={item.id}
                 keyVal={item.id}
+                item={item.product}
+                quant={item.quantity}
+                updateItem={updateItem}
                 setItemToComplete={setItemToComplete}
-                editable={editable}
-                setEditable={setEditable}
-                handleChange={editItem}
               />
             );
           })
         ) : (
-          <EmptyShoppingList />
+          <EmptyShoppingList /> // rendering empty screen message
         )}
 
-        {addItem ? (
+        {addItem ? ( // checking if the user clicked button to add new item
           <ItemForm
             addItem={addItem}
             setAddItem={setAddItem}

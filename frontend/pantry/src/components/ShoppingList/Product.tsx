@@ -5,25 +5,28 @@ import { productStyles } from './shoppingListStyles.ts';
 import RenderText from './renderText.tsx';
 
 const Product = ({
-  keyVal,
   item,
-  setItemToComplete,
-  editable,
   quant,
-  setEditable,
+  keyVal,
+  updateItem,
+  setItemToComplete,
 }: any) => {
   const [editableName, setEditableName] = useState(false);
   const [editableQuant, setEditableQuant] = useState(false);
+  const [name, setName] = useState(item);
+  const [quantity, setQuantity] = useState(quant);
+
   return (
     <View key={keyVal} style={productStyles.product}>
       <RenderText
-        editable={editable}
-        item={item}
-        quant={quant}
-        setEditable={setEditable}
+        name={name}
+        quant={quantity}
+        setName={setName}
+        updateItem={updateItem}
+        setQuantity={setQuantity}
         editableName={editableName}
-        setEditableName={setEditableName}
         editableQuant={editableQuant}
+        setEditableName={setEditableName}
         setEditableQuant={setEditableQuant}
       />
 
@@ -36,6 +39,9 @@ const Product = ({
           onPress={() => {
             setEditableQuant(false);
             setEditableName(false);
+            if (name.length || quantity.length) {
+              updateItem(keyVal, name, quantity);
+            }
           }}
         />
       ) : null}
