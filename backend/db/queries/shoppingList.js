@@ -15,7 +15,7 @@ const getShoppingListById = async (pantry_id) =>
 const addNewItem = async (product, pantry_id, quantity) =>
   await db.one(
     `INSERT INTO shopping_list_items (product,pantry_id,quantity) 
-     VALUES($1,$2,$3)
+    VALUES($1,$2,$3)
      ON CONFLICT (product) DO UPDATE SET completed = false, quantity = $3
      RETURNING *`,
     [product, pantry_id, quantity]
