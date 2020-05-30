@@ -99,7 +99,7 @@ const ShoppingList = ({ navigation }: any) => {
   // updates the text of the list
   const updateItem = async (id: any, product: string, quant: any) => {
     try {
-      const { data }: any = client.patch(`/shoppingList/update/${id}`, {
+      const { data }: any = await client.patch(`/shoppingList/update/${id}`, {
         product,
         quantity: quant,
       });
