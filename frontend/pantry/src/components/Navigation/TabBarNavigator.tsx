@@ -65,8 +65,9 @@ const TabBarNavigator = (props: any) => {
             activeTintColor: '#ff5c61',
             inactiveTintColor: '#000',
             style: {
+              height: '9%',
               paddingTop: 0,
-              paddingBottom: 30,
+              paddingBottom: 0,
               paddingHorizontal: 10,
               justifyContent: 'space-around',
               backgroundColor: '#fff',
