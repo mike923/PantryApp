@@ -1,56 +1,71 @@
 const db = require("../db");
 
-const getFoodItemsByReceiptID = async (recieptId) => await db.any(`
+const getFoodItemsByReceiptID = async (recieptId) =>
+  await db.any(
+    `
   SELECT * FROM food_item 
   JOIN receipts ON food_item.receipt_id = receipts.id
   WHERE receipt_id = $1;
-`, [recieptId]);
+`,
+    [recieptId]
+  );
 
 const getFoodItemByItemID = async (itemId) => {
-  let data = await db.any(`
+  let data = await db.any(
+    `
     SELECT * FROM food_item
     WHERE item_id = $1;
-  `, [itemId]);
+  `,
+    [itemId]
+  );
 
-  console.log(data)
-  return data
-}
+  if (data) {
+    data.details = await fetchFirestore(data.upc).catch((error) =>
+      console.log("food detail error: ", error.message)
+    );
+  }
 
-const getFoodItemsByPantry = async (pantryId) => {
-  
-}
+  console.log("getFoodItemByID: ", data);
+  return !data ? null : data;
+};
 
-const addFoodItem = async (receiptData) => await db.oneOrNone(`
+const getFoodItemsByPantry = async (pantryId) => {};
+
+const addFoodItem = async (receiptData) =>
+  await db.oneOrNone(
+    `
   INSERT INTO food_item (receipt_id, pantry_id, preferred_name, price, quantity, img_url) 
   VALUES ( $/receiptId/, $/pantryId/, $/preferred_name/, $/price/, $/quantity/, $/imgUrl/ ) 
   RETURNING *;
-`, receiptData);
+`,
+    receiptData
+  );
 
 const updateFoodItem = async (id, data) => {
-  delete data.receipt_date
-  delete data.edited
-  delete data.loaded
+  delete data.receipt_date;
+  delete data.edited;
+  delete data.loaded;
 
   const keys = Object.keys(data);
   console.log(keys);
-  let str = keys.map((key, i) => `${key} = $/values.${key}/`).join(', ');
+  let str = keys.map((key, i) => `${key} = $/values.${key}/`).join(", ");
   console.log(str);
-  
+
   const query = `
     UPDATE food_item
     SET ${str}
     WHERE item_id = ${id}
     RETURNING *;
-  `
-  console.log(query)
+  `;
+  console.log(query);
 
   const updatedData = await db.one(query, {
-    keys: keys, 
-    values: data
+    keys: keys,
+    values: data,
   });
   console.log(updatedData);
   return updatedData;
-}
+};
 
 module.exports = {
   getFoodItemsByReceiptID,

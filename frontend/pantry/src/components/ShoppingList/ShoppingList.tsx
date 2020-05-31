@@ -12,6 +12,7 @@ import { shoppingListStyles } from './shoppingListStyles.ts';
 import ItemForm from './ItemForm.tsx';
 import EmptyShoppingList from './emptyShoppinglist.tsx';
 
+// function that sets the loading time for the page refresh
 const wait = (timeout: any) => {
   return new Promise((resolve) => {
     setTimeout(resolve, timeout);
