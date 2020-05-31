@@ -45,4 +45,40 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+router.patch("/update/:id", async (req, res, next) => {
+  try {
+    let updatedItem = await queries.updateItem(req.body, req.params.id);
+    res.json({
+      payload: updatedItem,
+      message: "Update successful",
+      error: false,
+    });
+  } catch (error) {
+    console.log("error", error);
+    res.status(500).json({
+      payload: null,
+      msg: "Failed to update item",
+      error: true,
+    });
+  }
+});
+
+router.patch("/completed/:id", async (req, res, next) => {
+  try {
+    let completedItem = await queries.removeItem(req.params.id);
+    res.json({
+      payload: completedItem,
+      message: "item successful removed from list",
+      error: false,
+    });
+  } catch (error) {
+    console.log("error", error);
+    res.status(500).json({
+      payload: null,
+      msg: "Failed, you can perform this action",
+      error: true,
+    });
+  }
+});
+
 module.exports = router;
