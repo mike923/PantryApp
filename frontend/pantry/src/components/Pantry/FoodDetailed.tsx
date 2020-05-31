@@ -46,6 +46,7 @@ const FoodDetailed = (props: any) => {
   const handleSubmit = async () => {
     // IF DATE CHANGED UPDATE DATE FINISHED COLUMN
     console.log(`Submitted`, state);
+    // delete state.details;
     const data = await client.patch(`/fooditem/update/${state.item_id}`, state);
     console.log(data);
     props.navigation.goBack();

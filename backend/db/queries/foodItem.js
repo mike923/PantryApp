@@ -9,7 +9,7 @@ const getFoodItemsByReceiptID = async (receiptId) =>
   JOIN receipts ON food_item.receipt_id = receipts.id
   WHERE receipt_id = 1;
 `,
-    [receiptId]
+    [receiptId],
   );
 
 const getFoodItemByItemID = async (itemId) => {
@@ -18,12 +18,12 @@ const getFoodItemByItemID = async (itemId) => {
     SELECT * FROM food_item
     WHERE item_id = $1;
   `,
-    [itemId]
+    [itemId],
   );
 
   if (data) {
     data.details = await fetchFirestore(data.upc).catch((error) =>
-      console.log("food detail error: ", error.message)
+      console.log("food detail error: ", error.message),
     );
   }
 
@@ -36,7 +36,7 @@ const getFoodItemsByPantry = async (pantryId) =>
     `
   SELECT * FROM food_item WHERE pantry_id = $1
 `,
-    [pantryId]
+    [pantryId],
   );
 
 const addFoodItem = async (receiptData) =>
@@ -46,13 +46,14 @@ const addFoodItem = async (receiptData) =>
   VALUES ( $/receipt_id/, $/pantry_id/, $/preferred_name/, $/price/, $/quantity/, $/upc/, $/imgUrl/ ) 
   RETURNING *;
 `,
-    receiptData
-  );
+    receiptData,
+);
 
 const updateFoodItem = async (id, data) => {
   delete data.receipt_date;
   delete data.edited;
   delete data.loaded;
+  delete data.details;
 
   const [keys, str] = createUpdateString(data);
 
