@@ -32,10 +32,6 @@ const textRecogReducer = (state = initUserState, action: any) => {
       stateCopy.receipt = action.payload;
       break;
     }
-    // case BARCODE_SCANNED: {
-    //   stateCopy.receipt = action.payload;
-    //   break;
-    // }
     case SCANNING_RECEIPT_ERROR: {
       stateCopy.scanningReceipt = false;
       stateCopy.scannedReceipt = false;

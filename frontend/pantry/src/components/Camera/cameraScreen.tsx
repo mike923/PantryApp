@@ -5,15 +5,15 @@ import { Slider } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useSelector, useDispatch } from 'react-redux';
 import vision from '@react-native-firebase/ml-vision';
-import Toast from 'react-native-simple-toast';
 import { barcodeApiCalls } from '../../redux/actions/cameraActions.ts';
 
 import { styles, colors } from './cameraStyles.ts';
 
 const Camera = ({ navigation, modalVisible }: any) => {
-  const camera: any = useSelector((state) => state.camera);
-  const receipt: any = useSelector((state) => state.recog.receipt.receiptItems);
-  // const receipt: object = useSelector((state) => state.recog.receipt);
+  const camera: any = useSelector((state: any) => state.camera);
+  const receipt: any = useSelector(
+    (state: any) => state.recog.receipt.receiptItems,
+  );
 
   const [title, setTitle] = useState('');
 
@@ -28,10 +28,9 @@ const Camera = ({ navigation, modalVisible }: any) => {
 
   const [zoomValue, setZoomValue] = useState(0);
   const [flash, setFlash] = useState(RNCamera.Constants.FlashMode.off);
-  // const [modalVisible, setModalVisible] = useState(false);
 
   // camera functionalities
-  let cameraRef = useRef(null);
+  let cameraRef: any = useRef(null);
 
   const toggleFlash = () => {
     if (flash === RNCamera.Constants.FlashMode.off) {
@@ -56,8 +55,6 @@ const Camera = ({ navigation, modalVisible }: any) => {
           // checking to ensure that something return from firebase scan
           console.log('bar', barcodes);
           dispatch(barcodeApiCalls(barcodes[0].rawValue)); // redux action to searching product based on barcode
-          // setModalVisible(true);
-          Toast.showWithGravity(`${title} was scanned`, Toast.LONG, Toast.TOP);
         } else {
           navigation.navigate('Parsed', {
             localUriPath: uri,
@@ -77,7 +74,7 @@ const Camera = ({ navigation, modalVisible }: any) => {
     return camera.products.forEach((product: any) => {
       let obj: any = {
         name: product.name,
-        price: '12',
+        price: '12', // TODO change to be the price that the api cal returns
         quantity: 1,
       };
 
@@ -115,7 +112,6 @@ const Camera = ({ navigation, modalVisible }: any) => {
           name="flash"
         />
         <View>
-          {/* <View style={styles.iconView}> */}
           <Icon
             name="camera"
             size={3}
@@ -123,7 +119,6 @@ const Camera = ({ navigation, modalVisible }: any) => {
             style={[styles.icon, styles.camera]}
             onPress={takePicture}
           />
-          {/* </View> */}
           {camera.products.length ? (
             <Icon
               name="check-square"
@@ -137,7 +132,7 @@ const Camera = ({ navigation, modalVisible }: any) => {
 
                 modalVisible // checking the parent component
                   ? constructReceiptObj()
-                  : navigation.navigate('Shopping Cart');
+                  : navigation.navigate('Cart');
               }}
             />
           ) : null}
