@@ -6,7 +6,6 @@ import {
   ScrollView,
   TextInput,
   StyleSheet,
-  SafeAreaView,
   KeyboardAvoidingView,
   RefreshControl,
 } from 'react-native';
