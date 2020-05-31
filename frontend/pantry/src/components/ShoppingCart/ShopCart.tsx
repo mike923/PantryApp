@@ -36,13 +36,16 @@ const ShopCart = ({ navigation }: any) => {
   console.log('products', localProducts);
 
   const uploadScannedItem = async (itemObj: any) => {
+    console.log('hit em upload');
+
     try {
       const { data } = await client.post(`/fooditem/add`, {
         quantity: itemObj.quantity,
-        price: itemObj.price,
+        price: itemObj.shopNow.price,
         upc: itemObj.upc,
         imgUrl: itemObj.image,
         preferred_name: itemObj.name,
+        receipt_id: 1,
       });
       console.log('food item upload', data);
     } catch (error) {
