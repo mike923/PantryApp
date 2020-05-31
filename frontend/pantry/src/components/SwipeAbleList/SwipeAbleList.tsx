@@ -30,7 +30,7 @@ class List extends React.Component {
 
   // rendering the items in the state to the screen in the items component
   renderItems() {
-    let { uploadScannedItem } = this.props;
+    let { uploadScannedItem }: any = this.props;
 
     return this.props.data.map((item: any) => {
       return (
@@ -43,7 +43,10 @@ class List extends React.Component {
           message={item.name}
           id={item.id}
           cleanFromScreen={(upc: string) => this.cleanFromScreen(item.upc)}
-          leftButtonPressed={() => uploadScannedItem(item)}
+          leftButtonPressed={() => {
+            uploadScannedItem(item);
+            this.cleanFromScreen(item.upc);
+          }}
           deleteButtonPressed={() => console.log('delete button pressed')}
           editButtonPressed={() => this.setState({ isEditing: true })}
         />
