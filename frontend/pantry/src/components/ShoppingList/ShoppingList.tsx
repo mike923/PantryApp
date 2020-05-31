@@ -16,11 +16,6 @@ import { shoppingListStyles } from './shoppingListStyles.ts';
 import ItemForm from './ItemForm.tsx';
 import EmptyShoppingList from './emptyShoppinglist.tsx';
 
-import { client } from '../../../proxy';
-import { shoppingListStyles } from './shoppingListStyles.ts';
-import ItemForm from './ItemForm.tsx';
-import EmptyShoppingList from './emptyShoppinglist.tsx';
-
 const wait = (timeout: any) => {
   return new Promise((resolve) => {
     setTimeout(resolve, timeout);
