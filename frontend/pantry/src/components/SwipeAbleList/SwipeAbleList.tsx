@@ -1,11 +1,9 @@
 import React from 'react';
 import { ScrollView, UIManager, LayoutAnimation } from 'react-native';
-import { connect } from 'react-redux';
 import Item from './item.tsx';
-import { deleteItem } from '../../redux/actions/cameraActions.ts';
 
 class List extends React.Component {
-  constructor(props) {
+  constructor(props: any) {
     super(props);
     this.state = {
       swiping: false,
@@ -23,14 +21,16 @@ class List extends React.Component {
 
   // cleaning the screen of the item from the screen
   cleanFromScreen(upc: string) {
-    const data = this.props.products.filter((item: object) => item.upc !== upc);
+    const data: any = this.props.data.filter(
+      (item: object) => item.upc !== upc,
+    );
 
     this.props.deleteItem(data);
   }
 
   // rendering the items in the state to the screen in the items component
   renderItems() {
-    return this.props.products.map((item: object) => {
+    return this.props.data.map((item: any) => {
       return (
         <Item
           setTitle={this.setTitle}
@@ -60,16 +60,4 @@ class List extends React.Component {
   }
 }
 
-const mapStateToProps = ({ camera: { products } }) => {
-  return {
-    products,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    deleteItem: (data: any) => dispatch(deleteItem(data)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(List);
+export default List;
