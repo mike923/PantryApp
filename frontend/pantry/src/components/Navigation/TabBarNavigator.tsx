@@ -1,8 +1,10 @@
-import React, { Component } from 'react';
-import { StyleSheet, View } from 'react-native';
+import React, { useEffect } from 'react';
+// import { StyleSheet, View } from 'react-native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
+import NetInfo from '@react-native-community/netinfo';
+import { useSelector, useDispatch } from 'react-redux';
 
 import UploadStack from './UploadStack.tsx';
 // import SettingsStack from './SettingsStack.tsx';
@@ -63,8 +65,9 @@ const TabBarNavigator = (props: any) => {
             activeTintColor: '#ff5c61',
             inactiveTintColor: '#000',
             style: {
+              height: '9%',
               paddingTop: 0,
-              paddingBottom: 30,
+              paddingBottom: 0,
               paddingHorizontal: 10,
               justifyContent: 'space-around',
               backgroundColor: '#fff',

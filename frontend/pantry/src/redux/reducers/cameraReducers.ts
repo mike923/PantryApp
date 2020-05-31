@@ -1,7 +1,4 @@
 import {
-  SCANNING,
-  SCANNED,
-  SCANNING_ERROR,
   DELETE_PRODUCT,
   FETCHING_PRODUCT,
   FETCHED_PRODUCT,
@@ -41,16 +38,8 @@ const cameraReducer = (state = initCameraState, action: any) => {
     }
 
     case SET_PRODUCT: {
-      let productSet = new Set(stateCopy.products);
-
-      if (!productSet.has(action.payload.upc)) {
-        productSet.add(action.payload);
-      }
-      console.log('upc ut', action.payload.upc);
-
-      // productSet.add(action.payload);
       stateCopy.fetchedProduct = true;
-      stateCopy.products = [...productSet];
+      stateCopy.products = [...stateCopy.products, action.payload];
       break;
     }
 
