@@ -34,7 +34,7 @@ const FoodDetailed = (props: any) => {
       try {
         const { data } = await client.get(`/fooditem/itemid/${state.item_id}`);
         console.log(data);
-        setState({ ...state, ...data.payload[0], loaded: true });
+        setState({ ...state, ...data.payload, loaded: true });
       } catch (err) {
         console.log(err);
       }
