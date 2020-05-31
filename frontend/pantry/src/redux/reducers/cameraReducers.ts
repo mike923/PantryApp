@@ -25,7 +25,7 @@ const initCameraState: InitCameraState = {
   errorMessage: [],
 };
 
-const cameraReducer = (state = initCameraState, action) => {
+const cameraReducer = (state = initCameraState, action: any) => {
   const stateCopy = { ...state };
 
   switch (action.type) {
@@ -46,7 +46,9 @@ const cameraReducer = (state = initCameraState, action) => {
       if (!productSet.has(action.payload.upc)) {
         productSet.add(action.payload);
       }
-      productSet.add(action.payload);
+      console.log('upc ut', action.payload.upc);
+
+      // productSet.add(action.payload);
       stateCopy.fetchedProduct = true;
       stateCopy.products = [...productSet];
       break;
