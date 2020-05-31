@@ -3,7 +3,6 @@ import {
   Text,
   TextInput,
   View,
-  StyleSheet,
   Image,
   TouchableOpacity,
   TouchableHighlight,
@@ -11,6 +10,7 @@ import {
 } from 'react-native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import DatePicker from 'react-native-date-picker';
+import styles from './styles.ts';
 
 import { client } from '../../../proxy';
 
@@ -27,14 +27,15 @@ const FoodDetailed = (props: any) => {
     receipt_date,
   });
   const [dateModal, setDateModal] = useState(false);
-  console.log(`HERE`, state);
+
+  // console.log(`HERE`, state);
 
   useEffect(() => {
     const apiCall = async () => {
       try {
         const { data } = await client.get(`/fooditem/itemid/${state.item_id}`);
         console.log(data);
-        setState({ ...state, ...data.payload[0], loaded: true });
+        setState({ ...state, ...data.payload, loaded: true });
       } catch (err) {
         console.log(err);
       }
@@ -60,11 +61,13 @@ const FoodDetailed = (props: any) => {
         }
         editable
       />
-      <Image
-        source={{ uri: state.img_url }}
-        resizeMode="contain"
-        style={styles.img}
-      />
+      <View style={styles.imgContainer}>
+        <Image
+          source={{ uri: state.img_url }}
+          resizeMode="contain"
+          style={styles.img}
+        />
+      </View>
       <View style={styles.quantityContainer}>
         <FeatherIcon
           name="minus-circle"
@@ -128,81 +131,5 @@ const FoodDetailed = (props: any) => {
     </View>
   ) : null;
 };
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    flex: 1,
-  },
-  date: {
-    color: 'black',
-    fontSize: 20,
-    padding: 10,
-  },
-  datePicker: {
-    alignItems: 'center',
-    backgroundColor: 'white',
-    height: 200,
-    justifyContent: 'center',
-  },
-  img: {
-    backgroundColor: 'white',
-    borderRadius: 5,
-    height: '40%',
-    padding: 10,
-    width: '100%',
-  },
-  modalDoneBtn: {
-    backgroundColor: 'orange',
-    borderRadius: 5,
-    marginTop: 10,
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-  },
-  modalDoneBtnText: {
-    color: 'white',
-    fontSize: 24,
-  },
-  modalView: {
-    alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    elevation: 5,
-    flex: 1,
-    height: 50,
-    justifyContent: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-  },
-  name: {
-    color: 'black',
-    fontSize: 24,
-    padding: 10,
-  },
-  quantity: {
-    color: 'black',
-    fontSize: 20,
-    padding: 10,
-  },
-  quantityContainer: {
-    alignItems: 'center',
-    flexDirection: 'row',
-  },
-  submitBtn: {
-    backgroundColor: 'orange',
-    borderRadius: 5,
-    marginTop: 10,
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-  },
-  submitBtnText: {
-    color: 'white',
-    fontSize: 20,
-  },
-});
 
 export default FoodDetailed;

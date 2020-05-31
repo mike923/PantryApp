@@ -1,5 +1,7 @@
 import React from 'react';
 import { TouchableOpacity, Text, Image, StyleSheet } from 'react-native';
+import { useDispatch } from 'react-redux';
+import { updatedSelectedFood } from '../../redux/actions/pantryActions.ts';
 
 interface FoodItemProp {
   preferred_name: string;
@@ -10,6 +12,7 @@ interface FoodItemProp {
 }
 
 const FoodItem = (props: any) => {
+  const dispatch = useDispatch();
   let { goTo } = props;
   const {
     preferred_name,
@@ -25,6 +28,7 @@ const FoodItem = (props: any) => {
     <TouchableOpacity
       style={styles.foodItem}
       onPress={() => {
+        dispatch(updatedSelectedFood(`${preferred_name}`));
         goTo({ item_id, receipt_date });
       }}>
       <Image
@@ -34,8 +38,8 @@ const FoodItem = (props: any) => {
         resizeMode="contain"
         style={{ height: 160, width: 160, borderRadius: 5 }}
       />
-      <Text style={{ marginTop: 3 }}>{preferred_name}</Text>
-      <Text style={{ marginTop: 3 }}>{receipt_date}</Text>
+      <Text style={styles.itemName}>{preferred_name}</Text>
+      {/* <Text style={{ marginTop: 3 }}>{receipt_date}</Text> */}
     </TouchableOpacity>
   );
 };
@@ -43,11 +47,24 @@ const FoodItem = (props: any) => {
 const styles = StyleSheet.create({
   foodItem: {
     alignItems: 'center',
-    backgroundColor: '#ffe6e6',
-    borderRadius: 10,
+    backgroundColor: '#fff',
+    borderColor: '#ff5c61',
+    borderRadius: 5,
+    elevation: 3,
     marginVertical: 10,
     padding: 9,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 1,
+      height: 1,
+    },
+    shadowOpacity: 0.35,
+    shadowRadius: 2.22,
     width: '45%',
+  },
+  itemName: {
+    color: '#000',
+    marginTop: 3,
   },
 });
 

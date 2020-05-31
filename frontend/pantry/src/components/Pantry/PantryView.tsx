@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, TextInput, StyleSheet } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
 import { client } from '../../../proxy';
 
 import FoodItem from './FoodItem.tsx';
-import Foods from '../Receipts/dummyData/dummyFoodItems.ts';
 
 const foodItems = `/fooditem/receiptid/1`;
 
@@ -30,7 +29,14 @@ const PantryView = ({ navigation }) => {
 
   return (
     <ScrollView style={{ backgroundColor: 'white', flex: 1 }}>
-      <Text style={{ alignSelf: 'center' }}>These are all you pantries!</Text>
+      {/* <Text style={{ alignSelf: 'center' }}>These are all you pantries!</Text> */}
+      <View style={styles.filterContainer}>
+        <TextInput
+          style={styles.searchBar}
+          value="Search..."
+          // onChangeText={(text) => }
+        />
+      </View>
       <View style={styles.pantryView}>
         {state.map((p: any) => (
           <FoodItem {...p} key={p.item_id} goTo={goTo} />
@@ -41,6 +47,9 @@ const PantryView = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
+  filterContainer: {
+    alignSelf: 'center',
+  },
   pantryView: {
     backgroundColor: '#fff',
     flex: 1,
