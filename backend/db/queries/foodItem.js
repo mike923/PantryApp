@@ -21,7 +21,7 @@ const getFoodItemByItemID = async (itemId) => {
   
   console.log('getFoodItemByID: ', data);
   return !data ? null : data;
-}
+} 
 
 const getFoodItemsByPantry = async (pantryId) => await db.any(`
   SELECT * FROM food_item WHERE pantry_id = $1
