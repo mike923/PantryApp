@@ -13,8 +13,8 @@ const PantryStack = ({ navigation }) => {
       screenOptions={{
         ...screenOptions,
       }}>
-      <Stack.Screen name="Pantry" component={Pantry} />
-      <Stack.Screen name="Food" component={FoodItem} />
+      {/* <Stack.Screen name="Pantry" component={Pantry} />
+      <Stack.Screen name="Food" component={FoodItem} /> */}
       <Stack.Screen name="PantryView" component={PantryView} />
       <Stack.Screen name="FoodDetailed" component={FoodDetailed} />
     </Stack.Navigator>
