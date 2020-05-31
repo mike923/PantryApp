@@ -3,7 +3,7 @@ import { testReducer } from './testReducer.ts';
 import { userReducer } from './userReducer.ts';
 import { cameraReducer } from './cameraReducers.ts';
 import { textRecogReducer } from './textRecogReducers.ts';
-import { appReducer } from './appReducer.ts';
+import { appReducer } from './appReducers.ts';
 
 const rootReducer = combineReducers({
   testUser: testReducer,

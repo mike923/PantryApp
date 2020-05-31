@@ -5,13 +5,7 @@ import Camera from './cameraScreen.tsx';
 
 const CameraModal = ({ modalVisible, setModalVisible, navigation }) => {
   return (
-    <Modal
-      animationType="slide"
-      transparent={false}
-      visible={modalVisible}
-      onRequestClose={() => {
-        Alert.alert('Modal has now been closed.');
-      }}>
+    <Modal animationType="slide" transparent={false} visible={modalVisible}>
       <Camera navigation={navigation} modalVisible={modalVisible} />
       <Text
         style={styles.closeText}
