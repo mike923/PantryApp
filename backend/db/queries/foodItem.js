@@ -11,10 +11,15 @@ const getFoodItemByItemID = async (itemId) => {
     SELECT * FROM food_item
     WHERE item_id = $1;
   `, [itemId]);
-
-  console.log(data)
-  return data
-}
+  
+  if (data) {
+    data.details = await fetchFirestore(data.upc)
+      .catch(error => console.log('food detail error: ', error.message));
+  }
+  
+  console.log('getFoodItemByID: ', data);
+  return !data ? null : data;
+} 
 
 const getFoodItemsByPantry = async (pantryId) => {
   
