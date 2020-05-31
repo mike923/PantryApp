@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import {
-  View,
   Text,
   TouchableOpacity,
   ScrollView,
-  TextInput,
-  StyleSheet,
-  SafeAreaView,
   KeyboardAvoidingView,
   RefreshControl,
 } from 'react-native';
@@ -16,11 +12,7 @@ import { shoppingListStyles } from './shoppingListStyles.ts';
 import ItemForm from './ItemForm.tsx';
 import EmptyShoppingList from './emptyShoppinglist.tsx';
 
-import { client } from '../../../proxy';
-import { shoppingListStyles } from './shoppingListStyles.ts';
-import ItemForm from './ItemForm.tsx';
-import EmptyShoppingList from './emptyShoppinglist.tsx';
-
+// function that sets the loading time for the page refresh
 const wait = (timeout: any) => {
   return new Promise((resolve) => {
     setTimeout(resolve, timeout);
@@ -28,8 +20,6 @@ const wait = (timeout: any) => {
 };
 
 const ShoppingList = ({ navigation }: any) => {
-  //   const navigateToImg = () => navigation.navigate('Pantry');
-  //   const navigateToReceipts = () => navigation.navigate('Receipts');
   const [products, setProducts] = useState([]);
   const [itemName, setItemName] = useState('');
   const [quantity, setQuantity] = useState(1);
@@ -50,6 +40,7 @@ const ShoppingList = ({ navigation }: any) => {
   };
 
   useEffect(() => {
+    // useEffect to fetch shopping list data
     fetchShoppingList();
   }, []);
 
@@ -109,7 +100,7 @@ const ShoppingList = ({ navigation }: any) => {
   // updates the text of the list
   const updateItem = async (id: any, product: string, quant: any) => {
     try {
-      const { data }: any = client.patch(`/shoppingList/update/${id}`, {
+      const { data }: any = await client.patch(`/shoppingList/update/${id}`, {
         product,
         quantity: quant,
       });
@@ -158,63 +149,13 @@ const ShoppingList = ({ navigation }: any) => {
           />
         ) : null}
       </ScrollView>
-      <View style={styles.footer}>
-        <TextInput
-          style={styles.textInput}
-          placeholder="Item"
-          placeholderTextColor="white"
-          underlineColorAndroid="transparent"
-          onChangeText={(text) => setProductInfo(text)}
-          value={productInfo}
-        />
-      </View>
-      <TouchableOpacity style={styles.addButton}>
+      <TouchableOpacity
+        style={shoppingListStyles.addButton}
+        onPress={() => setAddItem(!addItem)}>
         <Text>+</Text>
       </TouchableOpacity>
-      {/* </SafeAreaView> */}
     </KeyboardAvoidingView>
   );
 };
 
 export default ShoppingList;
-
-const styles = StyleSheet.create({
-  addButton: {
-    alignItems: 'center',
-    alignSelf: 'flex-end',
-    backgroundColor: 'orange',
-    borderRadius: 70 / 2,
-    bottom: '15%',
-    height: 70,
-    justifyContent: 'center',
-    position: 'absolute',
-    right: '5%',
-    shadowColor: '#F02A4B',
-    shadowRadius: 10,
-    width: 70,
-    zIndex: 30,
-  },
-
-  container: {
-    flex: 1,
-  },
-  footer: {
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
-    right: 0,
-    zIndex: 20,
-  },
-  scrollContainer: {
-    flex: 1,
-    marginBottom: 100,
-  },
-  textInput: {
-    alignSelf: 'stretch',
-    backgroundColor: '#252525',
-    borderTopColor: '#ededed',
-    borderTopWidth: 2,
-    color: '#fff',
-    padding: 20,
-  },
-});
