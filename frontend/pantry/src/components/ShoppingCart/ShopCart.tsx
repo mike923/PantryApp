@@ -56,7 +56,7 @@ const ShopCart = ({ navigation }: any) => {
   return products.length ? (
     <List
       data={localProducts}
-      deleteItem={() => dispatch(deleteItem)}
+      deleteItem={(data: any) => dispatch(deleteItem(data))}
       uploadScannedItem={uploadScannedItem}
     />
   ) : (

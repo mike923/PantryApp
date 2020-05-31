@@ -55,7 +55,7 @@ const barcodeApiCalls = (upc: string) => {
 };
 
 const deleteItem = (data: object) => {
-  console.log('rargagag');
+  console.log('delete', data);
 
   return (dispatch: any) => {
     dispatch(deleteProduct(data));
