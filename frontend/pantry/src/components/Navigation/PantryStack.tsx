@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 // import { FoodItem, Pantry, PantryView, FoodDetailed } from '../Pantry/index.ts';
 import { useSelector } from 'react-redux';
@@ -23,6 +23,13 @@ const PantryStack = ({ navigation }) => {
         name="Pantry"
         component={PantryView}
         options={{ title: `${loggedUser}'s Pantry` }}
+        // listeners={({ navigation, route }) => ({
+        //   focus: (e) => {
+        //     console.log(`Pantry View focused`);
+        //     console.log(navigation);
+        //     navigation.navigate('Pantry');
+        //   },
+        // })}
       />
       <Stack.Screen
         name="FoodDetailed"

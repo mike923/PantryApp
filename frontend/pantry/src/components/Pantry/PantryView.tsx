@@ -1,15 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { View, TextInput, StyleSheet } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
+import { useDispatch, useSelector } from 'react-redux';
+import FoodItem from './FoodItem.tsx';
+import { setPantryItems } from '../../redux/actions/pantryActions.ts';
 
 import { client } from '../../../proxy';
-
-import FoodItem from './FoodItem.tsx';
 
 const foodItems = `/fooditem/receiptid/1`;
 
 const PantryView = ({ navigation }) => {
-  const [state, setState] = useState([]);
+  const dispatch = useDispatch();
+  // TODO: useSelector INSTEAD OF STATE
+  const reduxState = useSelector((state) => state.pantry.pantryItems);
+  // const [state, setState] = useState([]);
+  console.log(navigation.isFocused());
   const goTo = (props) => navigation.navigate('FoodDetailed', { ...props });
 
   useEffect(() => {
@@ -17,7 +22,8 @@ const PantryView = ({ navigation }) => {
       try {
         const { data } = await client.get(foodItems);
         console.log(data.payload);
-        setState(data.payload);
+        // setState(data.payload);
+        dispatch(setPantryItems(data.payload));
         return data;
       } catch (err) {
         console.log(err);
@@ -38,8 +44,8 @@ const PantryView = ({ navigation }) => {
         />
       </View>
       <View style={styles.pantryView}>
-        {state.map((p: any) => (
-          <FoodItem {...p} key={p.item_id} goTo={goTo} />
+        {reduxState.map((p: any, i: number) => (
+          <FoodItem {...p} key={p.item_id} goTo={goTo} index={i} />
         ))}
       </View>
     </ScrollView>

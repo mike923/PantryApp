@@ -54,7 +54,8 @@ const updateFoodItem = async (id, data) => {
   delete data.edited;
   delete data.loaded;
   delete data.details;
-
+  delete data.name;
+  
   const [keys, str] = createUpdateString(data);
 
   const query = `

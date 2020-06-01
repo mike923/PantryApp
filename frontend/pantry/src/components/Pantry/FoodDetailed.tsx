@@ -10,15 +10,18 @@ import {
 } from 'react-native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import DatePicker from 'react-native-date-picker';
+import { useDispatch } from 'react-redux';
 import styles from './styles.ts';
+import { updatePantryItems } from '../../redux/actions/pantryActions.ts';
 
 import { client } from '../../../proxy';
 
 const FoodDetailed = (props: any) => {
-  console.log(props);
+  // console.log(props);
   // const params = { ...props.route.params, edited: false };
   // params. = new Date(params.receipt_date).toDateString();
-  const { item_id } = props.route.params;
+  const dispatch = useDispatch();
+  const { item_id, index } = props.route.params;
   const { receipt_date } = props.route.params;
   const [state, setState] = useState({
     loaded: false,
@@ -28,7 +31,7 @@ const FoodDetailed = (props: any) => {
   });
   const [dateModal, setDateModal] = useState(false);
 
-  // console.log(`HERE`, state);
+  console.log(`HERE`, state);
 
   useEffect(() => {
     const apiCall = async () => {
@@ -46,9 +49,9 @@ const FoodDetailed = (props: any) => {
   const handleSubmit = async () => {
     // IF DATE CHANGED UPDATE DATE FINISHED COLUMN
     console.log(`Submitted`, state);
-    // delete state.details;
     const data = await client.patch(`/fooditem/update/${state.item_id}`, state);
     console.log(data);
+    // await dispatch(updatePantryItems(index, state.preferred_name));
     props.navigation.goBack();
   };
 
@@ -57,9 +60,10 @@ const FoodDetailed = (props: any) => {
       <TextInput
         style={styles.name}
         value={state.preferred_name}
-        onChangeText={(text) =>
-          setState({ ...state, name: text, edited: true })
-        }
+        onChangeText={(text) => {
+          dispatch(updatePantryItems(index, text));
+          setState({ ...state, preferred_name: text, edited: true });
+        }}
         editable
       />
       <View style={styles.imgContainer}>
