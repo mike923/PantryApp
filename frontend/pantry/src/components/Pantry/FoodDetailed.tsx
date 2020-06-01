@@ -3,7 +3,6 @@ import {
   Text,
   TextInput,
   View,
-  StyleSheet,
   Image,
   TouchableOpacity,
   TouchableHighlight,
@@ -11,14 +10,18 @@ import {
 } from 'react-native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import DatePicker from 'react-native-date-picker';
+import { useDispatch } from 'react-redux';
+import styles from './styles.ts';
+import { updatePantryItems } from '../../redux/actions/pantryActions.ts';
 
 import { client } from '../../../proxy';
 
 const FoodDetailed = (props: any) => {
-  console.log(props);
+  // console.log(props);
   // const params = { ...props.route.params, edited: false };
   // params. = new Date(params.receipt_date).toDateString();
-  const { item_id } = props.route.params;
+  const dispatch = useDispatch();
+  const { item_id, index } = props.route.params;
   const { receipt_date } = props.route.params;
   const [state, setState] = useState({
     loaded: false,
@@ -27,6 +30,7 @@ const FoodDetailed = (props: any) => {
     receipt_date,
   });
   const [dateModal, setDateModal] = useState(false);
+
   console.log(`HERE`, state);
 
   useEffect(() => {
@@ -47,6 +51,7 @@ const FoodDetailed = (props: any) => {
     console.log(`Submitted`, state);
     const data = await client.patch(`/fooditem/update/${state.item_id}`, state);
     console.log(data);
+    // await dispatch(updatePantryItems(index, state.preferred_name));
     props.navigation.goBack();
   };
 
@@ -55,16 +60,19 @@ const FoodDetailed = (props: any) => {
       <TextInput
         style={styles.name}
         value={state.preferred_name}
-        onChangeText={(text) =>
-          setState({ ...state, name: text, edited: true })
-        }
+        onChangeText={(text) => {
+          dispatch(updatePantryItems(index, text));
+          setState({ ...state, preferred_name: text, edited: true });
+        }}
         editable
       />
-      <Image
-        source={{ uri: state.img_url }}
-        resizeMode="contain"
-        style={styles.img}
-      />
+      <View style={styles.imgContainer}>
+        <Image
+          source={{ uri: state.img_url }}
+          resizeMode="contain"
+          style={styles.img}
+        />
+      </View>
       <View style={styles.quantityContainer}>
         <FeatherIcon
           name="minus-circle"
@@ -128,81 +136,5 @@ const FoodDetailed = (props: any) => {
     </View>
   ) : null;
 };
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    flex: 1,
-  },
-  date: {
-    color: 'black',
-    fontSize: 20,
-    padding: 10,
-  },
-  datePicker: {
-    alignItems: 'center',
-    backgroundColor: 'white',
-    height: 200,
-    justifyContent: 'center',
-  },
-  img: {
-    backgroundColor: 'white',
-    borderRadius: 5,
-    height: '40%',
-    padding: 10,
-    width: '100%',
-  },
-  modalDoneBtn: {
-    backgroundColor: 'orange',
-    borderRadius: 5,
-    marginTop: 10,
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-  },
-  modalDoneBtnText: {
-    color: 'white',
-    fontSize: 24,
-  },
-  modalView: {
-    alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    elevation: 5,
-    flex: 1,
-    height: 50,
-    justifyContent: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-  },
-  name: {
-    color: 'black',
-    fontSize: 24,
-    padding: 10,
-  },
-  quantity: {
-    color: 'black',
-    fontSize: 20,
-    padding: 10,
-  },
-  quantityContainer: {
-    alignItems: 'center',
-    flexDirection: 'row',
-  },
-  submitBtn: {
-    backgroundColor: 'orange',
-    borderRadius: 5,
-    marginTop: 10,
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-  },
-  submitBtnText: {
-    color: 'white',
-    fontSize: 20,
-  },
-});
 
 export default FoodDetailed;
