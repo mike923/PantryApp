@@ -22,7 +22,7 @@ const RenderText = ({ name, quant, setName, setQuantity, editable }: any) => {
     <View style={productStyles.productInfo}>
       {editable ? (
         <TextInput
-          style={[productStyles.item, productStyles.quantTxtInput]}
+          style={productStyles.item}
           value={`${quant}`}
           onChangeText={(text: any) => handleChange('quantity', text)}
           onSubmitEditing={() => {
@@ -30,13 +30,11 @@ const RenderText = ({ name, quant, setName, setQuantity, editable }: any) => {
           }}
         />
       ) : (
-        <Text style={[productStyles.item, productStyles.quantity]}>
-          {quant}
-        </Text>
+        <Text style={productStyles.item}>{quant}</Text>
       )}
       {editable ? (
         <TextInput
-          style={[productStyles.item, productStyles.nameTxtInput]}
+          style={productStyles.item}
           value={name}
           onChangeText={(text: string) => handleChange('name', text)}
           onSubmitEditing={() => {
@@ -44,14 +42,7 @@ const RenderText = ({ name, quant, setName, setQuantity, editable }: any) => {
           }}
         />
       ) : (
-        <Text
-          style={[
-            productStyles.item,
-            productStyles.itemNameBtn,
-            productStyles.itemNameTxt,
-          ]}>
-          {name}
-        </Text>
+        <Text style={productStyles.item}>{name}</Text>
       )}
     </View>
   );

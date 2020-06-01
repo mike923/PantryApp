@@ -126,17 +126,15 @@ const ShoppingList = ({ navigation }: any) => {
           products.map((item: any) => {
             return (
               // component the renders each item in the list
-              <View>
-                <Product
-                  key={item.id}
-                  keyVal={item.id}
-                  item={item.product}
-                  quant={item.quantity}
-                  unique={item.product}
-                  updateItem={updateItem}
-                  setItemToComplete={setItemToComplete}
-                />
-              </View>
+              <Product
+                key={item.id}
+                keyVal={item.id}
+                item={item.product}
+                quant={item.quantity}
+                unique={item.product}
+                updateItem={updateItem}
+                setItemToComplete={setItemToComplete}
+              />
             );
           })
         ) : (

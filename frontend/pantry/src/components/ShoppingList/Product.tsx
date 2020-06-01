@@ -30,6 +30,7 @@ const Product = ({
       style={productStyles.product}
       onPress={() => setUserActionsVisible(!userActionsVisible)}>
       <RenderText
+        key={keyVal}
         name={name}
         quant={quantity}
         setName={setName}
@@ -39,13 +40,15 @@ const Product = ({
       />
 
       <View
+        key={keyVal}
         style={
-          userActionsVisible && unique === identity
+          userActionsVisible
             ? productStyles.itemActionsVisible
             : productStyles.itemActionsInvisible
         }>
         {/* {editableQuant || editableName ? ( */}
         <Icon
+          key={keyVal}
           name="pencil"
           onPress={() => {
             setEditable(!editable);
@@ -53,6 +56,7 @@ const Product = ({
           style={productStyles.editBtn}
         />
         <Icon
+          key={keyVal}
           name="check"
           size={25}
           style={productStyles.editable}
@@ -65,6 +69,7 @@ const Product = ({
         />
         {/* ) : null} */}
         <Icon
+          key={keyVal}
           name="trash"
           onPress={() => setItemToComplete(keyVal)}
           style={productStyles.deleteBtn}
