@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-//styling for the shopping list component
+// styling for the shopping list component
 export const shoppingListStyles = StyleSheet.create({
   addButton: {
     alignItems: 'center',
@@ -45,7 +45,7 @@ export const shoppingListStyles = StyleSheet.create({
   },
 });
 
-//styling for the product component
+// styling for the product component
 export const productStyles = StyleSheet.create({
   deleteBtn: {
     alignItems: 'center',
@@ -86,7 +86,7 @@ export const productStyles = StyleSheet.create({
   },
 });
 
-//styling for the item form
+// styling for the item form
 export const itemFormStyles = StyleSheet.create({
   activityIndicator: {
     alignSelf: 'center',
@@ -147,19 +147,25 @@ export const itemFormStyles = StyleSheet.create({
   },
 });
 
-//styling for the empty shopping list component
+// styling for the empty shopping list component
 export const emptyShoppingList = StyleSheet.create({
   emptyListContainer: {
     alignItems: 'center',
     flex: 1,
+    height: '100%',
     justifyContent: 'center',
   },
   headerText: {
-    fontSize: 20,
+    fontSize: 30,
     top: 20,
   },
   listSvg: {
     height: 380,
     width: 180,
+  },
+  secondaryText: {
+    fontSize: 20,
+    top: '4%',
+    zIndex: 20,
   },
 });

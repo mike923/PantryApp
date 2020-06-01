@@ -10,13 +10,12 @@ const ShopCart = ({ navigation }: any) => {
   const products: any = useSelector((state: any) => state.camera.products);
   const [localProducts, setLocalProducts] = useState([]);
   let productObj: any = {};
-  let newProductArr;
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     console.log('shopping cart hit');
-    newProductArr = constructProductObj();
+    constructProductObj();
   }, []);
 
   const constructProductObj = () => {
