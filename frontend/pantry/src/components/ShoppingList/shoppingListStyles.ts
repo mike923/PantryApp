@@ -76,13 +76,21 @@ export const productStyles = StyleSheet.create({
     justifyContent: 'center',
     // width: 120,
   },
-  itemName: {
-    alignItems: 'center',
+  itemNameBtn: {
     backgroundColor: 'red',
     borderRadius: 5,
-    fontSize: 20,
     left: '5%',
+    paddingBottom: 50,
     width: 250,
+  },
+  itemNameTxt: {
+    fontSize: 20,
+    top: 25,
+  },
+  nameTxtInput: {
+    backgroundColor: 'red',
+    height: 50,
+    width: 550,
   },
   product: {
     borderBottomColor: '#ededed',
@@ -101,19 +109,20 @@ export const productStyles = StyleSheet.create({
     // justifyContent: 'space-around',
     // paddingLeft: 20,
   },
+  quantTxtInput: {
+    backgroundColor: '#eccfcf',
+    flex: 1,
+    fontSize: 20,
+    height: 50,
+    justifyContent: 'center',
+    marginRight: '-66%',
+    paddingLeft: 9,
+    width: 50,
+  },
   quantity: {
     fontSize: 20,
     textAlign: 'center',
     width: 50,
-  },
-  txtInput: {
-    backgroundColor: '#eccfcf',
-    borderLeftColor: 'black',
-    fontSize: 20,
-    marginRight: -120,
-    // textAlign: 'center',
-    // backgroundColor: 'pink',
-    // width: 20,
   },
 });
 

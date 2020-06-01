@@ -31,7 +31,7 @@ const RenderText = ({
     <View style={productStyles.productInfo}>
       {editableQuant ? (
         <TextInput
-          style={[productStyles.item, productStyles.txtInput]}
+          style={[productStyles.item, productStyles.quantTxtInput]}
           value={`${quant}`}
           onChangeText={(text: any) => handleChange('quantity', text)}
           onSubmitEditing={() => {
@@ -49,7 +49,7 @@ const RenderText = ({
       )}
       {editableName ? (
         <TextInput
-          style={[productStyles.item, productStyles.itemName]}
+          style={[productStyles.item, productStyles.nameTxtInput]}
           value={name}
           onChangeText={(text: string) => handleChange('name', text)}
           onSubmitEditing={() => {
@@ -58,11 +58,11 @@ const RenderText = ({
         />
       ) : (
         <TouchableOpacity
-          style={productStyles.item}
+          style={[productStyles.item, productStyles.itemNameBtn]}
           onPress={() => {
             setEditableName(!editableName);
           }}>
-          <Text style={productStyles.itemName}>{name}</Text>
+          <Text style={productStyles.itemNameTxt}>{name}</Text>
         </TouchableOpacity>
       )}
     </View>
