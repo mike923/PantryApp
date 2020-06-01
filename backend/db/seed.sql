@@ -9,13 +9,11 @@ CREATE TABLE pantry (
   name VARCHAR NOT NULL
 );
 
-
 CREATE TABLE users (
   id  VARCHAR PRIMARY KEY,
   email VARCHAR NOT NULL UNIQUE,
   pantry_id INT REFERENCES pantry (id)
 );
-
 
 -- receipts need status
 CREATE TABLE receipts (
@@ -39,7 +37,6 @@ CREATE TABLE receipts (
 --     type_id INT REFERENCES item_categories(id)
 -- ); 
 
-
 CREATE TABLE food_item (
   item_id SERIAL PRIMARY KEY,
   receipt_id INT REFERENCES receipts(id),
@@ -61,7 +58,7 @@ CREATE TABLE shopping_list_items (
 );
 
 ------------------------------------------------------------------------------------------
--- What are these lines?!!?!?!?!?!?!?!!???!?!?!?!?!??!????!???!?!?!?!?!!?!!!!?!??!?!?!?!?!
+-- What are deez 🥜?!!?!?!?!?!?!?!!???!?!?!?!?!??!????!???!?!?!?!?!!?!!!!?!??!?!?!?!?!
 ------------------------------------------------------------------------------------------
 
 INSERT INTO pantry(name) VALUES
