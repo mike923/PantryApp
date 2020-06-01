@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import {
-  Text,
   TouchableOpacity,
   ScrollView,
   KeyboardAvoidingView,
   RefreshControl,
+  View,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Product from './Product.tsx';
@@ -126,14 +126,17 @@ const ShoppingList = ({ navigation }: any) => {
           products.map((item: any) => {
             return (
               // component the renders each item in the list
-              <Product
-                key={item.id}
-                keyVal={item.id}
-                item={item.product}
-                quant={item.quantity}
-                updateItem={updateItem}
-                setItemToComplete={setItemToComplete}
-              />
+              <View>
+                <Product
+                  key={item.id}
+                  keyVal={item.id}
+                  item={item.product}
+                  quant={item.quantity}
+                  unique={item.product}
+                  updateItem={updateItem}
+                  setItemToComplete={setItemToComplete}
+                />
+              </View>
             );
           })
         ) : (

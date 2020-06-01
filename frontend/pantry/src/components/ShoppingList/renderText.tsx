@@ -1,18 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, Text } from 'react-native';
-import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
+import { TextInput } from 'react-native-gesture-handler';
 import { productStyles } from './shoppingListStyles.ts';
 
-const RenderText = ({
-  name,
-  quant,
-  setName,
-  setQuantity,
-  editableName,
-  editableQuant,
-  setEditableName,
-  setEditableQuant,
-}: any) => {
+const RenderText = ({ name, quant, setName, setQuantity, editable }: any) => {
   const handleChange = (type: string, val: any) => {
     switch (type) {
       case 'name':
@@ -29,7 +20,7 @@ const RenderText = ({
 
   return (
     <View style={productStyles.productInfo}>
-      {editableQuant ? (
+      {editable ? (
         <TextInput
           style={[productStyles.item, productStyles.quantTxtInput]}
           value={`${quant}`}
@@ -39,15 +30,11 @@ const RenderText = ({
           }}
         />
       ) : (
-        <TouchableOpacity
-          style={productStyles.item}
-          onPress={() => {
-            setEditableQuant(!editableQuant);
-          }}>
-          <Text style={productStyles.quantity}>{quant}</Text>
-        </TouchableOpacity>
+        <Text style={[productStyles.item, productStyles.quantity]}>
+          {quant}
+        </Text>
       )}
-      {editableName ? (
+      {editable ? (
         <TextInput
           style={[productStyles.item, productStyles.nameTxtInput]}
           value={name}
@@ -57,13 +44,14 @@ const RenderText = ({
           }}
         />
       ) : (
-        <TouchableOpacity
-          style={[productStyles.item, productStyles.itemNameBtn]}
-          onPress={() => {
-            setEditableName(!editableName);
-          }}>
-          <Text style={productStyles.itemNameTxt}>{name}</Text>
-        </TouchableOpacity>
+        <Text
+          style={[
+            productStyles.item,
+            productStyles.itemNameBtn,
+            productStyles.itemNameTxt,
+          ]}>
+          {name}
+        </Text>
       )}
     </View>
   );
