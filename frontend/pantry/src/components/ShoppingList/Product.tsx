@@ -34,7 +34,6 @@ const Product = ({
         <Icon
           name="check"
           size={25}
-          color="#900"
           style={productStyles.editable}
           onPress={() => {
             setEditableQuant(false);

@@ -4,7 +4,7 @@ import { StyleSheet } from 'react-native';
 export const shoppingListStyles = StyleSheet.create({
   addButton: {
     alignItems: 'center',
-    backgroundColor: 'orange',
+    backgroundColor: 'rgb(255, 92, 97)',
     borderRadius: 70 / 2,
     bottom: '5%',
     height: 70,
@@ -25,6 +25,11 @@ export const shoppingListStyles = StyleSheet.create({
     position: 'absolute',
     right: 0,
     zIndex: 20,
+  },
+  plus: {
+    color: 'white',
+    fontSize: 32,
+    fontWeight: '200',
   },
   scrollContainer: {
     bottom: 0,
@@ -50,20 +55,34 @@ export const productStyles = StyleSheet.create({
   deleteBtn: {
     alignItems: 'center',
     bottom: 10,
+    color: '#900',
     fontSize: 25,
     height: 30,
     justifyContent: 'center',
     position: 'absolute',
     right: '8%',
     top: '70%',
+    zIndex: 30,
   },
   editable: {
     alignSelf: 'center',
+    color: 'green',
     position: 'absolute',
     right: '20%',
   },
   item: {
     color: 'black',
+    flex: 1,
+    justifyContent: 'center',
+    // width: 120,
+  },
+  itemName: {
+    alignItems: 'center',
+    backgroundColor: 'red',
+    borderRadius: 5,
+    fontSize: 20,
+    left: '5%',
+    width: 250,
   },
   product: {
     borderBottomColor: '#ededed',
@@ -76,13 +95,25 @@ export const productStyles = StyleSheet.create({
     position: 'relative',
   },
   productInfo: {
-    borderLeftColor: 'black',
-    borderLeftWidth: 10,
     flex: 1,
     flexDirection: 'row',
-    height: 50,
+    height: 40,
     // justifyContent: 'space-around',
-    paddingLeft: 20,
+    // paddingLeft: 20,
+  },
+  quantity: {
+    fontSize: 20,
+    textAlign: 'center',
+    width: 50,
+  },
+  txtInput: {
+    backgroundColor: '#eccfcf',
+    borderLeftColor: 'black',
+    fontSize: 20,
+    marginRight: -120,
+    // textAlign: 'center',
+    // backgroundColor: 'pink',
+    // width: 20,
   },
 });
 
@@ -154,18 +185,21 @@ export const emptyShoppingList = StyleSheet.create({
     flex: 1,
     height: '100%',
     justifyContent: 'center',
+    marginBottom: '50%',
   },
   headerText: {
-    fontSize: 30,
-    top: 20,
+    fontSize: 28,
+    fontWeight: 'bold',
+    top: '5%',
   },
   listSvg: {
-    height: 380,
-    width: 180,
+    height: 490,
+    top: '6%',
+    width: 290,
   },
   secondaryText: {
-    fontSize: 20,
-    top: '4%',
+    fontSize: 28,
+    top: '11%',
     zIndex: 20,
   },
 });

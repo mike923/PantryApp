@@ -6,6 +6,7 @@ import {
   KeyboardAvoidingView,
   RefreshControl,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import Product from './Product.tsx';
 import { client } from '../../../proxy';
 import { shoppingListStyles } from './shoppingListStyles.ts';
@@ -152,7 +153,8 @@ const ShoppingList = ({ navigation }: any) => {
       <TouchableOpacity
         style={shoppingListStyles.addButton}
         onPress={() => setAddItem(!addItem)}>
-        <Text>+</Text>
+        {/* <Text>+</Text> */}
+        <Icon name="plus" style={shoppingListStyles.plus} />
       </TouchableOpacity>
     </KeyboardAvoidingView>
   );

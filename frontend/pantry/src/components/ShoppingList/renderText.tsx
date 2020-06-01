@@ -29,30 +29,11 @@ const RenderText = ({
 
   return (
     <View style={productStyles.productInfo}>
-      {editableName ? (
-        <TextInput
-          style={productStyles.item}
-          value={name}
-          onChangeText={(text) => handleChange('name', text)}
-          onSubmitEditing={() => {
-            console.log('edit');
-          }}
-        />
-      ) : (
-        <TouchableOpacity
-          style={productStyles.item}
-          onPress={() => {
-            setEditableName(!editableName);
-          }}>
-          <Text>{name}</Text>
-        </TouchableOpacity>
-      )}
-
       {editableQuant ? (
         <TextInput
-          style={productStyles.item}
+          style={[productStyles.item, productStyles.txtInput]}
           value={`${quant}`}
-          onChangeText={(text) => handleChange('quantity', text)}
+          onChangeText={(text: any) => handleChange('quantity', text)}
           onSubmitEditing={() => {
             console.log('edit');
           }}
@@ -63,7 +44,25 @@ const RenderText = ({
           onPress={() => {
             setEditableQuant(!editableQuant);
           }}>
-          <Text>{quant}</Text>
+          <Text style={productStyles.quantity}>{quant}</Text>
+        </TouchableOpacity>
+      )}
+      {editableName ? (
+        <TextInput
+          style={[productStyles.item, productStyles.itemName]}
+          value={name}
+          onChangeText={(text: string) => handleChange('name', text)}
+          onSubmitEditing={() => {
+            console.log('edit');
+          }}
+        />
+      ) : (
+        <TouchableOpacity
+          style={productStyles.item}
+          onPress={() => {
+            setEditableName(!editableName);
+          }}>
+          <Text style={productStyles.itemName}>{name}</Text>
         </TouchableOpacity>
       )}
     </View>

@@ -21,7 +21,7 @@ const ItemForm = ({
             <View style={shoppingListStyles.footer}>
               <TextInput
                 style={shoppingListStyles.textInput}
-                placeholder="Item"
+                placeholder="Item Name"
                 placeholderTextColor="white"
                 underlineColorAndroid="transparent"
                 onChangeText={(text) => setItemName(text)}
