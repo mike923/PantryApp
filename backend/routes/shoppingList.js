@@ -3,16 +3,10 @@ const router = express.Router();
 const queries = require("../db/queries/shoppingList");
 
 router.post("/upload", async (req, res, next) => {
-  const { product, quantity, time_posted } = req.body;
+  const { product, quantity } = req.body;
   const { pantry_id } = res.locals;
-  console.log("posted", time_posted);
   try {
-    const data = await queries.addNewItem(
-      product,
-      pantry_id,
-      quantity,
-      time_posted
-    );
+    const data = await queries.addNewItem(product, pantry_id, quantity);
 
     res.json({
       payload: data,
@@ -69,9 +63,8 @@ router.patch("/update/:id", async (req, res, next) => {
 });
 
 router.patch("/completed/:id", async (req, res, next) => {
-  let { time_posted } = req.body;
   try {
-    let completedItem = await queries.removeItem(req.params.id, time_posted);
+    let completedItem = await queries.removeItem(req.params.id);
     res.json({
       payload: completedItem,
       message: "item successful removed from list",

@@ -9,20 +9,18 @@ const getShoppingListById = async (pantry_id) =>
   await db.any(
     `SELECT * FROM shopping_list_items 
     WHERE (pantry_id = $1) AND completed = false 
-    ORDER BY time_posted DESC`,
+    ORDER BY time_modified DESC`,
     [pantry_id]
   );
 
 //adding a new item to the shopping list
-const addNewItem = async (product, pantry_id, quantity, time_posted) => {
-  console.log("time:", time_posted);
-
+const addNewItem = async (product, pantry_id, quantity) => {
   return await db.one(
-    `INSERT INTO shopping_list_items (product,pantry_id,quantity,time_posted) 
+    `INSERT INTO shopping_list_items (product,pantry_id,quantity,edited) 
        VALUES($1,$2,$3,$4)
        ON CONFLICT (product) DO UPDATE SET completed = false, quantity = $3
        RETURNING *`,
-    [product, pantry_id, quantity, time_posted]
+    [product, pantry_id, quantity, "false"]
   );
 };
 
@@ -31,33 +29,32 @@ const updateItem = async (itemObj, id) => {
     return await db.oneOrNone(
       `UPDATE shopping_list_items
       SET product = $1,
-      time_posted = $2 
+      edited = $2
       WHERE id = $3
       RETURNING  *`,
-      [itemObj.product, itemObj.time_posted, Number(id)]
+      [itemObj.product, "true", Number(id)]
     );
   } else if (itemObj.quantity) {
     return await db.oneOrNone(
       `UPDATE shopping_list_items
       SET quantity = $1,
-      time_posted = $2 
-      WHERE id = $2
+      edited = $2
+      WHERE id = $3
       RETURNING *`,
-      [itemObj.quantity, itemObj.time_posted, Number(id)]
+      [itemObj.quantity, "true", Number(id)]
     );
   }
 };
 
-const removeItem = async (id, time_posted) => {
+const removeItem = async (id) => {
   console.log("id hit", id);
 
   return await db.oneOrNone(
     `UPDATE shopping_list_items
-      SET completed = true,
-      time_posted = $1
+      SET completed = true
       WHERE id = $2
       RETURNING  *`,
-    [Number(time_posted), Number(id)]
+    [Number(id)]
   );
 };
 

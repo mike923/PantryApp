@@ -26,14 +26,6 @@ const ShoppingList = ({ navigation }: any) => {
   const [addItem, setAddItem] = useState(false);
 
   const [refreshing, setRefreshing] = React.useState(false);
-  const [currTime, setCurrTime] = useState(new Date().toLocaleString());
-
-  /**
-    summing the hour, minutes and seconds to get a unique id for each time
-    a list item was changed by the user
-  * */
-
-  console.log('curTime');
 
   const fetchShoppingList = async () => {
     // fetching all user shopping list items from database
@@ -48,31 +40,9 @@ const ShoppingList = ({ navigation }: any) => {
     }
   };
 
-  /**
-    summing the hour, minutes and seconds to get a unique id for each time
-    a list item was changed by the user
-  * */
-  const calculateTimeEdited = () => {
-    console.log('here in edit');
-
-    let date: any = new Date();
-    let hour: any = date.getHours(); // hour of the day
-    let minutes: any = date.getMinutes(); // minutes in the hour
-    let seconds: any = date.getSeconds(); // seconds in the minute
-    let timeNow: any = hour + minutes + seconds; // sum of the time of day
-
-    if (hour >= 12) {
-      setCurrTime(timeNow + 1);
-      console.log('here in edit');
-    } else {
-      setCurrTime(timeNow + 2);
-    }
-  };
-
   useEffect(() => {
     // useEffect to fetch shopping list data
     fetchShoppingList();
-    // calculateTimeEdited(new Date());
   }, []);
 
   const onRefresh = React.useCallback(() => {
@@ -85,9 +55,7 @@ const ShoppingList = ({ navigation }: any) => {
   // updated item status to complete to remove from list
   const setItemToComplete = async (id: any) => {
     try {
-      const { data } = await client.patch(`/shoppingList/completed/${id}`, {
-        time_posted: currTime,
-      });
+      const { data } = await client.patch(`/shoppingList/completed/${id}`);
       console.log(data);
     } catch (error) {
       console.log(error);
@@ -97,14 +65,10 @@ const ShoppingList = ({ navigation }: any) => {
 
   // submit new list item
   const handleSubmit = async () => {
-    console.log('item name', itemName);
-    calculateTimeEdited();
-
     try {
       const { data }: any = await client.post('/shoppingList/upload', {
         product: itemName,
         quantity,
-        time_posted: currTime,
       });
       console.log(data);
     } catch (error) {
@@ -121,7 +85,6 @@ const ShoppingList = ({ navigation }: any) => {
       const { data }: any = await client.patch(`/shoppingList/update/${id}`, {
         product,
         quantity: quant,
-        time_posted: currTime,
       });
       console.log('item update', data);
     } catch (error) {
