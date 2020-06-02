@@ -36,12 +36,6 @@ const ItemForm = ({
                 keyboardType="numeric"
                 value={quantity}
               />
-              {/* <TextInput
-                style={shoppingListStyles.placeholder}
-                placeholder="Item"
-                placeholderTextColor="white"
-                underlineColorAndroid="transparent"
-              /> */}
             </View>
 
             <TouchableHighlight

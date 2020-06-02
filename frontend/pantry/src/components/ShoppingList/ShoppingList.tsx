@@ -135,7 +135,6 @@ const ShoppingList = ({ navigation }: any) => {
       <TouchableOpacity
         style={shoppingListStyles.addButton}
         onPress={() => setAddItem(!addItem)}>
-        {/* <Text>+</Text> */}
         <Icon name="plus" style={shoppingListStyles.plus} />
       </TouchableOpacity>
     </KeyboardAvoidingView>

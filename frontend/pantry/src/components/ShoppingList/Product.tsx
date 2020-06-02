@@ -14,14 +14,7 @@ const Product = ({
   const [editable, setEditable] = useState(false);
   const [name, setName] = useState(item);
   const [quantity, setQuantity] = useState(quant);
-  const [identity, setIdentity] = useState();
   const [userActionsVisible, setUserActionsVisible] = useState(false);
-
-  useEffect(() => {
-    setIdentity(name);
-  }, []);
-
-  console.log('id', identity);
 
   return (
     <View>
@@ -50,14 +43,13 @@ const Product = ({
             onPress={() => {
               setEditable(!editable);
             }}
-            style={productStyles.editBtn}
+            style={[productStyles.editBtn, productStyles.editIcons]}
           />
           {editable ? ( // checking if the use is editing the text
             <Icon
               key={keyVal + 3}
               name="check"
-              size={25}
-              style={productStyles.editable}
+              style={[productStyles.editable, productStyles.editIcons]}
               onPress={() => {
                 setEditable(false);
                 if (name.length || quantity.length) {
@@ -70,7 +62,7 @@ const Product = ({
             key={keyVal + 4}
             name="trash"
             onPress={() => setItemToComplete(keyVal)}
-            style={productStyles.deleteBtn}
+            style={[productStyles.deleteBtn, productStyles.editIcons]}
           />
         </View>
       ) : null}
