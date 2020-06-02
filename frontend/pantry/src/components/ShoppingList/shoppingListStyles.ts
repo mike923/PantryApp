@@ -54,24 +54,23 @@ export const shoppingListStyles = StyleSheet.create({
 export const productStyles = StyleSheet.create({
   deleteBtn: {
     alignItems: 'center',
-    backgroundColor: 'blue',
+    // backgroundColor: 'blue',
     bottom: 10,
     color: '#900',
     fontSize: 25,
     height: 30,
     justifyContent: 'center',
-    position: 'absolute',
+    // position: 'absolute',
     right: '5%',
-    top: '70%',
-    zIndex: 30,
+    // top: '70%',
   },
   editBtn: {
     backgroundColor: 'red',
     fontSize: 25,
-    left: -70,
+    // left: -70,
     position: 'absolute',
-    top: '70%',
-    width: 60,
+    // top: '70%',
+    // width: 60,
     zIndex: 30,
   },
   editable: {
@@ -83,6 +82,9 @@ export const productStyles = StyleSheet.create({
     top: '70%',
     width: 60,
   },
+  hidden: {
+    zIndex: -8,
+  },
   item: {
     color: 'black',
     flex: 1,
@@ -91,7 +93,7 @@ export const productStyles = StyleSheet.create({
   },
   itemActionsInvisible: {
     height: 0,
-    zIndex: -1,
+    zIndex: -50,
   },
   itemActionsVisible: {
     alignItems: 'center',
@@ -99,10 +101,17 @@ export const productStyles = StyleSheet.create({
     borderTopWidth: 1,
     flex: 1,
     flexDirection: 'row',
-    height: 20,
+    height: 30,
     justifyContent: 'space-around',
+    // top: 10,
     width: 540,
-    zIndex: 2,
+    zIndex: 5,
+  },
+  itemNameTxt: {
+    backgroundColor: 'white',
+  },
+  nameTxtInput: {
+    width: 450,
   },
   product: {
     borderBottomColor: '#ededed',
@@ -127,6 +136,9 @@ export const productStyles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     width: 50,
+  },
+  visible: {
+    zIndex: 1,
   },
 });
 

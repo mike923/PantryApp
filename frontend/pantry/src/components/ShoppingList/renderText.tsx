@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text } from 'react-native';
-import { TextInput } from 'react-native-gesture-handler';
+import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 import { productStyles } from './shoppingListStyles.ts';
 
-const RenderText = ({ name, quant, setName, setQuantity, editable }: any) => {
+const RenderText = ({
+  name,
+  quant,
+  setName,
+  setQuantity,
+  editable,
+  keyVal,
+}: any) => {
   const handleChange = (type: string, val: any) => {
     switch (type) {
       case 'name':
@@ -19,10 +26,10 @@ const RenderText = ({ name, quant, setName, setQuantity, editable }: any) => {
   console.log(name, 'names');
 
   return (
-    <View style={productStyles.productInfo}>
+    <View style={productStyles.productInfo} key={keyVal}>
       {editable ? (
         <TextInput
-          style={productStyles.item}
+          style={[productStyles.item, productStyles.quantTxtInput]}
           value={`${quant}`}
           onChangeText={(text: any) => handleChange('quantity', text)}
           onSubmitEditing={() => {
@@ -30,11 +37,13 @@ const RenderText = ({ name, quant, setName, setQuantity, editable }: any) => {
           }}
         />
       ) : (
-        <Text style={productStyles.item}>{quant}</Text>
+        <Text style={[productStyles.item, productStyles.quantity]}>
+          {quant}
+        </Text>
       )}
       {editable ? (
         <TextInput
-          style={productStyles.item}
+          style={[productStyles.item, productStyles.nameTxtInput]}
           value={name}
           onChangeText={(text: string) => handleChange('name', text)}
           onSubmitEditing={() => {
@@ -42,7 +51,9 @@ const RenderText = ({ name, quant, setName, setQuantity, editable }: any) => {
           }}
         />
       ) : (
-        <Text style={productStyles.item}>{name}</Text>
+        <Text style={[productStyles.item, productStyles.itemNameTxt]}>
+          {name}
+        </Text>
       )}
     </View>
   );

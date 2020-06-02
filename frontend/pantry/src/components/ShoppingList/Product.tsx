@@ -8,7 +8,6 @@ const Product = ({
   item,
   quant,
   keyVal,
-  unique,
   updateItem,
   setItemToComplete,
 }: any) => {
@@ -25,62 +24,65 @@ const Product = ({
   console.log('id', identity);
 
   return (
-    <TouchableOpacity
-      key={keyVal}
-      style={productStyles.product}
-      onPress={() => setUserActionsVisible(!userActionsVisible)}>
-      <RenderText
+    <View>
+      <TouchableOpacity
         key={keyVal}
-        name={name}
-        quant={quantity}
-        setName={setName}
-        updateItem={updateItem}
-        setQuantity={setQuantity}
-        editable={editable}
-      />
-
-      <View
-        key={keyVal}
-        style={
-          userActionsVisible
-            ? productStyles.itemActionsVisible
-            : productStyles.itemActionsInvisible
-        }>
-        {/* {editableQuant || editableName ? ( */}
-        <Icon
+        style={productStyles.product}
+        onPress={() => setUserActionsVisible(!userActionsVisible)}>
+        <RenderText
           key={keyVal}
-          name="pencil"
-          onPress={() => {
-            setEditable(!editable);
-          }}
-          style={productStyles.editBtn}
+          name={name}
+          quant={quantity}
+          setName={setName}
+          updateItem={updateItem}
+          setQuantity={setQuantity}
+          editable={editable}
         />
-        <Icon
-          key={keyVal}
-          name="check"
-          size={25}
-          style={productStyles.editable}
-          onPress={() => {
-            setEditable(false);
-            if (name.length || quantity.length) {
-              updateItem(keyVal, name, quantity);
-            }
-          }}
-        />
-        {/* ) : null} */}
-        <Icon
-          key={keyVal}
-          name="trash"
-          onPress={() => setItemToComplete(keyVal)}
-          style={productStyles.deleteBtn}
-        />
-      </View>
-      {/* <Icon
+        {/* <Icon
         name="trash"
         onPress={() => setItemToComplete(keyVal)}
         style={productStyles.deleteBtn}
       /> */}
-    </TouchableOpacity>
+      </TouchableOpacity>
+      {userActionsVisible ? (
+        <View
+          key={keyVal + 1}
+          style={
+            userActionsVisible
+              ? productStyles.itemActionsVisible
+              : productStyles.itemActionsInvisible
+          }>
+          {/* {editableQuant || editableName ? ( */}
+          <Icon
+            key={keyVal + 2}
+            name="pencil"
+            onPress={() => {
+              setEditable(!editable);
+            }}
+            style={productStyles.editBtn}
+          />
+          <Icon
+            key={keyVal + 3}
+            name="check"
+            size={25}
+            style={productStyles.editable}
+            onPress={() => {
+              setEditable(false);
+              if (name.length || quantity.length) {
+                updateItem(keyVal, name, quantity);
+              }
+            }}
+          />
+          {/* ) : null} */}
+          <Icon
+            key={keyVal + 4}
+            name="trash"
+            onPress={() => setItemToComplete(keyVal)}
+            style={productStyles.deleteBtn}
+          />
+        </View>
+      ) : null}
+    </View>
   );
 };
 
