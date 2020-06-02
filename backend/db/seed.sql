@@ -54,7 +54,8 @@ CREATE TABLE shopping_list_items (
   product VARCHAR NOT NULL UNIQUE,
   pantry_id INT REFERENCES pantry(id),
   quantity INT DEFAULT 1,
-  completed BOOLEAN DEFAULT FALSE
+  completed BOOLEAN DEFAULT FALSE,
+  time_posted INT NOT NULL
 );
 
 ------------------------------------------------------------------------------------------
@@ -94,5 +95,5 @@ INSERT INTO food_item (receipt_id, pantry_id, preferred_name, price, quantity, u
   );
 
 
-INSERT INTO shopping_list_items(product,pantry_id) VALUES
-('Oreos',1)
+INSERT INTO shopping_list_items(product,pantry_id,time_posted) VALUES
+('Oreos',1,37)

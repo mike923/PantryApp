@@ -1,17 +1,11 @@
-import React, { Component, useEffect, useState } from 'react';
-import {
-  View,
-  Image,
-  ImageBackground,
-  TouchableOpacity,
-  Text,
-} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, ImageBackground, Text } from 'react-native';
 import { useSelector } from 'react-redux';
 
 import { dashBoardStyles } from './dashBoardStyles.ts';
 
 const UserProfile = () => {
-  const loggedUser = useSelector((state) => state.user.userInfo);
+  const loggedUser: any = useSelector((state: any) => state.user.userInfo);
 
   const [currTime, setCurrTime] = useState(new Date().toLocaleString());
 

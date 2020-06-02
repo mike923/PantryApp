@@ -4,7 +4,6 @@ import {
   ScrollView,
   KeyboardAvoidingView,
   RefreshControl,
-  View,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Product from './Product.tsx';
@@ -27,8 +26,25 @@ const ShoppingList = ({ navigation }: any) => {
   const [addItem, setAddItem] = useState(false);
 
   const [refreshing, setRefreshing] = React.useState(false);
+  const [currTime, setCurrTime] = useState(new Date().toLocaleString());
+
+  useEffect(() => {
+    /**
+      summing the hour, minutes and seconds to get a unique id for each time
+      a list item was changed by the user
+    * */
+    const time = setInterval(() => {
+      let timeNow: any =
+        new Date().getHours() +
+        new Date().getMinutes() +
+        new Date().getSeconds();
+      setCurrTime(timeNow);
+    }, 1000);
+    return () => clearInterval(time);
+  });
 
   const fetchShoppingList = async () => {
+    // fetching all user shopping list items from database
     try {
       const {
         data: { payload },
@@ -52,11 +68,12 @@ const ShoppingList = ({ navigation }: any) => {
     wait(2000).then(() => setRefreshing(false));
   }, [refreshing]);
 
+  // updated item status to complete to remove from list
   const setItemToComplete = async (id: any) => {
-    console.log('hit', id);
-
     try {
-      const { data } = await client.patch(`/shoppingList/completed/${id}`);
+      const { data } = await client.patch(`/shoppingList/completed/${id}`, {
+        time_posted: currTime,
+      });
       console.log(data);
     } catch (error) {
       console.log(error);
@@ -64,30 +81,15 @@ const ShoppingList = ({ navigation }: any) => {
     fetchShoppingList();
   };
 
-  // useEffect(() => {
-  //   // keyboard
-  //   Keyboard.addListener('keyboardDidHide', _keyboardDidHide);
-
-  //   return () => {
-  //     Keyboard.removeListener('keyboardDidHide', _keyboardDidHide);
-  //   };
-  // }, []);
-
-  // const _keyboardDidHide = async () => {
-  //   await handleSubmit();
-  //   setQuantity(1);
-  //   setItemName('');
-  //   setAddItem(false);
-  // };
-
+  // submit new list item
   const handleSubmit = async () => {
-    // submit new list item
     console.log('item name', itemName);
 
     try {
       const { data }: any = await client.post('/shoppingList/upload', {
         product: itemName,
         quantity,
+        time_posted: currTime,
       });
       console.log(data);
     } catch (error) {
@@ -104,6 +106,7 @@ const ShoppingList = ({ navigation }: any) => {
       const { data }: any = await client.patch(`/shoppingList/update/${id}`, {
         product,
         quantity: quant,
+        time_posted: currTime,
       });
       console.log('item update', data);
     } catch (error) {
@@ -162,3 +165,19 @@ const ShoppingList = ({ navigation }: any) => {
 };
 
 export default ShoppingList;
+
+// useEffect(() => {
+//   // keyboard
+//   Keyboard.addListener('keyboardDidHide', _keyboardDidHide);
+
+//   return () => {
+//     Keyboard.removeListener('keyboardDidHide', _keyboardDidHide);
+//   };
+// }, []);
+
+// const _keyboardDidHide = async () => {
+//   await handleSubmit();
+//   setQuantity(1);
+//   setItemName('');
+//   setAddItem(false);
+// };
