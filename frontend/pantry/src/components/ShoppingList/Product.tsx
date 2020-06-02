@@ -38,20 +38,11 @@ const Product = ({
           setQuantity={setQuantity}
           editable={editable}
         />
-        {/* <Icon
-        name="trash"
-        onPress={() => setItemToComplete(keyVal)}
-        style={productStyles.deleteBtn}
-      /> */}
       </TouchableOpacity>
       {userActionsVisible ? (
-        <View
-          key={keyVal + 1}
-          style={
-            userActionsVisible
-              ? productStyles.itemActionsVisible
-              : productStyles.itemActionsInvisible
-          }>
+        // the view only shows up if the user clicks on the item
+        // preventing overlap with item
+        <View key={keyVal + 1} style={productStyles.itemActionsVisible}>
           {/* {editableQuant || editableName ? ( */}
           <Icon
             key={keyVal + 2}
@@ -61,19 +52,20 @@ const Product = ({
             }}
             style={productStyles.editBtn}
           />
-          <Icon
-            key={keyVal + 3}
-            name="check"
-            size={25}
-            style={productStyles.editable}
-            onPress={() => {
-              setEditable(false);
-              if (name.length || quantity.length) {
-                updateItem(keyVal, name, quantity);
-              }
-            }}
-          />
-          {/* ) : null} */}
+          {editable ? ( // checking if the use is editing the text
+            <Icon
+              key={keyVal + 3}
+              name="check"
+              size={25}
+              style={productStyles.editable}
+              onPress={() => {
+                setEditable(false);
+                if (name.length || quantity.length) {
+                  updateItem(keyVal, name, quantity);
+                }
+              }}
+            />
+          ) : null}
           <Icon
             key={keyVal + 4}
             name="trash"
