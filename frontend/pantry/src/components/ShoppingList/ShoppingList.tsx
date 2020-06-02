@@ -28,20 +28,12 @@ const ShoppingList = ({ navigation }: any) => {
   const [refreshing, setRefreshing] = React.useState(false);
   const [currTime, setCurrTime] = useState(new Date().toLocaleString());
 
-  useEffect(() => {
-    /**
-      summing the hour, minutes and seconds to get a unique id for each time
-      a list item was changed by the user
-    * */
-    const time = setInterval(() => {
-      let timeNow: any =
-        new Date().getHours() +
-        new Date().getMinutes() +
-        new Date().getSeconds();
-      setCurrTime(timeNow);
-    }, 1000);
-    return () => clearInterval(time);
-  });
+  /**
+    summing the hour, minutes and seconds to get a unique id for each time
+    a list item was changed by the user
+  * */
+
+  console.log('curTime');
 
   const fetchShoppingList = async () => {
     // fetching all user shopping list items from database
@@ -56,9 +48,31 @@ const ShoppingList = ({ navigation }: any) => {
     }
   };
 
+  /**
+    summing the hour, minutes and seconds to get a unique id for each time
+    a list item was changed by the user
+  * */
+  const calculateTimeEdited = () => {
+    console.log('here in edit');
+
+    let date: any = new Date();
+    let hour: any = date.getHours(); // hour of the day
+    let minutes: any = date.getMinutes(); // minutes in the hour
+    let seconds: any = date.getSeconds(); // seconds in the minute
+    let timeNow: any = hour + minutes + seconds; // sum of the time of day
+
+    if (hour >= 12) {
+      setCurrTime(timeNow + 1);
+      console.log('here in edit');
+    } else {
+      setCurrTime(timeNow + 2);
+    }
+  };
+
   useEffect(() => {
     // useEffect to fetch shopping list data
     fetchShoppingList();
+    // calculateTimeEdited(new Date());
   }, []);
 
   const onRefresh = React.useCallback(() => {
@@ -84,6 +98,7 @@ const ShoppingList = ({ navigation }: any) => {
   // submit new list item
   const handleSubmit = async () => {
     console.log('item name', itemName);
+    calculateTimeEdited();
 
     try {
       const { data }: any = await client.post('/shoppingList/upload', {
