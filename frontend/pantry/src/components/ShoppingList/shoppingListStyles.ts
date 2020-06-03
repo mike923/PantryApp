@@ -17,6 +17,7 @@ export const shoppingListStyles = StyleSheet.create({
     zIndex: 30,
   },
   container: {
+    backgroundColor: 'white',
     flex: 1,
   },
   footer: {
@@ -56,14 +57,14 @@ export const productStyles = StyleSheet.create({
     alignItems: 'center',
     bottom: 10,
     color: '#900',
-    marginTop: '2%',
-    top: '3%',
+    marginTop: '4%',
+    position: 'absolute',
+    right: '4%',
   },
   editBtn: {
-    backgroundColor: 'red',
+    color: 'black',
     marginTop: '3%',
     position: 'absolute',
-    right: '59%',
     top: '3%',
     zIndex: 30,
   },
@@ -73,7 +74,6 @@ export const productStyles = StyleSheet.create({
   },
   editable: {
     alignSelf: 'center',
-    backgroundColor: 'white',
     color: 'green',
     marginTop: '2%',
     position: 'absolute',
@@ -92,13 +92,14 @@ export const productStyles = StyleSheet.create({
   },
   itemActionsVisible: {
     alignItems: 'center',
+    backgroundColor: '#dfe2e7',
     borderTopColor: 'black',
     borderTopWidth: 1,
     flex: 1,
     height: 50,
     justifyContent: 'space-around',
-    width: 540,
     zIndex: 5,
+    // opacity: 0.5,
   },
   itemNameTxt: {
     backgroundColor: 'white',
@@ -112,11 +113,15 @@ export const productStyles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    padding: 20,
+    padding: 5,
     paddingRight: 100,
     position: 'relative',
     zIndex: 3,
-    backgroundColor: 'yellow',
+    shadowOffset: { height: 1, width: 1 },
+    shadowOpacity: 1,
+    shadowRadius: 1,
+    borderRadius: 5,
+    width: '90%',
   },
   productInfo: {
     flex: 1,
@@ -124,6 +129,9 @@ export const productStyles = StyleSheet.create({
     height: 40,
     // justifyContent: 'space-around',
     // paddingLeft: 20,
+  },
+  quantTxtInput: {
+    textAlign: 'center',
   },
   quantity: {
     fontSize: 20,
