@@ -17,6 +17,7 @@ export const shoppingListStyles = StyleSheet.create({
     zIndex: 30,
   },
   container: {
+    alignItems: 'center',
     backgroundColor: 'white',
     flex: 1,
   },
@@ -99,10 +100,13 @@ export const productStyles = StyleSheet.create({
     height: 50,
     justifyContent: 'space-around',
     zIndex: 5,
+    // borderRadius: 15,
+    // borderBottomEndRadius: 5,
+    // borderBottomLeftRadius: 5,
     // opacity: 0.5,
   },
   itemNameTxt: {
-    backgroundColor: 'white',
+    // backgroundColor: 'white',
   },
   nameTxtInput: {
     width: 450,
@@ -121,7 +125,9 @@ export const productStyles = StyleSheet.create({
     shadowOpacity: 1,
     shadowRadius: 1,
     borderRadius: 5,
-    width: '90%',
+    width: 400,
+    backgroundColor: '#fcf7f4',
+    marginBottom: 3,
   },
   productInfo: {
     flex: 1,
