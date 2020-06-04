@@ -27,15 +27,14 @@ const UserProfile = () => {
             imageStyle={dashBoardStyles.image_imageStyle}
           />
         </View>
-        <View style={dashBoardStyles.edit_profile}>
-          <Text style={dashBoardStyles.edit_button}>Edit profile</Text>
-        </View>
       </View>
       <View style={dashBoardStyles.metadata}>
         <Text style={dashBoardStyles.location}>New York, NY</Text>
         <Text style={dashBoardStyles.time}>{currTime}</Text>
       </View>
-      <Text style={dashBoardStyles.welcome}>Welcome {loggedUser.email}</Text>
+      <Text style={dashBoardStyles.welcome}>
+        Welcome {loggedUser.email.split('@')[0]}
+      </Text>
     </View>
   );
 };

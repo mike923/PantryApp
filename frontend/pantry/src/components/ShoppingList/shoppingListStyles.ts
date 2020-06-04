@@ -116,7 +116,7 @@ export const productStyles = StyleSheet.create({
   },
   product: {
     borderBottomColor: '#ededed',
-    borderBottomWidth: 2,
+    borderBottomWidth: 0.5,
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -131,6 +131,7 @@ export const productStyles = StyleSheet.create({
     width: 400,
     backgroundColor: '#fcf7f4',
     marginBottom: 3,
+    elevation: 2,
   },
   productInfo: {
     flex: 1,
