@@ -94,19 +94,19 @@ export const productStyles = StyleSheet.create({
   itemActionsVisible: {
     alignItems: 'center',
     backgroundColor: '#dfe2e7',
-    borderTopColor: 'black',
+    borderBottomEndRadius: 5,
+    borderBottomLeftRadius: 5,
     borderTopWidth: 1,
     flex: 1,
     height: 50,
     justifyContent: 'space-around',
+    marginTop: -3,
+    top: 0,
     zIndex: 5,
-    // borderRadius: 15,
-    // borderBottomEndRadius: 5,
-    // borderBottomLeftRadius: 5,
     // opacity: 0.5,
   },
   itemNameTxt: {
-    // backgroundColor: 'white',
+    fontSize: 20,
   },
   nameTxtInput: {
     width: 450,
@@ -217,7 +217,7 @@ export const emptyShoppingList = StyleSheet.create({
     flex: 1,
     height: '100%',
     justifyContent: 'center',
-    marginBottom: '50%',
+    marginBottom: '29%',
   },
   headerText: {
     fontSize: 28,

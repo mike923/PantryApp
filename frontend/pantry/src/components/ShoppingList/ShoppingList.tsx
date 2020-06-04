@@ -95,47 +95,49 @@ const ShoppingList = ({ navigation }: any) => {
 
   console.log('name:', itemName, 'quant:', Number(quantity));
 
-  return products.length ? (
+  return (
     <KeyboardAvoidingView style={shoppingListStyles.container}>
-      <ScrollView
-        style={shoppingListStyles.scrollContainer}
-        refreshControl={
-          // allows for pull down to refresh page
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }>
-        {products.map((item: any) => {
-          return (
-            // component the renders each item in the list
-            <Product
-              key={item.id}
-              keyVal={item.id}
-              item={item.product}
-              quant={item.quantity}
-              unique={item.product}
-              updateItem={updateItem}
-              setItemToComplete={setItemToComplete}
-            />
-          );
-        })}
+      {products.length ? (
+        <ScrollView
+          style={shoppingListStyles.scrollContainer}
+          refreshControl={
+            // allows for pull down to refresh page
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }>
+          {products.map((item: any) => {
+            return (
+              // component the renders each item in the list
+              <Product
+                key={item.id}
+                keyVal={item.id}
+                item={item.product}
+                quant={item.quantity}
+                unique={item.product}
+                updateItem={updateItem}
+                setItemToComplete={setItemToComplete}
+              />
+            );
+          })}
 
-        {addItem ? ( // checking if the user clicked button to add new item
-          <ItemForm
-            addItem={addItem}
-            setAddItem={setAddItem}
-            setItemName={setItemName}
-            setQuantity={setQuantity}
-            handleSubmit={handleSubmit}
-          />
-        ) : null}
-      </ScrollView>
+          {addItem ? ( // checking if the user clicked button to add new item
+            <ItemForm
+              addItem={addItem}
+              setAddItem={setAddItem}
+              setItemName={setItemName}
+              setQuantity={setQuantity}
+              handleSubmit={handleSubmit}
+            />
+          ) : null}
+        </ScrollView>
+      ) : (
+        <EmptyShoppingList />
+      )}
       <TouchableOpacity
         style={shoppingListStyles.addButton}
         onPress={() => setAddItem(!addItem)}>
         <Icon name="plus" style={shoppingListStyles.plus} />
       </TouchableOpacity>
     </KeyboardAvoidingView>
-  ) : (
-    <EmptyShoppingList />
   );
 };
 

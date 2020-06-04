@@ -52,7 +52,7 @@ const removeItem = async (id) => {
   return await db.oneOrNone(
     `UPDATE shopping_list_items
       SET completed = true
-      WHERE id = $2
+      WHERE id = $1
       RETURNING  *`,
     [Number(id)]
   );
