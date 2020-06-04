@@ -118,20 +118,19 @@ const ShoppingList = ({ navigation }: any) => {
               />
             );
           })}
-
-          {addItem ? ( // checking if the user clicked button to add new item
-            <ItemForm
-              addItem={addItem}
-              setAddItem={setAddItem}
-              setItemName={setItemName}
-              setQuantity={setQuantity}
-              handleSubmit={handleSubmit}
-            />
-          ) : null}
         </ScrollView>
       ) : (
         <EmptyShoppingList />
       )}
+      {addItem ? ( // checking if the user clicked button to add new item
+        <ItemForm
+          addItem={addItem}
+          setAddItem={setAddItem}
+          setItemName={setItemName}
+          setQuantity={setQuantity}
+          handleSubmit={handleSubmit}
+        />
+      ) : null}
       <TouchableOpacity
         style={shoppingListStyles.addButton}
         onPress={() => setAddItem(!addItem)}>

@@ -103,6 +103,9 @@ export const productStyles = StyleSheet.create({
     marginTop: -3,
     top: 0,
     zIndex: 5,
+    // borderRadius: 15,
+    // borderBottomEndRadius: 5,
+    // borderBottomLeftRadius: 5,
     // opacity: 0.5,
   },
   itemNameTxt: {
@@ -217,21 +220,18 @@ export const emptyShoppingList = StyleSheet.create({
     flex: 1,
     height: '100%',
     justifyContent: 'center',
-    marginBottom: '29%',
+    position: 'absolute',
   },
   headerText: {
     fontSize: 28,
     fontWeight: 'bold',
-    top: '5%',
   },
   listSvg: {
     height: 490,
-    top: '6%',
     width: 290,
   },
   secondaryText: {
     fontSize: 28,
-    top: '11%',
     zIndex: 20,
   },
 });

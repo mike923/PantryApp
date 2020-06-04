@@ -52,6 +52,7 @@ const Product = ({
               style={[productStyles.editable, productStyles.editIcons]}
               onPress={() => {
                 setEditable(false);
+                setUserActionsVisible(!userActionsVisible);
                 if (name.length || quantity.length) {
                   updateItem(keyVal, name, quantity);
                 }
