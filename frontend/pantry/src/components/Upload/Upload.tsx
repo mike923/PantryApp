@@ -27,7 +27,9 @@ const Upload = ({ navigation }) => {
         style={styles.button}>
         <Text style={styles.buttonText}>Image Upload</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => goTo('Camera')} style={styles.button}>
+      <TouchableOpacity
+        onPress={() => navigation.navigate('Camera', { fromCart: false })}
+        style={styles.button}>
         <Text style={styles.buttonText}>Camera</Text>
       </TouchableOpacity>
       {/* <TouchableOpacity onPress={() => goTo('Api')} style={styles.button}>

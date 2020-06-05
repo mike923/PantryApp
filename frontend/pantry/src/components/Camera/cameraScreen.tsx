@@ -9,7 +9,7 @@ import { barcodeApiCalls } from '../../redux/actions/cameraActions.ts';
 
 import { styles, colors } from './cameraStyles.ts';
 
-const Camera = ({ navigation, modalVisible }: any) => {
+const Camera = ({ route, navigation, modalVisible }: any) => {
   const camera: any = useSelector((state: any) => state.camera);
   const receipt: any = useSelector(
     (state: any) => state.recog.receipt.receiptItems,
@@ -64,6 +64,18 @@ const Camera = ({ navigation, modalVisible }: any) => {
     } catch (e) {
       console.warn(e);
     }
+  };
+
+  const cameraNavigation = () => {
+    const { fromCart } = route.params;
+    let navRoute = '';
+    if (fromCart) {
+      navRoute = navigation.navigate('Cart');
+    } else {
+      navRoute = navigation.navigate('ShoppingCart', { screen: 'Cart' });
+    }
+
+    return navRoute;
   };
 
   // adding scanned product to item confirmation screen
@@ -132,7 +144,7 @@ const Camera = ({ navigation, modalVisible }: any) => {
 
                 modalVisible // checking the parent component
                   ? constructReceiptObj()
-                  : navigation.navigate('ShoppingCart', { screen: 'Cart' });
+                  : cameraNavigation();
               }}
             />
           ) : null}
