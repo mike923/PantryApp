@@ -49,7 +49,7 @@ const TabBarNavigator = (props: any) => {
             tabBarIcon: ({ focused, color, size }) => {
               let iconConfig = {
                 Pantry: { name: 'shopping-bag', size: size * 1.25 },
-                Cart: { name: 'shopping-cart', size: size * 1.25 },
+                ShoppingCart: { name: 'shopping-cart', size: size * 1.25 },
                 Upload: { name: 'plus-circle', size: size * 2 },
                 List: { name: 'list', size: size * 1.25 },
                 Settings: { name: 'settings', size: size * 1.25 },
@@ -79,7 +79,7 @@ const TabBarNavigator = (props: any) => {
           <Tab.Screen name="Settings" component={DashboardStack} />
           <Tab.Screen name="Pantry" component={PantryStack} />
           <Tab.Screen name="Upload" component={UploadStack} />
-          <Tab.Screen name="Cart" component={ShopCartStack} />
+          <Tab.Screen name="ShoppingCart" component={ShopCartStack} />
           <Tab.Screen name="List" component={ShoppingListStack} />
         </Tab.Navigator>
       </NavigationContainer>

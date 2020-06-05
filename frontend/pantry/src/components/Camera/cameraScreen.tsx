@@ -55,10 +55,10 @@ const Camera = ({ navigation, modalVisible }: any) => {
           // checking to ensure that something return from firebase scan
           console.log('bar', barcodes);
           dispatch(barcodeApiCalls(barcodes[0].rawValue)); // redux action to searching product based on barcode
-          // } else {
-          //   navigation.navigate('Parsed', {
-          //     localUriPath: uri,
-          //   });
+        } else {
+          navigation.navigate('Parsed', {
+            localUriPath: uri,
+          });
         }
       }
     } catch (e) {
@@ -132,7 +132,7 @@ const Camera = ({ navigation, modalVisible }: any) => {
 
                 modalVisible // checking the parent component
                   ? constructReceiptObj()
-                  : navigation.navigate('Cart');
+                  : navigation.navigate('ShoppingCart');
               }}
             />
           ) : null}

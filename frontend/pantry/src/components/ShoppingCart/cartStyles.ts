@@ -65,6 +65,11 @@ export const cartStyles = StyleSheet.create({
     color: 'black',
     fontSize: 15,
   },
+  scrollContainer: {
+    bottom: 0,
+    flex: 1,
+    height: '100%',
+  },
   secondary: {
     backgroundColor: '#FFF',
     borderRadius: 48 / 2,
