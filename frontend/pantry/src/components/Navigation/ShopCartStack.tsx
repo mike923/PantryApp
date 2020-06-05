@@ -13,6 +13,16 @@ const ShopCartStack = ({ navigation }) => {
         ...screenOptions,
       }}>
       <Stack.Screen name="Cart" component={ShopCart} />
+      <Stack.Screen
+        name="Camera"
+        component={Camera}
+        headerMode="screen"
+        headerShown="false"
+        options={{
+          headerMode: 'none',
+          headerShown: false,
+        }}
+      />
     </Stack.Navigator>
   );
 };

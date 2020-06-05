@@ -19,14 +19,17 @@ const ShopCart = ({ navigation }: any) => {
 
   const [refreshing, setRefreshing] = React.useState(false);
 
-  console.log('gtfctgchchh,g');
+  console.log('gtfctgchchh');
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     console.log('shopping cart hit');
+
+    // if (products.length >= 2) {
     constructProductObj();
-  }, []);
+    // }
+  }, [products]);
 
   const constructProductObj = () => {
     products.forEach((el: any) => {
