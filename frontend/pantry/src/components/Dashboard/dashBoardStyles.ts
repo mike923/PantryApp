@@ -12,7 +12,7 @@ export const dashBoardStyles = StyleSheet.create({
   },
   container: {
     // backgroundColor: '#1c2a38',
-    height: 400,
+    height: '40%',
     width: '100%',
   },
   edit_button: {
@@ -36,7 +36,7 @@ export const dashBoardStyles = StyleSheet.create({
     top: 0,
   },
   imageStackStack: {
-    height: 181,
+    height: 141,
   },
   location: {
     color: 'white',
@@ -51,7 +51,7 @@ export const dashBoardStyles = StyleSheet.create({
     justifyContent: 'center',
     marginLeft: 22,
     marginRight: 40,
-    marginTop: 98,
+    // marginTop: 98,
   },
   navContainer: {
     alignItems: 'center',
@@ -80,6 +80,6 @@ export const dashBoardStyles = StyleSheet.create({
     fontSize: 24,
     height: 50,
     lineHeight: 30,
-    marginTop: -82,
+    marginTop: -102,
   },
 });

@@ -9,12 +9,29 @@ const UserProfile = () => {
 
   const [currTime, setCurrTime] = useState(new Date().toLocaleString());
 
+  const buildDate = () => {
+    let weekDayObj: any = {
+      '1': 'Mon',
+      '2': 'Tues',
+      '3': 'Wed',
+      '4': 'Thurs',
+      '5': 'Fri',
+      '6': 'Sat',
+      '7': 'Sun',
+    };
+
+    let dateObj = new Date();
+    let month = dateObj.getMonth();
+    let date = dateObj.getDate();
+    let day = dateObj.getDate();
+    let year = dateObj.getFullYear();
+
+    return setCurrTime(`${weekDayObj[day]} ${month + 1}/${date}/${year}`);
+  };
+
   useEffect(() => {
-    const time = setInterval(() => {
-      setCurrTime(new Date().toLocaleString());
-    }, 1000);
-    return () => clearInterval(time);
-  });
+    buildDate();
+  }, []);
 
   return (
     <View style={dashBoardStyles.container}>

@@ -33,11 +33,17 @@ const barcodeApiCalls = (upc: string) => {
       const { data } = await client.get(`/allFoods/checkByUPC/${upc}`);
       // `https://api.spoonacular.com/food/products/upc/${upc}?apiKey=${SPOONACULAR_API_KEY}`,
       console.log('actions data', data);
-      Toast.showWithGravity(
-        `${data.payload.name} was scanned`,
-        Toast.LONG,
-        Toast.TOP,
-      );
+
+      if (data.payload.name === undefined) {
+        dispatch(setError(`Item not found`));
+        Toast.showWithGravity(`Item not found`, Toast.LONG, Toast.TOP);
+      } else {
+        Toast.showWithGravity(
+          `${data.payload.name} was scanned`,
+          Toast.LONG,
+          Toast.TOP,
+        );
+      }
 
       if (data.error) {
         dispatch(setError(data.message));
@@ -62,4 +68,4 @@ const deleteItem = (data: object) => {
   };
 };
 
-export { barcodeApiCalls, deleteItem };
+export { barcodeApiCalls, deleteItem, setError };
