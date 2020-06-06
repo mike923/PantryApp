@@ -1,23 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-
+import { ScrollView, RefreshControl } from 'react-native';
 import List from '../SwipeAbleList/SwipeAbleList.tsx';
 import EmptyCart from './emptyCart.tsx';
 import { deleteItem } from '../../redux/actions/cameraActions.ts';
 import { client } from '../../../proxy';
 
+const wait = (timeout: any) => {
+  return new Promise((resolve) => {
+    setTimeout(resolve, timeout);
+  });
+};
+
 const ShopCart = ({ navigation }: any) => {
   const products: any = useSelector((state: any) => state.camera.products);
   const [localProducts, setLocalProducts] = useState([]);
   let productObj: any = {};
-  let newProductArr;
+
+  const [refreshing, setRefreshing] = React.useState(false);
+
+  console.log('gtfctgchchh');
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     console.log('shopping cart hit');
-    newProductArr = constructProductObj();
-  }, []);
+
+    // if (products.length >= 2) {
+    constructProductObj();
+    // }
+  }, [products]);
 
   const constructProductObj = () => {
     products.forEach((el: any) => {
@@ -52,13 +64,23 @@ const ShopCart = ({ navigation }: any) => {
       console.log(error);
     }
   };
+  const onRefresh = React.useCallback(() => {
+    // pull down on screen to refresh page
+    setRefreshing(true);
+    wait(2000).then(() => setRefreshing(false));
+  }, [refreshing]);
 
   return products.length ? (
-    <List
-      data={localProducts}
-      deleteItem={() => dispatch(deleteItem)}
-      uploadScannedItem={uploadScannedItem}
-    />
+    <ScrollView
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }>
+      <List
+        data={localProducts}
+        deleteItem={(data: any) => dispatch(deleteItem(data))}
+        uploadScannedItem={uploadScannedItem}
+      />
+    </ScrollView>
   ) : (
     <EmptyCart navigation={navigation} />
   );

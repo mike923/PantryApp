@@ -47,7 +47,7 @@ class List extends React.Component {
             uploadScannedItem(item);
             this.cleanFromScreen(item.upc);
           }}
-          deleteButtonPressed={() => console.log('delete button pressed')}
+          deleteButtonPressed={() => this.cleanFromScreen(item.upc)}
           editButtonPressed={() => this.setState({ isEditing: true })}
         />
       );

@@ -8,7 +8,7 @@ const EmptyCart = ({ navigation }: any) => {
   const navigateToCamera = () => {
     console.log('eagrhaetr');
 
-    navigation.navigate('Camera');
+    navigation.navigate('Camera', { fromCart: true });
   };
   return (
     <View style={emptyCart.emptyCartContainer}>

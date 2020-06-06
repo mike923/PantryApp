@@ -65,6 +65,11 @@ export const cartStyles = StyleSheet.create({
     color: 'black',
     fontSize: 15,
   },
+  scrollContainer: {
+    bottom: 0,
+    flex: 1,
+    height: '100%',
+  },
   secondary: {
     backgroundColor: '#FFF',
     borderRadius: 48 / 2,
@@ -97,12 +102,13 @@ export const emptyCart = StyleSheet.create({
   },
   emptyCartContainer: {
     alignItems: 'center',
+    backgroundColor: 'white',
     flex: 1,
     justifyContent: 'center',
   },
   primaryText: {
     color: 'black',
-    fontSize: 45,
+    fontSize: 44,
     position: 'absolute',
   },
   secondaryText: {
@@ -111,7 +117,7 @@ export const emptyCart = StyleSheet.create({
     top: '5%',
   },
   svgImg: {
-    height: 210,
+    height: 310,
     width: 320,
   },
 });

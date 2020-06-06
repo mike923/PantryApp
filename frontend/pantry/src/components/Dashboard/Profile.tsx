@@ -1,17 +1,11 @@
-import React, { Component, useEffect, useState } from 'react';
-import {
-  View,
-  Image,
-  ImageBackground,
-  TouchableOpacity,
-  Text,
-} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, ImageBackground, Text } from 'react-native';
 import { useSelector } from 'react-redux';
 
 import { dashBoardStyles } from './dashBoardStyles.ts';
 
 const UserProfile = () => {
-  const loggedUser = useSelector((state) => state.user.userInfo);
+  const loggedUser: any = useSelector((state: any) => state.user.userInfo);
 
   const [currTime, setCurrTime] = useState(new Date().toLocaleString());
 
@@ -33,15 +27,14 @@ const UserProfile = () => {
             imageStyle={dashBoardStyles.image_imageStyle}
           />
         </View>
-        <View style={dashBoardStyles.edit_profile}>
-          <Text style={dashBoardStyles.edit_button}>Edit profile</Text>
-        </View>
       </View>
       <View style={dashBoardStyles.metadata}>
         <Text style={dashBoardStyles.location}>New York, NY</Text>
         <Text style={dashBoardStyles.time}>{currTime}</Text>
       </View>
-      <Text style={dashBoardStyles.welcome}>Welcome {loggedUser.email}</Text>
+      <Text style={dashBoardStyles.welcome}>
+        Welcome {loggedUser.email.split('@')[0]}
+      </Text>
     </View>
   );
 };

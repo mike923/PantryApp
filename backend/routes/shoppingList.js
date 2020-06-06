@@ -5,7 +5,6 @@ const queries = require("../db/queries/shoppingList");
 router.post("/upload", async (req, res, next) => {
   const { product, quantity } = req.body;
   const { pantry_id } = res.locals;
-  console.log(product, pantry_id, quantity);
   try {
     const data = await queries.addNewItem(product, pantry_id, quantity);
 

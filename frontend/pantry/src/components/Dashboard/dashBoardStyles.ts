@@ -11,7 +11,7 @@ export const dashBoardStyles = StyleSheet.create({
     width: 40,
   },
   container: {
-    backgroundColor: '#1c2a38',
+    // backgroundColor: '#1c2a38',
     height: 400,
     width: '100%',
   },
@@ -21,33 +21,12 @@ export const dashBoardStyles = StyleSheet.create({
     fontSize: 14,
     lineHeight: 20,
   },
-  edit_profile: {
-    borderColor: '#8596a3',
-    borderRadius: 100,
-    borderWidth: 1,
-    height: 30,
-    justifyContent: 'center',
-    left: 254,
-    position: 'absolute',
-    top: 141,
-    width: 100,
-  },
   image: {
-    height: 132,
+    height: 432,
     left: 0,
     position: 'absolute',
     right: 0,
     top: 0,
-  },
-  image2: {
-    borderColor: '#1c2a38',
-    borderRadius: 100,
-    borderWidth: 5,
-    height: 90,
-    left: 12,
-    position: 'absolute',
-    top: 91,
-    width: 90,
   },
   imageStack: {
     height: 181,
@@ -59,9 +38,8 @@ export const dashBoardStyles = StyleSheet.create({
   imageStackStack: {
     height: 181,
   },
-  image_imageStyle: {},
   location: {
-    color: '#798894',
+    color: 'white',
     fontSize: 16,
     height: 20,
     lineHeight: 20,
@@ -81,8 +59,6 @@ export const dashBoardStyles = StyleSheet.create({
     height: 600,
     paddingTop: 5,
     position: 'relative',
-    // justifyContent: 'space-around',
-    // top: windowHeight - 890,
   },
   nav_button: {
     alignItems: 'center',
@@ -94,7 +70,7 @@ export const dashBoardStyles = StyleSheet.create({
     // width: windowWidth - 200,
   },
   time: {
-    color: '#798894',
+    color: 'white',
     fontSize: 16,
     lineHeight: 20,
   },
@@ -106,19 +82,4 @@ export const dashBoardStyles = StyleSheet.create({
     lineHeight: 30,
     marginTop: -82,
   },
-  // time_container: {
-  //   alignItems: 'center',
-  //   flexDirection: 'row',
-  //   height: 20,
-  //   justifyContent: 'space-between',
-  //   marginLeft: 16,
-  //   width: 170,
-  // },
-  // location_container: {
-  //   alignItems: 'center',
-  //   flexDirection: 'row',
-  //   height: 20,
-  //   justifyContent: 'space-between',
-  //   width: 150,
-  // },
 });

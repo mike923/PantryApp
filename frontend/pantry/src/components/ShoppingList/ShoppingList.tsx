@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import {
-  Text,
   TouchableOpacity,
   ScrollView,
   KeyboardAvoidingView,
   RefreshControl,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import Product from './Product.tsx';
 import { client } from '../../../proxy';
 import { shoppingListStyles } from './shoppingListStyles.ts';
@@ -28,6 +28,7 @@ const ShoppingList = ({ navigation }: any) => {
   const [refreshing, setRefreshing] = React.useState(false);
 
   const fetchShoppingList = async () => {
+    // fetching all user shopping list items from database
     try {
       const {
         data: { payload },
@@ -51,9 +52,8 @@ const ShoppingList = ({ navigation }: any) => {
     wait(2000).then(() => setRefreshing(false));
   }, [refreshing]);
 
+  // updated item status to complete to remove from list
   const setItemToComplete = async (id: any) => {
-    console.log('hit', id);
-
     try {
       const { data } = await client.patch(`/shoppingList/completed/${id}`);
       console.log(data);
@@ -63,26 +63,8 @@ const ShoppingList = ({ navigation }: any) => {
     fetchShoppingList();
   };
 
-  // useEffect(() => {
-  //   // keyboard
-  //   Keyboard.addListener('keyboardDidHide', _keyboardDidHide);
-
-  //   return () => {
-  //     Keyboard.removeListener('keyboardDidHide', _keyboardDidHide);
-  //   };
-  // }, []);
-
-  // const _keyboardDidHide = async () => {
-  //   await handleSubmit();
-  //   setQuantity(1);
-  //   setItemName('');
-  //   setAddItem(false);
-  // };
-
+  // submit new list item
   const handleSubmit = async () => {
-    // submit new list item
-    console.log('item name', itemName);
-
     try {
       const { data }: any = await client.post('/shoppingList/upload', {
         product: itemName,
@@ -115,14 +97,14 @@ const ShoppingList = ({ navigation }: any) => {
 
   return (
     <KeyboardAvoidingView style={shoppingListStyles.container}>
-      <ScrollView
-        style={shoppingListStyles.scrollContainer}
-        refreshControl={
-          // allows for pull down to refresh page
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }>
-        {products.length ? (
-          products.map((item: any) => {
+      {products.length ? (
+        <ScrollView
+          style={shoppingListStyles.scrollContainer}
+          refreshControl={
+            // allows for pull down to refresh page
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }>
+          {products.map((item: any) => {
             return (
               // component the renders each item in the list
               <Product
@@ -130,32 +112,48 @@ const ShoppingList = ({ navigation }: any) => {
                 keyVal={item.id}
                 item={item.product}
                 quant={item.quantity}
+                unique={item.product}
                 updateItem={updateItem}
                 setItemToComplete={setItemToComplete}
               />
             );
-          })
-        ) : (
-          <EmptyShoppingList /> // rendering empty screen message
-        )}
-
-        {addItem ? ( // checking if the user clicked button to add new item
-          <ItemForm
-            addItem={addItem}
-            setAddItem={setAddItem}
-            setItemName={setItemName}
-            setQuantity={setQuantity}
-            handleSubmit={handleSubmit}
-          />
-        ) : null}
-      </ScrollView>
+          })}
+        </ScrollView>
+      ) : (
+        <EmptyShoppingList />
+      )}
+      {addItem ? ( // checking if the user clicked button to add new item
+        <ItemForm
+          addItem={addItem}
+          setAddItem={setAddItem}
+          setItemName={setItemName}
+          setQuantity={setQuantity}
+          handleSubmit={handleSubmit}
+        />
+      ) : null}
       <TouchableOpacity
         style={shoppingListStyles.addButton}
         onPress={() => setAddItem(!addItem)}>
-        <Text>+</Text>
+        <Icon name="plus" style={shoppingListStyles.plus} />
       </TouchableOpacity>
     </KeyboardAvoidingView>
   );
 };
 
 export default ShoppingList;
+
+// useEffect(() => {
+//   // keyboard
+//   Keyboard.addListener('keyboardDidHide', _keyboardDidHide);
+
+//   return () => {
+//     Keyboard.removeListener('keyboardDidHide', _keyboardDidHide);
+//   };
+// }, []);
+
+// const _keyboardDidHide = async () => {
+//   await handleSubmit();
+//   setQuantity(1);
+//   setItemName('');
+//   setAddItem(false);
+// };

@@ -54,7 +54,10 @@ CREATE TABLE shopping_list_items (
   product VARCHAR NOT NULL UNIQUE,
   pantry_id INT REFERENCES pantry(id),
   quantity INT DEFAULT 1,
-  completed BOOLEAN DEFAULT FALSE
+  completed BOOLEAN DEFAULT FALSE,
+  edited BOOLEAN NOT NULL,
+  time_posted TIMESTAMP default CURRENT_TIMESTAMP,
+  time_modified TIMESTAMP default CURRENT_TIMESTAMP
 );
 
 ------------------------------------------------------------------------------------------
@@ -94,5 +97,16 @@ INSERT INTO food_item (receipt_id, pantry_id, preferred_name, price, quantity, u
   );
 
 
-INSERT INTO shopping_list_items(product,pantry_id) VALUES
-('Oreos',1)
+INSERT INTO shopping_list_items(product,pantry_id,edited) VALUES
+('Oreos',1,'false');
+
+
+CREATE OR REPLACE FUNCTION update_modified_column() 
+RETURNS TRIGGER AS $$
+BEGIN
+    NEW.time_modified = now();
+    RETURN NEW; 
+END;
+$$ language 'plpgsql';
+
+CREATE TRIGGER update_shopping_list_modtime BEFORE UPDATE ON shopping_list_items FOR EACH ROW EXECUTE PROCEDURE  update_modified_column();

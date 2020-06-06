@@ -7,9 +7,8 @@ const Dashboard = ({ navigation }) => {
   const navigateToImg = () => navigation.navigate('Pantry');
   const navigateToReceipts = () => navigation.navigate('Receipts');
   return (
-    <View style={{ backgroundColor: '#fff' }}>
+    <View>
       <UserProfile />
-      {/* <DashboardNav/> */}
       <View style={dashBoardStyles.navContainer}>
         <TouchableOpacity
           onPress={() => navigateToImg()}
