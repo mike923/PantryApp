@@ -50,12 +50,14 @@ const ShopCart = ({ navigation }: any) => {
   const uploadScannedItem = async (itemObj: any) => {
     console.log('hit em upload');
 
+    let placeHolder =
+      'https://cdn0.iconfinder.com/data/icons/ecommerce-57/100/Ecommerce_RTE-03-512.png';
     try {
       const { data } = await client.post(`/fooditem/add`, {
         quantity: itemObj.quantity,
-        price: itemObj.shopNow.price,
+        price: itemObj.shopNow[0].price || 0,
         upc: itemObj.upc,
-        imgUrl: itemObj.image,
+        imgUrl: itemObj.image[0] || placeHolder,
         preferred_name: itemObj.name,
         receipt_id: 1,
       });

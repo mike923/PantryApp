@@ -14,7 +14,7 @@ const wait = (timeout: any) => {
   });
 };
 
-const foodItems = `/fooditem/receiptid/1`;
+const foodItems = `/fooditem/pantry`;
 
 const PantryView = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -37,7 +37,6 @@ const PantryView = ({ navigation }) => {
       return err;
     }
   };
-
   useEffect(() => {
     apiCall();
   }, []);
