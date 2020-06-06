@@ -1,67 +1,77 @@
 const axios = require("axios");
 const { admin, db } = require("../../firebase");
 
+const log = (...args) => console.log('queries/allfoods: ', ...args);
+
+const respond = (result, source, valid) => ({result, source, valid});
+
 const fetchSpoonacular = async (idOrUPC, typeUPC = true) => {
-  const { data } = await axios.get(
-    `https://api.spoonacular.com/food/products/${
-      typeUPC ? "upc/" : ""
-    }${idOrUPC}?apiKey=${process.env.SPOONACULAR_API_KEY}`
-  );
-  console.log("fetchSpoonacular", process.env.SPOONACULAR_API_KEY);
-  if (data.status && data.status === "failure") {
-    return {
-      result: null,
-      source: "spoonacular",
-      valid: false,
-    };
-  }
-  return {
-    result: data,
-    source: "spoonacular",
-    valid: true,
-  };
+  log('fetchSpoonacular');
+
+  let response;
+  let data = await axios.get(`https://api.spoonacular.com/food/products/${typeUPC ? "upc/" : ""}${idOrUPC}?apiKey=${process.env.SPOONACULAR_API_KEY}`)
+    .catch(error => {
+      log('ERR0R with spoonacular', Object.keys(error), { ...error.response, config: '', request: '', headers: ''});
+      response = respond(error.response ? error.response.data : error, 'spoonacular', null);
+    });
+    
+  if (response) log(data)
+  if (response) return response
+  else data = data.data
+
+  response = 
+    data.status && data.status === "failure" 
+      ? respond(null, "spoonacular", false)
+      : respond(data, "spoonacular", true);
+
+  return response;
 };
 
 const fetchUPCitemDB = async (upc) => {
-  const { data } = await axios.get(
-    `https://api.upcitemdb.com/prod/trial/lookup?upc=${upc}`
-  );
-  console.log("fetchUPCitemDB", data);
-  if (data.code === "INVALID_UPC" || data.total === 0) {
-    return {
-      result: null,
-      source: "upcitemdb",
-      valid: false,
-    };
-  }
-  return {
-    result: data.items[0],
-    source: "upcitemdb",
-    valid: true,
-  };
+  log('fetchtupcitemdb');
+
+  let response;
+  let data = await axios.get(`https://api.upcitemdb.com/prod/trial/lookup?upc=${upc}`)
+    .catch(error => {
+      log('ERR0R with upcitemdb', Object.keys(error), { ...error.response, config: '', request: '', headers: ''});
+      response = respond(error.response ? error.response.data : error, 'upcitemdb', null);
+    });
+    
+  if (response) log(data)
+  if (response) return response
+  else data = data.data
+
+  response = 
+    data.code === "INVALID_UPC" || data.total === 0
+      ? respond(null, "upcitemdb", false)
+      : respond(data.items[0], "upcitemdb", true);
+
+  return response;
 };
 
 const fetchFDC = async (reqBody, search = false) => {
-  const baseUrl = `https://api.nal.usda.gov/fdc/v1/foods${
-    search ? "/search" : ""
-  }?api_key=`;
+  log('fetchfdc');
+
+  let response;
+  const baseUrl = `https://api.nal.usda.gov/fdc/v1/foods${search ? "/search" : ""}?api_key=`;
   const apiKey = process.env.FDC_API_KEY;
   const url = baseUrl + (apiKey ? apiKey : "DEMO_KEY");
-  const { data } = await axios.post(url, reqBody);
-  // console.log('fetchFDC', data)
-  if (!data.totalHits) {
-    return {
-      result: null,
-      source: "fdc",
-      valid: false,
-    };
-  }
+  let data = await axios.post(url, reqBody)
+    .catch(error => {
+      log('ERR0R with fdc', Object.keys(error), { ...error.response, config: '', request: '', headers: ''});
+      response = respond(error.response ? error.response.data : error, 'fdc', null);
+    });
+    
+  if (response) log(data)
+  if (response) return response
+  else data = data.data
 
-  return {
-    result: data.foods.length === 1 ? data.foods[0] : data.foods,
-    source: "fdc",
-    valid: true,
-  };
+  response = 
+    !data.totalHits
+      ? respond(null, "fdc", false)
+      : respond(data.foods.length === 1 ? data.foods[0] : data.foods, "fdc", true);
+
+  return response;
 };
 
 // TODO explain the order
@@ -70,58 +80,55 @@ const searchAPIs = async (upc) => {
     fetchSpoonacular(upc),
     fetchUPCitemDB(upc),
     fetchFDC({ query: upc }, true),
-  ]);
-  // console.log('SEARCH APIS RESULTS: ', results)
+  ])
+
+  log('searchapis results', results.map(r =>  r.source + r.valid))
+
   return results;
 };
 
 const createFirestoreReference = async (collection, reference) => {
-  try {
-    let status = await db
-      .collection(collection)
-      .doc(reference)
-      .set(
-        {
-          results: [],
-          item: {
-            name: null,
-            img: null,
-          },
-          valid: false,
+  let status = await db
+    .collection(collection)
+    .doc(reference)
+    .set(
+      {
+        results: [],
+        item: {
+          name: null,
+          img: null,
         },
-        { merge: true }
-      );
+        valid: false,
+      },
+      { merge: true }
+    )
+    .catch(error => log("createFirestoreReference ERROR: ", error.message));
 
-    console.log("status of createFirestoreReference", status);
-    return status;
-  } catch (error) {
-    console.log("createFirestoreReference ERROR: ", error);
-  }
+  log('create ref complete')
+
+  return status;
 };
 
 const addResultToFirestoreUPCDoc = async (collection, UPCRef, resultData) => {
   let ref = db.collection(collection).doc(UPCRef);
 
-  try {
-    let status = await db.runTransaction(async (doc) => {
-      try {
-        let data = await doc.get(ref);
-        console.log(Array(299).fill('+').join(), data.data(), Array(299).fill('+').join(), resultData, Array(299).fill('+').join())
-        if (data.exists) data = data.data().results;
-        else return null;
+  let status = await db
+    .runTransaction(async (doc) => {
+      let data = await doc.get(ref)
+        .catch(error => log("runTransaction ERROR: ", error.message));
 
-        data = data.concat(resultData);
-        doc.update(ref, { results: data });
-      } catch (error) {
-        console.log("runTransaction ERROR: ", error);
-      }
-    });
+      // log('addResultToFirestoreUPCDoc', data.data(), resultData);
 
-    console.log("status of addResultToFirestoreUPCDoc", status);
-    return status;
-  } catch (error) {
-    console.log("addResultToFirestoreUPCDoc ERROR: ", error);
-  }
+      if (data.exists) data = data.data().results;
+      else return null;
+
+      data = data.concat(resultData);
+      doc.update(ref, { results: data });
+    })
+    .catch(error => log("addResultToFirestoreUPCDoc ERROR: ", error.message));
+
+  log("addResultToFirestoreUPCDoc complete");
+  return status;
 };
 
 const extractFDC = (data) => ({
@@ -135,7 +142,7 @@ const extractFDC = (data) => ({
 
 const extractSpoonacular = (data) => ({
   name: data.title,
-  image: data.images[0],
+  image: data.images,
   description: data.description,
   upc: data.upc,
   nutrition: data.nutrition,
@@ -145,8 +152,8 @@ const extractSpoonacular = (data) => ({
 
 const extractUPCitemDB = (data) => ({
   upc: data.ean,
-  image: data.images[0],
-  shopNow: data.offers[0],
+  image: data.images,
+  shopNow: data.offers,
   name: data.title,
   upcitemdb_data: data,
 });
@@ -170,73 +177,72 @@ const consolidateResults = (results) => {
         (property) => (item[property] = extract[property])
       )
     );
+
   return item;
 };
 
 const createQuickItemLookup = async (collection, reference) => {
   const ref = db.collection(collection).doc(reference);
-  try {
-    let status = await db.runTransaction(async (snap) => {
-      try {
-        let doc = await snap.get(ref);
-        if (doc.exists) {
-          // console.log('createQuickItemLookup', doc.data())
-          const results = doc.data().results
-          console.log(Array(299).fill('+').join(), results ,Array(299).fill('+').join())
-          doc = consolidateResults(results);
+  let status = await db
+    .runTransaction(async (snap) => {
+      let doc = await snap.get(ref)
+        .catch (error => log(`firestore error fetching ${reference} from ${collection}: `, error.message));
+      
+      if (doc.exists) {
+        const results = doc.data().results
+        log('create quick item lookup transaction: ', results.map(d => ({ ...d, result: ''})));
+        doc = consolidateResults(results);
 
-          snap.update(ref, {
-            item: doc ? doc : `Item not found: ${reference}`,
-            results: results,
-            valid: !!doc,
-          });
-        }
-        return doc;
-      } catch (error) {
-        console.log(
-          `There was an error fetching ${reference} from ${collection} collection in firestore: `,
-          error
-        );
+        snap.update(ref, {
+          item: doc ? doc : `Item not found: ${reference}`,
+          results: results,
+          valid: !!doc,
+        });
       }
-    });
-    return status;
-    // console.log(doc)
-  } catch (error) {
-    console.log("fetchFirestore ERROR: ", error);
-  }
+
+      return doc;
+    })
+    .catch (error => log("createQuickItemLookup ERROR: ", error.message));
+
+  return status;
 };
 
-const createNewUPC = async (upc) => {
-  let data = await searchAPIs(upc);
-  // console.log('createNewUPC DATA: ', data)
-  let status1 = await createFirestoreReference("foodByUPC", upc);
-  // console.log('createNewUPC STATUS1: ', status1)
-  let status2 = await addResultToFirestoreUPCDoc("foodByUPC", upc, data);
-  // console.log('createNewUPC STATUS2: ', status2)
-  let simplifiedData = await createQuickItemLookup("foodByUPC", upc);
-  // console.log('createNewUPC STATUS3: ', status3)
-  // let status3 = await addResultToFirestoreUPCDoc('foodByUPC', upc, data[1])
-  // console.log('createNewUPC STATUS3: ', status3)
+const createNewUPC = async (upc, collection = "foodByUPC") => {
+  const sendError = (func, error) => log(func, error.message);
+  let data = await searchAPIs(upc)
+    .catch(e => sendError('searchapis failed', e));
+  log('searchAPIs complete')
+
+  let status1 = await createFirestoreReference(collection, upc)
+    .catch(e => sendError('createFirestoreReference failed', e));
+  log('createFirestoreReference complete')
+
+  let status2 = await addResultToFirestoreUPCDoc(collection, upc, data)
+    .catch(e => sendError('addResultToFirestoreUPCDoc failed', e));
+  log('addResultToFirestoreUPCDoc complete')
+
+  let simplifiedData = await createQuickItemLookup(collection, upc)
+    .catch(e => sendError('createQuickItemLookup failed', e));
+  log('createQuickItemLookup complete')
+
   return { data, simplifiedData };
 };
 
 const fetchFirestore = async (reference, collection = 'foodByUPC', item = true) => {
-  console.log('asdfasdf', reference, collection, item);
-  try {
-    let doc = await db.collection(collection).doc(reference).get();
+  log('fetching firestore', reference, collection, item);
+  let doc = await db.collection(collection).doc(reference).get()
+    .catch(error => log("fetchFirestore ERROR: ", error));
 
-    // console.log(doc)
-    if (doc.exists) {
-      doc = item ? doc.data().item : doc.data();
-    } else {
-      doc = await createNewUPC(reference);
-      doc = item ? doc.simplifiedData : doc.data;
-    }
-
-    return doc;
-  } catch (error) {
-    console.log("fetchFirestore ERROR: ", error);
+  // log(doc)
+  if (doc.exists) {
+    doc = item ? doc.data().item : doc.data();
+  } else {
+    doc = await createNewUPC(reference, collection)
+      .catch(error => log('fetchfirestore create new upc failed', error.message));
+    doc = item ? doc.simplifiedData : doc.data;
   }
+
+  return doc;
 };
 
 module.exports = {
