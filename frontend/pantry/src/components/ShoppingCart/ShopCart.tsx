@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { ScrollView, RefreshControl } from 'react-native';
 import List from '../SwipeAbleList/SwipeAbleList.tsx';
@@ -64,7 +64,7 @@ const ShopCart = ({ navigation }: any) => {
       console.log(error);
     }
   };
-  const onRefresh = React.useCallback(() => {
+  const onRefresh = useCallback(() => {
     // pull down on screen to refresh page
     setRefreshing(true);
     wait(2000).then(() => setRefreshing(false));
