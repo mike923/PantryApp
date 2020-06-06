@@ -12,7 +12,7 @@ const fetchSpoonacular = async (idOrUPC, typeUPC = true) => {
   let data = await axios.get(`https://api.spoonacular.com/food/products/${typeUPC ? "upc/" : ""}${idOrUPC}?apiKey=${process.env.SPOONACULAR_API_KEY}`)
     .catch(error => {
       log('ERR0R with spoonacular', Object.keys(error), { ...error.response, config: '', request: '', headers: ''});
-      response = respond(error.response.data, 'spoonacular', null);
+      response = respond(error.response ? error.response.data : error, 'spoonacular', null);
     });
     
   if (response) log(data)
@@ -34,7 +34,7 @@ const fetchUPCitemDB = async (upc) => {
   let data = await axios.get(`https://api.upcitemdb.com/prod/trial/lookup?upc=${upc}`)
     .catch(error => {
       log('ERR0R with upcitemdb', Object.keys(error), { ...error.response, config: '', request: '', headers: ''});
-      response = respond(error.response.data, 'upcitemdb', null);
+      response = respond(error.response ? error.response.data : error, 'upcitemdb', null);
     });
     
   if (response) log(data)
@@ -59,7 +59,7 @@ const fetchFDC = async (reqBody, search = false) => {
   let data = await axios.post(url, reqBody)
     .catch(error => {
       log('ERR0R with fdc', Object.keys(error), { ...error.response, config: '', request: '', headers: ''});
-      response = respond(error.response.data, 'fdc', null);
+      response = respond(error.response ? error.response.data : error, 'fdc', null);
     });
     
   if (response) log(data)
