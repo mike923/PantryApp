@@ -15,16 +15,12 @@ const Dashboard = ({ navigation }) => {
           <Text style={dashBoardStyles.buttonText}>Pantry View</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => {
-            console.log('hi');
-          }}
+          onPress={() => navigation.navigate('Settings')}
           style={dashBoardStyles.nav_button}>
-          <Text style={dashBoardStyles.buttonText}>Placeholder 1</Text>
+          <Text style={dashBoardStyles.buttonText}>Health</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => {
-            console.log('hi');
-          }}
+          onPress={() => navigation.navigate('Settings')}
           style={dashBoardStyles.nav_button}>
           <Text style={dashBoardStyles.buttonText}>Placeholder 1</Text>
         </TouchableOpacity>
