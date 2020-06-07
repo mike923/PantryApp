@@ -19,11 +19,11 @@ const Dashboard = ({ navigation }) => {
           style={dashBoardStyles.nav_button}>
           <Text style={dashBoardStyles.buttonText}>Health</Text>
         </TouchableOpacity>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           onPress={() => navigation.navigate('Settings')}
           style={dashBoardStyles.nav_button}>
           <Text style={dashBoardStyles.buttonText}>Placeholder 1</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         <TouchableOpacity
           onPress={() => navigation.navigate('Settings')}
           style={dashBoardStyles.nav_button}>
