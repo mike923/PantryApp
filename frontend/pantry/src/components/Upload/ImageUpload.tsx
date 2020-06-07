@@ -107,6 +107,9 @@ const ImageUpload = ({ navigation }: Props) => {
       {!imageURI.uri ? (
         <View>
           <Text style={styling.uploadYourReceipt}>Upload Your Receipt</Text>
+          <Text style={styling.uploadYourReceipt}>
+            Still Under Construction
+          </Text>
           <TouchableOpacity style={styling.button} onPress={uploadFile}>
             <Icon name="plus" style={styling.icon} />
           </TouchableOpacity>

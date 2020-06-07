@@ -6,13 +6,17 @@ CREATE DATABASE pantry;
 
 CREATE TABLE pantry (
   id SERIAL PRIMARY KEY,
-  name VARCHAR NOT NULL
+  name VARCHAR NOT NULL,
+  time_posted TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  time_modified TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE users (
   id  VARCHAR PRIMARY KEY,
   email VARCHAR NOT NULL UNIQUE,
-  pantry_id INT REFERENCES pantry (id)
+  pantry_id INT REFERENCES pantry (id),
+  time_posted TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  time_modified TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- receipts need status
@@ -113,4 +117,7 @@ BEGIN
 END;
 $$ language 'plpgsql';
 
+CREATE TRIGGER update_pantry_modtime BEFORE UPDATE ON pantry FOR EACH ROW EXECUTE PROCEDURE  update_modified_column();
+CREATE TRIGGER update_users_modtime BEFORE UPDATE ON users FOR EACH ROW EXECUTE PROCEDURE  update_modified_column();
 CREATE TRIGGER update_shopping_list_modtime BEFORE UPDATE ON shopping_list_items FOR EACH ROW EXECUTE PROCEDURE  update_modified_column();
+CREATE TRIGGER update_food_item_modtime BEFORE UPDATE ON food_item FOR EACH ROW EXECUTE PROCEDURE  update_modified_column();
