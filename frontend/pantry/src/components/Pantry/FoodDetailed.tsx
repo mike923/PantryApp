@@ -100,7 +100,9 @@ const FoodDetailed = (props: any) => {
         />
       </View>
       <Text style={styles.date}>
-        {`Purchase date: ${new Date(state.purchased_date).toDateString()}`}
+        {`Purchase date: ${new Date(
+          state.purchased_date.split(' ')[0],
+        ).toDateString()}`}
       </Text>
       <TouchableOpacity onPress={() => setDateModal(!dateModal)}>
         <Text>Change Date</Text>
@@ -109,7 +111,7 @@ const FoodDetailed = (props: any) => {
         <Modal animationType="slide" visible={dateModal} transparent>
           <View style={styles.modalView}>
             <DatePicker
-              date={Date.parse(state.purchased_date)}
+              date={Date.parse(state.purchased_date.split)}
               mode="date"
               onDateChange={(newDate) =>
                 setState({
