@@ -46,6 +46,7 @@ export const profileStyles = StyleSheet.create({
     width: 130,
   },
   metadata: {
+    flex: 1,
     flexDirection: 'row',
     height: 20,
     justifyContent: 'center',
@@ -54,8 +55,8 @@ export const profileStyles = StyleSheet.create({
     // marginTop: 98,
   },
   navContainer: {
-    alignItems: 'center',
     backgroundColor: '#fff',
+    flex: 1,
     height: 600,
     paddingTop: 5,
     position: 'relative',
@@ -67,25 +68,26 @@ export const profileStyles = StyleSheet.create({
   },
   welcome: {
     alignSelf: 'center',
+    bottom: '48%',
     color: 'rgba(255,255,255,1)',
     fontSize: 24,
     height: 50,
     lineHeight: 30,
-    marginTop: -102,
   },
 });
 
 export const dashBoardStyles = StyleSheet.create({
-  buttonText: { color: '#fff', fontSize: 18, fontWeight: 'bold' },
+  buttonText: { color: 'black', fontSize: 18, fontWeight: 'bold' },
+  container: {
+    height: '100%',
+  },
   nav_button: {
     alignItems: 'center',
-    backgroundColor: '#ff5c61',
+    backgroundColor: '#fcf7f4',
     borderRadius: 1,
-    height: 70,
     marginVertical: 1,
     padding: 12,
-    top: 20,
     width: '100%',
-    // width: windowWidth - 200,
+    zIndex: 9,
   },
 });

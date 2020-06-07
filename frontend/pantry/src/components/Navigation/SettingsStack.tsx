@@ -1,23 +1,26 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { View, Text } from 'react-native';
+import Settings from '../Settings/Settings.tsx';
 import { screenOptions } from './style.ts';
 
 const Stack = createStackNavigator();
 
-const Settings = () => (
-  <View style={{ backgroundColor: 'black' }}>
-    <Text>This will be the main settings page in the stack</Text>
-  </View>
-);
-
-const SettingsStack = ({ navigation }) => {
+const SettingsStack = ({ navigation }: any) => {
   return (
     <Stack.Navigator
       screenOptions={{
         ...screenOptions,
       }}>
-      <Stack.Screen name="Settings" component={Settings} />
+      <Stack.Screen
+        name="Settings"
+        component={Settings}
+        headerMode="screen"
+        headerShown="false"
+        options={{
+          headerMode: 'none',
+          headerShown: false,
+        }}
+      />
     </Stack.Navigator>
   );
 };
