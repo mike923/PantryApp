@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import UserProfile from './Profile.tsx';
-import { dashBoardStyles } from './dashBoardStyles.ts';
+import { dashBoardStyles, profileStyles } from './dashBoardStyles.ts';
 
 const Dashboard = ({ navigation }) => {
   const navigateToImg = () => navigation.navigate('Pantry');
@@ -9,20 +9,16 @@ const Dashboard = ({ navigation }) => {
   return (
     <View>
       <UserProfile />
-      <View style={dashBoardStyles.navContainer}>
+      <View style={profileStyles.navContainer}>
         <TouchableOpacity
           onPress={() => navigateToImg()}
           style={dashBoardStyles.nav_button}>
-          <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#fff' }}>
-            Pantry View
-          </Text>
+          <Text style={dashBoardStyles.buttonText}>Pantry View</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => navigateToReceipts()}
           style={dashBoardStyles.nav_button}>
-          <Text style={{ fontSize: 18, fontWeight: 'bold', color: '#fff' }}>
-            Receipts List
-          </Text>
+          <Text style={dashBoardStyles.buttonText}>Receipts List</Text>
         </TouchableOpacity>
       </View>
     </View>

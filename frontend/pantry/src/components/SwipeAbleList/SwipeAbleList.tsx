@@ -37,7 +37,7 @@ class List extends React.Component {
         <Item
           setTitle={this.setTitle}
           isEditing={this.state.isEditing}
-          img={item.image}
+          img={item.image[0]}
           key={item.upc}
           swipingCheck={(swiping: boolean) => this.setState({ swiping })}
           message={item.name}

@@ -64,12 +64,12 @@ const loginUser = (email, password) => {
           console.log(error);
         }
 
-        try {
-          let response = await client.get('/test');
-          console.log('response from client', response);
-        } catch (error) {
-          console.log('error with the client', client, error);
-        }
+        // try {
+        let response = await client.get('/test');
+        console.log('response from client', response);
+        // } catch (error) {
+        //   console.log('error with the client', client, error);
+        // }
 
         dispatch(fetchedUser());
         dispatch(setUser(email, token));

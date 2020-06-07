@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-export const dashBoardStyles = StyleSheet.create({
+export const profileStyles = StyleSheet.create({
   button: {
     backgroundColor: 'rgba(28,42,56,0.8)',
     borderRadius: 100,
@@ -12,7 +12,7 @@ export const dashBoardStyles = StyleSheet.create({
   },
   container: {
     // backgroundColor: '#1c2a38',
-    height: 400,
+    height: '30%',
     width: '100%',
   },
   edit_button: {
@@ -22,7 +22,7 @@ export const dashBoardStyles = StyleSheet.create({
     lineHeight: 20,
   },
   image: {
-    height: 432,
+    height: 402,
     left: 0,
     position: 'absolute',
     right: 0,
@@ -35,8 +35,8 @@ export const dashBoardStyles = StyleSheet.create({
     right: 0,
     top: 0,
   },
-  imageStackStack: {
-    height: 181,
+  imageStackContainer: {
+    height: 149,
   },
   location: {
     color: 'white',
@@ -51,7 +51,7 @@ export const dashBoardStyles = StyleSheet.create({
     justifyContent: 'center',
     marginLeft: 22,
     marginRight: 40,
-    marginTop: 98,
+    // marginTop: 98,
   },
   navContainer: {
     alignItems: 'center',
@@ -59,15 +59,6 @@ export const dashBoardStyles = StyleSheet.create({
     height: 600,
     paddingTop: 5,
     position: 'relative',
-  },
-  nav_button: {
-    alignItems: 'center',
-    backgroundColor: '#ff5c61',
-    borderRadius: 50,
-    marginVertical: 10,
-    padding: 12,
-    width: '90%',
-    // width: windowWidth - 200,
   },
   time: {
     color: 'white',
@@ -80,6 +71,21 @@ export const dashBoardStyles = StyleSheet.create({
     fontSize: 24,
     height: 50,
     lineHeight: 30,
-    marginTop: -82,
+    marginTop: -102,
+  },
+});
+
+export const dashBoardStyles = StyleSheet.create({
+  buttonText: { color: '#fff', fontSize: 18, fontWeight: 'bold' },
+  nav_button: {
+    alignItems: 'center',
+    backgroundColor: '#ff5c61',
+    borderRadius: 1,
+    height: 70,
+    marginVertical: 1,
+    padding: 12,
+    top: 20,
+    width: '100%',
+    // width: windowWidth - 200,
   },
 });

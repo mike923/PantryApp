@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { ScrollView, RefreshControl } from 'react-native';
 import List from '../SwipeAbleList/SwipeAbleList.tsx';
@@ -50,12 +50,14 @@ const ShopCart = ({ navigation }: any) => {
   const uploadScannedItem = async (itemObj: any) => {
     console.log('hit em upload');
 
+    let placeHolder =
+      'https://cdn0.iconfinder.com/data/icons/ecommerce-57/100/Ecommerce_RTE-03-512.png';
     try {
       const { data } = await client.post(`/fooditem/add`, {
         quantity: itemObj.quantity,
-        price: itemObj.shopNow.price,
+        price: itemObj.shopNow[0].price || 0,
         upc: itemObj.upc,
-        imgUrl: itemObj.image,
+        imgUrl: itemObj.image[0] || placeHolder,
         preferred_name: itemObj.name,
         receipt_id: 1,
       });
@@ -64,7 +66,7 @@ const ShopCart = ({ navigation }: any) => {
       console.log(error);
     }
   };
-  const onRefresh = React.useCallback(() => {
+  const onRefresh = useCallback(() => {
     // pull down on screen to refresh page
     setRefreshing(true);
     wait(2000).then(() => setRefreshing(false));

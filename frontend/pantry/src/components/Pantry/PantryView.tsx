@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { View, TextInput, StyleSheet } from 'react-native';
+import React, { useEffect, useCallback } from 'react';
+import { View, TextInput, StyleSheet, RefreshControl } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useDispatch, useSelector } from 'react-redux';
 import FoodItem from './FoodItem.tsx';
@@ -7,7 +7,14 @@ import { setPantryItems } from '../../redux/actions/pantryActions.ts';
 
 import { client } from '../../../proxy';
 
-const foodItems = `/fooditem/receiptid/1`;
+// function that sets the loading time for the page refresh
+const wait = (timeout: any) => {
+  return new Promise((resolve) => {
+    setTimeout(resolve, timeout);
+  });
+};
+
+const foodItems = `/fooditem/pantry`;
 
 const PantryView = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -16,25 +23,38 @@ const PantryView = ({ navigation }) => {
   // const [state, setState] = useState([]);
   console.log(navigation.isFocused());
   const goTo = (props) => navigation.navigate('FoodDetailed', { ...props });
+  const [refreshing, setRefreshing] = React.useState(false);
 
+  const apiCall = async () => {
+    try {
+      const { data } = await client.get(foodItems);
+      console.log(data.payload);
+      // setState(data.payload);
+      dispatch(setPantryItems(data.payload));
+      return data;
+    } catch (err) {
+      console.log(err);
+      return err;
+    }
+  };
   useEffect(() => {
-    const apiCall = async () => {
-      try {
-        const { data } = await client.get(foodItems);
-        console.log(data.payload);
-        // setState(data.payload);
-        dispatch(setPantryItems(data.payload));
-        return data;
-      } catch (err) {
-        console.log(err);
-        return err;
-      }
-    };
     apiCall();
   }, []);
 
+  const onRefresh = useCallback(() => {
+    // pull down on screen to refresh page
+    setRefreshing(true);
+    apiCall();
+    wait(2000).then(() => setRefreshing(false));
+  }, [refreshing]);
+
   return (
-    <ScrollView style={{ backgroundColor: 'white', flex: 1 }}>
+    <ScrollView
+      style={{ backgroundColor: 'white', flex: 1 }}
+      refreshControl={
+        // allows for pull down to refresh page
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }>
       {/* <Text style={{ alignSelf: 'center' }}>These are all you pantries!</Text> */}
       <View style={styles.filterContainer}>
         <TextInput

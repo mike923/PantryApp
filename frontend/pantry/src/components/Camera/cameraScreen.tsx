@@ -5,7 +5,11 @@ import { Slider } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useSelector, useDispatch } from 'react-redux';
 import vision from '@react-native-firebase/ml-vision';
-import { barcodeApiCalls } from '../../redux/actions/cameraActions.ts';
+import Toast from 'react-native-simple-toast';
+import {
+  barcodeApiCalls,
+  setError,
+} from '../../redux/actions/cameraActions.ts';
 
 import { styles, colors } from './cameraStyles.ts';
 
@@ -20,9 +24,8 @@ const Camera = ({ route, navigation, modalVisible }: any) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (camera.products.length) {
-      let last: number = camera.products.length - 1;
-      setTitle(camera.products[last].name);
+    if (camera.errorMessage.length) {
+      Toast.showWithGravity(`Item not found`, Toast.LONG, Toast.TOP);
     }
   }, [dispatch, camera]);
 
@@ -56,9 +59,10 @@ const Camera = ({ route, navigation, modalVisible }: any) => {
           console.log('bar', barcodes);
           dispatch(barcodeApiCalls(barcodes[0].rawValue)); // redux action to searching product based on barcode
         } else {
-          navigation.navigate('Parsed', {
-            localUriPath: uri,
-          });
+          // navigation.navigate('Parsed', {
+          //   localUriPath: uri,
+          // });
+          dispatch(setError(`Item not found`));
         }
       }
     } catch (e) {

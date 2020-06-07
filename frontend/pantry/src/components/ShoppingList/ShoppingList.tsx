@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   TouchableOpacity,
   ScrollView,
@@ -45,7 +45,7 @@ const ShoppingList = ({ navigation }: any) => {
     fetchShoppingList();
   }, []);
 
-  const onRefresh = React.useCallback(() => {
+  const onRefresh = useCallback(() => {
     // pull down on screen to refresh page
     setRefreshing(true);
     fetchShoppingList();

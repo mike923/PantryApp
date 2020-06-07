@@ -1,26 +1,40 @@
 const axios = require("axios");
 const { admin, db } = require("../../firebase");
 
-const log = (...args) => console.log('queries/allfoods: ', ...args);
+const log = (...args) => console.log("queries/allfoods: ", ...args);
 
-const respond = (result, source, valid) => ({result, source, valid});
+const respond = (result, source, valid) => ({ result, source, valid });
 
 const fetchSpoonacular = async (idOrUPC, typeUPC = true) => {
-  log('fetchSpoonacular');
+  log("fetchSpoonacular");
 
   let response;
-  let data = await axios.get(`https://api.spoonacular.com/food/products/${typeUPC ? "upc/" : ""}${idOrUPC}?apiKey=${process.env.SPOONACULAR_API_KEY}`)
-    .catch(error => {
-      log('ERR0R with spoonacular', Object.keys(error), { ...error.response, config: '', request: '', headers: ''});
-      response = respond(error.response ? error.response.data : error, 'spoonacular', null);
+  let data = await axios
+    .get(
+      `https://api.spoonacular.com/food/products/${
+        typeUPC ? "upc/" : ""
+      }${idOrUPC}?apiKey=${process.env.SPOONACULAR_API_KEY}`
+    )
+    .catch((error) => {
+      log("ERR0R with spoonacular", Object.keys(error), {
+        ...error.response,
+        config: "",
+        request: "",
+        headers: "",
+      });
+      response = respond(
+        error.response ? error.response.data : error,
+        "spoonacular",
+        null
+      );
     });
-    
-  if (response) log(data)
-  if (response) return response
-  else data = data.data
 
-  response = 
-    data.status && data.status === "failure" 
+  if (response) log(data);
+  if (response) return response;
+  else data = data.data;
+
+  response =
+    data.status && data.status === "failure"
       ? respond(null, "spoonacular", false)
       : respond(data, "spoonacular", true);
 
@@ -28,20 +42,30 @@ const fetchSpoonacular = async (idOrUPC, typeUPC = true) => {
 };
 
 const fetchUPCitemDB = async (upc) => {
-  log('fetchtupcitemdb');
+  log("fetchtupcitemdb");
 
   let response;
-  let data = await axios.get(`https://api.upcitemdb.com/prod/trial/lookup?upc=${upc}`)
-    .catch(error => {
-      log('ERR0R with upcitemdb', Object.keys(error), { ...error.response, config: '', request: '', headers: ''});
-      response = respond(error.response ? error.response.data : error, 'upcitemdb', null);
+  let data = await axios
+    .get(`https://api.upcitemdb.com/prod/trial/lookup?upc=${upc}`)
+    .catch((error) => {
+      log("ERR0R with upcitemdb", Object.keys(error), {
+        ...error.response,
+        config: "",
+        request: "",
+        headers: "",
+      });
+      response = respond(
+        error.response ? error.response.data : error,
+        "upcitemdb",
+        null
+      );
     });
-    
-  if (response) log(data)
-  if (response) return response
-  else data = data.data
 
-  response = 
+  if (response) log(data);
+  if (response) return response;
+  else data = data.data;
+
+  response =
     data.code === "INVALID_UPC" || data.total === 0
       ? respond(null, "upcitemdb", false)
       : respond(data.items[0], "upcitemdb", true);
@@ -50,26 +74,39 @@ const fetchUPCitemDB = async (upc) => {
 };
 
 const fetchFDC = async (reqBody, search = false) => {
-  log('fetchfdc');
+  log("fetchfdc");
 
   let response;
-  const baseUrl = `https://api.nal.usda.gov/fdc/v1/foods${search ? "/search" : ""}?api_key=`;
+  const baseUrl = `https://api.nal.usda.gov/fdc/v1/foods${
+    search ? "/search" : ""
+  }?api_key=`;
   const apiKey = process.env.FDC_API_KEY;
   const url = baseUrl + (apiKey ? apiKey : "DEMO_KEY");
-  let data = await axios.post(url, reqBody)
-    .catch(error => {
-      log('ERR0R with fdc', Object.keys(error), { ...error.response, config: '', request: '', headers: ''});
-      response = respond(error.response ? error.response.data : error, 'fdc', null);
+  let data = await axios.post(url, reqBody).catch((error) => {
+    log("ERR0R with fdc", Object.keys(error), {
+      ...error.response,
+      config: "",
+      request: "",
+      headers: "",
     });
-    
-  if (response) log(data)
-  if (response) return response
-  else data = data.data
+    response = respond(
+      error.response ? error.response.data : error,
+      "fdc",
+      null
+    );
+  });
 
-  response = 
-    !data.totalHits
-      ? respond(null, "fdc", false)
-      : respond(data.foods.length === 1 ? data.foods[0] : data.foods, "fdc", true);
+  if (response) log(data);
+  if (response) return response;
+  else data = data.data;
+
+  response = !data.totalHits
+    ? respond(null, "fdc", false)
+    : respond(
+        data.foods.length === 1 ? data.foods[0] : data.foods,
+        "fdc",
+        true
+      );
 
   return response;
 };
@@ -80,9 +117,12 @@ const searchAPIs = async (upc) => {
     fetchSpoonacular(upc),
     fetchUPCitemDB(upc),
     fetchFDC({ query: upc }, true),
-  ])
+  ]);
 
-  log('searchapis results', results.map(r =>  r.source + r.valid))
+  log(
+    "searchapis results",
+    results.map((r) => r.source + r.valid)
+  );
 
   return results;
 };
@@ -102,9 +142,9 @@ const createFirestoreReference = async (collection, reference) => {
       },
       { merge: true }
     )
-    .catch(error => log("createFirestoreReference ERROR: ", error.message));
+    .catch((error) => log("createFirestoreReference ERROR: ", error.message));
 
-  log('create ref complete')
+  log("create ref complete");
 
   return status;
 };
@@ -114,8 +154,9 @@ const addResultToFirestoreUPCDoc = async (collection, UPCRef, resultData) => {
 
   let status = await db
     .runTransaction(async (doc) => {
-      let data = await doc.get(ref)
-        .catch(error => log("runTransaction ERROR: ", error.message));
+      let data = await doc
+        .get(ref)
+        .catch((error) => log("runTransaction ERROR: ", error.message));
 
       // log('addResultToFirestoreUPCDoc', data.data(), resultData);
 
@@ -125,7 +166,7 @@ const addResultToFirestoreUPCDoc = async (collection, UPCRef, resultData) => {
       data = data.concat(resultData);
       doc.update(ref, { results: data });
     })
-    .catch(error => log("addResultToFirestoreUPCDoc ERROR: ", error.message));
+    .catch((error) => log("addResultToFirestoreUPCDoc ERROR: ", error.message));
 
   log("addResultToFirestoreUPCDoc complete");
   return status;
@@ -167,7 +208,7 @@ const extract = {
 const consolidateResults = (results) => {
   let item = {};
 
-  const inValid = results.every(({ valid }) => valid === false);
+  const inValid = results.every(({ valid }) => valid === false || !valid);
   if (inValid) return false;
 
   results
@@ -185,12 +226,21 @@ const createQuickItemLookup = async (collection, reference) => {
   const ref = db.collection(collection).doc(reference);
   let status = await db
     .runTransaction(async (snap) => {
-      let doc = await snap.get(ref)
-        .catch (error => log(`firestore error fetching ${reference} from ${collection}: `, error.message));
-      
+      let doc = await snap
+        .get(ref)
+        .catch((error) =>
+          log(
+            `firestore error fetching ${reference} from ${collection}: `,
+            error.message
+          )
+        );
+
       if (doc.exists) {
-        const results = doc.data().results
-        log('create quick item lookup transaction: ', results.map(d => ({ ...d, result: ''})));
+        const results = doc.data().results;
+        log(
+          "create quick item lookup transaction: ",
+          results.map((d) => ({ ...d, result: "" }))
+        );
         doc = consolidateResults(results);
 
         snap.update(ref, {
@@ -202,43 +252,57 @@ const createQuickItemLookup = async (collection, reference) => {
 
       return doc;
     })
-    .catch (error => log("createQuickItemLookup ERROR: ", error.message));
+    .catch((error) => log("createQuickItemLookup ERROR: ", error.message));
 
   return status;
 };
 
 const createNewUPC = async (upc, collection = "foodByUPC") => {
   const sendError = (func, error) => log(func, error.message);
-  let data = await searchAPIs(upc)
-    .catch(e => sendError('searchapis failed', e));
-  log('searchAPIs complete')
+  let data = await searchAPIs(upc).catch((e) =>
+    sendError("searchapis failed", e)
+  );
+  log("searchAPIs complete");
 
-  let status1 = await createFirestoreReference(collection, upc)
-    .catch(e => sendError('createFirestoreReference failed', e));
-  log('createFirestoreReference complete')
+  let status1 = await createFirestoreReference(collection, upc).catch((e) =>
+    sendError("createFirestoreReference failed", e)
+  );
+  log("createFirestoreReference complete");
 
-  let status2 = await addResultToFirestoreUPCDoc(collection, upc, data)
-    .catch(e => sendError('addResultToFirestoreUPCDoc failed', e));
-  log('addResultToFirestoreUPCDoc complete')
+  let status2 = await addResultToFirestoreUPCDoc(
+    collection,
+    upc,
+    data
+  ).catch((e) => sendError("addResultToFirestoreUPCDoc failed", e));
+  log("addResultToFirestoreUPCDoc complete");
 
-  let simplifiedData = await createQuickItemLookup(collection, upc)
-    .catch(e => sendError('createQuickItemLookup failed', e));
-  log('createQuickItemLookup complete')
+  let simplifiedData = await createQuickItemLookup(collection, upc).catch((e) =>
+    sendError("createQuickItemLookup failed", e)
+  );
+  log("createQuickItemLookup complete");
 
   return { data, simplifiedData };
 };
 
-const fetchFirestore = async (reference, collection = 'foodByUPC', item = true) => {
-  log('fetching firestore', reference, collection, item);
-  let doc = await db.collection(collection).doc(reference).get()
-    .catch(error => log("fetchFirestore ERROR: ", error));
+const fetchFirestore = async (
+  reference,
+  collection = "foodByUPC",
+  item = true
+) => {
+  log("fetching firestore", reference, collection, item);
+  let doc = await db
+    .collection(collection)
+    .doc(reference)
+    .get()
+    .catch((error) => log("fetchFirestore ERROR: ", error));
 
   // log(doc)
   if (doc.exists) {
     doc = item ? doc.data().item : doc.data();
   } else {
-    doc = await createNewUPC(reference, collection)
-      .catch(error => log('fetchfirestore create new upc failed', error.message));
+    doc = await createNewUPC(reference, collection).catch((error) =>
+      log("fetchfirestore create new upc failed", error.message)
+    );
     doc = item ? doc.simplifiedData : doc.data;
   }
 
