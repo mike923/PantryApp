@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, Text, Image } from 'react-native';
-import Error from '../../../assets/images/error-404-colour-1200px.png';
 
 const Settings = () => {
   return (

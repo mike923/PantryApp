@@ -59,7 +59,7 @@ const ShopCart = ({ navigation }: any) => {
         upc: itemObj.upc,
         imgUrl: itemObj.image[0] || placeHolder,
         preferred_name: itemObj.name,
-        receipt_id: 1,
+        receipt_id: null,
       });
       console.log('food item upload', data);
     } catch (error) {

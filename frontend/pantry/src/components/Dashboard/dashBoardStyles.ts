@@ -82,12 +82,12 @@ export const dashBoardStyles = StyleSheet.create({
     height: '100%',
   },
   nav_button: {
-    alignItems: 'center',
     backgroundColor: '#fcf7f4',
     borderRadius: 1,
     marginVertical: 1,
     padding: 12,
     width: '100%',
     zIndex: 9,
+    paddingLeft: 25,
   },
 });

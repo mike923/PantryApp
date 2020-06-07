@@ -19,15 +19,13 @@ import { client } from '../../../proxy';
 const FoodDetailed = (props: any) => {
   // console.log(props);
   // const params = { ...props.route.params, edited: false };
-  // params. = new Date(params.receipt_date).toDateString();
+  // params. = new Date(params.purchased_date).toDateString();
   const dispatch = useDispatch();
   const { item_id, index } = props.route.params;
-  const { receipt_date } = props.route.params;
   const [state, setState] = useState({
     loaded: false,
     edited: false,
     item_id,
-    receipt_date,
   });
   const [dateModal, setDateModal] = useState(false);
 
@@ -101,7 +99,9 @@ const FoodDetailed = (props: any) => {
           }
         />
       </View>
-      <Text style={styles.date}>{state.receipt_date}</Text>
+      <Text style={styles.date}>
+        {`Purchase date: ${new Date(state.purchased_date).toDateString()}`}
+      </Text>
       <TouchableOpacity onPress={() => setDateModal(!dateModal)}>
         <Text>Change Date</Text>
       </TouchableOpacity>
@@ -109,12 +109,12 @@ const FoodDetailed = (props: any) => {
         <Modal animationType="slide" visible={dateModal} transparent>
           <View style={styles.modalView}>
             <DatePicker
-              date={new Date(state.receipt_date)}
+              date={Date.parse(state.purchased_date)}
               mode="date"
               onDateChange={(newDate) =>
                 setState({
                   ...state,
-                  receipt_date: newDate.toDateString(),
+                  purchased_date: newDate.toDateString(),
                   edited: true,
                 })
               }

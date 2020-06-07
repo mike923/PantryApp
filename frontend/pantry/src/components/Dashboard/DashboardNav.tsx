@@ -12,10 +12,10 @@ const Dashboard = ({ navigation }) => {
         <TouchableOpacity
           onPress={() => navigation.navigate('Receipts')}
           style={dashBoardStyles.nav_button}>
-          <Text style={dashBoardStyles.buttonText}>Pantry View</Text>
+          <Text style={dashBoardStyles.buttonText}>Receipts</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => navigation.navigate('Settings')}
+          onPress={() => navigation.navigate('Health')}
           style={dashBoardStyles.nav_button}>
           <Text style={dashBoardStyles.buttonText}>Health</Text>
         </TouchableOpacity>
@@ -23,6 +23,11 @@ const Dashboard = ({ navigation }) => {
           onPress={() => navigation.navigate('Settings')}
           style={dashBoardStyles.nav_button}>
           <Text style={dashBoardStyles.buttonText}>Placeholder 1</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('Settings')}
+          style={dashBoardStyles.nav_button}>
+          <Text style={dashBoardStyles.buttonText}>Authorized Users</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => navigation.navigate('Settings')}

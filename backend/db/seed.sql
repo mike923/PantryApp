@@ -1,8 +1,8 @@
--- DROP DATABASE IF EXISTS pantry;
+DROP DATABASE IF EXISTS pantry;
 
--- CREATE DATABASE pantry;
+CREATE DATABASE pantry;
 
--- \c pantry
+\c pantry
 
 CREATE TABLE pantry (
   id SERIAL PRIMARY KEY,
@@ -46,7 +46,11 @@ CREATE TABLE food_item (
   quantity INT NOT NULL,
   upc VARCHAR,
   img_url VARCHAR, 
-  finished BOOLEAN DEFAULT FALSE
+  finished BOOLEAN DEFAULT FALSE,
+  time_posted TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  time_modified TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  purchased_date VARCHAR DEFAULT CURRENT_TIMESTAMP,
+  perished_date VARCHAR DEFAULT NULL
 );  
 
 CREATE TABLE shopping_list_items (
@@ -56,8 +60,8 @@ CREATE TABLE shopping_list_items (
   quantity INT DEFAULT 1,
   completed BOOLEAN DEFAULT FALSE,
   edited BOOLEAN NOT NULL,
-  time_posted TIMESTAMP default CURRENT_TIMESTAMP,
-  time_modified TIMESTAMP default CURRENT_TIMESTAMP
+  time_posted TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  time_modified TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 ------------------------------------------------------------------------------------------
