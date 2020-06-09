@@ -32,6 +32,9 @@ const Upload = ({ navigation }) => {
         style={styles.button}>
         <Text style={styles.buttonText}>Food Item Manual Entry</Text>
       </TouchableOpacity>
+      <TouchableOpacity onPress={() => goTo('TestCam')} style={styles.button}>
+        <Text style={styles.buttonText}>Test Cam</Text>
+      </TouchableOpacity>
       <TouchableOpacity
         onPress={() => navigation.navigate('Camera', { fromCart: false })}
         style={styles.button}>
