@@ -2,11 +2,16 @@ import { StyleSheet } from 'react-native';
 
 export const cartStyles = StyleSheet.create({
   instructions: {
+    alignSelf: 'center',
+    borderBottomWidth: 3,
     bottom: 6,
+    color: 'black',
     fontSize: 21,
     fontWeight: 'bold',
     marginBottom: 10,
+    paddingBottom: 5,
     textAlign: 'center',
+    width: '95%',
   },
 });
 

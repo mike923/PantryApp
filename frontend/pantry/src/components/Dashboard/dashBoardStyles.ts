@@ -42,7 +42,9 @@ export const profileStyles = StyleSheet.create({
     color: 'white',
     fontSize: 16,
     height: 20,
+    left: '3%',
     lineHeight: 20,
+    position: 'absolute',
     width: 130,
   },
   metadata: {
@@ -65,6 +67,8 @@ export const profileStyles = StyleSheet.create({
     color: 'white',
     fontSize: 16,
     lineHeight: 20,
+    position: 'absolute',
+    right: 0,
   },
   welcome: {
     alignSelf: 'center',
@@ -78,7 +82,7 @@ export const profileStyles = StyleSheet.create({
 
 export const dashBoardStyles = StyleSheet.create({
   buttonText: { color: 'black', fontSize: 18, fontWeight: 'bold' },
-  chevron: { alignSelf: 'flex-end', right: 10 },
+  chevron: { alignSelf: 'flex-end', bottom: 8, right: 10 },
   container: {
     height: '100%',
   },

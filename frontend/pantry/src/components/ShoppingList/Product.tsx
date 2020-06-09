@@ -33,7 +33,7 @@ const Product = ({
         />
         <Icon
           name="chevron-down"
-          style={{ bottom: 15, position: 'absolute', right: 20 }}
+          style={{ bottom: 15, position: 'absolute', right: 20, fontSize: 18 }}
         />
       </TouchableOpacity>
       {userActionsVisible ? (
