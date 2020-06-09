@@ -115,7 +115,7 @@ const FoodDetailed = (props: any) => {
           }
         />
       </View>
-      <Text style={styles.date}>{date.toDateString()}</Text>
+      <Text style={styles.date}>Purchased: {date.toDateString()}</Text>
       <TouchableOpacity
         onPress={() => {
           setDateModal(!dateModal);

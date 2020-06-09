@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, Animated, TouchableNativeFeedback } from 'react-native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
-import { cartStyles } from './cartStyles.ts';
+import { actionButtonStyles } from './cartStyles.ts';
 
 const FloatingActionButton = (props: any) => {
   let animation = new Animated.Value(0);
 
-  let open: boolean = true;
+  let open = true;
   const toggleMenu = () => {
     let toValue = open ? 0 : 1;
 
@@ -58,40 +58,48 @@ const FloatingActionButton = (props: any) => {
     ],
   };
 
-  const opacity = animation.interpolate({
-    inputRange: [0, 0.5, 1],
-    outputRange: [0, 0, 1],
-  });
+  // const opacity = animation.interpolate({
+  //   inputRange: [0, 0.5, 1],
+  //   outputRange: [0, 0, 1],
+  // });
 
   return (
-    <View style={[cartStyles.floatingButtonContainer, props.style]}>
+    <View style={[actionButtonStyles.floatingButtonContainer, props.style]}>
       <TouchableNativeFeedback>
         <Animated.View
           style={[
-            cartStyles.button,
-            cartStyles.secondary,
-            cartStyles.deleteButton,
+            actionButtonStyles.button,
+            actionButtonStyles.secondary,
+            actionButtonStyles.deleteButton,
             trashStyle,
           ]}>
-          <FeatherIcon name="trash-2" style={cartStyles.deleteIcon} />
+          <FeatherIcon name="trash-2" style={actionButtonStyles.deleteIcon} />
         </Animated.View>
       </TouchableNativeFeedback>
 
       <TouchableNativeFeedback>
         <Animated.View
           style={[
-            cartStyles.button,
-            cartStyles.secondary,
-            cartStyles.addButton,
+            actionButtonStyles.button,
+            actionButtonStyles.secondary,
+            actionButtonStyles.addButton,
             plusStyle,
           ]}>
-          <FeatherIcon name="plus-circle" style={cartStyles.deleteIcon} />
+          <FeatherIcon
+            name="plus-circle"
+            style={actionButtonStyles.deleteIcon}
+          />
         </Animated.View>
       </TouchableNativeFeedback>
 
       <TouchableNativeFeedback onPress={toggleMenu}>
-        <Animated.View style={[cartStyles.button, cartStyles.menu, rotation]}>
-          <FeatherIcon name="plus" style={cartStyles.deleteIcon} />
+        <Animated.View
+          style={[
+            actionButtonStyles.button,
+            actionButtonStyles.menu,
+            rotation,
+          ]}>
+          <FeatherIcon name="plus" style={actionButtonStyles.deleteIcon} />
         </Animated.View>
       </TouchableNativeFeedback>
     </View>

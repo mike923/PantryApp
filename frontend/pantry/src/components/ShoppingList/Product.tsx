@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { View, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { productStyles } from './shoppingListStyles.ts';
@@ -30,6 +30,10 @@ const Product = ({
           updateItem={updateItem}
           setQuantity={setQuantity}
           editable={editable}
+        />
+        <Icon
+          name="chevron-down"
+          style={{ bottom: 15, position: 'absolute', right: 20 }}
         />
       </TouchableOpacity>
       {userActionsVisible ? (

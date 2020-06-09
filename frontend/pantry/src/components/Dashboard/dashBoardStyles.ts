@@ -78,6 +78,7 @@ export const profileStyles = StyleSheet.create({
 
 export const dashBoardStyles = StyleSheet.create({
   buttonText: { color: 'black', fontSize: 18, fontWeight: 'bold' },
+  chevron: { alignSelf: 'flex-end', right: 10 },
   container: {
     height: '100%',
   },
@@ -86,8 +87,8 @@ export const dashBoardStyles = StyleSheet.create({
     borderRadius: 1,
     marginVertical: 1,
     padding: 12,
+    paddingLeft: 25,
     width: '100%',
     zIndex: 9,
-    paddingLeft: 25,
   },
 });
