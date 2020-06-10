@@ -496,6 +496,15 @@ PODS:
     - RNFBApp
   - RNGestureHandler (1.6.1):
     - React
+  - RNImageCropPicker (0.31.1):
+    - React-Core
+    - React-RCTImage
+    - RNImageCropPicker/QBImagePickerController (= 0.31.1)
+    - TOCropViewController
+  - RNImageCropPicker/QBImagePickerController (0.31.1):
+    - React-Core
+    - React-RCTImage
+    - TOCropViewController
   - RNReanimated (1.8.0):
     - React
   - RNScreens (2.4.0):
@@ -511,6 +520,7 @@ PODS:
     - React
   - TesseractOCRiOS (4.0.0)
   - Toast (4.0.0)
+  - TOCropViewController (2.5.2)
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
     - Yoga (~> 1.14)
@@ -565,6 +575,7 @@ DEPENDENCIES:
   - "RNFBMLVision (from `../node_modules/@react-native-firebase/ml-vision`)"
   - "RNFBStorage (from `../node_modules/@react-native-firebase/storage`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
+  - RNImageCropPicker (from `../node_modules/react-native-image-crop-picker`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNShare (from `../node_modules/react-native-share`)
@@ -612,6 +623,7 @@ SPEC REPOS:
     - Protobuf
     - TesseractOCRiOS
     - Toast
+    - TOCropViewController
     - YogaKit
 
 EXTERNAL SOURCES:
@@ -693,6 +705,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-firebase/storage"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
+  RNImageCropPicker:
+    :path: "../node_modules/react-native-image-crop-picker"
   RNReanimated:
     :path: "../node_modules/react-native-reanimated"
   RNScreens:
@@ -783,6 +797,7 @@ SPEC CHECKSUMS:
   RNFBMLVision: f0ee3209704db5cd2b34586a27f44f0c40c7aca4
   RNFBStorage: 24097a1d18534b9c3559f862b8d18365cd573c2c
   RNGestureHandler: 8f09cd560f8d533eb36da5a6c5a843af9f056b38
+  RNImageCropPicker: 38865ab4af1b0b2146ad66061196bc0184946855
   RNReanimated: 955cf4068714003d2f1a6e2bae3fb1118f359aff
   RNScreens: b5c0e1b2b04512919e78bd3898e144a157ce2363
   RNShare: fea1801315aa8875d6db73a4010b14afcd568765
@@ -791,6 +806,7 @@ SPEC CHECKSUMS:
   RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
   TesseractOCRiOS: 90638afbe43d082433f2e76b384c7901d23956df
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
+  TOCropViewController: e9da34f484aedd4e5d5a8ab230ba217cfe16c729
   Yoga: 50fb6eb13d2152e7363293ff603385db380815b1
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
