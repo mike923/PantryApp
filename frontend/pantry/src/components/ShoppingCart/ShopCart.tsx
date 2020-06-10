@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { ScrollView, RefreshControl } from 'react-native';
+import { ScrollView, RefreshControl, View, Text } from 'react-native';
 import List from '../SwipeAbleList/SwipeAbleList.tsx';
 import EmptyCart from './emptyCart.tsx';
 import { deleteItem } from '../../redux/actions/cameraActions.ts';
 import { client } from '../../../proxy';
+import { cartStyles } from './cartStyles.ts';
 
 const wait = (timeout: any) => {
   return new Promise((resolve) => {
@@ -59,7 +60,7 @@ const ShopCart = ({ navigation }: any) => {
         upc: itemObj.upc,
         imgUrl: itemObj.image[0] || placeHolder,
         preferred_name: itemObj.name,
-        receipt_id: 1,
+        receipt_id: null,
       });
       console.log('food item upload', data);
     } catch (error) {
@@ -73,16 +74,28 @@ const ShopCart = ({ navigation }: any) => {
   }, [refreshing]);
 
   return products.length ? (
-    <ScrollView
-      refreshControl={
-        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-      }>
-      <List
-        data={localProducts}
-        deleteItem={(data: any) => dispatch(deleteItem(data))}
-        uploadScannedItem={uploadScannedItem}
-      />
-    </ScrollView>
+    <View style={{ backgroundColor: 'white', height: '100%' }}>
+      <Text style={cartStyles.instructions}>
+        Swipe Right to
+        <Text style={{ color: 'green' }}> Add </Text>
+        or Left to
+        <Text style={{ color: '#991a00' }}> Delete</Text>
+      </Text>
+      <ScrollView
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+            style={{ backgroundColor: 'white' }}
+          />
+        }>
+        <List
+          data={localProducts}
+          deleteItem={(data: any) => dispatch(deleteItem(data))}
+          uploadScannedItem={uploadScannedItem}
+        />
+      </ScrollView>
+    </View>
   ) : (
     <EmptyCart navigation={navigation} />
   );

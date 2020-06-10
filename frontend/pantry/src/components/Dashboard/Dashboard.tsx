@@ -1,26 +1,14 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View } from 'react-native';
 import UserProfile from './Profile.tsx';
-import { dashBoardStyles, profileStyles } from './dashBoardStyles.ts';
+import DashboardNav from './DashboardNav.tsx';
+import { dashBoardStyles } from './dashBoardStyles.ts';
 
-const Dashboard = ({ navigation }) => {
-  const navigateToImg = () => navigation.navigate('Pantry');
-  const navigateToReceipts = () => navigation.navigate('Receipts');
+const Dashboard = ({ navigation }: any) => {
   return (
-    <View>
+    <View style={dashBoardStyles.container}>
       <UserProfile />
-      <View style={profileStyles.navContainer}>
-        <TouchableOpacity
-          onPress={() => navigateToImg()}
-          style={dashBoardStyles.nav_button}>
-          <Text style={dashBoardStyles.buttonText}>Pantry View</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => navigateToReceipts()}
-          style={dashBoardStyles.nav_button}>
-          <Text style={dashBoardStyles.buttonText}>Receipts List</Text>
-        </TouchableOpacity>
-      </View>
+      <DashboardNav navigation={navigation} />
     </View>
   );
 };

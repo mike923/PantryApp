@@ -1,30 +1,11 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import { createAppContainer } from 'react-navigation';
 import Receipts from '../Receipts/Receipts.tsx';
 import Dashboard from '../Dashboard/Dashboard.tsx';
-import PantryView from '../Pantry/PantryView.tsx';
 import { screenOptions } from './style.ts';
+import SettingsStack from './SettingsStack.tsx';
+import HealthFrom from '../Dashboard/Health/HealthForm.tsx';
 
-// const Stack = createStackNavigator(
-//   {
-//     Dashboard: {
-//       screen: Dashboard,
-// navigationOptions: {
-//   header: null,
-// },
-//     },
-//     Receipts,
-//     Pantry: {
-//       screen: PantryView,
-//     },
-//   },
-//   {
-//     initialRouteName: 'Dashboard',
-//   },
-// );
-
-// const RootContainer = createAppContainer(Stack);
 const Stack = createStackNavigator();
 const DashboardStack = ({ navigation }) => {
   return (
@@ -43,7 +24,8 @@ const DashboardStack = ({ navigation }) => {
         }}
       />
       <Stack.Screen name="Receipts" component={Receipts} />
-      <Stack.Screen name="Pantry" component={PantryView} />
+      <Stack.Screen name="Settings" component={SettingsStack} />
+      <Stack.Screen name="Health" component={HealthFrom} />
     </Stack.Navigator>
   );
 };

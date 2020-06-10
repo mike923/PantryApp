@@ -58,7 +58,9 @@ class List extends React.Component {
     console.log('swipe props', this.props.data);
 
     return (
-      <ScrollView scrollEnabled={!this.state.swiping}>
+      <ScrollView
+        scrollEnabled={!this.state.swiping}
+        style={{ height: '100%' }}>
         {this.renderItems()}
       </ScrollView>
     );

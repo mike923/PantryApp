@@ -39,7 +39,7 @@ export const shoppingListStyles = StyleSheet.create({
     height: '100%',
   },
   textInput: {
-    alignSelf: 'stretch',
+    alignSelf: 'center',
     backgroundColor: '#252525',
     borderRadius: 9,
     borderTopColor: '#ededed',
@@ -48,7 +48,7 @@ export const shoppingListStyles = StyleSheet.create({
     left: 6,
     marginBottom: 10,
     padding: 20,
-    width: '96%',
+    width: '85%',
   },
 });
 
@@ -202,6 +202,7 @@ export const itemFormStyles = StyleSheet.create({
     borderRadius: 10,
     bottom: 0,
     elevation: 5,
+    marginBottom: 10,
     padding: 10,
     position: 'absolute',
     width: 90,

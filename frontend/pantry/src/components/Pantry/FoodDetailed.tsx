@@ -5,12 +5,11 @@ import {
   View,
   Image,
   TouchableOpacity,
-  TouchableHighlight,
-  Modal,
+  Platform,
 } from 'react-native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
-import DatePicker from 'react-native-date-picker';
 import { useDispatch } from 'react-redux';
+import DateTimePicker from '@react-native-community/datetimepicker';
 import styles from './styles.ts';
 import { updatePantryItems } from '../../redux/actions/pantryActions.ts';
 
@@ -19,17 +18,28 @@ import { client } from '../../../proxy';
 const FoodDetailed = (props: any) => {
   // console.log(props);
   // const params = { ...props.route.params, edited: false };
-  // params. = new Date(params.receipt_date).toDateString();
+  // params. = new Date(params.purchased_date).toDateString();
   const dispatch = useDispatch();
   const { item_id, index } = props.route.params;
-  const { receipt_date } = props.route.params;
   const [state, setState] = useState({
     loaded: false,
     edited: false,
     item_id,
-    receipt_date,
   });
   const [dateModal, setDateModal] = useState(false);
+  const [date, setDate] = useState('');
+  const [show, setShow] = useState(false);
+
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    setShow(Platform.OS === 'ios');
+    setDate(currentDate);
+    setState({
+      ...state,
+      purchased_date: selectedDate,
+      edited: true,
+    });
+  };
 
   console.log(`HERE`, state);
 
@@ -37,6 +47,9 @@ const FoodDetailed = (props: any) => {
     const apiCall = async () => {
       try {
         const { data } = await client.get(`/fooditem/itemid/${state.item_id}`);
+        // console.log('dbwfbta', data.payload.purchased_date.split(' ')[0]);
+
+        setDate(new Date(data.payload.purchased_date.split(' ')[0]));
         console.log(data);
         setState({ ...state, ...data.payload, loaded: true });
       } catch (err) {
@@ -54,6 +67,7 @@ const FoodDetailed = (props: any) => {
     // await dispatch(updatePantryItems(index, state.preferred_name));
     props.navigation.goBack();
   };
+  console.log('sdgw', typeof date);
 
   return state.loaded ? (
     <View style={styles.container}>
@@ -101,32 +115,25 @@ const FoodDetailed = (props: any) => {
           }
         />
       </View>
-      <Text style={styles.date}>{state.receipt_date}</Text>
-      <TouchableOpacity onPress={() => setDateModal(!dateModal)}>
+      <Text style={styles.date}>Purchased: {date.toDateString()}</Text>
+      <TouchableOpacity
+        onPress={() => {
+          setDateModal(!dateModal);
+          setShow(true);
+        }}>
         <Text>Change Date</Text>
       </TouchableOpacity>
       <View>
-        <Modal animationType="slide" visible={dateModal} transparent>
-          <View style={styles.modalView}>
-            <DatePicker
-              date={new Date(state.receipt_date)}
-              mode="date"
-              onDateChange={(newDate) =>
-                setState({
-                  ...state,
-                  receipt_date: newDate.toDateString(),
-                  edited: true,
-                })
-              }
-              style={styles.datePicker}
-            />
-            <TouchableHighlight
-              onPress={() => setDateModal(!dateModal)}
-              style={styles.modalDoneBtn}>
-              <Text style={styles.modalDoneBtnText}>Done</Text>
-            </TouchableHighlight>
-          </View>
-        </Modal>
+        {show && (
+          <DateTimePicker
+            testID="dateTimePicker"
+            value={date}
+            mode="date"
+            is24Hour
+            display="default"
+            onChange={onChange}
+          />
+        )}
       </View>
       {state.edited ? (
         <TouchableOpacity style={styles.submitBtn} onPress={handleSubmit}>

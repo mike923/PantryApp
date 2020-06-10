@@ -11,19 +11,20 @@ const UserProfile = () => {
 
   const buildDate = () => {
     let weekDayObj: any = {
+      '0': 'Sun',
       '1': 'Mon',
       '2': 'Tues',
       '3': 'Wed',
       '4': 'Thurs',
       '5': 'Fri',
       '6': 'Sat',
-      '7': 'Sun',
     };
 
     let dateObj = new Date();
     let month = dateObj.getMonth();
     let date = dateObj.getDate();
-    let day = dateObj.getDate();
+    let day = dateObj.getDay();
+    console.log('date', day);
     let year = dateObj.getFullYear();
 
     return setCurrTime(`${weekDayObj[day]} ${month + 1}/${date}/${year}`);
@@ -50,8 +51,9 @@ const UserProfile = () => {
         <Text style={profileStyles.time}>{currTime}</Text>
       </View>
       <Text style={profileStyles.welcome}>
-        Welcome {loggedUser.email.split('@')[0]}
+        Hello {loggedUser.email.split('@')[0]}
       </Text>
+      <Text style={profileStyles.welcome}>What&apos;s in your Pantry</Text>
     </View>
   );
 };

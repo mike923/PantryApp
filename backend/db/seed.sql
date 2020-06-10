@@ -6,13 +6,17 @@
 
 CREATE TABLE pantry (
   id SERIAL PRIMARY KEY,
-  name VARCHAR NOT NULL
+  name VARCHAR NOT NULL,
+  time_posted TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  time_modified TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE users (
   id  VARCHAR PRIMARY KEY,
   email VARCHAR NOT NULL UNIQUE,
-  pantry_id INT REFERENCES pantry (id)
+  pantry_id INT REFERENCES pantry (id),
+  time_posted TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  time_modified TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- receipts need status
@@ -46,7 +50,11 @@ CREATE TABLE food_item (
   quantity INT NOT NULL,
   upc VARCHAR,
   img_url VARCHAR, 
-  finished BOOLEAN DEFAULT FALSE
+  finished BOOLEAN DEFAULT FALSE,
+  time_posted TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  time_modified TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  purchased_date VARCHAR DEFAULT CURRENT_TIMESTAMP,
+  perished_date VARCHAR DEFAULT NULL
 );  
 
 CREATE TABLE shopping_list_items (
@@ -56,8 +64,8 @@ CREATE TABLE shopping_list_items (
   quantity INT DEFAULT 1,
   completed BOOLEAN DEFAULT FALSE,
   edited BOOLEAN NOT NULL,
-  time_posted TIMESTAMP default CURRENT_TIMESTAMP,
-  time_modified TIMESTAMP default CURRENT_TIMESTAMP
+  time_posted TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  time_modified TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 ------------------------------------------------------------------------------------------
@@ -109,4 +117,7 @@ BEGIN
 END;
 $$ language 'plpgsql';
 
+CREATE TRIGGER update_pantry_modtime BEFORE UPDATE ON pantry FOR EACH ROW EXECUTE PROCEDURE  update_modified_column();
+CREATE TRIGGER update_users_modtime BEFORE UPDATE ON users FOR EACH ROW EXECUTE PROCEDURE  update_modified_column();
 CREATE TRIGGER update_shopping_list_modtime BEFORE UPDATE ON shopping_list_items FOR EACH ROW EXECUTE PROCEDURE  update_modified_column();
+CREATE TRIGGER update_food_item_modtime BEFORE UPDATE ON food_item FOR EACH ROW EXECUTE PROCEDURE  update_modified_column();
