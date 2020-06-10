@@ -105,6 +105,10 @@ INSERT INTO food_item (receipt_id, pantry_id, preferred_name, price, quantity, u
   );
 
 
+INSERT INTO shopping_list_items(product,pantry_id,edited) VALUES
+('Quaker Oats',1,'false');
+
+
 CREATE OR REPLACE FUNCTION update_modified_column() 
 RETURNS TRIGGER AS $$
 BEGIN
