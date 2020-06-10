@@ -25,6 +25,7 @@ const HealthFrom = () => {
               <TextInput
                 style={styles.textInput}
                 placeholder="Condition"
+                placeholderTextColor="black"
                 value={field.value}
                 onChangeText={(text) => onChangeText(text, index)}
               />

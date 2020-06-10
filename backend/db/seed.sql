@@ -1,8 +1,8 @@
--- DROP DATABASE IF EXISTS pantry;
+DROP DATABASE IF EXISTS pantry;
 
--- CREATE DATABASE pantry;
+CREATE DATABASE pantry;
 
--- \c pantry
+\c pantry
 
 CREATE TABLE pantry (
   id SERIAL PRIMARY KEY,
@@ -106,7 +106,7 @@ INSERT INTO food_item (receipt_id, pantry_id, preferred_name, price, quantity, u
 
 
 INSERT INTO shopping_list_items(product,pantry_id,edited) VALUES
-('Oreos',1,'false');
+('Quaker Oats',1,'false');
 
 
 CREATE OR REPLACE FUNCTION update_modified_column() 
