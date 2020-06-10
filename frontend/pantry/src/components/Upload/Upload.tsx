@@ -28,19 +28,18 @@ const Upload = ({ navigation }) => {
         <Text style={styles.buttonText}>Image Upload</Text>
       </TouchableOpacity>
       <TouchableOpacity
+        onPress={() => goTo('FoodItemForm')}
+        style={styles.button}>
+        <Text style={styles.buttonText}>Food Item Manual Entry</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => goTo('TestCam')} style={styles.button}>
+        <Text style={styles.buttonText}>Test Cam</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
         onPress={() => navigation.navigate('Camera', { fromCart: false })}
         style={styles.button}>
         <Text style={styles.buttonText}>Camera</Text>
       </TouchableOpacity>
-      {/* <TouchableOpacity onPress={() => goTo('Api')} style={styles.button}>
-        <Text style={styles.buttonText}>Api</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => goTo('Receipts')} style={styles.button}>
-        <Text style={styles.buttonText}>Receipts</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => goTo('Parsed')} style={styles.button}>
-        <Text style={styles.buttonText}>Parsed</Text>
-      </TouchableOpacity> */}
     </ScrollView>
   );
 };

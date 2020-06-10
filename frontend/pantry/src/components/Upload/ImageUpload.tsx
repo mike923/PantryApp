@@ -34,8 +34,6 @@ const ImageUpload = ({ navigation }: Props) => {
 
   console.log('fire url', firebaseImgUrl);
 
-  const imagePickerOptions = { noData: true };
-
   const getFileLocalPath = (res) => {
     const { path, uri } = res;
     return Platform.OS === 'android' ? path : uri;
@@ -43,11 +41,12 @@ const ImageUpload = ({ navigation }: Props) => {
 
   const uploadToFireBase = (imgPickerRes) => {
     const fileSrc = getFileLocalPath(imgPickerRes);
+    console.log('asdfasdfasd', fileSrc);
     const storageRef = FireBaseStorage.ref(imgPickerRes.fileName);
     return storageRef.putFile(fileSrc);
   };
 
-  const uploadImage = async (uploadTask) => {
+  const uploadImage = (uploadTask) => {
     uploadTask.on(
       'state_changed',
       (snapshot) => {
@@ -62,16 +61,8 @@ const ImageUpload = ({ navigation }: Props) => {
       },
       (completed) => {
         console.log(`Upload Completed`);
-        completed.ref.getDownloadURL().then(async (url) => {
+        completed.ref.getDownloadURL().then((url) => {
           console.log(`Firebase Hosted Url`, url);
-          // try {
-          //   const { data } = await client.post('/receipts/upload', {
-          //     url,
-          //   });
-          //   console.log(`Posted to backend successfully`, data);
-          // } catch (err) {
-          //   console.log(`Post to backedn error`, err);
-          // }
           setFirebaseImgUrl(url);
         });
       },
@@ -79,17 +70,15 @@ const ImageUpload = ({ navigation }: Props) => {
   };
 
   const uploadFile = () => {
-    ImagePicker.launchImageLibrary(imagePickerOptions, async (res) => {
+    ImagePicker.launchImageLibrary({ noData: true }, async (res) => {
       if (res.didCancel) {
         Alert.alert(`Cancelled`);
       } else if (res.error) {
         Alert.alert(`Error: `, res.error);
       } else {
+        console.log(res.fileName, res);
         res.fileName = res.fileName ? res.fileName : 'Test';
         const fileLocalPath = getFileLocalPath(res);
-        // console.log(`File details: `, res);
-        // console.log(`File Path: `, getFileLocalPath(res));
-        // console.log(`File Stored at: `, FireBaseStorage.ref(res.fileName))
         setImageURI({
           uri: res.uri,
           localPath: fileLocalPath,
@@ -102,7 +91,6 @@ const ImageUpload = ({ navigation }: Props) => {
 
   return (
     <Container>
-      {/* {Alert.alert(JSON.stringify(FireBaseStorage))} */}
       <StatusBar barStyle="dark-content" />
       {!imageURI.uri ? (
         <View>
@@ -124,15 +112,6 @@ const ImageUpload = ({ navigation }: Props) => {
             color="green"
           />
           {upload.progress === 100 ? (
-            // <Button
-            //   title="Parse Text"
-            //   onPress={() =>
-            //     navigation.navigate('Confirmation', {
-            //       localUriPath: imageURI.localPath,
-            //     })
-            //   }
-            // />
-            // ) :
             <Button
               title="Parse Text"
               onPress={() =>
@@ -146,16 +125,8 @@ const ImageUpload = ({ navigation }: Props) => {
         </View>
       )}
       {upload.loading && <ProgressBar bar={upload.progress} />}
-      {/* {imageURI.localPath ? (
-        <TextRecog localUriPath={imageURI.localPath} />
-      ) : null} */}
     </Container>
   );
 };
-
-ImageUpload.navigationOptions = ({ navigation }) => ({
-  title: 'Upload',
-  // headerShown: false,
-});
 
 export default ImageUpload;
