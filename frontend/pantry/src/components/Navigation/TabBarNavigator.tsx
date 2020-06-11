@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-// import { StyleSheet, View } from 'react-native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
@@ -7,7 +6,6 @@ import NetInfo from '@react-native-community/netinfo';
 import { useDispatch } from 'react-redux';
 
 import UploadStack from './UploadStack.tsx';
-// import SettingsStack from './SettingsStack.tsx';
 import DashboardStack from './DashboardStack.tsx';
 import PantryStack from './PantryStack.tsx';
 import ShopCartStack from './ShopCartStack.tsx';
@@ -64,13 +62,13 @@ const TabBarNavigator = (props: any) => {
             inactiveTintColor: '#000',
             style: {
               height: '9%',
-              paddingTop: 0,
-              paddingBottom: 0,
+              paddingTop: 10,
+              paddingBottom: 15,
               paddingHorizontal: 10,
+              alignItems: 'center',
               justifyContent: 'space-around',
               backgroundColor: '#fff',
               elevation: 0,
-              shadowOpacity: 0,
               borderTopWidth: 0,
             },
           }}>

@@ -11,6 +11,7 @@
     "lint": "npx eslint . --ext js,ts,jsx,ts,json --fix",
     "format": "npx prettier --write src/**/*.{js,ts,tsx} && npx prettier --write *.{js,json}",
     "start:android": "npm run start:debugger && npx react-native run-android",
+    "start:dev": "npm run start:debugger && npx react-native run-ios",
     "start:app": "watchman watch-del-all && rm -rf /tmp/metro-* && cd ios/ && pod install --repo-update && cd .. && npm run start:debugger && npx react-native run-ios",
     "start:mike": "npm run start:debugger && npx react-native run-ios --device='Michael D.’s iPhone'",
     "start:debugger": "open 'rndebugger://set-debugger-loc?host=localhost&port=8081'",
