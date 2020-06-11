@@ -23,6 +23,7 @@ const StorePicker = ({ stores, selected, handleStoreChange }: Props) => {
 
   return (
     <Picker
+      accessibilityLabel="store"
       selectedValue={selected}
       onValueChange={(itemValue, itemIndex) => handleStoreChange(itemValue)}
       style={styles.picker}

@@ -1,12 +1,5 @@
 import React, { useState } from 'react';
-import {
-  View,
-  ScrollView,
-  Image,
-  Text,
-  Picker,
-  Dimensions,
-} from 'react-native';
+import { View, ScrollView, Text } from 'react-native';
 import styles from './styles.ts';
 
 import dummyStores from './dummyData/dummyStores.ts';
@@ -25,11 +18,11 @@ const Receipts = (props: any) => {
 
   return (
     <View style={styles.container}>
-      <StorePicker
+      {/* <StorePicker
         stores={dummyStores}
         selected={selectedValue}
         handleStoreChange={handleStoreChange}
-      />
+      /> */}
       <View style={styles.scrollArea1}>
         <ScrollView
           contentContainerStyle={styles.scrollArea2}
