@@ -11,23 +11,21 @@ const EmptyCart = ({ navigation }: any) => {
     navigation.navigate('Camera', { fromCart: true });
   };
   return (
-    <View style={style.emptyCartContainer}>
+    <View style={style.container}>
       <ShoppingCartImage style={style.svgImg} />
-      <View style={style.innerContainer}>
-        <View style={{ flex: 1, justifyContent: 'center' }}>
-          <Text style={style.primaryText}>
-            Your cart is empty{'\n'}Start Scanning
-          </Text>
-          {/* <Text style={style.secondaryText}>Start Scanning</Text> */}
-        </View>
-        <View style={{ flex: 1, justifyContent: 'center' }} />
-        <View style={{ flex: 1, justifyContent: 'center' }}>
-          <TouchableOpacity
-            style={style.cameraLaunchButton}
-            onPress={navigateToCamera}>
-            <Text style={style.cameraLaunchButtonText}>Launch Camera</Text>
-          </TouchableOpacity>
-        </View>
+      <View style={style.divider}>
+        <Text style={style.primaryText}>
+          Your cart is empty{'\n'}Start Scanning
+        </Text>
+      </View>
+      {/* <Text style={style.secondaryText}>Start Scanning</Text> */}
+      <View style={style.divider} />
+      <View style={[style.divider, { width: '100%' }]}>
+        <TouchableOpacity
+          style={style.cameraLaunchButton}
+          onPress={navigateToCamera}>
+          <Text style={style.cameraLaunchButtonText}>Launch Camera</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -49,20 +47,21 @@ const style = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
   },
-  emptyCartContainer: {
+  container: {
     alignItems: 'center',
     backgroundColor: 'white',
     flex: 1,
     justifyContent: 'center',
   },
-  innerContainer: {
+  divider: {
     alignItems: 'center',
     flex: 1,
-    justifyContent: 'space-between',
+    justifyContent: 'center',
   },
   primaryText: {
     color: 'black',
     fontSize: 44,
+    lineHeight: 65,
     textAlign: 'center',
   },
   svgImg: {
