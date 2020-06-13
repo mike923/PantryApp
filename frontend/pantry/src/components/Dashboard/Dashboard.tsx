@@ -40,6 +40,7 @@ const Dashboard = ({ navigation }: any) => {
     buildDate();
   }, []);
 
+  let num = 0;
   return (
     <View style={style.container}>
       <ImageBackground
@@ -62,9 +63,12 @@ const Dashboard = ({ navigation }: any) => {
           {navigationButtonOptions.map(({ goTo, innerText }) => (
             <TouchableOpacity
               onPress={() => navigation.navigate(goTo)}
-              style={style.navButton}>
-              <Text style={style.buttonText}>{innerText}</Text>
-              <Icon name="chevron-right" style={style.chevron} />
+              style={style.navButton}
+              key={innerText}>
+              <Text key={num + 1} style={style.buttonText}>
+                {innerText}
+              </Text>
+              <Icon key={num + 2} name="chevron-right" style={style.chevron} />
             </TouchableOpacity>
           ))}
         </ScrollView>

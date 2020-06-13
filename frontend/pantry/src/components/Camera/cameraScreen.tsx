@@ -19,13 +19,12 @@ const Camera = ({ route, navigation, modalVisible }: any) => {
     (state: any) => state.recog.receipt.receiptItems,
   );
 
-  const [title, setTitle] = useState('');
-
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (camera.errorMessage.length) {
-      Toast.showWithGravity(`Item not found`, Toast.LONG, Toast.TOP);
+      // Toast.showWithGravity(`Item not found`, Toast.SHORT, Toast.TOP);
+      console.log(...camera.errorMessage);
     }
   }, [dispatch, camera]);
 
