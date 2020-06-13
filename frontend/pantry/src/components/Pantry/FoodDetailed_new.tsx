@@ -36,7 +36,14 @@ const FoodDetailed = (props) => {
     apiCall();
   }, [additionalDetails]);
 
-  const postUpdatedCopy = () => {
+  const postUpdatedCopy = async () => {
+    const data = await client.patch(
+      `/fooditem/update/${foodItem.item_id}`,
+      foodItem,
+    );
+
+    props.navigation.goBack();
+    console.log(data);
     console.log('DEEZ');
     allowEdit(false);
   };
