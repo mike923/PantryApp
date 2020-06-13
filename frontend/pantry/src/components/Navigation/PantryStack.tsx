@@ -35,8 +35,8 @@ const PantryStack = ({ navigation }) => {
         name="FoodDetailed"
         component={FoodDetailed}
         options={{
-          title: `${selectedFood}`,
-          headerBackTitle: 'Back',
+          title: `Detailed View`,
+          headerBackTitle: 'Pantry',
         }}
       />
     </Stack.Navigator>

@@ -21,7 +21,7 @@ export const typography = () => {
 
 const styles = StyleSheet.create({
   defaultText: {
-    color: '#666',
+    color: '#000',
     fontFamily: 'DINPro-Medium',
   },
   defaultView: {

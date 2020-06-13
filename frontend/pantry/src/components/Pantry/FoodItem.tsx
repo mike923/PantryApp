@@ -12,6 +12,7 @@ interface FoodItemProp {
 }
 
 const FoodItem = (props: any) => {
+  console.log('THESE ARE THE PROPS: ', props);
   let { goTo, index } = props;
   const dispatch = useDispatch();
   // const state = useSelector((state) => state.pantry[index].pantryItems);
@@ -30,7 +31,7 @@ const FoodItem = (props: any) => {
       style={styles.foodItem}
       onPress={() => {
         dispatch(updatedSelectedFood(`${preferred_name}`));
-        goTo({ item_id, receipt_date, index });
+        goTo({ ...props, goTo: '', item_id, receipt_date, index });
       }}>
       <Image
         source={{

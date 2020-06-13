@@ -129,6 +129,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     alignSelf: 'center',
+    elevation: 3,
     justifyContent: 'center',
     backgroundColor: 'white',
     borderRadius: 50,

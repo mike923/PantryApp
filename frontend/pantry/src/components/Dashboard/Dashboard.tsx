@@ -59,14 +59,18 @@ const Dashboard = ({ navigation }: any) => {
       </ImageBackground>
       <View style={style.navContainer}>
         <ScrollView>
-          {navigationButtonOptions.map(({ goTo, innerText }) => (
-            <TouchableOpacity
-              onPress={() => navigation.navigate(goTo)}
-              style={style.navButton}>
-              <Text style={style.buttonText}>{innerText}</Text>
-              <Icon name="chevron-right" style={style.chevron} />
-            </TouchableOpacity>
-          ))}
+          {navigationButtonOptions.map(({ goTo, innerText }, j) => {
+            let i = j;
+            return (
+              <TouchableOpacity
+                key={i * 100}
+                onPress={() => navigation.navigate(goTo)}
+                style={style.navButton}>
+                <Text style={style.buttonText}>{innerText}</Text>
+                <Icon name="chevron-right" style={style.chevron} />
+              </TouchableOpacity>
+            );
+          })}
         </ScrollView>
         <Breakfast style={style.breakfastImage} />
       </View>
