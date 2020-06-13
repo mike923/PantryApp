@@ -1,9 +1,8 @@
 import React from 'react';
-import { Text, TouchableOpacity, StyleSheet, StatusBar } from 'react-native';
+import { Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
 import styled from 'styled-components';
-import { styling } from './styles.ts';
 
 const Upload = ({ navigation }) => {
   const goTo = navigation.navigate;
@@ -38,7 +37,7 @@ const styles = StyleSheet.create({
   button: {
     alignItems: 'center',
     backgroundColor: '#ff5c61',
-    borderRadius: 5,
+    borderRadius: 50,
     elevation: 2,
     marginVertical: 10,
     padding: 12,
