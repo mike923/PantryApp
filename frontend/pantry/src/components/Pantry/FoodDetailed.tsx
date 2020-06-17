@@ -47,7 +47,11 @@ const FoodDetailed = (props: any) => {
     const apiCall = async () => {
       try {
         const { data } = await client.get(`/fooditem/itemid/${state.item_id}`);
-        // console.log('dbwfbta', data.payload.purchased_date.split(' ')[0]);
+
+        console.log(
+          'dbwfbta',
+          Date.parse(data.payload.purchased_date.split(' ')[0]),
+        );
 
         setDate(new Date(data.payload.purchased_date.split(' ')[0]));
         console.log(data);
