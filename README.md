@@ -1,4 +1,4 @@
-# Pantry App
+## Pantry
 
 _This is a [React Native app](https://reactnative.dev/) that helps people track their food inventory, which we call **Pantry**, by scanning your grocery receipts to know whats in stock and what's not inorder to make your next grocery shopping a breeze._
 
@@ -35,7 +35,7 @@ _This is a [React Native app](https://reactnative.dev/) that helps people track 
 
 - When getting an error starting ios simulator go to `cd /frontend/pantry/ios && pod install`
 
-## To run the app
+## To run the app on IOS
 
 - If you don't already have the app: `git clone https://github.com/mike923/PantryApp.git`
 
@@ -43,7 +43,15 @@ _This is a [React Native app](https://reactnative.dev/) that helps people track 
 
 - Install pod changes in ios `cd /ios && pod install`
 
-- Open iOS simulator `cd .. && npx react-native run-ios`
+- Open iOS simulator `cd .. npm run start:app`
+
+## To run the app on Android
+
+- If you don't already have the app: `git clone https://github.com/mike923/PantryApp.git`
+
+- Install dependencies `cd frontend/pantry && npm install`
+
+- Open iOS simulator `cd .. npm run start:android`
 
 ## To run the react-native-debugger
 
@@ -94,4 +102,23 @@ _This is a [React Native app](https://reactnative.dev/) that helps people track 
 - [Getting Started](https://rnfirebase.io/)
 
 - [Using Firebase ML Kits](https://rnfirebase.io/ml-vision/usage)
-  - [Text Recognition ML Kit](https://rnfirebase.io/ml-vision/text-recognition)
+
+# Deployment
+
+There are two different paths to deploying our app, we can either deploy to the [Google Play Store](https://play.google.com/store?hl=en_US) or the [Apple App Store](https://www.apple.com/ios/app-store/).
+
+# Google Play Store
+
+In order to deploy the app to the [Google Play Store](https://play.google.com/store?hl=en_US) you must use the organization [Play Console Account](https://play.google.com/apps/publish/signup/).
+
+## Resources for Deployment
+
+In order to deploy to the play store for the first time you can follow the [React Native Documentation for Publishing To Google Play Store](https://reactnative.dev/docs/signed-apk-android.html).
+
+# Apple App Store
+
+In order to deploy the app to the [Apple App Store](https://www.apple.com/ios/app-store/) you must use the organization [Apple Developer Account](https://developer.apple.com/).
+
+## Resources for deployment
+
+In order to deploying the app to the App Store you can follow the steps outlined in the [Readerbytes Article](https://readybytes.in/blog/how-to-deploy-a-react-native-ios-app-on-the-app-store).
