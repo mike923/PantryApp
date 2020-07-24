@@ -8,6 +8,10 @@ _This is a [React Native app](https://reactnative.dev/) that helps people track 
 - [Jenesh Napit](https://www.linkedin.com/in/jeneshnapit/)
 - [Michael Amparo](https://www.linkedin.com/in/michaeldamparo/)
 
+## Schema
+
+![Schema]()
+
 ## 🚨 Setting up your enviroment 🚨
 
 - Follow the [React Native](https://reactnative.dev/docs/environment-setup) setup docs
