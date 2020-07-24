@@ -10,7 +10,7 @@ _This is a [React Native app](https://reactnative.dev/) that helps people track 
 
 ## Schema
 
-![Schema]()
+![Schema](https://raw.githubusercontent.com/mike923/PantryApp/schema/frontend/pantry/assets/images/database_schema.png)
 
 ## 🚨 Setting up your enviroment 🚨
 
