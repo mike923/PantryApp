@@ -12,6 +12,10 @@ _This is a [React Native app](https://reactnative.dev/) that helps people track 
 
 ![Schema](https://raw.githubusercontent.com/mike923/PantryApp/schema/frontend/pantry/assets/images/database_schema.png)
 
+## Barcode Scanning
+
+![Barcode Scanning](https://raw.githubusercontent.com/mike923/PantryApp/schema/frontend/pantry/assets/images/barcode_scanning.png)
+
 ## 🚨 Setting up your enviroment 🚨
 
 - Follow the [React Native](https://reactnative.dev/docs/environment-setup) setup docs
