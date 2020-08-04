@@ -14,7 +14,8 @@
     "start:app": "watchman watch-del-all && rm -rf /tmp/metro-* && cd ios/ && pod install --repo-update && cd .. && npm run start:debugger && npx react-native run-ios",
     "start:mike": "npm run start:debugger && npx react-native run-ios --device='Michael D.’s iPhone'",
     "start:debugger": "open 'rndebugger://set-debugger-loc?host=localhost&port=8081'",
-    "start:keyEvent": "adb shell input keyevent 82"
+    "start:keyEvent": "adb shell input keyevent 82",
+    "start:simple": "npm run start:debugger && npx react-native run-ios"
   },
   "lint-staged": {
     "src/**/*.{ts,tsx,js}": [
@@ -51,9 +52,9 @@
     "metro-config": "^0.59.0",
     "native-base": "^2.13.12",
     "neumorphism-ui": "^1.0.2",
-    "react": "16.11.0",
+    "react": "16.13.1",
     "react-devtools": "^4.6.0",
-    "react-native": "0.62.1",
+    "react-native": "0.63.2",
     "react-native-camera": "^3.23.1",
     "react-native-check-box": "^2.1.7",
     "react-native-cli": "^2.0.1",
