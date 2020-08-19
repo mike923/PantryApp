@@ -6,6 +6,7 @@
     "start": "node ./bin/www",
     "start:dev": "nodemon",
     "start:reseed": "cd db/ && psql -f seed.sql && cd .. && npm run start:dev",
+    "start:reseed-pg12": "cd db/ && /Applications/Postgres.app/Contents/Versions/12/bin/psql -p5433 -f seed.sql && cd .. && npm run start:dev",
     "start:resetDB": "heroku pg:reset DATABASE",
     "start:reseedHeroku": "npm run start:resetDB && heroku pg:psql -f db/seed.sql"
   },
